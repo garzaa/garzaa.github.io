@@ -4,18 +4,18 @@ html, body
 }*/
 
 {
-	width: 100%;
+	width: 99%;
 	height: 100%;
 }
 
 .header {
 	font-family:"Arvo";
 	font-size:40px;
-	z-index: 1;
+	z-index: 2;
 	position: fixed;
 	padding-top: 5px;
 	color: white;
-	width: 100%;
+	width: 99%;
 	text-align: center;
 }
 
@@ -25,25 +25,23 @@ html, body
 	height: 55px;
 	border-bottom: #4B92D1;
 	border-radius: 3px;
-	z-index: -1;
-	width: 100%;
-	padding-left: 5px;
-	padding-right: 5px;
+	z-index: 1;
+	width: 99%;
 }
 
 .formwrapper {
 	font-family: "Raleway";
 	padding-top: 100px;
-	width:100%;
 	text-align: center;
 	color: #52AEFF;
 	position: relative;
+	max-height: 99%
 }
 
 .rules {
 	font-family: "Raleway";
 	bottom: 2px;
-	width: 100%;
+	width: 99%;
 	text-align: center;
 	color: white;
 	position: fixed;
@@ -56,9 +54,6 @@ html, body
 	bottom: 0;
 	height: 15px;
 	border-radius: 3px;
-	padding-bottom: 0px;
 	z-index: -1;
-	width: 100%;
-	padding-left: 5px;
-	padding-right: 5px;
+	width: 99%;
 }
