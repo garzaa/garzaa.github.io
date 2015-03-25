@@ -1,0 +1,19 @@
+.header {
+	font-family:"Lato";
+	font-size:40px;
+	text-align: center;
+	z-index: 1;
+	color: black;
+	padding-top: 5px;
+}
+
+.banner {
+	color: #52AEFF;
+	position: absolute;
+	height: 60px;
+	padding-top: -10px;
+	border-bottom: #4B92D1;
+	border-radius: 3px;
+	z-index: -1;
+	width: 100%;
+}
