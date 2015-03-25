@@ -27,3 +27,10 @@ html, body
 	padding-right: 5px;
 }
 
+form {
+	font-family: "Raleway";
+	padding-top: 100px;
+	width:100%;
+	text-align: center;
+	color: #52AEFF;
+} 
