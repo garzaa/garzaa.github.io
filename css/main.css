@@ -46,13 +46,13 @@ html, body
 	width: 100%;
 	text-align: center;
 	color: white;
-	position: absolute;
+	position: fixed;
 	font-size: 12px;
 }
 
 .footer {
 	background-color: #52AEFF;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	height: 15px;
 	border-radius: 3px;
