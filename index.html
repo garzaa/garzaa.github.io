@@ -9,10 +9,11 @@
 			function arghPlay() {
 				argh.play();
 				argh.currentTime = 0;
-				console.log("Played 'argh.mp3'")
+				console.log('argh.mp3 played')
 			}
 			function click() {
-				clicks = clicks += 1;
+				console.log('at least this part works');
+				clicks = clicks + 1;
 				document.getElementById("timesClicked").innerHTML = clicks;
 			}
 		</script>
@@ -30,10 +31,10 @@
 
 	<body>
 		<div class="button" align = "center">
-			<img src="favicon-01.png" onclick = "arghPlay()"; "clicked()">
+			<img src="favicon-01.png" onclick = "arghPlay(); click();">
 		</div>
-		<!-- <div id="timesClicked">
+		<div id="timesClicked">
 			0
-		</div> -->
+		</div>
 	</body>
 </html>
