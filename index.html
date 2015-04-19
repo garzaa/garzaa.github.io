@@ -2,6 +2,7 @@
 <html>
 	<head>
 	<link rel="shortcut icon" type="image/png" href="favicon-01.png">
+	<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 	<title>Sonic Shitposting</title>
 		<script>
 			var argh = new Audio("argh.mp3");
@@ -14,7 +15,7 @@
 			function pictureClick() {
 				console.log('at least this part works');
 				clicks = clicks + 1;
-				localStorage.timesClicked = Number(localStorage.timesClicked) + 1;
+				localStorage.timesClicked = localStorage.timesClicked + 1;
 				document.getElementById("timesClicked").innerHTML = clicks;
 			}
 		</script>
@@ -28,22 +29,30 @@
 		
 			cursor: pointer;
 		}
+		#timesClicked {
+			color: #371b7a;
+			font-family: 'Poiret One', cursive;
+			font-size: 60px;
+			margin-left: 10%;
+			margin-top: 10%;
+		}
 	</style>
 
 	<body>
 		<div class="button" align = "center">
 			<img src="favicon-01.png" onclick = "arghPlay(); pictureClick();">
 		</div>
-		<div id="timesClicked">
-			<p>
+		<div >
+			<p id="timesClicked">
 				0
 			</p>
 			<script>
+				localStorage.timesClicked = "0";
 				if (localStorage.timesClicked) {
-					document.getElementById("timesClicked").innerHTML = Number(localStorage.timesClicked;)
+					document.getElementById("timesClicked").innerHTML = Number(localStorage.timesClicked);
 				} else {
-					localStorage.timesClicked = 1;
-				}
+					localStorage.timesClicked = "0";
+				} console.log(localStorage.timesClicked);
 			</script>
 		</div>
 	</body>
