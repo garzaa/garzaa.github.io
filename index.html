@@ -5,18 +5,22 @@
 	<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 	<title>Sonic Shitposting</title>
 		<script>
-			var argh = new Audio("argh.mp3");
-			var clicks = 0;
+			var sounds = new Array("argh.mp3", "argh2.mp3", "argh3.mp3", "argh4.mp3", "argh5.mp3", "argh6.mp3", "argh7.mp3", "argh8.mp3");
+			var rand = Math.floor(Math.random() * 8);
+			var randomSound = sounds[rand];
+			var argh = new Audio(randomSound);
+			arghPlay();
+
 			function arghPlay() {
 				argh.play();
 				argh.currentTime = 0;
-				console.log('argh.mp3 played')
+				rand = Math.floor(Math.random() * 8);
+				randomSound = sounds[rand];
+				argh = new Audio(randomSound);
 			}
 			function pictureClick() {
-				console.log('at least this part works');
-				clicks = clicks + 1;
-				localStorage.timesClicked = localStorage.timesClicked + 1;
-				document.getElementById("timesClicked").innerHTML = clicks;
+				localStorage.timesClicked = Number(localStorage.timesClicked) + 1;
+				document.getElementById("timesClicked").innerHTML = localStorage.timesClicked;
 			}
 		</script>
 	</head>
@@ -47,7 +51,6 @@
 				0
 			</p>
 			<script>
-				localStorage.timesClicked = "0";
 				if (localStorage.timesClicked) {
 					document.getElementById("timesClicked").innerHTML = Number(localStorage.timesClicked);
 				} else {
