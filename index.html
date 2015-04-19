@@ -11,9 +11,10 @@
 				argh.currentTime = 0;
 				console.log('argh.mp3 played')
 			}
-			function click() {
+			function pictureClick() {
 				console.log('at least this part works');
 				clicks = clicks + 1;
+				localStorage.timesClicked = Number(localStorage.timesClicked) + 1;
 				document.getElementById("timesClicked").innerHTML = clicks;
 			}
 		</script>
@@ -31,10 +32,19 @@
 
 	<body>
 		<div class="button" align = "center">
-			<img src="favicon-01.png" onclick = "arghPlay(); click();">
+			<img src="favicon-01.png" onclick = "arghPlay(); pictureClick();">
 		</div>
 		<div id="timesClicked">
-			0
+			<p>
+				0
+			</p>
+			<script>
+				if (localStorage.timesClicked) {
+					document.getElementById("timesClicked").innerHTML = Number(localStorage.timesClicked;)
+				} else {
+					localStorage.timesClicked = 1;
+				}
+			</script>
 		</div>
 	</body>
 </html>
