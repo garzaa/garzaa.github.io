@@ -9,7 +9,6 @@
 			var rand = Math.floor(Math.random() * 8);
 			var randomSound = sounds[rand];
 			var argh = new Audio(randomSound);
-			
 
 			function arghPlay() {
 				argh.play();
@@ -30,7 +29,7 @@
 			position: fixed;
 			bottom: 0;
 			right: 0;
-		
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
 			cursor: pointer;
 		}
 		#timesClicked {
