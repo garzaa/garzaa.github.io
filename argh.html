@@ -25,6 +25,15 @@
 	</head>
 
 	<style>
+		html {
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		body {
+			width: 100%;
+			height: 100%;
+		}
 		.button {
 			position: fixed;
 			bottom: 0;
@@ -39,6 +48,18 @@
 			margin-left: 10%;
 			margin-top: 10%;
 		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.home {
+			color: #371b7a;
+			font-family: 'Poiret One', cursive;
+			font-size: 12px;
+			cursor: pointer;
+			padding-left: 10%
+		}
 	</style>
 
 	<body>
@@ -49,6 +70,9 @@
 			<p id="timesClicked">
 				0
 			</p>
+			<p class="home">
+				<a href="index.html"> HOME </a>
+			</p>
 			<script>
 				if (localStorage.timesClicked) {
 					document.getElementById("timesClicked").innerHTML = Number(localStorage.timesClicked);
@@ -57,5 +81,6 @@
 				} console.log(localStorage.timesClicked);
 			</script>
 		</div>
+		
 	</body>
 </html>

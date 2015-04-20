@@ -1,0 +1,19 @@
+html {
+	width: 100%;
+	height: 100%
+	overflow: hidden;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	background-color: #96b5b4;
+	overflow-x: hidden;
+}
+
+
+
+.link {
+	font-family: "VT323";
+	color: white;
+}
