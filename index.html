@@ -5,10 +5,11 @@
 	<link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 	<title>Sonic Shitposting</title>
 		<script>
-			var sounds = new Array("argh.mp3", "argh2.mp3", "argh3.mp3", "argh4.mp3", "argh5.mp3", "argh6.mp3", "argh7.mp3", "argh8.mp3");
+			var sounds = ["argh.mp3", "argh2.mp3", "argh3.mp3", "argh4.mp3", "argh5.mp3", "argh6.mp3", "argh7.mp3", "argh8.mp3"];
 			var rand = Math.floor(Math.random() * 8);
 			var randomSound = sounds[rand];
 			var argh = new Audio(randomSound);
+			var pictures = ["favicon-01.png", "favicon-02.png", "favicon-03.png","favicon-04.png", "favicon-05.png", "favicon-06.png", "favicon-07.png", "favicon-08.png", "favicon-09.png"];
 
 			function arghPlay() {
 				argh.play();
@@ -17,9 +18,15 @@
 				randomSound = sounds[rand];
 				argh = new Audio(randomSound);
 			}
+			function newPicture() {
+				rand = Math.floor(Math.random() * 8);
+				randomPicture = pictures[rand];
+				document.getElementById("picture").src = randomPicture;
+			}
 			function pictureClick() {
 				localStorage.timesClicked = Number(localStorage.timesClicked) + 1;
 				document.getElementById("timesClicked").innerHTML = localStorage.timesClicked;
+
 			}
 		</script>
 	</head>
@@ -34,7 +41,7 @@
 			width: 100%;
 			height: 100%;
 		}
-		.button {
+		#picturecontainer {
 			position: fixed;
 			bottom: 0;
 			right: 0;
@@ -63,8 +70,8 @@
 	</style>
 
 	<body>
-		<div class="button" align = "center">
-			<img src="favicon-01.png" onclick = "arghPlay(); pictureClick();">
+		<div id="picturecontainer">
+			<img id= "picture" src="favicon-01.png" onclick = "arghPlay(); pictureClick(); newPicture();">
 		</div>
 		<div >
 			<p id="timesClicked">
