@@ -12,8 +12,10 @@ body {
 }
 
 .link {
-	font-family: "Raleway";
+	font-family: "Poiret One", cursive;
 	color: white;
+	padding-left: 200px;
+	width: 100%;
 }
 
 a {
@@ -22,8 +24,14 @@ a {
 }
 
 #bg-image {
-	z-index: -1;
+	left: 0px;
+	top: 0px;
+	position: fixed;
+	z-index: -10;
 	float: right;
-	height: 900px;
 	overflow: hidden;
+}
+
+#spacer-200 {
+	padding-top: 200px;
 }
