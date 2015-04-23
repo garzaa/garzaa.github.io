@@ -14,7 +14,7 @@ body {
 	z-index: -1;
 }
 
-#title-text {
+p {
 	font-family: 'VT323';
 	color: #33CCFF;
 }
