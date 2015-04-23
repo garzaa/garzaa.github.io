@@ -11,10 +11,17 @@ body {
 }
 
 .bg-image {
+	position: fixed;
 	z-index: -1;
+	height: 98%%;
 }
 
 p {
 	font-family: 'VT323';
 	color: #33CCFF;
+	line-height: 45%;
+}
+
+.music-controls {
+	cursor: pointer;
 }

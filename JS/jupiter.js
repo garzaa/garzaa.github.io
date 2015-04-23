@@ -4,4 +4,13 @@ music.addEventListener('ended', function() {
     this.currentTime = 0;
     this.play();
 }, false);
+//music controls
 music.play();
+$("#play").click(function () {
+    music.play();
+})
+
+$("#pause").click(function () {
+    music.pause();
+})
+//start playing music on start
