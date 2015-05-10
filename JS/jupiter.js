@@ -63,7 +63,7 @@ function algaeAge(algaeArray, algaeLifeTime) {
 	}
 }
 
-function algaeCreate(algaeArray) {
+function algaeCreate() {
 	if (!algaeArray) {
 		console.log("Creating algae array...")
 		//if algae hasn't already been created
