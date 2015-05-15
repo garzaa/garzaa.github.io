@@ -45,6 +45,11 @@ $("#probe").click(function() {
 })
 
 //test params
+var algaeNumber = 3;
+var algaeSpawnRate = 3;
+var algaeLifeTime = 3;
+time = 12;
+
 $("#params").click(function() {
 	algaeNumber = prompt("algaeNumber: ");
 	algaeSpawnRate = prompt("algaeSpawnRate: ");
@@ -52,38 +57,8 @@ $("#params").click(function() {
 	time = prompt("How many months to run for?")
 })
 
-
-//JustAlgaeThings.js
-function algaeAge(algaeArray, algaeLifeTime) {
-	for (var i=0; i<algaeArray.length; i++) {
-		algaeArray[i] += 1;
-		if (algaeArray[i] > algaeLifeTime) {
-			algaeArray.splice(i, 1);
-		}
-	}
-}
-
-function algaeCreate() {
-	if (!algaeArray) {
-		console.log("Creating algae array...")
-		//if algae hasn't already been created
-		//creates an array, assigns a number to it for the number of cycles old algae is
-		for (var i=0; i<algaeNumber; i++) {
-			algaeArray[i] = 1;
-		}
-		console.log("populated array...");
-	}
-}
-																															//fix the scopes you idiot
-function algaeLife() {
-	algaeCreate();
-	algaeAge();
-}
-
-//that semantic satiation
-
 function cycle(time) {
-
+	createAlgae();
 	for(var i=0; i< time; i++) {
 		console.log("700 Jovian hours have passed...")
 		algaeLife();
