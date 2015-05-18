@@ -18,15 +18,6 @@ music.addEventListener('ended', function() {
     this.play();
 }, false);
 
-//init population variables
-
-var algae = 25; //initial number of algae
-var algaeSpawnRate = 4; //four new plants per cycle per plant
-var algaeLifeTime = 4; //number of cycles it takes for algae to die off
-var algaeArray = [];
-var time = 0;
-
-
 //music controls
 $("#play").click(function () {
     music.play();
@@ -51,8 +42,8 @@ time = 40;
 $("#params").click(function() {
 	algaeNumber = prompt("algaeNumber: ");
 	algaeSpawnRate = prompt("algaeSpawnRate: ");
-	algaeLifeTime = prompt("algaeLifeTime: ");
 	algaeSpawnChance = prompt("algaeSpawnChance: ")
+	algaeLifeTime = prompt("algaeLifeTime: ");
 	time = prompt("How many months to run for?")
 })
 

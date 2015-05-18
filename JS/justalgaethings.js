@@ -36,6 +36,24 @@ function algaeSpawn(originalLength) {
 
 function algaeLife() {
 	algaeAge();
-	algaeSpawn(algaeArray.length); //okay why does this crash Chrome
+	algaeSpawn(algaeArray.length);
 	console.log(algaeArray);
 }
+
+function resetAlgaeParams() {
+	algaeNumber = 3;
+	algaeSpawnRate = 3;
+	algaeSpawnChance = .06;
+	algaeLifeTime = 20;
+	algaeArray = [];
+}
+
+function getAlgaeParams() {
+	algaeNumber = document.getElementById("algaeNumber");
+	algaeSpawnRate = document.getElementById("algaeSpawnRate");
+	algaeSpawnChance = document.getElementById("algaeSpawnChance");
+	algaeLifeTime = document.getElementById("algaeLifeTime");
+	time = document.getElementById("time");
+}
+
+

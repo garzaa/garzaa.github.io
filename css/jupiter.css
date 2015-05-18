@@ -28,6 +28,11 @@ p {
 	line-height: 45%;
 }
 
+.param {
+	margin-top: -15px;
+	display: inline-block;
+}
+
 .music-controls {
 	cursor: pointer;
 }
@@ -42,10 +47,6 @@ a {
 }
 
 
-#params {
+#params-button {
 	cursor: pointer;
-}
-
-#rotationgif {
-	padding-top: -300px;
 }
