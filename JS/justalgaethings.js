@@ -42,7 +42,7 @@ function algaeLife() {
 function resetAlgaeParams() {
 	algaeNumber = 3;
 	algaeSpawnRate = 3;
-	algaeSpawnChance = .06;
+	algaeSpawnChance = 0.06;
 	algaeLifeTime = 20;
 	algaeArray = [];
 }
