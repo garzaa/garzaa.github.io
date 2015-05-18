@@ -43,6 +43,9 @@ a {
 }
 
 #probe {
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+ 	-moz-user-select: none;     /* Firefox all */
+  	-ms-user-select: none;
 	cursor: pointer;
 }
 
