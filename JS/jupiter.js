@@ -31,7 +31,6 @@ $("#pause").click(function () {
 
 //this should only happen once, make sure you don't forget and put it in the HTML
 $("#probe").click(function() {
-	console.log(document.getElementById("algaeNumber").innerHTML);
 	//probelaunch.play();
 	getParams();
 	probelaunch.currentTime = 0;

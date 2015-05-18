@@ -37,7 +37,6 @@ function algaeSpawn(originalLength) {
 function algaeLife() {
 	algaeAge();
 	algaeSpawn(algaeArray.length);
-	console.log(algaeArray);
 }
 
 function resetAlgaeParams() {
