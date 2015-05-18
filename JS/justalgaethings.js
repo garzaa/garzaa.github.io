@@ -1,11 +1,9 @@
-	//JustAlgaeThings.js
+//JustAlgaeThings.js
 var algaeArray = [];
 var algaeNumber;
 var algaeSpawnRate;
 var algaeSpawnChance;
 var algaeLifeTime;
-var algaeArray;
-getLocalStorage();
 
 getAlgaeParams();
 
@@ -19,7 +17,8 @@ function algaeAge() {
 }
 
 function createAlgae() {
-	algaeArray = [];
+	algaeArray = []; 
+	// ^^ seems redundant but this empties the prev array
 	for (var i=0; i<algaeNumber; i++) {
 		algaeArray.push(0);
 	}

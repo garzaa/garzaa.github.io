@@ -85,3 +85,6 @@ function getLocalStorage() {
 		cycles = localStorage.cycles;
 	}
 }
+
+//loads html from local storage if it exists
+getLocalStorage();
