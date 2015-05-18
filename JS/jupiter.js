@@ -31,22 +31,22 @@ var time = 0;
 $("#play").click(function () {
     music.play();
     localStorage.musicPlaying = "playing";
-})
+});
 
 $("#pause").click(function () {
     music.pause();
     localStorage.musicPlaying = "paused";
-})
+});
 
 //this should only happen once, make sure you don't forget and put it in the HTML
 $("#probe").click(function() {
 	probelaunch.play();
 	probelaunch.currentTime = 0;
 	cycle(time);
-})
+});
 
 //test params
-time = 220;
+time = 40;
 
 $("#params").click(function() {
 	algaeNumber = prompt("algaeNumber: ");
