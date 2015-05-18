@@ -38,6 +38,7 @@ $("#pause").click(function () {
     localStorage.musicPlaying = "paused";
 })
 
+//this should only happen once, make sure you don't forget and put it in the HTML
 $("#probe").click(function() {
 	probelaunch.play();
 	probelaunch.currentTime = 0;
@@ -45,7 +46,7 @@ $("#probe").click(function() {
 })
 
 //test params
-time = 12;
+time = 20;
 
 $("#params").click(function() {
 	algaeNumber = prompt("algaeNumber: ");
@@ -57,7 +58,6 @@ $("#params").click(function() {
 function cycle(time) {
 	createAlgae();
 	for(var i=0; i< time; i++) {
-		console.log("700 Jovian hours have passed...")
 		algaeLife();
 	}
 	alert("Current algae population: " + algaeArray.length);

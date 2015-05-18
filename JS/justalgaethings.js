@@ -1,10 +1,11 @@
 	//JustAlgaeThings.js
 var algaeNumber = 3;
 var algaeSpawnRate = 3;
-var algaeLifeTime = 3;
+var algaeLifeTime = 12;
+var algaeArray = [];
 
 function algaeAge() {
-	for (var i=0; i<algaeNumber; i++) {
+	for (var i=0; i<algaeArray.length; i++) {
 		algaeArray[i] += 1;
 		if (algaeArray[i] > algaeLifeTime) {
 			algaeArray.splice(i, 1);
@@ -15,17 +16,24 @@ function algaeAge() {
 function createAlgae() {
 	
 	console.log("Creating algae array...")
-	//if algae hasn't already been created
-	//creates an array, assigns a number to it for the number of cycles old algae is
-	var algaeArray = []
+	
 	for (var i=0; i<algaeNumber; i++) {
-		algaeArray[i] = 1;
+		algaeArray.push(0);
 	}
-	console.log(algaeArray);
 	console.log("populated array...");
 
 }
 
+/*function algaeSpawn() {
+	console.log("algae should spawn here...");
+	for (var i=0; i<algaeArray.length; i++) {
+		algaeArray.push(0);
+	}
+}*/
+
 function algaeLife() {
 	algaeAge();
+	//tHIS WILl COME LATER
+	//algaeSpawn();
+	console.log(algaeArray);
 }
