@@ -31,7 +31,9 @@ $("#pause").click(function () {
 
 //this should only happen once, make sure you don't forget and put it in the HTML
 $("#probe").click(function() {
-	probelaunch.play();
+	console.log(document.getElementById("algaeNumber").innerHTML);
+	//probelaunch.play();
+	getParams();
 	probelaunch.currentTime = 0;
 	cycle(time);
 });
@@ -52,5 +54,9 @@ function cycle(time) {
 	for(var i=0; i< time; i++) {
 		algaeLife();
 	}
-	alert("Current algae population: " + algaeArray.length);
+	document.getElementById("algaePop").innerHTML = algaeArray.length;
+}
+
+function getParams() {
+	getAlgaeParams();
 }
