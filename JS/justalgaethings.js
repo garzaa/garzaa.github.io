@@ -1,11 +1,11 @@
 	//JustAlgaeThings.js
 var algaeArray = [];
-
 var algaeNumber;
 var algaeSpawnRate;
 var algaeSpawnChance;
 var algaeLifeTime;
 var algaeArray;
+getLocalStorage();
 
 getAlgaeParams();
 
@@ -52,5 +52,5 @@ function getAlgaeParams() {
 	algaeSpawnRate = document.getElementById("algaeSpawnRate").innerHTML;
 	algaeSpawnChance = document.getElementById("algaeSpawnChance").innerHTML;
 	algaeLifeTime = document.getElementById("algaeLifeTime").innerHTML;
-	time = document.getElementById("time").innerHTML;
+	cycles = document.getElementById("cycles").innerHTML;
 }

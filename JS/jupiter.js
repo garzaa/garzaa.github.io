@@ -29,33 +29,59 @@ $("#pause").click(function () {
     localStorage.musicPlaying = "paused";
 });
 
-//this should only happen once, make sure you don't forget and put it in the HTML
+//this should only happen once
 $("#probe").click(function() {
 	//probelaunch.play();
 	getParams();
 	probelaunch.currentTime = 0;
-	cycle(time);
+	cycle(cycles);
+	updateLocalStorage();
 });
 
 //test params
-time = 40;
+cycles = 40;
 
-$("#params").click(function() {
-	algaeNumber = prompt("algaeNumber: ");
-	algaeSpawnRate = prompt("algaeSpawnRate: ");
-	algaeSpawnChance = prompt("algaeSpawnChance: ")
-	algaeLifeTime = prompt("algaeLifeTime: ");
-	time = prompt("How many months to run for?")
+$("#defaults").click(function() {
+	document.getElementById("algaeNumber").innerHTML = 3;
+	document.getElementById("algaeSpawnRate").innerHTML = 3;
+	document.getElementById("algaeSpawnChance").innerHTML = 0.06;
+	document.getElementById("algaeLifeTime").innerHTML = 20;
+	document.getElementById("cycles").innerHTML = 40;
+	resetAlgaeParams();
+	updateLocalStorage();
 })
 
-function cycle(time) {
+function cycle(cycles) {
 	createAlgae();
-	for(var i=0; i< time; i++) {
+	for(var i=0; i< cycles; i++) {
+		updateAlgae();
 		algaeLife();
 	}
-	document.getElementById("algaePop").innerHTML = algaeArray.length;
+	updateAlgae();
 }
 
 function getParams() {
 	getAlgaeParams();
+}
+
+function updateAlgae() {
+	document.getElementById("algaePop").innerHTML = algaeArray.length;
+}
+
+function updateLocalStorage() {
+	localStorage.algaeNumber = algaeNumber;
+	localStorage.algaeSpawnRate = algaeSpawnRate;
+	localStorage.algaeSpawnChance = algaeSpawnChance;
+	localStorage.algaeLifeTime = algaeLifeTime;
+	localStorage.cycles = cycles;
+}
+
+function getLocalStorage() {
+	if(localStorage.algaeNumber) {
+		algaeNumber = localStorage.algaeNumber;
+		algaeSpawnRate = localStorage.algaeSpawnRate;
+		algaeSpawnChance = localStorage.algaeSpawnChance;
+		algaeLifeTime = localStorage.algaeLifeTime;
+		cycles = localStorage.cycles;
+	}
 }
