@@ -46,12 +46,13 @@ $("#probe").click(function() {
 })
 
 //test params
-time = 20;
+time = 220;
 
 $("#params").click(function() {
 	algaeNumber = prompt("algaeNumber: ");
 	algaeSpawnRate = prompt("algaeSpawnRate: ");
 	algaeLifeTime = prompt("algaeLifeTime: ");
+	algaeSpawnChance = prompt("algaeSpawnChance: ")
 	time = prompt("How many months to run for?")
 })
 

@@ -1,6 +1,7 @@
 	//JustAlgaeThings.js
 var algaeNumber = 3;
 var algaeSpawnRate = 3;
+var algaeSpawnChance = .4;
 var algaeLifeTime = 12;
 var algaeArray = [];
 
@@ -27,7 +28,9 @@ function createAlgae() {
 function algaeSpawn(originalLength) {
 	console.log("algae should spawn here...");
 	for (var i=0; i<originalLength; i++) {
-		algaeArray.push(0);
+		if (Math.random() < algaeSpawnChance) {
+			algaeArray.push(0);
+		}
 	}
 }
 
