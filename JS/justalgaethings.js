@@ -24,16 +24,15 @@ function createAlgae() {
 
 }
 
-/*function algaeSpawn() {
+function algaeSpawn(originalLength) {
 	console.log("algae should spawn here...");
-	for (var i=0; i<algaeArray.length; i++) {
+	for (var i=0; i<originalLength; i++) {
 		algaeArray.push(0);
 	}
-}*/
+}
 
 function algaeLife() {
 	algaeAge();
-	//tHIS WILl COME LATER
-	//algaeSpawn();
+	algaeSpawn(algaeArray.length); //okay why does this crash Chrome
 	console.log(algaeArray);
 }
