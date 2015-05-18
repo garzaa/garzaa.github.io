@@ -45,9 +45,6 @@ $("#probe").click(function() {
 })
 
 //test params
-var algaeNumber = 3;
-var algaeSpawnRate = 3;
-var algaeLifeTime = 3;
 time = 12;
 
 $("#params").click(function() {

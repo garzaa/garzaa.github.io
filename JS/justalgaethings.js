@@ -1,5 +1,9 @@
-//JustAlgaeThings.js
-function algaeAge(algaeArray, algaeLifeTime) {
+	//JustAlgaeThings.js
+var algaeNumber = 3;
+var algaeSpawnRate = 3;
+var algaeLifeTime = 3;
+
+function algaeAge() {
 	for (var i=0; i<algaeNumber; i++) {
 		algaeArray[i] += 1;
 		if (algaeArray[i] > algaeLifeTime) {
