@@ -60,6 +60,7 @@ p {
 	color: white;
 	font-size: 10pt;
 	padding-left: 10%;
+	max-width: 600px;
 }
 
 #spacer-100 {
