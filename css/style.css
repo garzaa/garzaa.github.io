@@ -14,13 +14,18 @@ body {
 .link {
 	font-family: "Poiret One", cursive;
 	color: white;
-	width: 100%;
 	font-size: 16pt;
 }
 
 a {
 	color: white;
 	text-decoration: none;
+	padding: 3px;
+}
+
+a:hover {
+	background-color: #9E1D1D;
+	border-radius: 1px;
 }
 
 #bg-image {
@@ -34,4 +39,8 @@ a {
 
 #spacer-200 {
 	padding-top: 200px;
+}
+
+#spacer-7 {
+	padding-top: 7px;
 }
