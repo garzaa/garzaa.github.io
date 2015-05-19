@@ -4,6 +4,7 @@ var algaeNumber;
 var algaeSpawnRate;
 var algaeSpawnChance;
 var algaeLifeTime;
+var algaeFails;
 
 getAlgaeParams();
 
@@ -26,9 +27,12 @@ function createAlgae() {
 }
 
 function algaeSpawn(originalLength) {
+	algaeFails = 0; //gotta do this for each cycle
 	for (var i=0; i<(algaeSpawnRate*originalLength); i++) {
 		if (Math.random() < algaeSpawnChance) {
 			algaeArray.push(0);
+		} else {
+			algaeFails += 1;
 		}
 	}
 }
@@ -44,6 +48,7 @@ function resetAlgaeParams() {
 	algaeSpawnRate = 3;
 	algaeSpawnChance = 0.06;
 	algaeLifeTime = 20;
+	algaeFails = 0;
 }
 
 function getAlgaeParams() {

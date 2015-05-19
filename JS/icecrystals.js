@@ -12,19 +12,21 @@ function createIce() {
 	iceCrystals = iceNumber;
 }
 
-function iceSpawn(originalLength) {
-	for (var i=0; i<(algaeSpawnRate * originalLength); i++) {
-		if (math.random() < algaeSpawnChance) {
-			iceCrystals += 1;
-		}
-	}
+function iceSpawn(algaeFails) {
+	iceCrystals += algaeFails;
+	//could add more here depending on climate
 }
 
 function iceLife() {
+	createIce();
 	iceSpawn(algaeArray.length);
 }
 
 function resetIceParams() {
 	iceCrystals = 0;
 	iceNumber = 3;
+}
+
+function getIceParams() {
+	iceNumber = document.getElementByID("iceNumber").innerHTML;
 }
