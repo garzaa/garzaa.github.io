@@ -24,7 +24,7 @@ a {
 	padding: 3px;
 }
 
-a:hover {
+.link:hover {
 	background-color: #9E1D1D;
 	border-radius: 1px;
 }
@@ -52,4 +52,26 @@ a:hover {
 	right: 0;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	cursor: pointer;
+}
+
+p {
+	font-family: "Raleway", sans-serif;
+	font-weight: 400;
+	color: white;
+	font-size: 10pt;
+	padding-left: 10%;
+}
+
+#spacer-100 {
+	padding-top: 5%;
+}
+
+#inline-link {
+	color: #9E1D1D;
+}
+
+#inline-link:hover {
+	background-color: #9E1D1D;
+	border-radius: 1px;
+	color: white;
 }
