@@ -14,7 +14,7 @@ function createIce() {
 
 function iceSpawn(algaeFails) {
 	iceCrystals += algaeFails;
-	//could add more here depending on climate
+	//could add more here depending on climate, etc
 }
 
 function iceLife() {
