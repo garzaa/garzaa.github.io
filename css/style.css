@@ -12,7 +12,8 @@ body {
 }
 
 .link {
-	font-family: "Poiret One", cursive;
+	font-family: "Raleway", sans-serif;
+	font-weight: 200;
 	color: white;
 	font-size: 16pt;
 }
@@ -43,4 +44,12 @@ a:hover {
 
 #spacer-7 {
 	padding-top: 7px;
+}
+
+#picturecontainer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	cursor: pointer;
 }
