@@ -46,6 +46,7 @@ $("#defaults").click(function() {
 	document.getElementById("algaeSpawnRate").innerHTML = 3;
 	document.getElementById("algaeSpawnChance").innerHTML = 0.06;
 	document.getElementById("algaeLifeTime").innerHTML = 20;
+	document.getElementById("iceNumber").innerHTML = 12;
 	document.getElementById("cycles").innerHTML = 40;
 	resetAlgaeParams();
 	updateLocalStorage();
@@ -55,17 +56,17 @@ function cycle(cycles) {
 	createAlgae();
 	for(var i=0; i< cycles; i++) {
 		updateAlgae();
+		updateIce();
 		algaeLife();
+		iceLife();
 	}
+	updateIce();
 	updateAlgae();
 }
 
 function getParams() {
 	getAlgaeParams();
-}
-
-function updateAlgae() {
-	document.getElementById("algaePop").innerHTML = algaeArray.length;
+	getIceParams();
 }
 
 function updateLocalStorage() {
@@ -73,6 +74,7 @@ function updateLocalStorage() {
 	localStorage.algaeSpawnRate = algaeSpawnRate;
 	localStorage.algaeSpawnChance = algaeSpawnChance;
 	localStorage.algaeLifeTime = algaeLifeTime;
+	localStorage.iceNumber = iceNumber;
 	localStorage.cycles = cycles;
 }
 
@@ -82,6 +84,7 @@ function getLocalStorage() {
 		algaeSpawnRate = localStorage.algaeSpawnRate;
 		algaeSpawnChance = localStorage.algaeSpawnChance;
 		algaeLifeTime = localStorage.algaeLifeTime;
+		iceNumber = localStorage.iceNumber
 		cycles = localStorage.cycles;
 	}
 }

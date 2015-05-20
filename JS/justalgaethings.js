@@ -58,3 +58,7 @@ function getAlgaeParams() {
 	algaeLifeTime = document.getElementById("algaeLifeTime").innerHTML;
 	cycles = document.getElementById("cycles").innerHTML;
 }
+
+function updateAlgae() {
+	document.getElementById("algaePop").innerHTML = algaeArray.length;
+}
