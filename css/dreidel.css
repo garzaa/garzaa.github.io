@@ -19,3 +19,17 @@ h1 {
 	width: 100%;
 	height: 100%;
 }
+
+.centerbutton {
+	border-radius: 1px;
+	border-style: solid;
+	border-color: red;
+	margin: 40px;
+	width: 200px;
+	font-family: 'Electrolize', sans-serif;
+	font-size: 14pt;
+	color: red;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
