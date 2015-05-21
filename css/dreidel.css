@@ -21,7 +21,7 @@ h1 {
 	background-color: white;
 }
 
-.centerbutton {
+#centerbutton {
 	border-radius: 1px;
 	border-style: solid;
 	border-color: red;
@@ -36,23 +36,27 @@ h1 {
 	cursor: pointer;
 }
 
-.centerbutton:hover {
+#centerbutton:hover {
 	border-color: white;
 	color: white;
 	width: 250px;
 }
 
-.centerbutton:active {
+#centerbutton:active {
 	border-color: #E65C8A;
 	color: #E65C8A;
 	width: 250px;
 }
 
-#noselect {
+body {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+a {
+	text-decoration: none;
 }
