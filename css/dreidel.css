@@ -32,4 +32,26 @@ h1 {
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+	cursor: pointer;
+}
+
+.centerbutton:hover {
+	border-color: white;
+	color: white;
+	width: 250px;
+}
+
+.centerbutton:active {
+	border-color: #E65C8A;
+	color: #E65C8A;
+	width: 250px;
+}
+
+#noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
