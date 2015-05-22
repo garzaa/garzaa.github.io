@@ -5,20 +5,21 @@ html {
 }
 
 body {
-	background-color: #1F000F;
+	background-color: black;
 }
 
-h1 {
+#title {
 	font-family: 'Electrolize', sans-serif;
 	text-align: center;
 	font-size: 50pt;
 	color: red;
+	cursor: default;
 }
 
 #title-container {
 	width: 100%;
 	height: 100%;
-	background-color: white;
+	
 }
 
 #centerbutton {
@@ -37,14 +38,12 @@ h1 {
 }
 
 #centerbutton:hover {
-	border-color: white;
-	color: white;
 	width: 250px;
 }
 
 #centerbutton:active {
-	border-color: #E65C8A;
-	color: #E65C8A;
+	border-color: #900000;
+	color: #900000;
 	width: 250px;
 }
 
@@ -59,4 +58,16 @@ body {
 
 a {
 	text-decoration: none;
+}
+
+#customize {
+	opacity: 0;
+}
+
+#game {
+	opacity: 0;
+}
+
+#about {
+	opacity: 0;
 }
