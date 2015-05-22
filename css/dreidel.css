@@ -75,3 +75,29 @@ a {
 #players {
 	opacity: 0;
 }
+
+.button {
+	border-radius: 1px;
+	border-style: solid;
+	border-color: red;
+	margin: 40px;
+	width: 200px;
+	font-family: 'Electrolize', sans-serif;
+	font-size: 14pt;
+	color: red;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+}
+
+.button:hover {
+	width: 250px;
+}
+
+.button:active {
+	border-color: #900000;
+	color: #900000;
+	width: 250px;
+}
+}
