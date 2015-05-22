@@ -8,24 +8,24 @@ var com2 = {};
 var com3 = {};
 var currentScreen = "splashscreen";
 
-function goToScreen(screenId) {
+function goToCustomize() {
 	document.getElementById("splashscreen").style.opacity = "0";
-	document.getElementById("customize").style.opacity = "0";
 	document.getElementById("game").style.opacity = "0";
 	document.getElementById("options").style.opacity = "0";
 	document.getElementById("about").style.opacity = "0";
-	document.getElementById(screenId).style.opacity = "0";
-	currentScreen = screenId;
+	document.getElementById("customize").style.opacity = "100";
+	$("#splashscreen").slideUp();
+	currentScreen = "customize";
 }
 
 function beginGame1p() {
 	numPlayers = 1;
-	gotoScreen("customize");
+	goToCustomize();
 }
 
 function beginGame2p() {
 	numPlayers = 2;
-	gotoScreen("customize")
+	goToCustomize();
 }
 
 //loads game screens based on numPlayers
