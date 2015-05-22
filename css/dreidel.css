@@ -8,7 +8,7 @@ body {
 	background-color: black;
 }
 
-#title {
+h1 {
 	font-family: 'Electrolize', sans-serif;
 	text-align: center;
 	font-size: 50pt;
@@ -100,4 +100,7 @@ a {
 	color: #900000;
 	width: 250px;
 }
+
+#playersTitle {
+
 }
