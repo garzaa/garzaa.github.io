@@ -13,7 +13,8 @@ function goToScreen(screenId, originalScreen) {
 	document.getElementById("game").style.opacity = "0";
 	document.getElementById("options").style.opacity = "0";
 	document.getElementById("about").style.opacity = "0";
-	document.getElementById("customize").style.opacity = "0";
+	$("#customize").hide();
+	document.getElementById("players").style.opacity = "0";
 	console.log(screenId);
 	document.getElementById(screenId).style.opacity = "100";
 	$(originalScreen).hide();
@@ -22,7 +23,7 @@ function goToScreen(screenId, originalScreen) {
 
 function beginGame1p() {
 	numPlayers = 1;
-	goToScreen("customize", "#splashscreen");
+	goToScreen("players", "#splashscreen");
 }
 
 function beginGame2p() {
