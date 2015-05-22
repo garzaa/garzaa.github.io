@@ -9,10 +9,10 @@ var com3 = {};
 var currentScreen = "splashscreen";
 
 function goToScreen(screenId, originalScreen) {
-	document.getElementById("splashscreen").style.opacity = "0";
-	document.getElementById("game").style.opacity = "0";
-	document.getElementById("options").style.opacity = "0";
-	document.getElementById("about").style.opacity = "0";
+	$("#splashscreen").hide();
+	$("#game").hide();
+	$("#options").hide();
+	$("#about").hide();
 	$("#customize").hide();
 	document.getElementById("players").style.opacity = "0";
 	console.log(screenId);
