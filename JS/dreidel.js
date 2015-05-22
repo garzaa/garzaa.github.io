@@ -1,3 +1,0 @@
-$ ("1p").click(function() {
-
-});
