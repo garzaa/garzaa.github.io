@@ -60,6 +60,10 @@ a {
 	text-decoration: none;
 }
 
+#splashscreen {
+	height: 100%;
+}
+
 #customize {
 	opacity: 0;
 }

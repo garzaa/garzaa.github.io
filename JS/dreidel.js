@@ -13,14 +13,25 @@ function goToCustomize() {
 	document.getElementById("game").style.opacity = "0";
 	document.getElementById("options").style.opacity = "0";
 	document.getElementById("about").style.opacity = "0";
+	$("#splashscreen").hide();
 	document.getElementById("customize").style.opacity = "100";
-	$("#splashscreen").slideUp();
 	currentScreen = "customize";
+}
+
+function goToScreen(screenId) {
+	document.getElementById("splashscreen").style.opacity = "0";
+	document.getElementById("game").style.opacity = "0";
+	document.getElementById("options").style.opacity = "0";
+	document.getElementById("about").style.opacity = "0";
+	document.getElementById("customize").style.opacity = "0";
+	document.getElementById(screenId).style.opacity = "100";
+	$(screenId).hide();
+	currentScreen = screenId;
 }
 
 function beginGame1p() {
 	numPlayers = 1;
-	goToCustomize();
+	goToScreen("#customize");
 }
 
 function beginGame2p() {
