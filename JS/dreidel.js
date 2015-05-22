@@ -8,30 +8,21 @@ var com2 = {};
 var com3 = {};
 var currentScreen = "splashscreen";
 
-function goToCustomize() {
-	document.getElementById("splashscreen").style.opacity = "0";
-	document.getElementById("game").style.opacity = "0";
-	document.getElementById("options").style.opacity = "0";
-	document.getElementById("about").style.opacity = "0";
-	$("#splashscreen").hide();
-	document.getElementById("customize").style.opacity = "100";
-	currentScreen = "customize";
-}
-
-function goToScreen(screenId) {
+function goToScreen(screenId, originalScreen) {
 	document.getElementById("splashscreen").style.opacity = "0";
 	document.getElementById("game").style.opacity = "0";
 	document.getElementById("options").style.opacity = "0";
 	document.getElementById("about").style.opacity = "0";
 	document.getElementById("customize").style.opacity = "0";
+	console.log(screenId);
 	document.getElementById(screenId).style.opacity = "100";
-	$(screenId).hide();
+	$(originalScreen).hide();
 	currentScreen = screenId;
 }
 
 function beginGame1p() {
 	numPlayers = 1;
-	goToScreen("#customize");
+	goToScreen("customize", "#splashscreen");
 }
 
 function beginGame2p() {
