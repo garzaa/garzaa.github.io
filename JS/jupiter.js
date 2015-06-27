@@ -54,7 +54,8 @@ $("#defaults").click(function() {
 
 function cycle(cycles) {
 	createAlgae();
-	for(var i=0; i< cycles; i++) {
+	createIce();
+	for(var i=0; i<cycles; i++) {
 		updateAlgae();
 		updateIce();
 		algaeLife();

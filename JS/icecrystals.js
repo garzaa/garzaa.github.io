@@ -13,12 +13,11 @@ function createIce() {
 }
 
 function iceLife() {
-	createIce();
 	iceSpawn(algaeArray.length);
 }
 
-function iceSpawn(algaeFails) {
-	iceCrystals = algaeFails;
+function iceSpawn(number) {
+	iceCrystals = Number(iceCrystals + number);
 	//could add more here depending on climate, etc
 }
 

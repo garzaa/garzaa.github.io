@@ -32,7 +32,7 @@ function algaeSpawn(originalLength) {
 		if (Math.random() < algaeSpawnChance) {
 			algaeArray.push(0);
 		} else {
-			algaeFails += 1;
+			iceSpawn(1);
 		}
 	}
 }
