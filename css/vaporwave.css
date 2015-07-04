@@ -125,4 +125,31 @@ a {
 	height: 100px;
 	margin-bottom: 0px;
 	margin-right: 0px;
+	cursor: default;
+}
+
+.about {
+}
+
+#aboutwindowcontainer {
+	width: 30%;
+	margin-left: 300px;
+	margin-top: 100px;
+	background-color: #CFCFCF;
+	box-shadow: 2px 2px black,
+	inset 0 1px 3px rgba(255,255,255,1);
+	padding: 1px;
+	font-size: 12px;
+	cursor: default;
+}
+
+#about-text {
+	cursor: default;
+	font-size: 12pt;
+}
+
+#about-text:active {
+	cursor: default;
+	box-shadow: 2px 2px black,
+	inset 0 1px 3px rgba(255,255,255,1);
 }
