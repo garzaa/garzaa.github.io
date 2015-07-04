@@ -1,0 +1,128 @@
+html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#99FFFF,#FFB2B2)
+}
+
+h1 {
+	font-family: 'Permanent Marker', cursive;
+	color: #FF5050;
+	font-size: 100px;
+	text-align: center;
+	text-shadow: 5px 5px black;
+	-ms-transform: rotate(-7deg); /* IE 9 */
+    -webkit-transform: rotate(-7deg); /* Chrome, Safari, Opera */
+    transform: rotate(-7deg);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+table {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+
+div table td {
+	background-color: #CFCFCF;
+	box-shadow: 2px 2px black,
+	inset 0 2px 2px rgba(255,255,255,1);
+	font-size: 20px;
+	min-width: 20px;
+	max-width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+#maintable td {
+	width: 100px;
+}
+
+div table td:active {
+	box-shadow: 2px 2px white,
+	inset 0 2px 2px rgba(0,0,0,1);
+}
+
+#header {
+	padding-left: 50px;
+	font-size: 20px;
+	box-shadow: 2px 2px black,
+	inset 0 2px 2px rgba(255,255,255,1);
+	background: -webkit-linear-gradient(left, #0033CC, #0099FF);
+	background: -moz-linear-gradient(left, #0033CC, #0099FF);
+	background: -o-linear-gradient(left, #0033CC, #0099FF);
+	background: linear-gradient(left, #0033CC, #0099FF);
+	height: 20px;
+	text-align: left;
+	color: white;
+}
+
+#close {
+	height: 20px;
+	width: 5px;
+	padding: 0px;
+	margin: 0px;
+}
+
+#mainwindow {
+	background-color: #CFCFCF;
+	box-shadow: 2px 2px black,
+	inset 0 1px 3px rgba(255,255,255,1);
+	padding: 1px;
+	width: 50%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#spacer-20 {
+	height: 20px;
+	width: 50%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#can {
+	float: left;
+	height: 220px;
+	margin-left: 140px;
+	margin-top: 25px;
+	-ms-transform: rotate(30deg); /* IE 9 */
+    -webkit-transform: rotate(30deg); /* Chrome, Safari, Opera */
+    transform: rotate(30deg);
+}
+
+#gamecube {
+	height: 280px;
+	float: right;
+	margin-top: -275px;
+	margin-right: 70px;
+}
+
+#aesthetics {
+	display: none;
+	width: 100%;
+	text-align: center;
+	text-align: center;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	font-size: 64px;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+#about {
+	position: absolute;
+	height: 100px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+}
