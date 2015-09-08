@@ -1,4 +1,17 @@
+#canvas-container{
+	width: 100%;
+	text-align: center;
+}
+
 #canvas {
-	margin-left: auto;
-	margin-right: auto;
+	display: inline;
+	margin-top: 50px;
+}
+
+#title {
+	text-align: center;
+	color: #143D66;
+	font-family: 'Silkscreen', ;
+	font-size: 50pt;
+	text-shadow: 3px 3px 0px #CD36F3;
 }
