@@ -5,7 +5,6 @@
 
 #canvas {
 	display: inline;
-	margin-top: 50px;
 }
 
 #title {
@@ -14,4 +13,18 @@
 	font-family: 'Silkscreen', ;
 	font-size: 50pt;
 	text-shadow: 3px 3px 0px #CD36F3;
+}
+
+.controls {
+	margin-left: 700px;
+	font-family: 'Silkscreen', ;
+	font-size: 20pt;
+	color: gray;
+}
+
+span {
+	font-size: 24pt;
+	color: white;
+	background-color: gray;
+	padding: 5px;
 }
