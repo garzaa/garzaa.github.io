@@ -8,5 +8,6 @@ function drawEntryway() {
 }
 
 //before gamecode
+//test
 
 drawEntryway();
