@@ -10,8 +10,9 @@ function drawEntryway() {
 
 /* PLAYER CONTROLLER */
 
-var dadWidth = 320
-var dadHeight = 640
+var dadWidth = 160
+var dadHeight = 320
+var dadMargin = 274 //distance from top
 
 var dx = 0
 var movePerFrame = 4
@@ -20,7 +21,7 @@ function dad(x) {
 
 	this.xLocation = x
 
-  	this.xBottom = this.xLocation + 320
+  	this.xBottom = this.xLocation + dadWidth
 
   	this.standL = document.getElementById("stand-l")
   	this.walkL1 = document.getElementById("walk-l1")
@@ -33,19 +34,21 @@ function dad(x) {
 }
 
 function paintDad(dadObj) {
-	if (this.direction === "L") {
-		ctx.drawImage(dadObj.standL, dadObj.xLocation, 0)
-	} else if (this.direction === "R") {
-		ctx.drawImage(dadObj.standR, dadObj.xLocation, 0)
+	if (dadObj.direction === "L") {
+		ctx.drawImage(dadObj.standL, dadObj.xLocation, dadMargin)
+		console.log("drew a dad r")
+	} else if (dadObj.direction === "R") {
+		ctx.drawImage(dadObj.standR, dadObj.xLocation, dadMargin)
+		console.log("drew a dad r")
 	}
 
-	console.log("drew a dad")
+	console.log("drew a dad at " + dadObj.xLocation, dadMargin )
 }
 
 //before gamecode
 //test
 
-var dad = new dad(400)
+var dad = new dad(300)
 
 drawEntryway();
 paintDad(dad)
