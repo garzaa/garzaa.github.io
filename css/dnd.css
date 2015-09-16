@@ -3,12 +3,11 @@ body {
 	text-align: center;
 }
 
-#roll-outcome {
+#dicecontainer {
 	margin-right: auto;
 	margin-left: auto;
 	font-size: 100pt;
 	text-align: center;
-	width: 200px;
 	margin-top: 10%;
 	margin-bottom: 5%;
 }
@@ -29,4 +28,8 @@ body {
 .dicebutton:hover {
 	color: blue;
 	border-color: blue;
+}
+
+.roll-outcome {
+	padding: 10px;
 }

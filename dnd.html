@@ -9,10 +9,12 @@
 
 <body>
 
-	<div id="roll-outcome">
-
-			0
-
+	<div id="dicecontainer">
+		<span id="roll-outcome1" class="roll-outcome">0</span>
+		<span id="roll-outcome2" class="roll-outcome" style="display:none">0</span>
+		<span id="roll-outcome3" class="roll-outcome" style="display:none">0</span>
+		<span id="roll-outcome4" class="roll-outcome" style="display:none">0</span>
+		<span id="roll-outcome5" class="roll-outcome" style="display:none">0</span>
 	</div>
 	<br>
 	<br>
@@ -22,11 +24,40 @@
 	<span id="d10" class="dicebutton">D10</span>
 	<span id="d12" class="dicebutton">D12</span>
 	<span id="d20" class="dicebutton">D20</span>
+	<br>
+	<br>
+	<br>
+	<span id="one" class="dicebutton">1 die</span>
+	<span id="two" class="dicebutton">2 dice</span>
+	<span id="three" class="dicebutton">3 dice</span>
+	<span id="four" class="dicebutton">4 dice</span>
+	<span id="five" class="dicebutton">5 dice</span>
 
 	<script>
-		function rollDie(sides) {
-			var outcome = Math.floor(Math.random() * sides) + 1 
-			document.getElementById("roll-outcome").innerHTML = outcome
+		var dice = 1;
+
+		function rollDie(sides) {	
+			/* var outcome = Math.floor(Math.random() * sides) + 1 
+			document.getElementById("roll-outcome1").innerHTML = outcome */
+			var element
+			var outcome 
+			for (var i=1; i<=dice; i++) {
+				outcome = Math.floor(Math.random() * sides) + 1
+				element = "roll-outcome" + i
+				document.getElementById(element).innerHTML = outcome;
+			}
+		}
+
+		function visibleDice(numberDice) {
+			var element
+			$("#roll-outcome1, #roll-outcome2, #roll-outcome3, #roll-outcome4, #roll-outcome5").each(function() {
+				$(this).hide();
+			})
+			for (var i=1; i<=numberDice; i++) {
+				element = "#" + "roll-outcome" + i
+				$(element).show();
+				console.log(element);
+			}
 		}
 
 		$("#d4").click(function() {
@@ -51,6 +82,27 @@
 
 		$("#d20").click(function() {
 			rollDie(20);
+		})
+
+		$("#one").click(function() {
+			dice = 1
+			visibleDice(1)
+		})
+		$("#two").click(function() {
+			dice = 2
+			visibleDice(2)
+		})
+		$("#three").click(function() {
+			dice = 3
+			visibleDice(3)
+		})
+		$("#four").click(function() {
+			dice = 4
+			visibleDice(4)
+		})
+		$("#five").click(function() {
+			dice = 5
+			visibleDice(5)
 		})
 	</script>
 </body>
