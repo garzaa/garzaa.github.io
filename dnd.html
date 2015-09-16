@@ -32,7 +32,18 @@
 	<span id="three" class="dicebutton">3 dice</span>
 	<span id="four" class="dicebutton">4 dice</span>
 	<span id="five" class="dicebutton">5 dice</span>
-
+	<br>
+	<br>
+	<br>
+	<span id="dm-tools-toggle">DM Tools</span>
+	<br>
+	<br>
+	<div id="dm-tools" style="display:none">
+		<select id="enemytype">
+			<option value="pirate">pirate</option>
+			<option value="large pirate">large pirate</option>
+		</select>
+	</div>
 	<script>
 		var dice = 1;
 
@@ -41,7 +52,7 @@
 			document.getElementById("roll-outcome1").innerHTML = outcome */
 			var element
 			var outcome 
-			for (var i=1; i<=dice; i++) {
+			for (var i=1; i<=6; i++) {
 				outcome = Math.floor(Math.random() * sides) + 1
 				element = "roll-outcome" + i
 				document.getElementById(element).innerHTML = outcome;
@@ -103,6 +114,10 @@
 		$("#five").click(function() {
 			dice = 5
 			visibleDice(5)
+		})
+
+		$("#dm-tools-toggle").click(function() {
+			$("#dm-tools").slideToggle(200);
 		})
 	</script>
 </body>

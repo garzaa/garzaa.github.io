@@ -33,3 +33,18 @@ body {
 .roll-outcome {
 	padding: 10px;
 }
+
+#dm-tools-toggle {
+	font-size: 10pt;
+	user-select: none;
+	-moz-user-select: none;
+	margin: 10px;
+	cursor: pointer;
+	padding: 5px;
+	transition: color .5s;
+	-webkit-transition: color .5s;
+}
+
+#dm-tools-toggle:hover {
+	color:blue;
+}
