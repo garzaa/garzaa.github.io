@@ -6,7 +6,7 @@ body {
 #roll-outcome {
 	margin-right: auto;
 	margin-left: auto;
-	font-size: 90pt;
+	font-size: 100pt;
 	text-align: center;
 	width: 200px;
 	margin-top: 10%;
@@ -15,9 +15,18 @@ body {
 
 .dicebutton {
 	font-size: 16pt;
+	user-select: none;
+	-moz-user-select: none;
 	margin: 10px;
 	cursor: pointer;
 	padding: 5px;
 	border: 2px solid black;
 	border-radius: 1px;
+	transition: color .5s, border-color .5s;
+	-webkit-transition: color .5s, border-color .5s;
+}
+
+.dicebutton:hover {
+	color: blue;
+	border-color: blue;
 }
