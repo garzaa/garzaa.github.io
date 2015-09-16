@@ -1,0 +1,23 @@
+body {
+	font-family: "Roboto", sans-serif;
+	text-align: center;
+}
+
+#roll-outcome {
+	margin-right: auto;
+	margin-left: auto;
+	font-size: 90pt;
+	text-align: center;
+	width: 200px;
+	margin-top: 10%;
+	margin-bottom: 5%;
+}
+
+.dicebutton {
+	font-size: 16pt;
+	margin: 10px;
+	cursor: pointer;
+	padding: 5px;
+	border: 2px solid black;
+	border-radius: 1px;
+}
