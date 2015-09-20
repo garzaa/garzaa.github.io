@@ -32,6 +32,7 @@
 	<span id="three" class="dicebutton">3 dice</span>
 	<span id="four" class="dicebutton">4 dice</span>
 	<span id="five" class="dicebutton">5 dice</span>
+	<span id="modifier" class="dicebutton">+0</span>
 	<br>
 	<br>
 	<br>
@@ -45,6 +46,7 @@
 		</select>
 	</div>
 	<script>
+		var modifier = 0;
 		var dice = 1;
 
 		function rollDie(sides) {	
@@ -53,7 +55,7 @@
 			var element
 			var outcome 
 			for (var i=1; i<=6; i++) {
-				outcome = Math.floor(Math.random() * sides) + 1
+				outcome = Math.floor(Math.random() * sides) + 1 + Number(modifier)
 				element = "roll-outcome" + i
 				document.getElementById(element).innerHTML = outcome;
 			}
@@ -70,6 +72,11 @@
 				console.log(element);
 			}
 		}
+
+		$("#modifier").click(function() {
+			modifier = prompt("enter a modifier:")
+			document.getElementById("modifier").innerHTML = "+" + modifier;
+		})
 
 		$("#d4").click(function() {
 			rollDie(4);
