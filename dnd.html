@@ -75,6 +75,9 @@
 
 		$("#modifier").click(function() {
 			modifier = prompt("enter a modifier:")
+			if (modifier == "" || isNaN(modifier) || !modifier) {
+				modifier = "0";
+			}
 			document.getElementById("modifier").innerHTML = "+" + modifier;
 		})
 
