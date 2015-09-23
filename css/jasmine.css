@@ -1,0 +1,14 @@
+body {
+	background-color: rgb(40,40,40)
+}
+
+p {
+	margin-left: 30vw;
+	cursor: pointer;
+	font-family: "Open Sans", sans-serif;
+	color: rgb(100,100,100);
+}
+
+p:hover {
+	color: #A760AE;
+}
