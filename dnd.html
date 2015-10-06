@@ -46,6 +46,18 @@
 		</select>
 	</div>
 	<script>
+		/*var sounds = ["argh.mp3", "argh2.mp3", "argh3.mp3", "argh4.mp3", "argh5.mp3", "argh6.mp3", "argh7.mp3", "argh8.mp3"];
+		var rand = Math.floor(Math.random() * 8);
+		var randomSound = sounds[rand];
+		var argh = new Audio(randomSound);
+		function arghPlay() {
+			argh.play();
+			argh.currentTime = 0;
+			rand = Math.floor(Math.random() * 8);
+			randomSound = sounds[rand];
+			argh = new Audio(randomSound);
+		} */
+
 		var modifier = 0;
 		var dice = 1;
 
@@ -58,6 +70,9 @@
 				outcome = Math.floor(Math.random() * sides) + 1 + Number(modifier)
 				element = "roll-outcome" + i
 				document.getElementById(element).innerHTML = outcome;
+				if (outcome === sides) {
+					arghPlay();
+				}
 			}
 		}
 

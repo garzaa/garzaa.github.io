@@ -1,18 +1,16 @@
 html {
 	width: 100%;
 	height: 100%
-	overflow: hidden;
 }
 
 body {
 	width: 100%;
 	height: 100%;
-	background-color: #fef4f4;
-	overflow-x: hidden;
+	overflow-y: hidden;
+	font-family: "Roboto", sans-serif;
 }
 
 .link {
-	font-family: "Raleway", sans-serif;
 	font-weight: 400;
 	color: black;
 	font-size: 16pt;
@@ -24,8 +22,7 @@ a {
 }
 
 .link:hover {
-	color: #f6bfbc;
-	background-color: #a25768;
+	color: blue;
 	border-radius: 1px;
 }
 
@@ -55,7 +52,7 @@ a {
 }
 
 p {
-	font-family: "Raleway", sans-serif;
+	font-family: "Roboto", sans-serif;
 	font-weight: 400;
 	color: black;
 	font-size: 12pt;
@@ -68,11 +65,15 @@ p {
 }
 
 #inline-link {
-	color: #9E1D1D;
+	color: blue;
 }
 
 #inline-link:hover {
-	background-color: #9E1D1D;
-	border-radius: 1px;
-	color: white;
+	
+}
+
+.main {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
