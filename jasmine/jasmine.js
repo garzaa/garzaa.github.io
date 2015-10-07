@@ -16,6 +16,7 @@ var playing = false;
 var firstClick = true;
 
 function play(trackNumber) {
+	firstClick = false;
 	playing = true;
 	trackDuration = currentsong.duration;
 	document.getElementById("pause").innerHTML = "[pause]"
