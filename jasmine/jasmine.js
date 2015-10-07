@@ -10,7 +10,6 @@ var songs = [
 			];
 
 var currentsong = new Audio(songs[0]);
-var trackDuration = currentsong.duration;
 var track = 0;
 var playing = false;
 var firstClick = true;
@@ -116,7 +115,7 @@ $("#pause").click(function() {
 })
 
 function updateTrackbar() {
-	var percent = (currentsong.currentTime / trackDuration) * 100
+	var percent = (currentsong.currentTime / currentsong.duration) * 100
 	percent += "%"
 	$("#trackbar").css("width", percent)
 }
