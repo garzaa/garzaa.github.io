@@ -10,9 +10,10 @@ var songs = [
 			];
 
 var currentsong = new Audio(songs[0]);
+var trackDuration = currentsong.duration;
 var track = 0;
 var playing = false;
-var trackDuration;
+var firstClick = true;
 
 function play(trackNumber) {
 	playing = true;
@@ -98,7 +99,11 @@ $("#desire").click(function() {
 })
 
 $("#pause").click(function() {
-	if (playing) {
+	if (firstClick === true) {
+		play(0);
+		firstClick = false;
+		console.log("first click")
+	} else if (playing) {
 		currentsong.pause();
 		playing = false;
 		document.getElementById("pause").innerHTML = "[play]"
@@ -151,7 +156,7 @@ $("#next").click(function() {
 })
 
 $("#prev").click(function() {
-	if (track == 0) {
+	if (track === 0) {
 			play(songs.length-1);
 		} else { play(track - 1); }
 })
