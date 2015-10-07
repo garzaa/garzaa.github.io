@@ -9,13 +9,19 @@ p {
 	color: rgb(100,100,100);
 	transition: color .2s;
 	-webkit-transition: color .2s;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 p:hover {
 	color: #A760AE;
 }
 
-#pause {
+#prev {
 	margin-top: 3%;
 }
 

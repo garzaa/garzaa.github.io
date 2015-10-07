@@ -28,6 +28,33 @@ function play(trackNumber) {
 			play(track + 1);
 		} else { play(0); }
 	}
+	switch (track) {
+		case 0:
+			changeInfo("Revel In Your Time", "Gunship");
+			break;
+		case 1:
+			changeInfo("Pink Mist", "Gunship");
+			break;
+		case 2:
+			changeInfo("Parallel", "Stellar Dreams");
+			break;
+		case 3:
+			changeInfo("Haunted When The Minutes Drag", "Love &amp; Rockets");
+			break;
+		case 4:
+			changeInfo("Masquerade", "Clan Of Xymox");
+			break;
+		case 5:
+			changeInfo("Under Your Spell", "Desire");
+			break;
+		case 6:
+			changeInfo("Nightcall", "Kavinsky");
+			break;
+		case 7:
+			changeInfo("Desire", "Perturbator &amp; Greta Link");
+			break;
+		
+	}
 }
 
 $("#revelinyourtime").click(function() {
@@ -67,7 +94,7 @@ $("#nightcall").click(function() {
 
 $("#desire").click(function() {
 	play(7);
-	changeInfo("Desire", "Perturbator & Greta Link");
+	changeInfo("Desire", "Perturbator &amp; Greta Link");
 })
 
 $("#pause").click(function() {
@@ -116,3 +143,15 @@ var day = date.getDate()
 month = months[month - 1]
 document.getElementById("month").innerHTML = month;
 document.getElementById("day").innerHTML = day;
+
+$("#next").click(function() {
+	if (track != songs.length-1) {
+			play(track + 1);
+		} else { play(0); }
+})
+
+$("#prev").click(function() {
+	if (track == 0) {
+			play(songs.length-1);
+		} else { play(track - 1); }
+})
