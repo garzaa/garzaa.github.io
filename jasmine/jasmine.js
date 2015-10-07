@@ -156,29 +156,10 @@ $("#next").click(function() {
 })
 
 $("#prev").click(function() {
-		if (currentsong.currentTime > 5) {
+		if (currentsong.currentTime > 3) { //rewinds if in the middle of a song
 			currentsong.currentTime = 0;
 		} else if (track === 0) {
 				play(songs.length-1);
 		} else { play(track - 1); }
 })
 
-
-
-$(document).on("keypress", function (e) {
-    if (e.keycode === 32) {
-    	if (firstClick === true) {
-			play(0);
-			firstClick = false;
-			console.log("first click")
-		} else if (playing) {
-			currentsong.pause();
-			playing = false;
-			document.getElementById("pause").innerHTML = "[play]"
-		} else {
-			currentsong.play();
-			playing = true;
-			document.getElementById("pause").innerHTML = "[pause]"
-		}
-    }
-}); 
