@@ -7,6 +7,8 @@ p {
 	cursor: pointer;
 	font-family: "Open Sans", sans-serif;
 	color: rgb(100,100,100);
+	transition: color .2s;
+	-webkit-transition: color .2s;
 }
 
 p:hover {

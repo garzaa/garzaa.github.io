@@ -2,6 +2,7 @@ var songs = [
 			"revelinyourtime.mp3",
 			"pinkmist.mp3",
 			"parallel.mp3",
+			"haunted.mp3",
 			"masquerade.mp3",
 			"underyourspell.mp3",
 			"nightcall.m4a",
@@ -44,23 +45,28 @@ $("#parallel").click(function() {
 	changeInfo("Parallel", "Stellar Dreams");
 })
 
-$("#masquerade").click(function() {
+$("#haunted").click(function() {
 	play(3);
+	changeInfo("Haunted When The Minutes Drag", "Love &amp; Rockets");
+})
+
+$("#masquerade").click(function() {
+	play(4);
 	changeInfo("Masquerade", "Clan Of Xymox");
 })
 
 $("#underyourspell").click(function() {
-	play(4);
+	play(5);
 	changeInfo("Under Your Spell", "Desire");
 })
 
 $("#nightcall").click(function() {
-	play(5);
+	play(6);
 	changeInfo("Nightcall", "Kavinsky");
 })
 
 $("#desire").click(function() {
-	play(6);
+	play(7);
 	changeInfo("Desire", "Perturbator & Greta Link");
 })
 
@@ -88,3 +94,25 @@ function changeInfo(song, artist) {
 	document.getElementById("songName").innerHTML = song;
 	document.getElementById("artistName").innerHTML = artist;
 }
+
+var months = [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December",
+			]
+
+var date = new Date()
+var month = date.getMonth()+1
+var day = date.getDate()
+month = months[month - 1]
+document.getElementById("month").innerHTML = month;
+document.getElementById("day").innerHTML = day;
