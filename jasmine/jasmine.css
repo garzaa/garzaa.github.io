@@ -1,0 +1,60 @@
+body {
+	background-color: rgb(20,20,20)
+}
+
+p {
+	margin-left: 30vw;
+	cursor: pointer;
+	font-family: "Open Sans", sans-serif;
+	color: rgb(100,100,100);
+}
+
+p:hover {
+	color: #A760AE;
+}
+
+#pause {
+	margin-top: 3%;
+}
+
+#trackbar {
+	width: 0%;
+	height: 3px;
+	background-color: #A760AE;
+}
+
+span {
+	font-family: "Open Sans", sans-serif;
+	color: rgb(100,100,100);
+}
+
+#songName {
+	margin-left: 30vw;
+	color: #A760AE;
+	font-size: 20pt;
+	margin-right: 20px;
+}
+
+div {
+	color: #A760AE;
+}
+
+#title {
+	font-size: 12pt;
+	cursor: default;
+}
+
+#title:hover {
+	color: rgb(100,100,100)
+}
+
+
+.text {
+	font-size: 10pt;
+	cursor: default;
+	max-width: 30vw;
+}
+
+.text:hover {
+	color: rgb(100,100,100);
+}

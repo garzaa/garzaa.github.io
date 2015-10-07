@@ -1,0 +1,90 @@
+var songs = [
+			"revelinyourtime.mp3",
+			"pinkmist.mp3",
+			"parallel.mp3",
+			"masquerade.mp3",
+			"underyourspell.mp3",
+			"nightcall.m4a",
+			"desire.mp3"
+			];
+
+var currentsong = new Audio(songs[0]);
+var track = 0;
+var playing = false;
+var trackDuration;
+
+function play(trackNumber) {
+	playing = true;
+	trackDuration = currentsong.duration;
+	document.getElementById("pause").innerHTML = "[pause]"
+	track = trackNumber;
+	currentsong.pause();
+	currentsong.currentTime = 0;
+	currentsong = new Audio(songs[trackNumber]);
+	currentsong.play();
+	currentsong.onended = function() {
+		if (track != songs.length-1) {
+			play(track + 1);
+		} else { play(0); }
+	}
+}
+
+$("#revelinyourtime").click(function() {
+	play(0);
+	changeInfo("Revel In Your Time", "Gunship");
+})
+
+$("#pinkmist").click(function() {
+	play(1);
+	changeInfo("Pink Mist", "Gunship");
+})
+
+$("#parallel").click(function() {
+	play(2);
+	changeInfo("Parallel", "Stellar Dreams");
+})
+
+$("#masquerade").click(function() {
+	play(3);
+	changeInfo("Masquerade", "Clan Of Xymox");
+})
+
+$("#underyourspell").click(function() {
+	play(4);
+	changeInfo("Under Your Spell", "Desire");
+})
+
+$("#nightcall").click(function() {
+	play(5);
+	changeInfo("Nightcall", "Kavinsky");
+})
+
+$("#desire").click(function() {
+	play(6);
+	changeInfo("Desire", "Perturbator & Greta Link");
+})
+
+$("#pause").click(function() {
+	if (playing) {
+		currentsong.pause();
+		playing = false;
+		document.getElementById("pause").innerHTML = "[play]"
+	} else {
+		currentsong.play();
+		playing = true;
+		document.getElementById("pause").innerHTML = "[pause]"
+	}
+})
+
+function updateTrackbar() {
+	var percent = (currentsong.currentTime / trackDuration) * 100
+	percent += "%"
+	$("#trackbar").css("width", percent)
+}
+
+setInterval(updateTrackbar, 20)
+
+function changeInfo(song, artist) {
+	document.getElementById("songName").innerHTML = song;
+	document.getElementById("artistName").innerHTML = artist;
+}
