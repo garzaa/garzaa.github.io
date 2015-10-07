@@ -25,6 +25,10 @@ p:hover {
 	margin-top: 3%;
 }
 
+#pause {
+	color: #A760AE;
+}
+
 #trackbar {
 	width: 0%;
 	height: 3px;
