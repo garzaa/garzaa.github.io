@@ -120,6 +120,7 @@ function updateTrackbar() {
 	$("#trackbar").css("width", percent)
 }
 
+//trackbar updates @50fps
 setInterval(updateTrackbar, 20)
 
 function changeInfo(song, artist) {
@@ -150,6 +151,7 @@ document.getElementById("month").innerHTML = month;
 document.getElementById("day").innerHTML = day;
 
 $("#next").click(function() {
+	//loop if at the end
 	if (track != songs.length-1) {
 			play(track + 1);
 		} else { play(0); }
