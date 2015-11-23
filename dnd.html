@@ -39,11 +39,14 @@
 	<!-- <span id="dm-tools-toggle">DM Tools</span> -->
 	<br>
 	<br>
-	<div id="dm-tools" style="display:none">
+	<div id="dm-tools">
+		<!--
 		<select id="enemytype">
 			<option value="pirate">pirate</option>
 			<option value="large pirate">large pirate</option>
 		</select>
+	-->
+	<span id="spells" class="dicebutton">Random Spell</span>
 	</div>
 	<script>
 		/*var sounds = ["argh.mp3", "argh2.mp3", "argh3.mp3", "argh4.mp3", "argh5.mp3", "argh6.mp3", "argh7.mp3", "argh8.mp3"];
@@ -143,6 +146,106 @@
 
 		$("#dm-tools-toggle").click(function() {
 			$("#dm-tools").slideToggle(200);
+		})
+
+		var spell1 = [
+			"Flaming",
+			"Icy",
+			"Spooky",
+			"Poisonous",
+			"Electric",
+			"Thunderous",
+			"Water",
+			"Psychic",
+			"Spicy",
+			"Massive",
+			"Magnetic",
+			"Radioactive",
+			"Brimstone",
+			"Tiny",
+			"Ineffective",
+			"Weak",
+			"Terrifying",
+			"Sticky",
+			"Singing",
+			"Bouncing",
+			"Spinning",
+			"Homing",
+			"Short-lived",
+			"Holy",
+			"Necrotic",
+			"Elemental",
+			"Freezing",
+			"Long-range",
+		]
+
+		var spell2 = [
+			"sphere",
+			"sword",
+			"finger",
+			"foot",
+			"wave",
+			"fist",
+			"rune",
+			"storm",
+			"cyclone",
+			"whirlwind",
+			"storm",
+			"meteor",
+			"rod",
+			"spray",
+			"cone",
+			"touch",
+			"punch",
+			"cube",
+			"shield",
+			"arrow",
+			"needles",
+			"ball",
+			"golem",
+			"familiar",
+			"homunculus",
+			"spider",
+
+		]
+
+		var spell3 = [
+			"murder",
+			"death",
+			"lust",
+			"broken mechanics",
+			"chaos",
+			"vengeance",
+			"Kung Fu",
+			"punching",
+			"rage",
+			"metal",
+			"mind control",
+			"spiders",
+			"hallucination",
+			"transmutation",
+			"violation",
+			"perturbation",
+			"penetration",
+			"pain",
+			"public indecency",
+			"stupidity",
+			"dog shit",
+
+		]
+
+		function randomSpell() {
+			var output = getRand(spell1) + " " + getRand(spell2) + " of " + getRand(spell3)
+			return output
+		}
+
+		function getRand(arr) {
+			var outcome = Math.floor(Math.random() * arr.length)
+			return arr[outcome]
+		}
+
+		$("#spells").click(function() {
+			document.getElementById("spells").innerHTML = randomSpell()
 		})
 	</script>
 </body>
