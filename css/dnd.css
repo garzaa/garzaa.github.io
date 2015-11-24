@@ -67,3 +67,7 @@ a {
 #spacer {
 	height: 300px;
 }
+
+#dm-tools {
+	display: none;
+}
