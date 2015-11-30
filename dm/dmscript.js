@@ -113,6 +113,11 @@ var spell1 = [
 			"Elemental",
 			"Freezing",
 			"Long-range",
+			"Misguided",
+			"Backfiring",
+			"Unfortunate",
+			"Self-inflicted",
+			
 		]
 
 		var spell2 = [
