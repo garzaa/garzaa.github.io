@@ -82,7 +82,6 @@
 			for (var i=1; i<=numberDice; i++) {
 				element = "#" + "roll-outcome" + i
 				$(element).show();
-				console.log(element);
 			}
 		}
 
@@ -140,7 +139,8 @@
 		})
 
 		$("#dm-tools-toggle").click(function() {
-			$("#dm-tools").slideToggle(200);
+			$("#dm-tools").slideToggle(100)
+			document.getElementById("spells").innerHTML = "Random Spell"
 		})
 
 		var spell1 = [
@@ -180,7 +180,9 @@
 			"Misfiring",
 			"Unfortunate",
 			"Self-inflicted",
-
+			"Mild",
+			"Flaccid",
+			"Petulant",
 
 		]
 
@@ -229,7 +231,7 @@
 			"Kung Fu",
 			"punching",
 			"rage",
-			"metal",
+			"molten metal",
 			"mind control",
 			"spiders",
 			"hallucinations",
@@ -244,6 +246,8 @@
 			"dirt",
 			"stone",
 			"attempted murder",
+			"cold sweats",
+			"terror",
 
 		]
 
