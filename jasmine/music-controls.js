@@ -11,10 +11,11 @@ var TheWispSings = {title:"The Wisp Sings",artist:"Winter Aid",src:"The Wisp Sin
 var songs = [
 	Satellite,
 	Paris,
+	SimpleSong,
 	TheEnemy,
 	Oceans,
 	Kettering,
-	SimpleSong,
+
 	July4,
 	TheWispSings,
 ]
@@ -35,7 +36,7 @@ function play(trackNumber) {
 	currentSong.currentTime = 0;
 	songObj = songs[trackNumber]
 	currentSong = new Audio(songs[trackNumber].src);
-	console.log("playing " + currentSong);
+	console.log("playing " + songObj.title);
 	currentSong.play();
 	currentSong.onended = function() {
 		if (track != songs.length-1) {

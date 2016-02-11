@@ -6,17 +6,20 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<link href="jasmine.css" rel="stylesheet"/>
 	<title>Indie Trash</title>
+	<link rel="shortcut icon" type="image/png" href="favicon.png">
 </head>
 
 <body>
 
-	<div id="canvas-container"><canvas id="visualizer" width="500" height="500"></canvas></div><br>
+	<div id="canvas-container"><img src="image.png"></canvas></div><br>
 
 	<div id="info-container">
 	<span id="song-name">Satellite</span>  <span id="artist-name">Guster</span>
 	</div>
 
+	<div id="trackbar-container">
 	<div id="trackbar"></div>
+	</div>
 
 	<span class="controls" id="prev">[prev]</span>
 	<span class="controls" id="pause">[play]</span>
@@ -25,10 +28,10 @@
 	<ul id="tracklist">
 		<li id="song1">Satellite</li>
 		<li id="song2">Paris</li>
-		<li id="song3">The Enemy</li>
-		<li id="song4">Oceans</li>
-		<li id="song5">Kettering</li>
-		<li id="song6">Simple Song</li>
+		<li id="song3">Simple Song</li>
+		<li id="song4">The Enemy</li>
+		<li id="song5">Oceans</li>
+		<li id="song6">Kettering</li>
 		<li id="song7">Fourth Of July</li>
 		<li id="song8">The Wisp Sings</li>
 	</ul>
@@ -36,12 +39,5 @@
 
 
 <script type="text/javascript" src="music-controls.js"></script>
-<script type="text/javascript" src="visualizer.js"></script>
 </body>
 </html>
-
-<!--
-
-	http://www.patrick-wied.at/blog/how-to-create-audio-visualizations-with-javascript-html
-
-	-->

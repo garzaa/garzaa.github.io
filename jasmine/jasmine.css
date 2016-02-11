@@ -5,12 +5,10 @@ body {
 	color: slategray;
 }
 
-#visualizer {
+img {
 	-webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.2);
-
-
 }
 
 #canvas-container {
@@ -57,10 +55,15 @@ li:hover {
 #trackbar {
 	background-color: slategray;
 	margin: 0 auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
 	height: 2px;
 	width: 0px;
+}
+
+#trackbar-container {
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 500px;
 }
 .controls {
 	cursor: pointer;
