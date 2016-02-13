@@ -5,7 +5,7 @@ var TheEnemy = {title:"The Enemy",artist:"Andrew Belle",src:"The Enemy.mp3",}
 var Oceans = {title:"Oceans",artist:"Seafret",src:"Oceans.mp3",}
 var Kettering = {title:"Kettering",artist:"The Antlers",src:"Kettering.mp3",}
 var SimpleSong = {title:"Simple Song",artist:"The Shins",src:"Simple Song.mp4",}
-var July4 = {title:"Fourth Of July",artist:"Sufjan Stevens",src:"Fourth Of July.m4a",}
+var July4 = {title:"Fourth Of July",artist:"Sufjan Stevens",src:"Fourth of July.m4a",}
 var TheWispSings = {title:"The Wisp Sings",artist:"Winter Aid",src:"The Wisp Sings.mp3",}
 
 var songs = [
