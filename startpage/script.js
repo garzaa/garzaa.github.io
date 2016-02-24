@@ -100,7 +100,7 @@ function k_to_f(kelvin) {
 	return ((9 / 5) * (kelvin - 273) + 32).toFixed(0);
 }
 function insertWeatherInfo() {
-	$("#city").append(city);
+	$("#city").append(city.toLowerCase());
 	$("#description").append(description.toLowerCase());
 	$("#temp_curr").prepend("it's " + temp_curr + "&deg; out");
 	$("#temp_low").append("lo " + temp_low + "&deg; /");
