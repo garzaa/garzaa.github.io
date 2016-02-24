@@ -33,6 +33,7 @@ if(!!searchinput){
 
 function search(query) {
     console.log(query)
+    var original = query;
     var modifier = query.substr(query.length-2);
     query = query.slice(0, query.length-2);
     switch (modifier) {
@@ -62,7 +63,7 @@ function search(query) {
 
         default:
             window.location="https://www.google.com/#q=" +
-                   query.replace(" ", "+");
+                   original.replace(" ", "+");
 
     }
 }
@@ -72,3 +73,52 @@ $(document).bind('keydown', function(e) {
         document.getElementById("searchbar").focus();
     }
 });
+
+
+//weather shamelessly stolen from Austin Kilduff
+var json_url = "http://api.openweathermap.org/data/2.5/weather?q=NewYork,ny&appid=6e131a2916d5d45d8367b72a4675be0a";
+var city;
+var temp_curr;
+var temp_low;
+var temp_high;
+var description;
+$.when(
+	$.getJSON(json_url)
+	).done( function(json_obj) {
+		city = json_obj["name"];
+		temp_curr = k_to_f(json_obj["main"]["temp"]);
+		temp_low = k_to_f(json_obj["main"]["temp_min"]);
+		temp_high = k_to_f(json_obj["main"]["temp_max"]);
+		description = json_obj["weather"][0]["description"];
+		insertWeatherInfo();
+	}
+);
+function k_to_f(kelvin) {
+	return ((9 / 5) * (kelvin - 273) + 32).toFixed(0);
+}
+function insertWeatherInfo() {
+	$("#city").append(city);
+	$("#description").append(description.toLowerCase());
+	$("#temp_curr").prepend("it's " + temp_curr + "&deg; out");
+	$("#temp_low").append("lo " + temp_low + "&deg; /");
+	$("#temp_high").append("hi " + temp_high + "&deg;");
+
+}
+
+
+var monthNames = [
+  "January", "February", "March",
+  "April", "May", "June", "July",
+  "August", "September", "October",
+  "November", "December"
+];
+var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+var date = new Date();
+var day = date.getDate();
+var weekday = date.getDay();
+var monthIndex = date.getMonth();
+var year = date.getFullYear();
+
+console.log(day, monthNames[monthIndex], year);
+document.getElementById("date").innerHTML = days[weekday] + ", " + monthNames[monthIndex] + " " + day;

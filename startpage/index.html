@@ -9,11 +9,13 @@
 </head>
 <body>
 <div id="searchbar-container">
-    <input type="search" placeholder="-a -m -w -y" id="searchbar" onsubmit="search()"/>
+    <input type="search" placeholder="-a -m -w -y" id="searchbar" onsubmit="search()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
 </div>
 
 <div id="stripe">
     <h1 id="clock" class="card"></h1>
+    <br/>
+    <span id="date"></span>
 </div>
 
 <div id="cards-holder">
@@ -24,17 +26,41 @@
         <li>
             <a href="http://play.google.com/music/listen?hl=en&u=0#/wmp">google music</a>
         </li>
+        <li>
+            <a href="https://www.reddit.com/r/listentothis/top/?sort=top&t=month">/r/listentothis</a>
+        </li>
     </div>
 
     <div id="reference" class="cardcolumn">
         <li>
-            <a href="http://www.cs.columbia.edu/~jae/3157/">advanced programming</a>
+            <a href="http://www.cs.columbia.edu/~jae/3157/">jae's ap</a>
         </li>
         <li>
             <a href="http://www.cs.columbia.edu/~martha/courses/3827/sp16/">fundamentals</a>
         </li>
+
+    </div>
+
+    <div id="aesthetics" class="cardcolumn">
+        <li>
+            <a href="https://design.google.com/">google design</a>
+        </li>
+        <li>
+            <a href="http://boards.4chan.org/wg/">/wg/</a>
+        </li>
+    </div>
+
+    <div id="other" class="cardcolumn">
+        <li>
+            <span id="description"></span>
+        </li>
+        <li>
+            <span id="temp_curr"></span>
+        </li>
+
     </div>
 </div>
+
 <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
