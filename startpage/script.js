@@ -1,6 +1,7 @@
 function startTime() {
     var today = new Date();
     var h = today.getHours();
+    //america
     if (h >= 13) {
         h -= 12;
     }
@@ -19,7 +20,8 @@ function checkTime(i) {
 
 startTime();
 
-//search handler
+//press SHIFT to focus on the search bar
+//modifiers have to be AT THE END
 searchinput = document.getElementById("searchbar");
 if(!!searchinput){
     searchinput.addEventListener("keypress", function(a){
@@ -30,6 +32,7 @@ if(!!searchinput){
         }
     });
 }
+
 
 function search(query) {
     console.log(query)
