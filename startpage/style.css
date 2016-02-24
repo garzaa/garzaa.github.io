@@ -1,0 +1,123 @@
+html, body, div, span {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    background-color: #fafafa;
+    font-family: "Roboto", sans-serif;
+}
+
+#searchbar-container {
+    width: 100%;
+    height: 100px;
+    background-color: rgb(70, 80, 95);
+    -webkit-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+#searchbar {
+    transition: background-color .1s ease;
+    -webkit-transition: background-color .1s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50vw;
+    height: 50px;
+    position: relative;
+    top: 50%;
+    transform: translateX(-50%);
+    transform: translateY(-50%);
+    padding: 10px;
+    font-size: 18pt;
+    color: white;
+
+}
+
+#searchbar:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none
+}
+
+#searchbar:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#searchbar::-webkit-search-cancel-button{
+    display:none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  opacity: .25;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  opacity: .25;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  opacity: .25;
+}
+:-moz-placeholder { /* Firefox 18- */
+  opacity: .25;
+}
+
+#stripe {
+    margin-top: 100px;
+    text-align: center;
+}
+
+#clock {
+    color: rgb(50, 60, 75);
+    font-weight: 400;
+    font-size: 40pt;
+    display: inline;
+    text-align: center;
+    padding: 20px 40px 20px 40px;
+    transition: width .1s ease;
+    -webkit-transition: width .1s ease;
+}
+
+.card {
+    padding: 20px;
+    background-color: white;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.20);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 4px 2px 0px rgba(0,0,0,0.20);
+}
+
+.cardcolumn {
+    width: 150px;
+    padding: 20px;
+    margin-left: 50px;
+    background-color: white;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.20);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.20);
+    box-shadow: 0px 4px 2px 0px rgba(0,0,0,0.20);
+    text-align: center;
+    float: left;
+}
+
+#cards-holder {
+    display: table;
+    margin: auto;
+    margin-top: 100px;
+}
+
+li {
+    text-align: left;
+    margin: 10px;
+    list-style:none;
+}
+
+a {
+    color: rgb(50, 60, 75);
+    text-decoration: none;
+}
+
+a:hover {
+    color: hotpink;
+}
