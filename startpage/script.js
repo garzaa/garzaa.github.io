@@ -88,6 +88,7 @@ var temp_low;
 var temp_high;
 var description;
 var bad;
+var humidity;
 $.when(
 	$.getJSON(json_url)
 	).done( function(json_obj) {
@@ -97,6 +98,7 @@ $.when(
 		temp_high = k_to_f(json_obj["main"]["temp_max"]);
 		description = json_obj["weather"][0]["description"];
         bad = Number(json_obj["weather"][0]["id"]);
+        humidity = Number(json_obj["main"]["humidity"])
 		insertWeatherInfo();
 	}
 );
@@ -109,10 +111,11 @@ function insertWeatherInfo() {
 	$("#temp_curr").prepend("it's " + temp_curr + "&deg; out");
 	$("#temp_low").append("lo " + temp_low + "&deg; /");
 	$("#temp_high").append("hi " + temp_high + "&deg;");
-    if (bad > 500 || Number(temp_low) < 30) {
+    if (bad > 500 || Number(temp_low) < 30 || Number(temp_high) > 95
+        || humidity > 50) {
         $("#badness").append("disgusting");
     } else {
-        $("#badness").append("not bad tbh");
+        $("#badness").append("not bad");
     }
 }
 
