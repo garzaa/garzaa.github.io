@@ -85,6 +85,7 @@ var temp_curr;
 var temp_low;
 var temp_high;
 var description;
+var bad;
 $.when(
 	$.getJSON(json_url)
 	).done( function(json_obj) {
@@ -93,6 +94,7 @@ $.when(
 		temp_low = k_to_f(json_obj["main"]["temp_min"]);
 		temp_high = k_to_f(json_obj["main"]["temp_max"]);
 		description = json_obj["weather"][0]["description"];
+        bad = Number(json_obj["weather"][0]["id"]);
 		insertWeatherInfo();
 	}
 );
@@ -100,12 +102,16 @@ function k_to_f(kelvin) {
 	return ((9 / 5) * (kelvin - 273) + 32).toFixed(0);
 }
 function insertWeatherInfo() {
-	$("#city").append(city.toLowerCase());
+	//$("#city").append(city.toLowerCase());
 	$("#description").append(description.toLowerCase());
 	$("#temp_curr").prepend("it's " + temp_curr + "&deg; out");
 	$("#temp_low").append("lo " + temp_low + "&deg; /");
 	$("#temp_high").append("hi " + temp_high + "&deg;");
-
+    if (bad > 500 || Number(temp_low) < 30) {
+        $("#badness").append("disgusting");
+    } else {
+        $("#badness").append("not bad");
+    }
 }
 
 
