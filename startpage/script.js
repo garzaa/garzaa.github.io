@@ -111,6 +111,7 @@ function insertWeatherInfo() {
 	$("#temp_curr").prepend("it's " + temp_curr + "&deg; out");
 	$("#temp_low").append("lo " + temp_low + "&deg; /");
 	$("#temp_high").append("hi " + temp_high + "&deg;");
+    console.log(bad);
     if (bad > 500 || Number(temp_low) < 30 || Number(temp_high) > 95
         || humidity > 50) {
         $("#badness").append("disgusting");
