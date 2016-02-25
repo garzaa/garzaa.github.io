@@ -4,6 +4,8 @@ function startTime() {
     //america
     if (h >= 13) {
         h -= 12;
+    } else if (h < 1) {
+        h += 12;
     }
     var m = today.getMinutes();
     var s = today.getSeconds();
@@ -110,7 +112,7 @@ function insertWeatherInfo() {
     if (bad > 500 || Number(temp_low) < 30) {
         $("#badness").append("disgusting");
     } else {
-        $("#badness").append("not bad");
+        $("#badness").append("not bad tbh");
     }
 }
 
