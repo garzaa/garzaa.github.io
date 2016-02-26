@@ -87,7 +87,7 @@ var temp_curr;
 var temp_low;
 var temp_high;
 var description;
-var bad;
+var weatherCode;
 var humidity;
 $.when(
 	$.getJSON(json_url)
@@ -97,7 +97,7 @@ $.when(
 		temp_low = k_to_f(json_obj["main"]["temp_min"]);
 		temp_high = k_to_f(json_obj["main"]["temp_max"]);
 		description = json_obj["weather"][0]["description"];
-        bad = Number(json_obj["weather"][0]["id"]);
+        weatherCode = Number(json_obj["weather"][0]["id"]);
         humidity = Number(json_obj["main"]["humidity"])
 		insertWeatherInfo();
 	}
@@ -111,9 +111,11 @@ function insertWeatherInfo() {
 	$("#temp_curr").prepend("it's " + temp_curr + "&deg; out");
 	$("#temp_low").append("lo " + temp_low + "&deg; /");
 	$("#temp_high").append("hi " + temp_high + "&deg;");
-    console.log(bad);
-    if (bad > 500 || Number(temp_low) < 30 || Number(temp_high) > 95
-        || humidity > 50) {
+    console.log("weather code: " + weatherCode);
+    console.log("humidity: " + humidity);
+    var disgusting = (weatherCode > 500 && weatherCode < 800);
+    if (disgusting > 500 || Number(temp_low) < 30 || Number(temp_high) > 95
+        || humidity > 75) {
         $("#badness").append("disgusting");
     } else {
         $("#badness").append("not bad");
@@ -135,5 +137,4 @@ var weekday = date.getDay();
 var monthIndex = date.getMonth();
 var year = date.getFullYear();
 
-console.log(day, monthNames[monthIndex], year);
 document.getElementById("date").innerHTML = days[weekday] + ", " + monthNames[monthIndex] + " " + day;
