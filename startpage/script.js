@@ -47,20 +47,17 @@ function search(query) {
             query.replace(" ", "+");
             break;
         case "-y":
-            query = query.substr(3);
             window.location =
                 "https://www.youtube.com/results?search_query=" +
                 query.replace(" ", "+");
             break;
         case "-w":
-            query = query.substr(3);
             window.location =
                 "https://en.wikipedia.org/w/index.php?search=" +
                 query.replace(" ", "%20");
             break;
 
     	case "-m":
-    	    query = query.substr(3);
     	    window.location =
     		"http://www.wolframalpha.com/input/?i=" +
     		query.replace("+", "%2B");
