@@ -1,8 +1,8 @@
-var epilepsy = true
+var epilepsy = false
 
 if (localStorage.epilepsy) {
-    if (localStorage.epilepsy == 0) {
-        epilepsy = false
+    if (localStorage.epilepsy == 1) {
+        epilepsy = true
         document.getElementById("epilepsy").innerHTML = "More Flashing"
     }
 }
