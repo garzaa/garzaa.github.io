@@ -59,9 +59,8 @@
 			element = "roll-outcome" + i
 			
 			var elementId = "#" + "roll-outcome" + i
-			console.log(elementId)
 			if (outcome == sides && $(elementId).is(":visible")) {
-
+				console.log("critical roll on " + elementId)
 				playAirhorn();
 			}
 			document.getElementById(element).innerHTML = outcome + Number(modifier)
