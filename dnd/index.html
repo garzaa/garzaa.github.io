@@ -135,6 +135,7 @@ function playAirhorn() {
 		var airhorn = new Audio("airhorn.mp3");
 		airhorn.play();
 		airhorn.currentTime = 0;
+		flash()
 		if (localStorage.airhorncount) {
 			localStorage.airhorncount++;
 			if (localStorage.airhorncount == 100 || 
@@ -314,6 +315,28 @@ function playAirhorn() {
 				break;
 		}
 	})
+
+	function flash() {
+		var red = false;
+		var flashCount = 0;
+		var flashing = window.setInterval(function() {
+
+			if (!red) {
+				document.body.style.backgroundColor = "red"
+				red = true
+
+			} else {
+				document.body.style.backgroundColor = "white"
+				red = false
+			}
+			flashCount++
+			console.log(flashCount)
+			if (flashCount >= 50) {
+				clearInterval(flashing)
+			}
+		}, 10);
+
+	}
 
 	</script>
 </body>
