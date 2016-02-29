@@ -135,6 +135,16 @@ function playAirhorn() {
 		var airhorn = new Audio("airhorn.mp3");
 		airhorn.play();
 		airhorn.currentTime = 0;
+		if (localStorage.airhorncount) {
+			localStorage.airhorncount++;
+			if (localStorage.airhorncount == 100 || 
+				localStorage.airhorncount % 1000 == 0) {
+				prompt("Congratulations!\nYou've been dank af " + localStorage.airhorncount + " times!")
+			}
+		} else {
+			localStorage.airhorncount = 1
+		}
+		console.log("Airhorned " + localStorage.airhorncount + " times")
 }
 
 	$("#airhorn").click(function() {
