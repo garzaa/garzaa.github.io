@@ -6,7 +6,7 @@ body {
   -khtml-user-select: none;    /* Konqueror */
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
-  user-select: none;  
+  user-select: none;
 }
 
 #dicecontainer {
@@ -76,4 +76,9 @@ a {
 
 #dm-tools {
 	display: none;
+}
+
+#epilepsy:hover {
+	color: red;
+	border-color: red;
 }
