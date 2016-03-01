@@ -21,7 +21,7 @@ function playAirhorn() {
 		} else {
 			localStorage.airhorncount = 1
 		}
-		console.log("Airhorned " + localStorage.airhorncount + " times")
+		console.log("%cAirhorned " + localStorage.airhorncount + " times", "color: red; font-size: 24pt;")
 }
 
 $("#airhorn").click(function() {
