@@ -31,6 +31,7 @@ function specialHandle(str) {
             break;
         case "help":
             render("ls<br>color<br>reset color<br>")
+            render("")
             break;
         default:
             return null

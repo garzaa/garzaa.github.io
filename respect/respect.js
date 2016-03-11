@@ -62,13 +62,13 @@ function toggleNight() {
 	if (nightMode) {
 		nightMode = false;
 		$("#input").css("color", "black");
-		$("#terminal-container").css("color", "black")
-		$("#terminal-container").css("background-color", "white")
+		$("#terminal").css("color", "black")
+		$("#terminal").css("background-color", "white")
 	} else {
 		nightMode = true
 		$("#input").css("color", "white");
-		$("#terminal-container").css("color", "white")
-		$("#terminal-container").css("background-color", "black")
+		$("#terminal").css("color", "white")
+		$("#terminal").css("background-color", "black")
 	}
 }
 

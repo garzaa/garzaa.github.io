@@ -107,7 +107,7 @@ function handle(str) {
 	str === "" ? "do nothing" : addInput(str)
 	render(str);
 	input.value = "";
-
+	gameHandle(str);
 	hook(str);
 }
 
@@ -165,7 +165,7 @@ function color() {
 	if (light) {
 		tempcolor = genColor(0, 128)
 		$("#terminal").css("color", tempcolor)
-		$("#input").css("color", genColor(128, 255));
+		$("#input").css("color", genColor(0, 128));
 	} else {
 		tempcolor = genColor(128, 255)
 		$("#terminal").css("color", tempcolor)
@@ -178,8 +178,4 @@ function genColor(min, max) {
 	g = randRange(min, max);
 	b = randRange(min, max);
 	return "rgb(" +r+ "," +g+ "," +b+ ")"
-}
-
-function resetColors() {
-	initCSS()
 }
