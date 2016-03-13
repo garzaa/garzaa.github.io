@@ -7,7 +7,7 @@ function rollDie(sides) {
 	document.getElementById("roll-outcome1").innerHTML = outcome */
 	var element
 	var outcome
-	for (var i=1; i<=5; i++) {
+	for (var i=1; i<=10; i++) {
 		outcome = Math.floor(Math.random() * sides) + 1
 		element = "roll-outcome" + i
 
@@ -22,7 +22,7 @@ function rollDie(sides) {
 
 function visibleDice(numberDice) {
 	var element
-	$("#roll-outcome1, #roll-outcome2, #roll-outcome3, #roll-outcome4, #roll-outcome5").each(function() {
+	$("#roll-outcome1, #roll-outcome2, #roll-outcome3, #roll-outcome4, #roll-outcome5, #roll-outcome6, #roll-outcome7, #roll-outcome8, #roll-outcome9, #roll-outcome10").each(function() {
 		$(this).hide();
 	})
 	for (var i=1; i<=numberDice; i++) {
@@ -83,6 +83,28 @@ $("#five").click(function() {
 	dice = 5
 	visibleDice(5)
 })
+
+$("#six").click(function() {
+	dice = 6
+	visibleDice(6)
+})
+$("#seven").click(function() {
+	dice = 7
+	visibleDice(7)
+})
+$("#eight").click(function() {
+	dice = 8
+	visibleDice(8)
+})
+$("#nine").click(function() {
+	dice = 9
+	visibleDice(9)
+})
+$("#ten").click(function() {
+	dice = 10
+	visibleDice(10)
+})
+
 function setModifier() {
 	modifier = prompt("enter a modifier:")
 	if (modifier == "" || isNaN(modifier) || !modifier) {
