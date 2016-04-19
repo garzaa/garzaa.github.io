@@ -6,6 +6,7 @@ function downloadInnerHtml(filename, elId, mimeType) {
     var elHtml = document.getElementById(elId).innerHTML;
 
     //replace divs with newlines
+    elHtml = elHtml.replace("<div>","");
     elHtml = elHtml.split("<div>").join("\n");
 
     //and then get rid of all the HTML tags
