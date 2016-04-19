@@ -8,6 +8,18 @@
     <title>New Tab</title>
 </head>
 <body>
+<script>
+$(window).bind('keydown', function(event) {
+    if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 'r':
+            event.preventDefault();
+            window.location = "../origami/index.html"
+            break;
+        }
+    }
+});
+</script>
 <div id="searchbar-container">
     <input type="search" placeholder="-a -m -w -y" id="searchbar" onsubmit="search()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" title="press shift to focus"/>
 </div>

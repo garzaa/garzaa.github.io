@@ -1,4 +1,4 @@
-var currentFont = 2;
+var currentFont = 1;
 var cardOn = false;
 var nightOn = false;
 
@@ -38,6 +38,10 @@ window.onload = function() {
     } else {
         localStorage.theme = "default"
     }
+
+    if (localStorage.getItem("document")) {
+        editor.innerHTML = localStorage.getItem("document")
+    }
 };
 
 var fonts = [
@@ -54,7 +58,7 @@ function switchFont() {
 }
 
 $(window).bind('keydown', function(event) {
-    if (event.ctrlKey || event.metaKey) {
+    if ((event.ctrlKey || event.metaKey) && !event.shiftKey) {
         switch (String.fromCharCode(event.which).toLowerCase()) {
         case 's':
             event.preventDefault();
@@ -71,6 +75,14 @@ $(window).bind('keydown', function(event) {
         case 'i':
             event.preventDefault();
             toggleCard();
+            break;
+        }
+    }
+    else if ((event.ctrlKey || event.metaKey) && event.shiftKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 's':
+            event.preventDefault();
+            localStorage.setItem("document", editor.innerHTML);
             break;
         }
     }
