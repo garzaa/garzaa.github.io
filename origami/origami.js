@@ -18,7 +18,7 @@ function downloadInnerHtml(filename, elId, mimeType) {
     link.click();
 }
 
-var fileName =  'untitled.pdf';
+var fileName =  'untitled.txt';
 
 function download() {
     downloadInnerHtml(fileName, 'editor','text/html');
