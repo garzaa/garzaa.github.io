@@ -116,11 +116,12 @@ function toggleCard() {
     if (cardOn) {
         localStorage.theme = "default"
         editor.className = ""
-        body.style.backgroundColor = "white";
+        editor.style.backgroundColor = "#f1f1f1";
     } else {
         localStorage.theme = "card"
         editor.className = "card"
-        body.style.backgroundColor = "rgba(0,0,0,.05)"
+        body.style.backgroundColor = "#f1f1f1"
+        editor.style.backgroundColor = "white";
     }
     cardOn = !cardOn
 }
@@ -132,8 +133,8 @@ function toggleNight() {
     if (nightOn) {
         localStorage.theme = "default"
         editor.style.color = "rgb(50, 50, 50)"
-        body.style.backgroundColor = "white";
-        editor.style.backgroundColor = "white";
+        body.style.backgroundColor = "#f1f1f1";
+        editor.style.backgroundColor = "#f1f1f1";
     } else {
         localStorage.theme = "night"
         body.style.backgroundColor = "rgb(33, 37, 43)";

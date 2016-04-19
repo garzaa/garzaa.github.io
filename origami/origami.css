@@ -7,12 +7,12 @@ html, body, span {
 }
 
 body {
-    background-color: #ffffff;
+    background-color: #f1f1f1;
     font-family: "Roboto Mono";
 }
 
 #editor {
-    background-color: white;
+    background-color: #f1f1f1;
     width: 50%;
     min-height: 71vh;
     margin-left: auto;
