@@ -135,3 +135,15 @@ var monthIndex = date.getMonth();
 var year = date.getFullYear();
 
 document.getElementById("date").innerHTML = days[weekday] + ", " + monthNames[monthIndex] + " " + day;
+
+//opening Origami in one keystroke
+$(window).bind('keydown', function(event) {
+    if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 'r':
+            event.preventDefault();
+            window.location = "../origami/index.html"
+            break;
+        }
+    }
+});
