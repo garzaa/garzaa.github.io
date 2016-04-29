@@ -8,6 +8,7 @@ body {
     background-color: #fafafa;
     font-family: "Roboto", sans-serif;
     background-image: url("bg.png");
+    background-size: cover;
 }
 
 #searchbar-container {
@@ -116,7 +117,7 @@ body {
 }
 
 .cardcolumn:hover {
-    border-bottom: 3px solid hotpink;
+    border-bottom: 3px solid mediumseagreen;
     -webkit-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.20);
     -moz-box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.20);
     box-shadow: 0px 1px 7px 0px rgba(0,0,0,0.20);
@@ -142,6 +143,6 @@ a {
 }
 
 a:hover {
-    color: hotpink;
+    color: mediumseagreen;
 
 }

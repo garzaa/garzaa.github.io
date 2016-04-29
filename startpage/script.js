@@ -111,7 +111,7 @@ function insertWeatherInfo() {
     console.log("weather code: " + weatherCode);
     console.log("humidity: " + humidity);
     var disgusting = (weatherCode > 500 && weatherCode < 800);
-    if (disgusting > 500 || Number(temp_low) < 30 || Number(temp_high) > 95
+    if (disgusting || Number(temp_low) < 30 || Number(temp_high) > 95
         || humidity > 75) {
         $("#badness").append("disgusting");
     } else {
