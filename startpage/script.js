@@ -104,8 +104,8 @@ function k_to_f(kelvin) {
 }
 function insertWeatherInfo() {
 	//$("#city").append(city.toLowerCase());
-	$("#description").append(description.toLowerCase());
-	$("#temp_curr").prepend("it's " + temp_curr + "&deg; out");
+	document.getElementById("description").innerHTML = (description.toLowerCase());
+	document.getElementById("temp_curr").innerHTML = ("it's " + temp_curr + "&deg; out");
 	$("#temp_low").append("lo " + temp_low + "&deg; /");
 	$("#temp_high").append("hi " + temp_high + "&deg;");
     console.log("weather code: " + weatherCode);
@@ -113,9 +113,9 @@ function insertWeatherInfo() {
     var disgusting = (weatherCode > 500 && weatherCode < 800);
     if (disgusting || Number(temp_low) < 30 || Number(temp_high) > 95
         || humidity > 75) {
-        $("#badness").append("disgusting");
+        document.getElementById("badness").innerHTML = ("disgusting");
     } else {
-        $("#badness").append("not bad");
+        document.getElementById("badness").innerHTML = ("not bad");
     }
 }
 
@@ -135,3 +135,7 @@ var monthIndex = date.getMonth();
 var year = date.getFullYear();
 
 document.getElementById("date").innerHTML = days[weekday] + ", " + monthNames[monthIndex] + " " + day;
+
+$("#searchbar-container").click(function() {
+    $("#searchbar").focus();
+})
