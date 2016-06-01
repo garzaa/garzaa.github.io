@@ -1,0 +1,67 @@
+body {
+
+	text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    transition: color .1s ease;
+    -webkit-transition: color .1s ease;
+}
+
+a:hover {
+    color: blue;
+}
+
+h2 {
+	margin-top: 5vh;
+	font-family: "Droid Serif";
+	font-size: 12pt;
+	font-weight: 300;	
+}
+
+#tabs {
+    display: inline-block;
+    margin-top: 5vh;
+    padding-bottom: 3vh;
+    border-bottom: 1px solid black;
+}
+
+.tab {
+    cursor: pointer;
+    font-family: "Raleway", sans-serif;
+    font-size: 30pt;
+    font-weight:300;
+    transition: color .2s ease;
+    -webkit-transition: color .2s ease;
+
+}
+
+.tab:hover {
+    color: blue;
+}
+    #games{
+        margin-left: 3vw;
+    }
+
+	#personal {
+		margin: 0vw 3vw;
+	}
+
+
+ul {
+    margin-top: 5vh;
+    font-family: "Roboto", sans-serif;
+    font-size: 14pt;
+    list-style-type: none;
+	display: inline-block;
+}
+
+    li {
+            margin-top: 5vh;
+    }
+
+    h1 {
+        margin-bottom: 1vh;
+    }

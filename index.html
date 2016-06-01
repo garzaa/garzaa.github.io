@@ -1,31 +1,73 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel="stylesheet" href="css/home.css" />
+		<link rel="stylesheet" href="style.css" />
 		<link href='http://fonts.googleapis.com/css?family=Raleway:200,400' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'/>
-		<link rel="shortcut icon" type="image/png" href="img/pink.png">
+        <link href='https://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<title> Adrian Garza </title>
 	</head>
 	<body>
+		<h2>Adrian Garza</h2>
+        <div id="tabs">
+            <!-- apps, games, personal-->
+            <span class="tab" id="apps">Apps</span>
+            <span class="tab" id="games">Games</span>
+            <span class="tab" id="personal">Personal</span>
+			<span class="tab" id="about">About</span>
+        </div>
+        <br />
 
-		<div id="spacer"></div>
-		<div class="main">
-		<a href="dnd" class="dicebutton" target="_blank"  title="Roll for Initiative!"> D&amp;D</a>
-		<a href="http://mumblr.diagraphictech.com" class="dicebutton" id="mumblr" target="_blank" title="Your Screaming Debate Assistant"> Mumblr</a>
-		<a href="http://realrep.diagraphictech.com" class="dicebutton" id="realrep" target="_blank" title="Judge Your Friends!"> RealRep</a>
-		<a href="http://pixeltheosis.tumblr.com" class="dicebutton" id="tumblr" target="_blank" "My Stuff!"> Art</a>
-		<a href="resume.pdf" class="dicebutton" id="resume" target = "_blank" title="Resume">Resume</a>
-		</div>
+        <ul id="appslist">
+            <li>
+                <h1><a href="http://mumblr.diagraphictech.com" >Mumblr</a></h1>
 
-		<div id="spacer-200"></div>
+                <em>Your personal debate assistant</em><br /><br />
+            </li>
+            <li>
+                <h1><a href="http://realrep.diagraphictech.com" >RealRep</a></h1>
 
-		<p class="about" align="center">
-			I'm a junior studying Computer Science and Creative Writing at Columbia University.
-		</p>
+                <em>Judge your friends like they judge you</em><br /><br />
+            </li>
+            <li>
+                <h1><a href="dnd">D&amp;D</a></h1>
+                <em>The Dungeons and Dragons companion app</em>
+            </li>
+        </ul>
+        <ul id="gameslist">
+            <li>
+                <h1><a href="http://defendthelounge.diagraphictech.com">Defend the Lounge</a></h1>
 
-		<p class="about">
-			In my free time I create programs, stories, artwork and games. 
-		</p>
-	</body>
+                <em>Fight clones, eat chicken tenders</em>
+            </li>
+            <li>
+                <h1><a href="https://www.dropbox.com/sh/11d6i0949r9why5/AAAIOAJKi5Bws2ssls1S329Ma?dl=0">Morrow Peak</a></h1>
+                <em>Spooky happenings in a small town</em><br />
+                <em>Download the first level here!</em>
+            </li>
+        </ul>
+        <ul id="personallist">
+			<li>
+				<h1><a href="Resume.pdf" target="_blank">My Resume</a></h1>
+				<em>a PDF</em>
+			</li>
+			<li>
+				<h1><a href="pixeltheosis.tumblr.com">My Art</a></h1>
+				<em>a blog</em>
+			</li>
+
+        </ul>
+		<ul id="aboutlist">
+			<li>
+				<img src="img/me.jpg" height="400vh"/>
+			</li>
+			<li style="text-align: left; font-size: 12pt;">
+				I'm a junior studying Computer Science and Creative Writing<br />
+				at Columbia University. In my free time I code, write, and<br />
+				make games and artwork.
+			</li>
+		</ul>
+        <script src="script.js"></script>
+    </body>
 </html>
