@@ -23,12 +23,11 @@ function updateTabs(input) {
     //show the list
     $("#" + input + "list").show();
     currentList = input;
-    //update the css for the tabs
+
+    //update the css for the tabs, turn the active one blue
     $("#apps,#games,#personal,#about").css("color", "black");
     $("#" + input).css("color", "blue");
 }
 
 hideAll();
-$("#appslist").show();
-
 updateTabs("apps");
