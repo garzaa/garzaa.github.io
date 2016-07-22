@@ -8,6 +8,7 @@ body {
     background-color: #fafafa;
     font-family: "Roboto", sans-serif;
     background-image: url("bg.png");
+    background-size: cover;
 }
 
 #searchbar-container {
