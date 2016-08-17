@@ -1,6 +1,17 @@
-body {
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 
+}
+
+body {
+    background-image: url("img/photo-1465326117523-6450112b60b2.jpg");
 	text-align: center;
+    background-repeat: no-repeat;
 }
 
 a {
@@ -10,48 +21,55 @@ a {
     -webkit-transition: color .1s ease;
 }
 
-a:hover {
-    color: blue;
+a:hover, .tab:hover, .activetab {
+    color: #3293f4;
 }
 
 h2 {
 	margin-top: 5vh;
-	font-family: "Droid Serif";
+	font-family: "Roboto Mono";
 	font-size: 12pt;
-	font-weight: 300;
+	font-weight: 200;
 }
 
 #tabs {
     display: inline-block;
-    margin-top: 5vh;
-    padding-bottom: 3vh;
-    border-bottom: 1px solid black;
+    margin-top: 10pt;
+    padding-bottom: 5pt;
 }
 
 .tab {
     cursor: pointer;
-    font-family: "Raleway", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 30pt;
     font-weight:300;
     transition: color .2s ease;
     -webkit-transition: color .2s ease;
-
+    padding-bottom: 10pt;
 }
 
-.tab:hover {
-    color: blue;
-}
-    #games{
+
+    #apps{
         margin-left: 3vw;
     }
 
-	#personal {
+	#games {
 		margin: 0vw 3vw;
 	}
 
+#aboutlist>li {
+    text-align: left; 
+    font-size: 12pt;
+    margin-top: 2em;
+}
+
+#aboutlist {
+    width: 30vw;
+    min-width: 20em;
+}
 
 ul {
-    margin-top: 5vh;
+    margin-top: 15pt;
     font-family: "Roboto", sans-serif;
     font-size: 14pt;
     list-style-type: none;
@@ -65,3 +83,10 @@ ul {
     h1 {
         margin-bottom: 1vh;
     }
+
+#line {
+    width: 100%;
+    height: 1px;
+    background-color: #3293f4;
+    transition: .2s ease;
+}

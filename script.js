@@ -19,15 +19,21 @@ function hideAll() {
 }
 
 function updateTabs(input) {
-    hideAll();
+    hideAll()
+    $("#apps,#games,#personal,#about").removeClass("activetab");
     //show the list
-    $("#" + input + "list").show();
+    $("#" + input + "list").fadeIn(200);
     currentList = input;
 
-    //update the css for the tabs, turn the active one blue
-    $("#apps,#games,#personal,#about").css("color", "black");
-    $("#" + input).css("color", "blue");
+    //update the css for the tabs
+    $("#" + input).addClass("activetab");
+    
+    var tmpWidth = $("#" + input).width();
+    var tmpPos = $("#" + input).offset().left;
+    
+    $("#line").css("width", tmpWidth + "px");
+    $("#line").css("margin-left", tmpPos + "px");
+    
 }
 
-hideAll();
-updateTabs("apps");
+updateTabs("about");
