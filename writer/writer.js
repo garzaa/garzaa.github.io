@@ -65,7 +65,7 @@ $(window).bind('keydown', function(event) {
             event.preventDefault();
             download();
             break;
-        case 'd':
+        case 'e':
             event.preventDefault();
             switchFont();
             break;

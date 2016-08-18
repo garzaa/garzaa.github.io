@@ -144,7 +144,7 @@ $("#searchbar-container").click(function() {
 /*
 update the stylesheet based on time:
 if it's after say 9pm and before 7 am, go night colors
- */
+
 var today = new Date();
 
 var h = today.getHours();
@@ -153,3 +153,4 @@ if (h > 19 || h < 7) {
 } else {
     $("head").append('<link href="daycolors.css" rel="stylesheet"/>');
 }
+ */
