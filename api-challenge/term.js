@@ -107,7 +107,8 @@ function clear(input) {
 
 function about(input) {
     print("Terminal emulator v2.0 created by Adrian Garza, 2016.")
-    print("Features include history and autocomplete functions. ")
+    print("It's sleek, aesthetic and full of secrets.")
+    print("<a href='https://github.com/adriangarza/adriangarza.github.io/tree/master/api-challenge' target='_blank'>Github Page</a>")
 }
 
 function history(input) {
@@ -116,6 +117,7 @@ function history(input) {
 }
 
 function help(input) {
+    //add some kind of help for various functions (like rendering)
     for (var i=0; i<terminalFunctions.length; i++) {
         print(terminalFunctions[i]);
     }
@@ -140,6 +142,7 @@ function echo(input) {
 }
 
 //====================  HISTORY  ===================================
+//keep duplicates from being added, change "" to &nbsp;
 var lastInputs = []
 var inputIndex = 0;
 

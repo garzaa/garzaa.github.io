@@ -28,6 +28,11 @@ body {
 	overflow-x: hidden;
 }
 
+a {
+	color: pink;
+	text-decoration: underline;
+}
+
 pre, #prompt {
     color: #adadad;
 }
