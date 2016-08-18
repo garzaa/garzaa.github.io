@@ -86,7 +86,7 @@ function fancyRender(text, color, size) {
         color = "inherit"
     }
     if (size == undefined) {
-        size = "12"
+        size = "10"
     }
     pre += "color:" + color + "; "
     pre += "font-size:" + size + 'pt;"'
@@ -145,11 +145,13 @@ function echo(args) {
 }
 
 function render(args) {
-    if (args.length != 3) {
-        print("usage: render [text] [color] [size]")
+    args = args.join(" ").split("; ")
+    var cssVars = args[1].split(" ")
+    if (args.length != 2) {
+        print("usage: render [text]; [color] [size]")
         return
     }
-    fancyRender(args[0], args[1], args[2]);
+    fancyRender(args[0], cssVars[0], cssVars[1]);
 }
 
 //====================  HISTORY  ===================================
@@ -159,7 +161,8 @@ var inputIndex = 0;
 
 //adds to the beginning of the array
 function addInput(str) {
-    if (str === "") return;
+    if (str === "") str = "&nbsp;";
+    if (lastInputs[0] === str) return;
     if (lastInputs.length > 0) {
         if (lastInputs[lastInputs.length - 1] != str) lastInputs.unshift(str)
     } else lastInputs.unshift(str);

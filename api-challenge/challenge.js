@@ -18,4 +18,5 @@ var hookCommands = ["start"];
 
 function start(str) {
     print("coming soon!")
+    
 }
