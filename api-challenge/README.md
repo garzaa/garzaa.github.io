@@ -6,5 +6,7 @@ I'm applying for the CODE2040 fellowship this year, and decided to build a termi
 - Tab auto-completion and echo commands
 - History, searchable with arrow keys
 - A tiny, multi-color text rendering engine
+- Evaluate console commands with a ~ prefix
 - Riddles and secrets for nerds
 
+[Let's go check it out.](http://adriangarza.github.io/api-challenge/)
