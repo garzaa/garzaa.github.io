@@ -80,7 +80,7 @@ function print(text) {
 }
 
 //for fancy rendering
-function render(text, color, size) {
+function fancyRender(text, color, size) {
     var pre = '<pre class="output" style="'
     if (color == undefined) {
         color = "inherit"
@@ -97,7 +97,7 @@ function render(text, color, size) {
 }
 
 //====================  TERMINAL FUNCTIONS  ========================
-var terminalFunctions = ["about", "clear", "echo", "help", "history"];
+var terminalFunctions = ["about", "clear", "echo", "help", "history", "render"];
 
 function clear(input) {
     var data = '<p id="prompt" class="prompt">guest@demo:$&nbsp;</p><pre id="input" contenteditable="true" autofocus="true" spellcheck="false"></pre>'
@@ -107,7 +107,6 @@ function clear(input) {
 
 function about(input) {
     print("Terminal emulator v2.0 created by Adrian Garza, 2016.")
-    print("It's sleek, aesthetic and full of secrets.")
     print("<a href='https://github.com/adriangarza/adriangarza.github.io/tree/master/api-challenge' target='_blank'>Github Page</a>")
 }
 
@@ -133,12 +132,24 @@ function randRange(n) {
   return Math.ceil(Math.random() * n);
 }
 
-function rollDie(string) {
-    print(randRange(Number(string.substr(1))));
+function rollDie(args) {
+    print(randRange(Number(args.substr(1))));
 }
 
-function echo(input) {
-    print(input);
+function echo(args) {
+    if (args.length == 0) {
+        print("usage: echo [text]")
+        return
+    }
+    print(args.join(" "));
+}
+
+function render(args) {
+    if (args.length != 3) {
+        print("usage: render [text] [color] [size]")
+        return
+    }
+    fancyRender(args[0], args[1], args[2]);
 }
 
 //====================  HISTORY  ===================================
