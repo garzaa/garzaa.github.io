@@ -1,13 +1,13 @@
-function hook(str) {
+function hook(str, args) {
 
     if (str[0] == "~") {
         eval(str.slice(1, str.length))
         return true
     }
 
-    if (terminalFunctions.indexOf(input) > -1) {
+    if (hookCommands.indexOf(str) > -1) {
         //call it as a function
-        window[input](str);
+        window[str](args);
         return true;
     }
 
@@ -17,6 +17,22 @@ function hook(str) {
 var hookCommands = ["start"];
 
 function start(str) {
-    print("coming soon!")
-    
+    var github = "https://github.com/adriangarza/adriangarza.github.io/tree/master/api-challenge";
+    var token = "0cd6f780d84211209711168429d70d68";
+    var endpoint = "http://challenge.code2040.org/api/register";
+    print("connecting to endpoint " + endpoint)
+    var dict = JSON.stringify({"token": token, "github": github});
+    $.ajax({
+        type: "POST",
+        datatype: "json",
+        async: false,
+        url: endpoint,
+        processData: false,
+        data: dict,
+        contentType: "application/json",
+        success: function(data){
+            print("success!")
+            return data;
+        }
+    })
 }

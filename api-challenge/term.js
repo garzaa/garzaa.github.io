@@ -26,8 +26,8 @@ function init() {
         }
     });
 
-    //print("Welcome to my demo for the CODE2040 tech assessment.")
-    //print("Type 'start' to get started, or 'help' for more options.")
+    print("Welcome to my demo for the CODE2040 tech assessment.")
+    print("Type 'start' to get started, or 'help' for more options.")
     $("#input").focus();
 }
 
@@ -57,7 +57,7 @@ function handle(text) {
         window[firstWord](args);
     } else {
         //outside programs just need to have this function
-        if (hook(input) != true) {
+        if (hook(input, args) != true) {
             print("Command " + "'" + input + "' not found. Type 'help' for more options.")
         }
     }
@@ -97,7 +97,7 @@ function fancyRender(text, color, size) {
 }
 
 //====================  TERMINAL FUNCTIONS  ========================
-var terminalFunctions = ["about", "clear", "echo", "help", "history", "render"];
+var terminalFunctions = ["about", "clear", "echo", "help", "history", "ls", "render"];
 
 function clear(input) {
     var data = '<p id="prompt" class="prompt">guest@demo:$&nbsp;</p><pre id="input" contenteditable="true" autofocus="true" spellcheck="false"></pre>'
@@ -128,6 +128,11 @@ function help(input) {
     }
 }
 
+function ls(input) {
+    print("No files here :^)")
+    print("Try 'help' for more options.")
+}
+
 function randRange(n) {
   return Math.ceil(Math.random() * n);
 }
@@ -145,10 +150,18 @@ function echo(args) {
 }
 
 function render(args) {
+    var usage = "usage: render [text]; [color] [size]"
+    if (args.length === 0) {
+        print(usage)
+        return
+    }
     args = args.join(" ").split("; ")
+    if (args.length === 1) {
+        print(usage)
+    }
     var cssVars = args[1].split(" ")
     if (args.length != 2) {
-        print("usage: render [text]; [color] [size]")
+        print(usage)
         return
     }
     fancyRender(args[0], cssVars[0], cssVars[1]);
