@@ -17,18 +17,17 @@ function hook(str, args) {
 var hookCommands = ["start"];
 
 function start(str) {
-    var github = "https://github.com/adriangarza/adriangarza.github.io/tree/master/api-challenge";
+    var github = "https://github.com/adriangarza/code2040";
     var token = "0cd6f780d84211209711168429d70d68";
     var endpoint = "http://challenge.code2040.org/api/register";
     print("connecting to endpoint " + endpoint)
     $.ajax({
-        type: "POST",
-        async: false,
         url: endpoint,
-        processData: false,
+        type: "POST",
         data: JSON.stringify({"token": token, "github": github}),
-        datatype: "json",
         contentType: "application/json",
+        dataType: "json",
+        async: false,
         success: function(data){
             print("success!")
             return data;
