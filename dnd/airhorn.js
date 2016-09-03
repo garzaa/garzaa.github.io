@@ -8,7 +8,7 @@ if (localStorage.epilepsy) {
 }
 
 function playAirhorn() {
-		var airhorn = new Audio("airhorn.mp3");
+		var airhorn = new Audio("../dnd/airhorn.mp3");
 		airhorn.play();
 		airhorn.currentTime = 0;
 		if (epilepsy == true) { flash() }

@@ -14,23 +14,33 @@ function hook(str, args) {
 }
 
 //==================== CHALLENGE COMMANDS ==========================
-var hookCommands = ["start"];
+var github = "https://github.com/adriangarza/adriangarza.github.io/tree/master/api-challenge";
+var token = "0cd6f780d84211209711168429d70d68";
+var auth = JSON.stringify({"token": token, "github": github})
+
+var hookCommands = ["start", "test"];
 
 function start(str) {
-    var github = "https://github.com/adriangarza/code2040";
-    var token = "0cd6f780d84211209711168429d70d68";
     var endpoint = "http://challenge.code2040.org/api/register";
     print("connecting to endpoint " + endpoint)
     $.ajax({
-        url: endpoint,
+        dataType: "jsonp",
         type: "POST",
-        data: JSON.stringify({"token": token, "github": github}),
-        contentType: "application/json",
-        dataType: "json",
+        url: endpoint,
         async: false,
-        success: function(data){
-            print("success!")
-            return data;
+        data: auth,
+    })
+}
+
+function test(str) {
+    $.ajax({
+        dataType: "jsonp",
+        type: "POST",
+        url: "http://challenge.code2040.org/api/reverse",
+        async: false,
+        data: auth,
+        success: function(data) {
+            print(data);
         }
     })
 }
