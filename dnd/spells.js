@@ -6,7 +6,7 @@ if (!toolsShown) {
     toolsShown = false
 }
 $("#dm-tools").slideToggle(100)
-document.getElementById("spells").innerHTML = "Random Spell"
+document.getElementById("spells").innerHTML = "Random Scroll/Item Generator"
 
 var toolsShown = false
 $("#dm-tools-toggle").click(function() {
@@ -19,7 +19,7 @@ $("#dm-tools-toggle").click(function() {
         toolsShown = false
     }
     $("#dm-tools").slideToggle(100)
-	document.getElementById("spells").innerHTML = "Random Spell"
+	document.getElementById("spells").innerHTML = "Random Scroll/Item Generator"
 })
 
 var spell1 = [
