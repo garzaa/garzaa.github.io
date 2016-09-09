@@ -85,7 +85,7 @@ function randomClothes() {
 }
 
 function randomItem() {
-
+	return getRand(item1) + " " + getRand(item2) + " of " + getRand(item3)
 }
 
 function getRand(arr) {

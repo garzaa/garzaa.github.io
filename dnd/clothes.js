@@ -2,13 +2,13 @@ var clothes1 = [
 	"Spooky",
 	"Unsettling",
 	"Invisible",
-    "Arcane",
 	"The",
-	"Charmed",
 	"Talking",
 	"Glowing",
-	"Worn",
-
+	"Shining",
+	"Unremarkable",
+	"Gaudy",
+	"Plain",
 ]
 
 var clothes2 = [
@@ -17,7 +17,6 @@ var clothes2 = [
     "helmet",
 	"gauntlets",
 	"gloves",
-	"mail",
 	"brooch",
 	"hat",
 	"cape",
@@ -43,7 +42,8 @@ var clothes2 = [
 	"trousers",
 	"socks",
 	"coat",
-	"belt"
+	"belt",
+
 ]
 
 var clothes3 = [
@@ -64,5 +64,6 @@ var clothes3 = [
 	"situational awareness",
 	"protection",
 	"strength",
-	"emotional manipulation"
+	"emotional manipulation",
+	"calm"
 ]
