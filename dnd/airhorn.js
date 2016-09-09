@@ -1,12 +1,5 @@
 var epilepsy = false
 
-if (localStorage.epilepsy) {
-    if (localStorage.epilepsy == 1) {
-        epilepsy = true
-        document.getElementById("epilepsy").innerHTML = "More Flashing"
-    }
-}
-
 function playAirhorn() {
 		var airhorn = new Audio("../dnd/airhorn.mp3");
 		airhorn.play();

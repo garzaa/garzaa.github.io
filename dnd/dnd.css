@@ -14,8 +14,8 @@ body {
 	margin-left: auto;
 	font-size: 100pt;
 	text-align: center;
-	margin-top: 10%;
-	margin-bottom: 5%;
+	margin-top: 10vh;
+	margin-bottom: 10vh;
 }
 
 .dicebutton {
@@ -55,14 +55,6 @@ body {
 	color:blue;
 }
 
-#picturecontainer {
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	cursor: pointer;
-}
-
 a {
 	text-decoration: none;
 	color: black;
@@ -70,7 +62,7 @@ a {
 
 
 
-#spacer {
+.spacer {
 	height: 300px;
 }
 
