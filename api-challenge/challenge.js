@@ -39,8 +39,8 @@ function test(str) {
         url: "http://challenge.code2040.org/api/reverse",
         async: false,
         data: auth,
-        success: function(data) {
-            print(data);
-        }
+    })
+    .done( function() {
+        print("success");
     })
 }
