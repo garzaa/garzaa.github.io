@@ -20,6 +20,8 @@ var curse1 = [
     "Disappointing",
     "Disgusting",
     "Oozing",
+	"Rotten",
+	""
 ]
 
 var curse2 = [
@@ -36,7 +38,9 @@ var curse2 = [
 	"boils",
 	"stare",
 	"voice",
-
+	"piss",
+	"stench",
+	"piss",
 ]
 
 var curse3 = [
