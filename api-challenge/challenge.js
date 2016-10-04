@@ -4,6 +4,7 @@ function hook(str, args) {
         eval(str.slice(1, str.length))
         return true
     }
+    
 
     if (hookCommands.indexOf(str) > -1) {
         //call it as a function

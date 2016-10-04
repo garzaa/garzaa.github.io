@@ -78,7 +78,7 @@ $(document).bind('keydown', function(e) {
 
 
 //weather shamelessly stolen from Austin Kilduff
-var json_url = "http://api.openweathermap.org/data/2.5/weather?q=Manhattan,ny&appid=6e131a2916d5d45d8367b72a4675be0a";
+var json_url = "http://api.openweathermap.org/data/2.5/weather?q=Morningside+Heights,ny&appid=6e131a2916d5d45d8367b72a4675be0a";
 var city;
 var temp_curr;
 var temp_low;
