@@ -22,20 +22,6 @@ function checkTime(i) {
 
 startTime();
 
-//press SHIFT to focus on the search bar
-//modifiers have to be AT THE END
-searchinput = document.getElementById("searchbar");
-if(!!searchinput){
-    searchinput.addEventListener("keypress", function(a){
-        var key = a.keyCode;
-        if(key == 13){
-            var query = this.value;
-            search(query);
-        }
-    });
-}
-
-
 function search(query) {
     console.log(query)
     var original = query;

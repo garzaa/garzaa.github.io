@@ -158,3 +158,9 @@ a:hover {
     color: dodgerblue;
     text-shadow: 0px 0px 12px rgba(0,145,255,.5);
 }
+
+#stripe {
+	cursor: default;
+}
+
+
