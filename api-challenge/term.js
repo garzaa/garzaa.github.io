@@ -86,7 +86,7 @@ function fancyRender(text, color, size) {
         color = "inherit"
     }
     if (size == undefined) {
-        size = "10"
+        size = "11"
     }
     pre += "color:" + color + "; "
     pre += "font-size:" + size + 'pt;"'
@@ -107,7 +107,8 @@ function clear(input) {
 
 function about(input) {
     print("Terminal emulator v2.0 created by Adrian Garza, 2016.")
-    print("<a href='https://github.com/adriangarza/adriangarza.github.io/tree/master/api-challenge' target='_blank'>Github Page</a>")
+    print("<a href='https://github.com/adriangarza/code2040/' target='_blank'>[GitHub Page]</a>")
+    print("Features include tab autocompletion and history, searchable with arrow keys.")
 }
 
 function history(input) {
@@ -129,8 +130,7 @@ function help(input) {
 }
 
 function ls(input) {
-    print("No files here :^)")
-    print("Try 'help' for more options.")
+    help(input)
 }
 
 function randRange(n) {

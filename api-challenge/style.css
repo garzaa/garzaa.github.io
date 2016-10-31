@@ -26,11 +26,12 @@ body {
 	width: 100%;
 	height: 100%;
 	overflow-x: hidden;
+	font-size: 11pt;
 }
 
 a {
-	color: hotpink;
-	text-decoration: underline;
+	color: mediumpurple;
+	text-decoration: none
 }
 
 pre, #prompt {
