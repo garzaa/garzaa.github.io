@@ -106,9 +106,10 @@ function clear(input) {
 }
 
 function about(input) {
-    print("Terminal emulator v2.0 created by Adrian Garza, 2016.")
     print("<a href='https://github.com/adriangarza/code2040/' target='_blank'>[GitHub Page]</a>")
+    print("Terminal emulator v2.0 created by Adrian Garza, 2016.")
     print("Features include tab autocompletion and history, searchable with arrow keys.")
+    print("Background photo by <a href='https://unsplash.com/@fableandfolk' target='_blank'>Annie Spratt</a>")
 }
 
 function history(input) {
