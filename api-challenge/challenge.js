@@ -143,7 +143,10 @@ function timestamp(str) {
     shortPost('http://challenge.code2040.org/api/dating/validate',
         {'token': token, 'datestamp': dateString})
     print(" ")
-    print("And that's all the challenges! Check out my <a href='https://github.com/adriangarza/code2040/' target='_blank'>GitHub Page</a> for more info.")
+    print("And that's all the challenges! Check out my <a href='https://github.com/adriangarza/code2040/' target='_blank'>GitHub Page</a> for more info, or play around using the following commands:")
+    for(var i=0; i<terminalFunctions.length; i++) {
+        print(terminalFunctions[i])
+    }
 }
 
 function all(str) {
