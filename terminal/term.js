@@ -1,5 +1,5 @@
-$(document).click(function() {
-    $("#input").focus();
+$("#terminal").click(function() {
+    if (!editing) $("#input").focus();
 })
 
 $(document).ready(function() {
@@ -31,7 +31,7 @@ function setName(name) {
 
 function getMachine() {
     if (!localStorage.getItem('userMachine')) {
-        userMachine = "blackbox"
+        userMachine = "start"
     } else {
         userMachine = localStorage.getItem('userMachine')
     }
@@ -64,8 +64,10 @@ function init() {
             inputIndex > 0 ? inputIndex-- : true;
             document.getElementById("input").innerHTML = lastInputs[inputIndex];
         } else if (key === 9) { //tab
-            a.preventDefault();
-            autocomplete(document.getElementById("input").innerHTML);
+            if(!editing) {
+                a.preventDefault();
+                autocomplete(document.getElementById("input").innerHTML);
+            }
         }
     });
     getName();
@@ -107,7 +109,7 @@ function handle(text) {
     } else {
         //outside programs just need to have this function
         if (hook(input.split(" ")[0], args) != true) {
-            print("Command " + "'" + input + "' not found. Type 'help' for more options.")
+            print("Command " + "'" + input + "' not found. Type 'ls' for all commands.")
         }
     }
 
@@ -122,10 +124,18 @@ function appendLastInput(text) {
 
 function print(text) {
 
+    //you can use multiple args with commas if you're lazy
+    var finalText = ""
+    var args = arguments;
+
+    for (var a in args) {
+        finalText += args[a] + " "
+    }
+
     var pre = '<pre class="output">'
     var suf = '</pre>'
 
-    $(pre + text + suf).insertBefore("#prompt");
+    $(pre + finalText + suf).insertBefore("#prompt");
 }
 
 //for fancy rendering
@@ -146,7 +156,18 @@ function fancyRender(text, color, size) {
 }
 
 //====================  TERMINAL FUNCTIONS  ========================
-var terminalFunctions = ["about", "clear", "echo", "help", "history", "ls", "name", "machine", "re", "render", 'search'];
+var terminalFunctions = [
+    "about",
+    "clear",
+    "echo",
+    "help",
+    "history",
+    "ls",
+    "name",
+    "machine",
+    "re",
+    "render",
+    'search'];
 
 function clear(input) {
     var data = '<p id="prompt" class="prompt">' + getName() + '@' + getMachine() + ':$&nbsp;</p><pre id="input" contenteditable="true" autofocus="true" spellcheck="false"></pre>'
@@ -155,9 +176,7 @@ function clear(input) {
 }
 
 function about(input) {
-    print("<a href='https://github.com/adriangarza/code2040/' target='_blank'>[GitHub Page]</a>")
-    print("Terminal emulator v2.0 created by Adrian Garza, 2016.")
-    print("Features include tab autocompletion and history, searchable with arrow keys.")
+    print("Features include tab autocompletion, a file editor, custom web searches and history, searchable with arrow keys.")
     print("Background photo by <a href='https://unsplash.com/@fableandfolk' target='_blank'>Annie Spratt</a>.")
 }
 
@@ -169,20 +188,46 @@ function history(input) {
 function help(input) {
     //add some kind of help for various functions (like rendering)
     fancyRender("general", "lightgray")
+    var printStr = ""
     for (var i=0; i<terminalFunctions.length; i++) {
-        print(terminalFunctions[i]);
+        printStr +=  "> " +(terminalFunctions[i]) + " ";
     }
-    fancyRender("functions", "lightgray")
-    if (typeof hookCommands != "undefined" && hookCommands.length > 0) {
+    print(printStr)
+
+    fancyRender("commands", "lightgray")
+    printStr = ""
+        if (typeof hookCommands != "undefined" && hookCommands.length > 0) {
         for (var i=0; i<hookCommands.length; i++) {
-            print(hookCommands[i]);
+            printStr +=  "> " +(hookCommands[i]) + " ";
+        }
+        print(printStr)
+    }
+
+    printStr = ""
+    if (typeof bookmarks != "undefined" && bookmarks.length > 0) {
+        fancyRender("bookmarks", "lightgray")
+        for (var i=0; i<bookmarks.length; i++) {
+            printStr +=  "> " +(bookmarks[i][0]) + " ";
         }
     }
-    fancyRender("bookmarks", "lightgray")
-    if (typeof bookmarks != "undefined" && bookmarks.length > 0) {
-        for (var i=0; i<bookmarks.length; i++) {
-            print(bookmarks[i][0]);
+    print(printStr)
+
+    printStr = ""
+    if (typeof fileFunctions != "undefined" && fileFunctions.length > 0) {
+        fancyRender("i/o", "lightgray")
+        for (var i=0; i<fileFunctions.length; i++) {
+            printStr +=  "> " +(fileFunctions[i]) + " ";
         }
+    }
+    print(printStr)
+
+    printStr = ""
+    if (!$.isEmptyObject(files)) {
+        fancyRender("files", "lightgray")
+        for(var prop in files) {
+            printStr +=  "> " +(prop) + " "
+        }
+        print(printStr)
     }
 }
 
@@ -197,8 +242,8 @@ function ls(input) {
         }
         return;
     }
-    if(input.slice(input.length - 2, input.length) + "" === "-f") {
-        fancyRender("functions", "lightgray")
+    if(input.slice(input.length - 2, input.length) + "" === "-c") {
+        fancyRender("commands", "lightgray")
         if (typeof hookCommands != "undefined" && hookCommands.length > 0) {
             for (var i=0; i<hookCommands.length; i++) {
                 print(hookCommands[i]);
@@ -206,15 +251,19 @@ function ls(input) {
         }
         return;
     }
+
+    if(input.slice(input.length - 2, input.length) + "" === "-f") {
+        if ($.isEmptyObject(files)) {
+            print("No files here.")
+            return
+        }
+        fancyRender("files", "lightgray")
+        for(var prop in files) {
+            print(prop)
+        }
+        return;
+    }
     help(input)
-}
-
-function randRange(n) {
-  return Math.ceil(Math.random() * n);
-}
-
-function rollDie(args) {
-    print(randRange(Number(args.substr(1))));
 }
 
 function echo(args) {
@@ -277,7 +326,7 @@ function autocomplete(string) {
     for (var i=0; i<terminalFunctions.length; i++) {
         if (terminalFunctions[i].indexOf(string) === 0) {
             document.getElementById("input").innerHTML = terminalFunctions[i];
-            return;
+            return
         }
     }
     //if hook commands exist
@@ -285,19 +334,25 @@ function autocomplete(string) {
         for (var i=0; i<hookCommands.length; i++) {
             if (hookCommands[i].indexOf(string) === 0) {
                 document.getElementById("input").innerHTML = hookCommands[i];
-                return;
+                return
             }
         }
     }
     if (typeof bookmarks != "undefined" && bookmarks.length > 0) {
         for (var i=0; i<bookmarks.length; i++) {
-            console.log(bookmarks[i])
             if(bookmarks[i][0].indexOf(string) === 0) {
                 document.getElementById("input").innerHTML = bookmarks[i][0];
-                return;
+                return
             }
         }
-
+    }
+    if (typeof fileFunctions != "undefined" && fileFunctions.length > 0   ) {
+        for (var i=0; i<fileFunctions.length; i++) {
+            if (fileFunctions[i].indexOf(string) === 0) {
+                document.getElementById("input").innerHTML = fileFunctions[i];
+                return
+            }
+        }
     }
 }
 
@@ -333,4 +388,18 @@ function searchString(query) {
             return true;
     }
     return false;
+}
+
+//====================  HELPER FUNCTIONS  ==========================
+function randRange(n) {
+  return Math.ceil(Math.random() * n);
+}
+
+function rollDie(args) {
+    print(randRange(Number(args.substr(1))));
+}
+
+//returns a span with the color of a string, good for chaining with print()
+function cssColor(string, colorName) {
+    return "<span style='color:" + colorName + "'>" + string + "</span>"
 }

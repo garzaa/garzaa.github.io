@@ -1,3 +1,6 @@
+//initializing commands
+$(document).ready(function() {weather()});
+
 function hook(str, args) {
 
     if (str[0] == '~') {
@@ -21,6 +24,13 @@ function hook(str, args) {
     }
 
     if (hookCommands.indexOf(str) > -1) {
+        //call it as a function
+        //args are an array
+        window[str](args.join(" "));
+        return true
+    }
+
+    if (fileFunctions.indexOf(str) > -1) {
         //call it as a function
         //args are an array
         window[str](args.join(" "));
@@ -96,8 +106,8 @@ function weather() {
             || Number(temp_low) < 30
             || Number(temp_high) > 95
             || humidity > 75);
-        //description = description.charAt(0).toUpperCase() + description.slice(1)
-        var weatherString = "It's " + temp_curr + "&deg; out; " + description + ". "
+        description = description.charAt(0).toUpperCase() + description.slice(1)
+        var weatherString = "It's " + temp_curr + "&deg; out. " + description + ". "
         disgusting ? weatherString += "Disgusting." : weatherString += "Not bad."
         print(weatherString)
 	})
