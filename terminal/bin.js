@@ -82,7 +82,8 @@ function hook(str, args) {
             output += temp + " "
         }
         print(output);
-        return true    }
+        return true
+    }
 
 }
 
@@ -90,6 +91,7 @@ function hook(str, args) {
 var hookCommands = [
     'chan',
     'date',
+    'dice',
     'reddit',
     'time',
     'weather',
@@ -199,4 +201,8 @@ function reddit(s) {
 
 function chan(s) {
     print("Usage: /[board] or /[board]/")
+}
+
+function dice(s) {
+    print("Usage: [number]d[number]+[modifier]")
 }

@@ -62,7 +62,13 @@ function init() {
             inputIndex < lastInputs.length-1 ? inputIndex++ : true;
         } else if (key === 40) { //down arrow
             inputIndex > 0 ? inputIndex-- : true;
-            document.getElementById("input").innerHTML = lastInputs[inputIndex];
+            if (inputIndex > 0) {
+                inputIndex--;
+                document.getElementById("input").innerHTML = lastInputs[inputIndex];
+            } else {
+                document.getElementById("input").innerHTML = "";
+            }
+
         } else if (key === 9) { //tab
             if(!editing) {
                 a.preventDefault();
@@ -175,7 +181,7 @@ function about(input) {
 
 function history(input) {
     //print in descending order, without printing the history command
-    for (var h=lastInputs.length-1; h>0; h--) print(lastInputs[h]);
+    for (var h=lastInputs.length-1; h>=0; h--) print(lastInputs[h]);
 }
 
 function help(input) {
@@ -306,16 +312,23 @@ function search(s) {
 
 //====================  HISTORY  ===================================
 //keep duplicates from being added, change "" to &nbsp;
-var lastInputs = [""]
+var lastInputs = []
 var inputIndex = 0;
+
+if (localStorage.getItem("history")) {
+    lastInputs = JSON.parse(localStorage.getItem("history"))
+}
 
 //adds to the beginning of the array
 function addInput(str) {
-    if (str === "") str = "&nbsp;";
-    if (lastInputs[0] === str) return;
+    if (str === "" || /^[ ]+$/.test(str)) {
+        return;
+    }
+    if (lastInputs[0] === str){alert("asdas"); return};
     if (lastInputs.length > 0) {
         if (lastInputs[lastInputs.length - 1] != str) lastInputs.unshift(str)
     } else lastInputs.unshift(str);
+    localStorage.setItem("history", JSON.stringify(lastInputs))
 }
 
 //====================  TAB AUTO-COMPLETION ========================
