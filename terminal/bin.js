@@ -48,6 +48,42 @@ function hook(str, args) {
 
     }
 
+    //regex for dice matching, either straight or with a modifier (+x)
+    if (/^[0-9]*[d][0-9]+$/.test(str)) {
+
+        var tempArr = str.split('d')
+        var numDice = Number(tempArr[0])
+        if (numDice === 0) numDice = 1
+        var numSides = Number(tempArr[1])
+        var output = ""
+        for (var i=0; i<numDice; i++) {
+            var outcome = randRange(numSides)
+            //highlight max rolls
+            if (outcome === numSides) outcome = cssColor(outcome, "#b0b0b0")
+            output += outcome + " "
+        }
+        print(output);
+        return true
+    } else if (/^[0-9]*[d][0-9]+[+][0-9]+$/.test(str)) {
+        var regex = /[+][0-9]+/.exec(str)[0];
+        modifier = Number(regex.slice(1)) //remove the + to get the modifier
+        console.log(modifier)
+
+        var tempArr = str.split('d')
+        var numDice = Number(tempArr[0])
+        if (numDice === 0) numDice = 1
+        var numSides = Number(tempArr[1].split("+")[0]) //gross, but works
+        var output = ""
+        for (var i=0; i<numDice; i++) {
+            var outcome = randRange(numSides)
+            var temp = outcome + modifier
+            //highlight max rolls
+            if (outcome === numSides) temp = cssColor(temp, "#b0b0b0")
+            output += temp + " "
+        }
+        print(output);
+        return true    }
+
 }
 
 //==================== CHALLENGE COMMANDS ==========================
