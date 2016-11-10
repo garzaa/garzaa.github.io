@@ -171,7 +171,6 @@ function clear(input) {
 
 function about(input) {
     print("Features include tab autocompletion, a file editor, custom web searches and history, searchable with arrow keys.")
-    print("Background photo by <a href='https://unsplash.com/@fableandfolk' target='_blank'>Annie Spratt</a>.")
 }
 
 function history(input) {
@@ -353,6 +352,19 @@ function autocomplete(string) {
             }
         }
     }
+	//autocompleting based on filenames
+    console.log(string)
+	var tempCommand = string.split(" ")[0];
+	if (fileFunctions.indexOf(tempCommand) >= 0
+			&& string.split(" ").length > 1) {
+		var beginName = string.split(" ")[1];
+		Object.keys(files).forEach(function(key, index) {
+			if (key.indexOf(beginName) === 0)	{
+                document.getElementById("input").innerHTML = tempCommand + " " + key
+                return
+            }
+		})
+	}
 }
 
 //====================  SEARCHING ==================================

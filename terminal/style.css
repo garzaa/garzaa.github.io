@@ -114,3 +114,9 @@ pre {
 	font-size: 11pt;
 	font-family: monospace;
 }
+
+#filename {
+	float: left;
+	font-family: monospace;
+	color: gray;
+}

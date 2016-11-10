@@ -38,7 +38,8 @@ function edit(fileName) {
     }
 
     //open the editor window
-    $("#terminal").append(editBlob)
+    $("#terminal").append(editBlob);
+	$("#filename").html(fileName)
     currentFileName = fileName;
     //open it if it exists
     if (files[fileName]) {
@@ -71,7 +72,8 @@ function close() {
     console.log(editArea.value)
     files[currentFileName] = editArea.value;
     localStorage.setItem("textFiles", JSON.stringify(files))
-    $("#editWrapper").remove()
+    $("#editWrapper").remove();
+	$("#filename").html("");
 }
 
 function rm(fileName) {
@@ -85,6 +87,7 @@ function rm(fileName) {
         print(fileName + " deleted.")
         if (editing) {
             $("#editWrapper").remove()
+			$("#filename").html("");
             editing = false;
         }
     } else {
