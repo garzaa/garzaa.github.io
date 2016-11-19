@@ -100,6 +100,7 @@ var hookCommands = [
 var bookmarks = [
     ['cstheory', 'http://www.cs.columbia.edu/~aho/cs3261/'],
     ['listentothis', "https://www.reddit.com/r/listentothis/"],
+    ['m', "https://www.messenger.com/"],
     ['pawprint', 'https://pawprtprodmprt1.cuit.columbia.edu/myprintcenter/'],
     ['play', 'https://play.google.com/music/listen?hl=en&u=0#/wmp'],
     ['school', 'https://drive.google.com/drive/u/0/folders/0B57efURGOOGiVzFMWnl1QktUd2s'],

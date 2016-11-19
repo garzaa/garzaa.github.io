@@ -205,11 +205,8 @@ function help(input) {
     printStr = ""
     if (typeof bookmarks != "undefined" && bookmarks.length > 0) {
         fancyRender("bookmarks", "lightgray")
-        for (var i=0; i<bookmarks.length; i++) {
-            printStr +=  "> " +(bookmarks[i][0]) + " ";
-        }
+        renderBookmarks();
     }
-    print(printStr)
 
     printStr = ""
     if (typeof fileFunctions != "undefined" && fileFunctions.length > 0) {
@@ -234,11 +231,7 @@ function ls(input) {
     //horrible. converts input to a string by adding an empty string.
     if(input.slice(input.length - 2, input.length) + "" === "-b") {
         fancyRender("bookmarks", "lightgray")
-        if (typeof bookmarks != "undefined" && bookmarks.length > 0) {
-            for (var i=0; i<bookmarks.length; i++) {
-                print(bookmarks[i][0]);
-            }
-        }
+        renderBookmarks();
         return;
     }
     if(input.slice(input.length - 2, input.length) + "" === "-c") {
@@ -324,7 +317,7 @@ function addInput(str) {
     if (str === "" || /^[ ]+$/.test(str)) {
         return;
     }
-    if (lastInputs[0] === str){alert("asdas"); return};
+    if (lastInputs[0] === str){return};
     if (lastInputs.length > 0) {
         if (lastInputs[lastInputs.length - 1] != str) lastInputs.unshift(str)
     } else lastInputs.unshift(str);
@@ -426,4 +419,12 @@ function rollDie(args) {
 //returns a span with the color of a string, good for chaining with print()
 function cssColor(string, colorName) {
     return "<span style='color:" + colorName + "'>" + string + "</span>"
+}
+
+function renderBookmarks() {
+    var outputstr = ""
+    for (var i=0; i<bookmarks.length; i++) {
+        outputstr += '> <a href="' + bookmarks[i][1] + '">' + bookmarks[i][0] + '</a> '
+    }
+    print(outputstr)
 }
