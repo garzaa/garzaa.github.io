@@ -371,6 +371,14 @@ function autocomplete(string) {
             }
 		})
 	}
+
+    //looking through history
+    for (var i=0; i<lastInputs.length; i++) {
+        if (lastInputs[i].indexOf(string) === 0) {
+            document.getElementById("input").innerHTML = lastInputs[i];
+            return
+        }
+    }
 }
 
 //====================  SEARCHING ==================================
