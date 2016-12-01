@@ -317,11 +317,7 @@ function addInput(str) {
     if (str === "" || /^[ ]+$/.test(str)) {
         return;
     }
-<<<<<<< HEAD
     if (lastInputs[0] === str){ return};
-=======
-    if (lastInputs[0] === str){return};
->>>>>>> 45d94b22974b174a7e549c504a257cb8e161d1b7
     if (lastInputs.length > 0) {
         if (lastInputs[lastInputs.length - 1] != str) lastInputs.unshift(str)
     } else lastInputs.unshift(str);
