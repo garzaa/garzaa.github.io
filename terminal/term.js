@@ -324,7 +324,7 @@ function addInput(str) {
     if (str === "" || /^[ ]+$/.test(str)) {
         return;
     }
-    if (lastInputs[0] === str){alert("asdas"); return};
+    if (lastInputs[0] === str){ return};
     if (lastInputs.length > 0) {
         if (lastInputs[lastInputs.length - 1] != str) lastInputs.unshift(str)
     } else lastInputs.unshift(str);
