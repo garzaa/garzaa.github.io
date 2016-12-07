@@ -1,4 +1,3 @@
-//initializing commands
 $(document).ready(function() {weather()});
 
 function hook(str, args) {
