@@ -297,6 +297,8 @@ function search(s) {
     print("Usage: [query] -x")
     print("x is a switch for: ")
     print("a:   amazon")
+	print("i:	g-images")
+	print("g:	google")
     print("m:   wolfram alpha")
     print("v:   vimeo")
     print("w:   wikipedia")
@@ -411,6 +413,16 @@ function searchString(query) {
             "https://vimeo.com/search?q=" +
             query.replace(" ", "+");
             return true;
+		case "-g":
+			window.location = 
+			"https://www.google.com/#q=" + 
+			query.replace(" ", "+")
+			return true
+		case "-i":
+			window.location = 
+			"https://www.google.com/search?tbm=isch&q=" + 
+			query.replace(" ", "+")
+			return true
     }
     return false;
 }
