@@ -44,7 +44,7 @@ a {
 
 pre, #prompt {
     color: #adadad;
-	font-family: 'Roboto Mono', monospace;
+	font-family: 'Source Code Pro', monospace;
 }
 
 ::selection {
@@ -74,7 +74,7 @@ pre {
 }
 
 .prompt {
-    font-family: "Roboto Mono", monospace;
+    font-family: "Source Code Pro", monospace;
     display: inline;
 	white-space: nowrap;
 }
@@ -101,7 +101,7 @@ pre {
 
 #clock, #date {
 	float: right;
-	font-family: "Roboto Mono", monospace;
+	font-family: "Source Code Pro", monospace;
 	color: gray;
 	margin-left: 1em;
 }
@@ -119,11 +119,11 @@ pre {
 	resize: none;
 	border: none;
 	font-size: inherit;
-	font-family: "Roboto Mono";
+	font-family: "Source Code Pro";
 }
 
 #filename {
 	float: left;
-	font-family: "Roboto Mono";
+	font-family: "Source Code Pro";
 	color: gray;
 }
