@@ -84,6 +84,13 @@ function hook(str, args) {
         return true
     }
 
+	//test for a web url
+	  var pattern = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+	  if (pattern.test(str)) {
+		  if (!str.startsWith("http")) str = "https://" + str
+		  loadURL(str);
+		  return true;
+	  }
 }
 
 //==================== CHALLENGE COMMANDS ==========================
