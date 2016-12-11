@@ -2,6 +2,18 @@ $("#terminal").click(function() {
     if (!editing) $("#input").focus();
 })
 
+//bind paste inputs for non-styled text
+document.getElementById("input").addEventListener('paste', handlePaste);
+
+function handlePaste(e) {
+	var clipboardData, pastedData;
+	e.stopPropagation();
+	e.preventDefault();
+	clipboardData = e.clipboardData || window.clipboardData;
+	pastedData = clipboardData.getData('text');
+	$('#input').html(pastedData);
+}
+
 $(document).ready(function() {
     init()
 })
@@ -297,8 +309,8 @@ function search(s) {
     print("Usage: [query] -x")
     print("x is a switch for: ")
     print("a:   amazon")
-	print("i:	g-images")
-	print("g:	google")
+	print("i:   g-images")
+	print("g:   google")
     print("m:   wolfram alpha")
     print("v:   vimeo")
     print("w:   wikipedia")
