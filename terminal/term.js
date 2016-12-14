@@ -419,7 +419,7 @@ function searchString(query) {
     	case "-m":
     	    window.location =
     		"http://www.wolframalpha.com/input/?i=" +
-    		query.replace("+", "%2B");*/
+    		query.replace("+", "%2B");
             return true;
         case "-v":
             window.location =
