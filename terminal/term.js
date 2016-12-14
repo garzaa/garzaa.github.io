@@ -106,7 +106,7 @@ function handle(text) {
     //intercepting the function here to search
     if (searchString(input)) {
         print("Searching for " + input.slice(0, input.length-3) + "...")
-        return
+        return;
     }
 
     var firstWord = input;
@@ -157,7 +157,8 @@ function fancyRender(text, color, size) {
         color = "inherit"
     }
     if (size == undefined) {
-        size = "11"
+		//scale the font with whatever the currently defined prompt is
+        size = $("#prompt").css("font-size")
     }
     pre += "color:" + color + "; "
     pre += "font-size:" + size + 'pt;"'
@@ -418,7 +419,7 @@ function searchString(query) {
     	case "-m":
     	    window.location =
     		"http://www.wolframalpha.com/input/?i=" +
-    		query.replace("+", "%2B");
+    		query.replace("+", "%2B");*/
             return true;
         case "-v":
             window.location =

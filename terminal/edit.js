@@ -49,6 +49,16 @@ function edit(fileName) {
     editing = true;
     files[currentFileName] = editArea.value;
     localStorage.setItem("textFiles", JSON.stringify(files))
+
+	//add an event listener for "i" when the text area isn't focused
+	$("#input").bind("keydown.vim", function(a) {
+		if (a.key == "i") {
+			a.preventDefault();
+			if ($("#input").is(":focus")) {
+				document.getElementById("editArea").focus();
+			}
+		}
+	});
 }
 
 function save() {
@@ -74,6 +84,7 @@ function close() {
     localStorage.setItem("textFiles", JSON.stringify(files))
     $("#editWrapper").remove();
 	$("#filename").html("");
+	$("#input").unbind("keydown.vim");
 }
 
 function rm(fileName) {
@@ -88,6 +99,7 @@ function rm(fileName) {
         if (editing) {
             $("#editWrapper").remove()
 			$("#filename").html("");
+			$("#input").unbind("keydown.vim");
             editing = false;
         }
     } else {
