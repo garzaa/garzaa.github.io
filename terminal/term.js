@@ -92,6 +92,15 @@ function init() {
     getMachine();
     document.getElementById('prompt').innerHTML = getName() + '@' + getMachine() +':$&nbsp;'
     $("#input").focus();
+
+    //le current year meme
+    if (navigator.appVersion.indexOf("Win")!=-1) {
+        echo((">using Windows in " + new Date().getFullYear()).split(" "))
+        //source code pro looks weird at 11pt, let's fix that
+        $("<style>.pre, #prompt, .prompt, #clock, #date, #editArea, #fileName, .output {font-family: \"Roboto Mono\", monospace}</style>").appendTo("head")
+    } else if (navigator.appVersion.indexOf("Mac")!=-1) {
+        echo(">using MacOS".split(" "))
+    }
 }
 
 
@@ -278,7 +287,8 @@ function echo(args) {
     }
     var printStr = args.join(" ")
     //greentexting
-    if(printStr.indexOf("&gt;") === 0) {
+    if(printStr.indexOf("&gt;") === 0 ||
+        printStr.indexOf(">") === 0) {
         printStr = cssColor(printStr, "#789922")
     }
     print(printStr);
@@ -427,13 +437,13 @@ function searchString(query) {
             query.replace(" ", "+");
             return true;
 		case "-g":
-			window.location = 
-			"https://www.google.com/#q=" + 
+			window.location =
+			"https://www.google.com/#q=" +
 			query.replace(" ", "+")
 			return true
 		case "-i":
-			window.location = 
-			"https://www.google.com/search?tbm=isch&q=" + 
+			window.location =
+			"https://www.google.com/search?tbm=isch&q=" +
 			query.replace(" ", "+")
 			return true
     }

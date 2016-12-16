@@ -16,7 +16,7 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
+	font-family: inherit;;
 	vertical-align: baseline;
 }
 
@@ -44,7 +44,7 @@ a {
 
 pre, #prompt {
     color: #adadad;
-	font-family: 'Source Code Pro', monospace;
+	font-family: "Source Code Pro";
 }
 
 ::selection {
