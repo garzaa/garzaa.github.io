@@ -15,9 +15,24 @@ function handlePaste(e) {
 }
 
 $(document).ready(function() {
-	time();
+	print(getTime())
     init();
 })
+
+function getTime() {
+	var today = new Date();
+	var h = today.getHours();
+	var m = today.getMinutes();
+	var pm = false;
+	if (m < 10) m = "0" + m;
+	if (h >= 13) {
+		h -= 12;
+		pm = true;
+	} else if (h < 1) {
+		h += 12
+	}
+	return h + ":" + m + (pm ? " PM" : " AM")
+}
 
 var userName;
 var userMachine;
