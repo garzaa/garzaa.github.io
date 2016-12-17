@@ -15,7 +15,8 @@ function handlePaste(e) {
 }
 
 $(document).ready(function() {
-    init()
+	time();
+    init();
 })
 
 var userName;
