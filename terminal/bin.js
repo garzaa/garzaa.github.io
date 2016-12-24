@@ -104,7 +104,6 @@ var hookCommands = [
 ];
 
 var bookmarks = [
-    ['cstheory', 'http://www.cs.columbia.edu/~aho/cs3261/'],
     ['drive', "https://drive.google.com/drive/u/0/my-drive"],
     ['listentothis', "https://www.reddit.com/r/listentothis/"],
     ['messenger', "https://www.messenger.com/"],
