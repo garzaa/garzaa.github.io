@@ -104,6 +104,7 @@ var hookCommands = [
 ];
 
 var bookmarks = [
+	['baristasim', "https://docs.google.com/document/d/1X72UfftLbP19X9M6KGtWqkI7VVozr-DyiREmMSbSwoU/edit"],
     ['drive', "https://drive.google.com/drive/u/0/my-drive"],
     ['listentothis', "https://www.reddit.com/r/listentothis/"],
     ['messenger', "https://www.messenger.com/"],
