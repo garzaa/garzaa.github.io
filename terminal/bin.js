@@ -108,6 +108,7 @@ var bookmarks = [
 	["databases", "http://www.cs.columbia.edu/~gravano/cs4111/"],
     ['drive', "https://drive.google.com/drive/u/0/my-drive"],
     ['listentothis', "https://www.reddit.com/r/listentothis/"],
+	['linalg', "http://www.math.columbia.edu/~barraquand/teaching/spring2017.html"],
     ['messenger', "https://www.messenger.com/"],
     ['pawprint', 'https://pawprtprodmprt1.cuit.columbia.edu/myprintcenter/'],
     ['play', 'https://play.google.com/music/listen?hl=en&u=0#/wmp'],
