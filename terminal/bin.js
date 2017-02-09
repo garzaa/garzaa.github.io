@@ -113,7 +113,7 @@ var bookmarks = [
     ['pawprint', 'https://pawprtprodmprt1.cuit.columbia.edu/myprintcenter/'],
     ['play', 'https://play.google.com/music/listen?hl=en&u=0#/wmp'],
     ['school', 'https://drive.google.com/drive/u/0/folders/0B57efURGOOGiVzFMWnl1QktUd2s'],
-    ['spotify', 'https://open.spotify.com/collection/songs'],
+    ['spotify', 'https://play.spotify.com/collection/songs'],
     ['write', 'https://drive.google.com/drive/u/0/folders/0B57efURGOOGid2tDS1cyVE1zWk0'],
 ]
 

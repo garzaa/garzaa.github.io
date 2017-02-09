@@ -1,0 +1,33 @@
+img {
+    display: block;
+    margin: auto;
+}
+
+html, body {
+    background-color: black;
+    height: 100%;
+    overflow: hidden;
+}
+
+h1, p {
+    font-family: "Roboto", sans-serif;
+    margin: auto;
+    max-width: 50em;
+}
+
+h1 {
+    text-align: center;
+    color: #f95efc;
+    margin: 4vh auto;
+}
+
+p {
+    color: #91fff4;
+    font-weight: 400;
+}
+
+#center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
