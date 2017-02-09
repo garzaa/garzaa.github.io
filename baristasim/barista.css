@@ -31,3 +31,9 @@ p {
     top: 50%;
     transform: translateY(-50%);
 }
+
+a {
+    text-decoration: none !important;
+    color: inherit;
+    border-bottom: 2px solid #91fff4;
+}
