@@ -63,6 +63,10 @@ $("#d20").click(function() {
 	rollDie(20);
 })
 
+$("#d100").click(function() {
+	rollDie(100);
+})
+
 $("#one").click(function() {
 	dice = 1
 	visibleDice(1)
