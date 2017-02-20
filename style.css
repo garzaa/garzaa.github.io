@@ -57,8 +57,12 @@ h2 {
 		margin: 0vw 3vw;
 	}
 
+	#writing {
+		margin-right: 3vw;
+	}
+
 #aboutlist>li {
-    text-align: left; 
+    text-align: left;
     font-size: 12pt;
     margin-top: 2em;
 }
