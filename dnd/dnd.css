@@ -7,6 +7,13 @@ body {
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
+  background: rgba(7,0,48,1);
+}
+
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 
 #dicecontainer {
@@ -25,19 +32,20 @@ body {
 	margin: 10px;
 	cursor: pointer;
 	padding: 5px;
-	border: 2px solid black;
-	border-radius: 1px;
-	transition: color .5s, border-color .5s;
-	-webkit-transition: color .5s, border-color .5s;
+	color: blue;
+	border-bottom: 2px solid blue;
+	transition: .2s ease;
 }
 
 .dicebutton:hover {
-	color: blue;
-	border-color: blue;
+	color: #00aaff;
+	border-color: #00aaff;
 }
 
 .roll-outcome {
 	padding: 10px;
+	color: blue;
+	cursor: default;
 }
 
 #dm-tools-toggle {

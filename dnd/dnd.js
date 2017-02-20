@@ -18,28 +18,6 @@ function flash() {
 		}, 10);
 }
 
-if (!toolsShown) {
-    document.getElementById("dm-tools-toggle").innerHTML = "less"
-    toolsShown = true
-} else {
-    document.getElementById("dm-tools-toggle").innerHTML = "more"
-    toolsShown = false
-}
-$("#dm-tools").slideToggle(100)
-
-var toolsShown = false
-$("#dm-tools-toggle").click(function() {
-
-    if (!toolsShown) {
-        document.getElementById("dm-tools-toggle").innerHTML = "less"
-        toolsShown = true
-    } else {
-        document.getElementById("dm-tools-toggle").innerHTML = "more"
-        toolsShown = false
-    }
-    $("#dm-tools").slideToggle(100)
-})
-
 function randomName() {
     var name = "";
     var length = Math.floor(Math.random() * 7 + 3)

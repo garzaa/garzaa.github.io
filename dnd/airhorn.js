@@ -8,7 +8,7 @@ function playAirhorn() {
 		if (localStorage.airhorncount) {
 			localStorage.airhorncount++;
 			if (localStorage.airhorncount == 100 ||
-				localStorage.airhorncount % 500 == 0) {
+				localStorage.airhorncount % 100 == 0) {
 				prompt("Congratulations!\nYou've been dank af " + localStorage.airhorncount + " times!")
 			}
 		} else {
