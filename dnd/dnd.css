@@ -8,12 +8,8 @@ body {
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
   background: rgba(2,0,25,1);
-}
-
-html {
-	margin: 0;
-	padding: 0;
-	height: 100%;
+  margin: 0;
+  height: 100%;
 }
 
 #dicecontainer {
@@ -87,4 +83,16 @@ a {
 #epilepsy:hover {
 	color: red;
 	border-color: red;
+}
+
+canvas {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 99vw;
+  overflow: hidden;
+  transform: translate(-50%, -10%);
+  height: 99vh;
+  z-index: -1;
+  opacity: .8;
 }
