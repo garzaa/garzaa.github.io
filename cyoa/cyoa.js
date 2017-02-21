@@ -10,11 +10,8 @@ function format(s) {
 
 
 /*
-    Finds words that start with $ in the text, and updates them with formatted
-    links to another scene object.
-
     Link format:
-    [variablename](link text)
+    [sceneName](link text)
 */
 
     //add links, following the format above
@@ -46,6 +43,7 @@ function loadScene(scene) {
     //remove the links on the last scene
     RecursiveUnbind($("#scene" + (currentScene - 1) + ""))
     $("#scene" + (currentScene - 1) + " span").removeClass("enabled")
+    document.getElementById("scene" + (currentScene) + "").scrollIntoView();
     currentScene++;
 }
 
