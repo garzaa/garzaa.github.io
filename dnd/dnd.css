@@ -7,7 +7,7 @@ body {
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
-  background: rgba(7,0,48,1);
+  background: rgba(2,0,25,1);
 }
 
 html {
@@ -40,6 +40,12 @@ html {
 .dicebutton:hover {
 	color: #00aaff;
 	border-color: #00aaff;
+}
+
+.dicebutton:active {
+	color: #00aaff;
+	border-color: #00aaff;
+	background-color: rgba(0, 0, 255, .2)
 }
 
 .roll-outcome {
