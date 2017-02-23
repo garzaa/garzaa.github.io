@@ -14,7 +14,7 @@ function toggleDay() {
 	day = !day;
 	$("#daycss, #nightcss").remove();
 	if (!day) {
-		$("head").append('<link id="nightcss" href="dnd.css" rel="stylesheet"/>')
+		$("head").append('<link id="nightcss" href="night.css" rel="stylesheet"/>')
 	} else {
 		$("head").append('<link id="daycss" href="day.css" rel="stylesheet"/>')
 	}

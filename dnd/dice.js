@@ -38,13 +38,6 @@ function visibleDice(numberDice) {
 	}
 }
 
-$("#modifier").click(function() {
-	modifier = prompt("enter a modifier:")
-	if (modifier == "" || isNaN(modifier) || !modifier) {
-		modifier = "0";
-	}
-	document.getElementById("modifier").innerHTML = "+" + modifier;
-})
 
 $(document).ready(function() {
 	addDice();
@@ -68,7 +61,7 @@ function addBr() {
 }
 
 function addModifier() {
-	$("#dice-buttons").append('<span id="modifier" class="dicebutton">+0</span>')
+	$("#dice-buttons").append('<span id="modifier" onclick="setModifier()" class="dicebutton">+0</span>')
 	$("#dice-buttons").append('<span class="dicebutton" onclick="setCustomDie()">DX</span>')
 }
 

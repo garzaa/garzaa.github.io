@@ -1,0 +1,30 @@
+body {
+  background: rgba(2,0,25,1);
+}
+
+.dicebutton {
+	color: blue;
+	border-bottom: 2px solid blue;
+	border-top: 2px solid rgba(0, 0, 0, 0);
+	border-left: 2px solid rgba(0, 0, 0, 0);
+	border-right: 2px solid rgba(0, 0, 0, 0);
+}
+
+.dicebutton:hover {
+	color: #00aaff;
+	border-bottom-color: #00aaff;
+}
+
+.dicebutton:active {
+	color: #00aaff;
+	border-bottom-color: #00aaff;
+	background-color: rgba(0, 0, 255, .2)
+}
+
+.roll-outcome {
+	color: blue;
+}
+
+#outcome-container {
+	color: blue;
+}

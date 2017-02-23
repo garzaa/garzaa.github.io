@@ -1,38 +1,10 @@
 body {
-	font-family: "Roboto", sans-serif;
-	text-align: center;
-	  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -khtml-user-select: none;    /* Konqueror */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none;       /* IE/Edge */
-  user-select: none;
   background-color: white;
-  margin: 0;
-  height: 100%;
-}
-
-#dicecontainer {
-	margin-right: auto;
-	margin-left: auto;
-	font-size: 100pt;
-	margin-top: 10vh;
-	margin-bottom: 5vh;
-	max-width: 50vw;
-	min-width: 400px;
 }
 
 .dicebutton {
-	font-size: 16pt;
-	user-select: none;
-	-moz-user-select: none;
-	margin: 10px;
-	display: inline-block;
-	cursor: pointer;
-	padding: 5px;
 	color: black;
 	border: 2px solid black;
-	transition: .2s ease;
 }
 
 .dicebutton:hover {
@@ -41,38 +13,9 @@ body {
 }
 
 .roll-outcome {
-	padding: 0vw 2vw;
 	color: black;
-	cursor: default;
-	display: inline-block;
-}
-
-.buttons-container, .outcome-text {
-	width: 35vw;
-	min-width: 400px;
-	margin: auto;
-}
-
-#longbuttons {
-	min-width: 500px;
 }
 
 #outcome-container {
 	color: black;
-}
-
-#outcome-title {
-	font-size: 20pt;
-	text-align: left;
-	width: 30vw;
-	margin: auto;
-}
-
-#outcome-text {
-	font-size: 14pt;
-	line-height: 150%;
-	text-align: left;
-	width: 30vw;
-	margin: auto;
-	margin-bottom: 10vh;
 }
