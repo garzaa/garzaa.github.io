@@ -23,8 +23,8 @@
 		<span id="daynight" class="dicebutton" onclick="toggleDay()">Day/Night</span>
 		<span id="spells" class="dicebutton" title="Random Spell">Random Spell</span>
 		<span id="curses" class="dicebutton" title="Random Curse">Random Curse</span>
-		<span id="clothes" class="dicebutton" title="Random Clothing">Random Clothing</span>
-		<span id="items" class="dicebutton" title="Random Magic Item">Random Magic Weapon</span>
+		<span id="clothes" class="dicebutton" onclick="armors.randArmor()">Random Magic Armor</span>
+		<span id="items" class="dicebutton" onclick="randomWeapon()">Random Magic Weapon</span>
 		<span class="dicebutton" onclick="randNPC()">Random NPC</span>
 		<span class="dicebutton" onclick="randPotion()">Random Potion</span>
 		<span class="dicebutton" onclick="clearResults()">Clear</span>
@@ -46,5 +46,7 @@
 	<script src="generators/items.js"></script>
 	<script src="generators/npcs.js"></script>
 	<script src="generators/potions.js"></script>
+	<script src="generators/improvedweapons.js"></script>
+	<script src="generators/armors.js"></script>
 </body>
 <html>

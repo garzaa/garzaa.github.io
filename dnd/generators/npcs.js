@@ -91,3 +91,104 @@ var jobs = [
     "Toymaker", "Vendor", "Veterinarian", "Vintner", "Weaver", "Wetnurse",
     "Woodcarver", "Wood seller", "Wrestler", "Writer"
 ]
+
+var eyes = [
+    "Sleepy eyes.", "Shifty eyes.", "Watery eyes.", "Bright eyes.", "Cold eyes.", "Smiling eyes.",
+    "Close-set eyes.", "Wild eyes.", "Distant eyes.", "A lazy eye.", "Piercing eyes.", "Watchful eyes.",
+    "Dark eyes.", "Hooded eyes.", "Eyes of two different colors.", "Slightly crossed eyes.",
+    "Wide eyes.", "Beautiful eyes.", "Beady eyes.", "Penetrating eyes.",
+]
+
+var ears = [
+    "Over-sized ears.", "Long ear lobes.", "Small ears.", "Uneven ears.", "Hairy ears.", "Pointy ears.",
+    "Short ear lobes.", "Ears that stick out.", "Jug-handle ears.", "Elaborately pierced ears.",
+    "Cauliflower ears.", "Ears with improbable tufts of hair.",
+]
+
+var mouth = [
+    "Full lips.", "Buck-teeth.", "Thin lips.", "Rotting teeth.", "Crooked teeth.", "A broken or missing tooth.",
+    "Pursed lips.", "Dry, cracked lips.", "One or more false teeth.", "A mouth that hangs open.",
+]
+
+var nose = [
+    "A crooked nose.", "A bulbous nose.", "A narrow nose.", "A button nose.", "A long nose.", "A broad nose.",
+    "An angular nose.", "A round nose.", "A broken nose.", "A hawk-like nose.", "A wide nose.",
+    "A delicate nose.",
+]
+
+var chin = [
+    "A pronounced chin.", "A cleft chin.", "A dimple on the chin.", "A rounded chin.", "A sharp jawline.",
+    "A square jaw.", "A round jaw.", "An underbite.",
+]
+
+var hair = [
+    "Thick hair.", "Wispy hair.", "Straight hair.", "Wavy hair.", "Curly hair.", "Wiry hair.", "Oily hair.",
+    "Lush hair.", "Poofy hair.", "Long braids.", "Braids tight against the head.", "Very long hair.",
+    "Greasy hair.", "Unruly hair.", "An unusual hairstyle.", "An outdated hairstyle.", "A high-maintenance hairstyle.",
+    "Short-cropped hair.", "A shaved head.", "No hair at all.",
+]
+
+var other = [
+    "High cheekbones.", "Tight, drawn cheeks.", "Chubby cheeks.", "An unpleasant pustule.",
+    "A large mole.", "A beauty mark.", "Freckles.", "Terrible scarring.",
+]
+
+var height = [
+    "Unusually short.", "Short in stature.", "Average height.", "Slightly above average height.",
+    "Well above average height.", "Unusually tall.",
+]
+
+var bodytype = [
+    "Thin and delicate.", "Of average build.", "Well-muscled.", "Slightly overweight.", "Grotesquely obese.",
+    "Lean and lanky.", "Lithe and lean.", "Thin and wiry.", "Sinewy and strong.", "Flabby and weak.",
+    "Lumpy or bent.", "Thin and flimsy.", "Soft and chubby.", "Thin and petite.", "Pudgy.", "Big and broad.",
+    "Stocky and strong.", "Bony.", "Wide and ponderous.", "Covered in hair.",
+]
+
+var hands = [
+    "Powerful hands.", "Delicate hands.", "Rough hands.", "Soft hands.", "A light touch.", "A heavy touch.",
+]
+
+var scar = [
+    "A jagged scar.", "A dark purple scar.", "An angry red scar.", "A long, thin scar.",
+]
+
+var tattoo = [
+    "A dagger tattoo.", "An arrow tattoo.", "An anchor tattoo.", "A skull tattoo.", "A pair of crossed bones tattoo.",
+    "A snake tattoo.", "A scorpion tattoo.", "A spider web tattoo.", "A heart tattoo.", "A ring of thorns tattoo.",
+    "A mermaid tattoo.", "A dragon tattoo.",
+]
+
+var jewelry = [
+    "An earring.", "Two earrings.", "A small chain about the neck.", "A large chain about the neck.",
+    "A tight choker about the neck.", "A brooch.", "A ring.", "Several rings.", "A bracelet.",
+    "A nose ring.", "A medallion.", "An ornate belt.",
+]
+
+var personality = [
+    "Compassionate", "Cheerful", "Reserved", "Outspoken", "Uninterested", "Gruff", "Eager", "Deceitful",
+    "Foolish", "Strict", "Agreeable", "Mischeivious", "Angry", "Fearful", "Manipulative", "Devout", "Greedy",
+    "Funny", "Dour", "Fun-Loving", "Lazy", "Driven", "Boastful", "Artistic", "Assertive", "Carefree", "Cautious",
+    "Confident", "Thoughtful", "Loyal", "Sophisticated", "Weak-Willed",
+]
+
+var faith = [
+    "Quiet true believer.", "Casual observer.", "Critical student.", "Outspoken cynic.", "Open-minded seeker.",
+    "Broken heretic.", "Cautious listener.", "Fanatical true believer.",
+]
+
+var hates = [
+    "Other genders.", "Children.", "Teenagers.", "Elderly.", "Ruling class and authority figures.",
+    "Powerful rich.", "Destitute poor.", "Beggars.", "Drunks.", "Drug-users.", "Farmers.", "Artists.",
+    "Clergy.", "Soldiers.", "Fishermen.", "Harlots.", "Miners.", "Merchants.", "Scholars.", "Herders.",
+    "Sailors.", "Mages.", "Dwarves.", "Elves.", "Gnomes.", "Goblins.", "Halflings.", "Humans.", "Orcs.", "Reptiles.",
+    "Themselves.",
+]
+
+var flaws = [
+    "Fidgets.", "Drinks too much.", "Eats too much.", "Swears often.", "Has poor hygiene.", "Can’t resist flirting.",
+    "Can’t stop staring.", "Sweats profusely and easily.", "Is a habitual liar.", "Embellishes the truth.",
+    "Exaggerates details.", "Has a short temper.", "Is melodramatic.", "Gossips.", "Chews with an open mouth.",
+    "Often sniffs audibly.", "Believes what you tell him/her.", "Is skeptical of everything.",
+    "Paces.", "Makes poor eye contact.",
+]

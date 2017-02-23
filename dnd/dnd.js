@@ -81,6 +81,11 @@ function getRand(arr) {
 	return arr[outcome]
 }
 
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
 $("#spells").click(function() {
 	document.getElementById("outcome-title").innerHTML = randomSpell()
 	document.getElementById("outcome-text").innerHTML = ""
@@ -88,16 +93,6 @@ $("#spells").click(function() {
 
 $("#curses").click(function() {
 	document.getElementById("outcome-title").innerHTML = randomCurse()
-	document.getElementById("outcome-text").innerHTML = ""
-})
-
-$("#clothes").click(function() {
-	document.getElementById("outcome-title").innerHTML = randomClothes()
-	document.getElementById("outcome-text").innerHTML = ""
-})
-
-$("#items").click(function() {
-	document.getElementById("outcome-title").innerHTML = randomItem()
 	document.getElementById("outcome-text").innerHTML = ""
 })
 

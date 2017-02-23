@@ -5,16 +5,22 @@ function randPotion() {
         name = randomName() + "'s "
     }
     $("#outcome-title").text(name + getRand(type) +" of "+ effect.split(".")[0])
-    $("#outcome-text").html(
-        "In: " + getRand(container) +
+
+    var output = "In: " + getRand(container) +
         "<br>Effect: " + effect +
-        "<br>Strength: " + getRand(strength) +
-        "<br>Side Effects: " + getRand(sideeffects) +
-        "<br>Appearance: " + getRand(appearance) + " " + getRand(appearance2) +
+        "<br>Strength: "
+    var strengthLine = getRand(strength);
+    output += strengthLine;
+    if (strengthLine.indexOf("side effect") >= 0) {
+        output += "<br>Side Effects: " + getRand(sideeffects)
+    }
+
+    output +=  "<br>Appearance: " + getRand(appearance) + " " + getRand(appearance2) +
         "<br>Smell: " + getRand(smell) +
         "<br>Taste: " + getRand(taste) +
         "<br>Label: " + getRand(label)
-    )
+
+    $("#outcome-text").html(output)
 }
 
 var type = ["Potion", "Elixir", "Draught", "Vial", "Philter", "Tonic", "Brew", "Ichor", "Juice", "Concoction", ]
@@ -77,9 +83,9 @@ var effects = ["Healing. It instantly regenerates some health when drank.", "Vig
     "Night vision. Gives the ability to see in the dark.", "Tracking. Lets the user track an enemy.",
     "Cure-all. Cures any negative status effects.",
 ]
-var strength = ["Regular with a slight side effect.", "Regular with no side effect.", "Regular with a strong side effect.",
+var strength = ["Regular with a slight side effect.", "Regular.", "Regular with a strong side effect.",
     "Minor with a strong side effect.", "Minor with a slight side effect.", "Major with a strong side effect.",
-    "Major with a small side effect.", "A poison. Almost no positive affect all side effect.",
+    "Major with a small side effect.", "A poison. All side effect.",
     "Temporary but strong and wears off quickly.", "Seemingly permanent.",
 ]
 var sideeffects = ["Nothing bad at all!", "Puts the user to sleep.", "Rapid hair growth all over the body.",
