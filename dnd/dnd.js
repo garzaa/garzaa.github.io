@@ -1,11 +1,11 @@
-var day = false;
+var day = true;
 
 if (localStorage.getItem("day") != null	) {
 	day = localStorage.getItem("day") == "true"
 }
 
 if (!day) {
-	$("head").append('<link id="nightcss" href="dnd.css" rel="stylesheet"/>')
+	$("head").append('<link id="nightcss" href="night.css" rel="stylesheet"/>')
 } else {
 	$("head").append('<link id="daycss" href="day.css" rel="stylesheet"/>')
 }

@@ -7,7 +7,6 @@ body {
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
-  background: rgba(2,0,25,1);
   margin: 0;
   height: 100%;
 }
@@ -18,8 +17,8 @@ body {
 	font-size: 100pt;
 	margin-top: 10vh;
 	margin-bottom: 5vh;
-	max-width: 50vw;
-	min-width: 400px;
+	max-width: 60vw;
+	min-width: 600px;
 }
 
 .dicebutton {
@@ -30,28 +29,12 @@ body {
 	display: inline-block;
 	cursor: pointer;
 	padding: 5px;
-	color: blue;
-	border-bottom: 2px solid blue;
-	border-top: 2px solid rgba(0, 0, 0, 0);
-	border-left: 2px solid rgba(0, 0, 0, 0);
-	border-right: 2px solid rgba(0, 0, 0, 0);
+	border: 2px solid rgba(0, 0, 0, 0);
 	transition: .2s ease;
-}
-
-.dicebutton:hover {
-	color: #00aaff;
-	border-bottom-color: #00aaff;
-}
-
-.dicebutton:active {
-	color: #00aaff;
-	border-bottom-color: #00aaff;
-	background-color: rgba(0, 0, 255, .2)
 }
 
 .roll-outcome {
 	padding: 0vw 2vw;
-	color: blue;
 	cursor: default;
 	display: inline-block;
 }
@@ -64,10 +47,6 @@ body {
 
 #longbuttons {
 	min-width: 500px;
-}
-
-#outcome-container {
-	color: blue;
 }
 
 #outcome-title {

@@ -1,8 +1,13 @@
 function randPotion() {
-    $("#outcome-title").text(getRand(type))
+    var effect = getRand(effects);
+    var name = ""
+    if (Math.random() < .1) {
+        name = randomName() + "'s "
+    }
+    $("#outcome-title").text(name + getRand(type) +" of "+ effect.split(".")[0])
     $("#outcome-text").html(
         "In: " + getRand(container) +
-        "<br>Effect: " + getRand(effects) +
+        "<br>Effect: " + effect +
         "<br>Strength: " + getRand(strength) +
         "<br>Side Effects: " + getRand(sideeffects) +
         "<br>Appearance: " + getRand(appearance) + " " + getRand(appearance2) +
@@ -15,6 +20,7 @@ function randPotion() {
 var type = ["Potion", "Elixir", "Draught", "Vial", "Philter", "Tonic", "Brew", "Ichor", "Juice", "Concoction", ]
 var effects = ["Healing. It instantly regenerates some health when drank.", "Vigor. Gives temporary health when drank.",
     "Vitality. It slowly regenerates health over a period of some hours.", "Might. It gives a bonus to attack rolls after drinking.",
+    "Goblin nut. The user instantly nuts like a goblin.",
     "Courage. Gives immunity to fear and some temporary inspiration.", "Giant Strength. It gives the user much more strength.",
     "Flame Resistance. It gives resistance to fire damage.", "Cold Resistance. It gives resistance to cold damage.",
     "Necro Resistance. Gives resistance to necrotic damage.", "Radiant Resistance. Gives resistance to radiant damage.",
@@ -26,8 +32,8 @@ var effects = ["Healing. It instantly regenerates some health when drank.", "Vig
     "Intimidation. Gives the user a huge booming voice that terrifies those around.",
     "Luck. It gives the user a temporary boost to luck.", "Mana. Gives the user more magical power to cast with.",
     "Arcane. Gives the user more powerful spells.", "Animal form. Makes the user turn into a random animal.",
-    "Dreams. Makes the user get lost in a hallucinary dream world of their perfect dream.",
-    "Nightmares. Makes the user get lost in a hallucinary dream world of their worst nightmares.",
+    "Dreams. Makes the user get lost in a hallucinatory dream world of their perfect dream.",
+    "Nightmares. Makes the user get lost in a hallucinatory dream world of their worst nightmares.",
     "Stamina. Gives the user more stamina and constitution.", "Fleet foot. Makes the user have more speed.",
     "Knowledge. Increases the users intelligence temporarily.", "The Bard. Increases the users charisma and charm temporarily.",
     "Disguise. Changes the users form to a disguised form of any race and appeance.",
@@ -45,7 +51,7 @@ var effects = ["Healing. It instantly regenerates some health when drank.", "Vig
     "Gracefulness. Makes the user have a better acrobatics skill.", "Goblin Climb. Gives the user a bonus to climbing.",
     "Dead Ringer. Makes the user appear completely dead to all magic.", "One Leafed Clover. Gives the user worst luck.",
     "Possession. Lets the user gain control of a nearby creature, their body comatosed while they do.",
-    "Owls Wake. Makes the user need no sleep for a time.", "Hawks Flight. Lets the user fly.",
+    "Owl's Wake. Makes the user need no sleep for a time.", "Hawk's Flight. Lets the user fly.",
     "Peace. Makes the user very calm and unable to harm others.", "Rejuvenation. Heals a single scar or bad injury on the user such as a missing arm.",
     "Sphinxes Truth. Makes the user tell the truth.", "Serpent Tongue. Makes the user only able to lie.",
     "Navigation. Makes the user unable to get lost and find where they need.", "Hook Horror. The users hands become sharp weaponised blades.",
@@ -54,22 +60,22 @@ var effects = ["Healing. It instantly regenerates some health when drank.", "Vig
     "Fame. Makes the user more famous.", "Goats Trek. Makes the user immune to the toils of long travels and bad weather.",
     "Gargoyle Toughness. Increases the users constitution.", "Atomic Clock. Lets the user know the exact tme and date.",
     "Transmutation. Lets the user have the ability to change somethings properties.",
-    "Iron Skin. Turns the users skin to metal giving them many resistances.", "Sex Change. Changes the users gender.",
+    "Iron Skin. Turns the users skin to metal giving them many resistances.", "Sex Change. Changes the user's gender.",
     "Race Change. Changes the users race.", "Musical Breath. Makes the user say everything in song, and fey music follows them in the air.",
     "Utter Understanding. Makes the user know very intimately about one exact thing. Random, or they can decide.",
     "Split Form. The user turns into two or three tiny versions of themselves and controls them all.",
-    "Flavour. Makes anything and everything taste amazing!", "Glimmer. Makes the user and its gear instantly clean and as good looking as possible.",
+    "Flavour. Makes anything and everything taste amazing!", "Glimmer. Makes the user and their gear instantly clean and as good looking as possible.",
     "Love. Makes the user and someone else fall in love.", "Poison. Poisons the user, weakening them.",
     "Rebirth. Resurrects the user if they die soon after drinking.", "Elemental form. Turns the user to an elemental form relevant to their personality.",
-    "True form. Turns the user into a familiar like creature similar to their personality.",
+    "True form. Turns the user into a familiar-like creature similar to their personality.",
     "Gods Touch. Gives the user a holy connection to their god or fiendish deity.",
     "Antidepressant. Does what it says on the tin.", "Ghostly Form. Makes the user intangible and able to phase through objects.",
-    "Artisans Skill. Gives the user skill in a particular art temporarily.", "Godly form. Improves all stats.",
+    "Artisan's Skill. Gives the user skill in a particular art temporarily.", "Godly form. Improves all stats.",
     "Bless Weapon. Makes the users weapons do more damage.", "Euphoria. Makes the user feel amazing and trip out.",
     "Bodyguard. Creates a spectral bodyguard for a short time who obeys orders.", "Babelfish. Lets the user speak any language but not understand it.",
     "Preservation. Stops whatever its poured on from rotting or degrading.", "Fear. Makes the user terrified.",
     "Night vision. Gives the ability to see in the dark.", "Tracking. Lets the user track an enemy.",
-    "Cure-all. Cures any status effects.",
+    "Cure-all. Cures any negative status effects.",
 ]
 var strength = ["Regular with a slight side effect.", "Regular with no side effect.", "Regular with a strong side effect.",
     "Minor with a strong side effect.", "Minor with a slight side effect.", "Major with a strong side effect.",
@@ -156,7 +162,7 @@ var label = ["Its name and title in bold letters.", "Its description in ornate e
     "Its name and its recommended buying price.", "Bloody prints all over it.", "Name engraved into the container.",
     "Its name glowing with minor magic.", "A cartoony mascot.", "A warning of an ancient curse.",
     "Its name and description in invisible ink.", "Its description in draconic.", "Several different names and descriptions plastered over eachother.",
-    "A name of a completely different potion to what it does.", "A title describing the exact opposite.",
+    "A name of a completely different potion.", "A title describing the exact opposite.",
     "A money back guarantee.", "A coupon for a free potion.", "A living face looking around.",
     "Its name and recipe for other alchemists.", "A heartfelt love letter for someone.",
     "A heartfelt hate letter for someone.", "A persons name. The potion wont work unless asked by its name to do so.",

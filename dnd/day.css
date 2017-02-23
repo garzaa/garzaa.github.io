@@ -5,6 +5,7 @@ body {
 .dicebutton {
 	color: black;
 	border: 2px solid black;
+    
 }
 
 .dicebutton:hover {
