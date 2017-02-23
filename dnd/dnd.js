@@ -1,3 +1,5 @@
+console.log("shoutout to /r/behindthetables")
+
 var day = true;
 
 if (localStorage.getItem("day") != null	) {
