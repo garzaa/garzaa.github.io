@@ -5,9 +5,12 @@ var start = {
 
 loadScene(start)
 
+//demonstrating onLoad and local variables
 var bedroom = {
+    timesloaded: 0,
     onLoad: function() {
-        console.log("benis")
+        this.timesloaded++;
+        console.log(this.timesloaded)
     },
     text:"You're lying in bed, staring at your phone again. You're \
     [kitchen](hungry), but you need to [bathroom](pee)."

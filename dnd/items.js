@@ -24,12 +24,20 @@ var item1 = [
 ]
 
 var item2 = [
+	"amputation knife",
+	"club",
+	"dagger",
+	"bayonet",
+	"bonesaw",
+	"brass knuckles",
+	"darts", "needle", "scythe", "sickle", "stiletto", "cutlass", "epee", "rapier",
+	"estoc", "axe", "cane", "pickaxe", "whip", "hammer", "crossbow", "chakram",
+	"javelin", "handaxe", "greataxe",
 	"sword",
-	"rod",
+	"arrow",
 	"shield",
 	"arrow",
-	"orb",
-    "ninja stars",
+	"katana",
     "spear",
     "brick",
 	"wand",
@@ -63,5 +71,5 @@ var item3 = [
     "healing",
     "dread",
     "paralysis",
-    "drowsiness",
+    "drowsiness", "+2 attack", "+2 damage", "+1 attack", "+1 damage"
 ]

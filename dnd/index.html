@@ -4,69 +4,36 @@
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'/>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<link href="dnd.css" rel="stylesheet"/>
+	<link href="../css/scrollbar.css" rel="stylesheet"/>
 	<title>D&amp;D</title>
 </head>
 
 <body>
 	<div id="dicecontainer">
-		<span id="roll-outcome1" class="roll-outcome">0</span>
-		<span id="roll-outcome2" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome3" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome4" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome5" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome6" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome7" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome8" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome9" class="roll-outcome" style="display:none">0</span>
-		<span id="roll-outcome10" class="roll-outcome" style="display:none">0</span>
+	</div>
+	<div class=buttons-container id="dice-buttons">
+
 	</div>
 	<br>
 	<br>
-	<span id="d4" class="dicebutton">D4</span>
-	<span id="d6" class="dicebutton">D6</span>
-	<span id="d8" class="dicebutton">D8</span>
-	<span id="d10" class="dicebutton">D10</span>
-	<span id="d12" class="dicebutton">D12</span>
-	<span id="d20" class="dicebutton">D20</span>
-	<span id="d100" class="dicebutton">D100</span>
 	<br>
-	<br>
-	<br>
-	<span id="one" class="dicebutton">1 die</span>
-	<span id="two" class="dicebutton">2 dice</span>
-	<span id="three" class="dicebutton">3 dice</span>
-	<span id="four" class="dicebutton">4 dice</span>
-	<span id="five" class="dicebutton">5 dice</span>
+	<div class="buttons-container" id="longbuttons">
+		<span id="airhorn" class="dicebutton">AIRHORN</span>
+		<span id="spells" class="dicebutton" title="Random Spell">Random Spell</span>
+		<span id="curses" class="dicebutton" title="Random Curse">Random Curse</span>
+		<span id="clothes" class="dicebutton" title="Random Clothing">Random Clothing</span>
+		<span id="items" class="dicebutton" title="Random Magic Item">Random Magic Weapon</span>
+		<span class="dicebutton" onclick="randNPC()">Random NPC</span>
+		<span class="dicebutton" onclick="randPotion()">Random Potion</span>
+		<span class="dicebutton" onclick="clearResults()">Clear</span>
+	</div>
 	<br />
-	<br />
-	<br />
-	<span id="six" class="dicebutton">6 dice</span>
-	<span id="seven" class="dicebutton">7 dice</span>
-	<span id="eight" class="dicebutton">8 dice</span>
-	<span id="nine" class="dicebutton">9 dice</span>
-	<span id="ten" class="dicebutton">10 dice</span>
-	<span id="modifier" class="dicebutton">+0</span>
-	<br>
-	<br>
-	<br>
-	<span id="airhorn" class="dicebutton">AIRHORN</span>
-	<!-- <span id="dm-tools-toggle">DM Tools</span> -->
-	<br>
-	<br>
-	<br />
-	<span id="spells" class="dicebutton" title="Random Spell">Random Spell</span>
-	<br>
-	<br>
-	<br>
-	<span id="curses" class="dicebutton" title="Random Curse">Random Curse</span>
-	<br>
-	<br>
-	<br>
-	<span id="clothes" class="dicebutton" title="Random Clothing">Random Clothing</span>
-	<br>
-	<br>
-	<br>
-	<span id="items" class="dicebutton" title="Random Magic Item">Random Magic Item</span>
+	<div id="outcome-container">
+		<h2 id="outcome-title"></h2>
+		<div id="outcome-text">
+
+		</div>
+	</div>
 
 	<script src="airhorn.js"></script>
 	<script src="dice.js"></script>
@@ -75,5 +42,7 @@
 	<script src="curses.js"></script>
 	<script src="clothes.js"></script>
 	<script src="items.js"></script>
+	<script src="npcs.js"></script>
+	<script src="potions.js"></script>
 </body>
 <html>

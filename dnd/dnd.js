@@ -63,7 +63,12 @@ function randomClothes() {
 }
 
 function randomItem() {
-	return getRand(item1) + " " + getRand(item2) + " of " + getRand(item3)
+	var outcome = ""
+	if (Math.random() < .4) {
+		outcome += getRand(item1) + " "
+	}
+	outcome += getRand(item2) + " of " + getRand(item3)
+	return outcome[0].toUpperCase() + outcome.substring(1)
 }
 
 function getRand(arr) {
@@ -72,17 +77,26 @@ function getRand(arr) {
 }
 
 $("#spells").click(function() {
-	document.getElementById("spells").innerHTML = randomSpell()
+	document.getElementById("outcome-title").innerHTML = randomSpell()
+	document.getElementById("outcome-text").innerHTML = ""
 })
 
 $("#curses").click(function() {
-	document.getElementById("curses").innerHTML = randomCurse()
+	document.getElementById("outcome-title").innerHTML = randomCurse()
+	document.getElementById("outcome-text").innerHTML = ""
 })
 
 $("#clothes").click(function() {
-	document.getElementById("clothes").innerHTML = randomClothes()
+	document.getElementById("outcome-title").innerHTML = randomClothes()
+	document.getElementById("outcome-text").innerHTML = ""
 })
 
 $("#items").click(function() {
-	document.getElementById("items").innerHTML = randomItem()
+	document.getElementById("outcome-title").innerHTML = randomItem()
+	document.getElementById("outcome-text").innerHTML = ""
 })
+
+function clearResults() {
+	document.getElementById("outcome-title").innerHTML = ""
+	document.getElementById("outcome-text").innerHTML = ""
+}

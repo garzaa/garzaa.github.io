@@ -2,18 +2,25 @@
 var modifier = 0;
 var dice = 1;
 
+var diceNumbers = [
+	2, 4, 6, 8, 10, 12, 20, 100
+]
+
+var maxDice = 10
+
 function rollDie(sides) {
 	/* var outcome = Math.floor(Math.random() * sides) + 1
 	document.getElementById("roll-outcome1").innerHTML = outcome */
+	console.log("rolling d" + sides)
 	var element
 	var outcome
 	for (var i=1; i<=10; i++) {
 		outcome = Math.floor(Math.random() * sides) + 1
+		console.log("got " + outcome)
 		element = "roll-outcome" + i
 
 		var elementId = "#" + "roll-outcome" + i
 		if (outcome == sides && $(elementId).is(":visible")) {
-			console.log("critical roll on " + elementId)
 			playAirhorn();
 		}
 		document.getElementById(element).innerHTML = outcome + Number(modifier)
@@ -22,6 +29,7 @@ function rollDie(sides) {
 
 function visibleDice(numberDice) {
 	var element
+	dice = numberDice
 	$("#roll-outcome1, #roll-outcome2, #roll-outcome3, #roll-outcome4, #roll-outcome5, #roll-outcome6, #roll-outcome7, #roll-outcome8, #roll-outcome9, #roll-outcome10").each(function() {
 		$(this).hide();
 	})
@@ -39,75 +47,67 @@ $("#modifier").click(function() {
 	document.getElementById("modifier").innerHTML = "+" + modifier;
 })
 
-$("#d4").click(function() {
-	rollDie(4);
+$(document).ready(function() {
+	addDice();
+	addCustomDie(3);
+	addBr();
+	addVisDice();
+	addModifier();
 })
 
-$("#d6").click(function() {
-	rollDie(6);
-})
+function addDice() {
+	for (var i=0; i<diceNumbers.length; i++) {
+		$("#dice-buttons").append(
+			'<span class="dicebutton" onclick="rollDie(' +
+			diceNumbers[i] + ')">D' + diceNumbers[i] + '</span>'
+		)
+	}
+}
 
-$("#d8").click(function() {
-	rollDie(8);
-})
+function addBr() {
+	$("#dice-buttons").append('<br>')
+}
 
-$("#d10").click(function() {
-	rollDie(10);
-})
+function addModifier() {
+	$("#dice-buttons").append('<span id="modifier" class="dicebutton">+0</span>')
+	$("#dice-buttons").append('<span class="dicebutton" onclick="setCustomDie()">DX</span>')
+}
 
-$("#d12").click(function() {
-	rollDie(12);
-})
+function addVisDice() {
+	$("#dice-buttons").append(
+		'<span class="dicebutton" onclick="visibleDice(' +
+		1 + ')">' + 1 + ' die</span>'
+	)
+	for (var i=2; i<maxDice+1; i++) {
+		$("#dice-buttons").append(
+			'<span class="dicebutton" onclick="visibleDice(' +
+			i + ')">' + i + ' dice</span>'
+		)
+	}
 
-$("#d20").click(function() {
-	rollDie(20);
-})
+	//now add the roll outcomes
+	$("#dicecontainer").append('<span id="roll-outcome1" class="roll-outcome">0</span>')
+	for (var i=2; i<maxDice+1; i++) {
+		$("#dicecontainer").append(
+			'<span id="roll-outcome'+i+'" class="roll-outcome" style="display: none;">0</span>'
+		)
+	}
+}
 
-$("#d100").click(function() {
-	rollDie(100);
-})
+function addCustomDie(num) {
+	$("#dice-buttons").append(
+		'<span class="dicebutton" id="customDie" onclick="rollDie(' +
+		num + ')">D' + num + '</span>'
+	)
+}
 
-$("#one").click(function() {
-	dice = 1
-	visibleDice(1)
-})
-$("#two").click(function() {
-	dice = 2
-	visibleDice(2)
-})
-$("#three").click(function() {
-	dice = 3
-	visibleDice(3)
-})
-$("#four").click(function() {
-	dice = 4
-	visibleDice(4)
-})
-$("#five").click(function() {
-	dice = 5
-	visibleDice(5)
-})
-
-$("#six").click(function() {
-	dice = 6
-	visibleDice(6)
-})
-$("#seven").click(function() {
-	dice = 7
-	visibleDice(7)
-})
-$("#eight").click(function() {
-	dice = 8
-	visibleDice(8)
-})
-$("#nine").click(function() {
-	dice = 9
-	visibleDice(9)
-})
-$("#ten").click(function() {
-	dice = 10
-	visibleDice(10)
-})
+function setCustomDie() {
+	temp = prompt("enter a number of sides:")
+	if (temp == "" || isNaN(temp) || !temp || temp < 1) {
+		temp = "3";
+	}
+	$("#customDie").attr("onclick", "rollDie(" + temp +")").text("D" + temp)
+}
 
 function setModifier() {
 	modifier = prompt("enter a modifier:")
@@ -116,32 +116,3 @@ function setModifier() {
 	}
 	document.getElementById("modifier").innerHTML = "+" + modifier;
 }
-
-$(document).keypress(function (e) {
-	switch (e.which) {
-		case 49:
-			rollDie(12);
-			break;
-		case 50:
-			rollDie(20);
-			break;
-		case 52:
-			rollDie(4);
-			break;
-		case 54:
-			rollDie(6);
-			break;
-		case 56:
-			rollDie(8);
-			break;
-		case 48:
-			rollDie(10);
-			break;
-		case 13:
-			setModifier();
-			break;
-		case 32:
-			playAirhorn();
-			break;
-	}
-})
