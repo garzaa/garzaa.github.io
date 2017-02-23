@@ -207,7 +207,7 @@ var armors = {
         var bodyText = ""
 
         var suffix = false;
-        if (Math.random() < .8) {
+        if (Math.random() < .3) {
             suffix = true;
         }
         var first = getRand(this.properties)
