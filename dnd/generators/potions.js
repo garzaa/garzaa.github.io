@@ -90,7 +90,7 @@ var strength = ["Regular with a slight side effect.", "Regular.", "Regular with 
 ]
 var sideeffects = ["Nothing bad at all!", "Puts the user to sleep.", "Rapid hair growth all over the body.",
     "Bleeding from the eyes.", "Vivid hallucinations.", "Flashbacks of your own eventual demise.",
-    "The skin to crack and appear distorted.", "Spots to grow on the skin.", "Diarrhoea.",
+    "The skin to crack and appear distorted.", "Spots to grow on the skin.", "Diarrhea.",
     "Vomiting.", "Blurred Vision.", "Blindness.", "Deafness.", "Mutism.", "Health loss via rapid bleeding.",
     "A sudden horrific accent.", "The irresistible urge to dance.", "The hearing of demons.",
     "Loss of balance.", "Everything tasting like dirt for some time.", "Excessive drooling.",

@@ -4,7 +4,7 @@ function randomWeapon() {
     var bodyText = ""
 
     var weaponSuffix = false;
-    if (Math.random() < .8) {
+    if (Math.random() < .4) {
         weaponSuffix = true;
     }
     var first = getRand(weaponEffects)
@@ -15,7 +15,6 @@ function randomWeapon() {
         var second = getRand(weaponEffects)
         //prevent intersections
         while (second[0] === first[0]){
-            alert("asdasdasd")
             second = getRand(weaponEffects)
         }
         name += " " + second[1]
@@ -157,7 +156,7 @@ var weaponEffects = [
     ["Rosen", "of Roses", "A ruby worth 30gp is the center stone in a rose-shaped setting on the weapon. If the bearer removes the ruby, the weapon grows a new one at the end of the month. The weapon always smells of roses while the ruby is in its setting."],
     ["Runic", "of Runes", "Whenever bearer casts a spell, treat this weapon as a +1 weapon until the beginning of their next turn."],
     ["Scarlet", "of Bleeding", "This weapon perpetually drips the blood of a monstrous race, chosen by the DM. The bearer can speak that race's language and has advantage on intimidation checks against monsters of that race when the weapon is revealed."],
-    ["Seige", "of Sieges", "This weapon does maximum damage against man-made, inanimate objects."],
+    ["Siege", "of Sieges", "This weapon does maximum damage against man-made, inanimate objects."],
     ["Shading", "of Shade", "The bearer suffers no harm or discomfort in temperatures as high as 120 degrees Fahrenheit."],
     ["Shadow", "of Shadows", "Treat as a +1 magic weapon when in dim light."],
     ["Shamanic", "of Rituals", "Whenever the bearer is casting a spell as a ritual, they have advantage to maintain concentration during the ritual."],

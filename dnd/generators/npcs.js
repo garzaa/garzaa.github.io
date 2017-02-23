@@ -2,7 +2,13 @@ function randNPC() {
     $("#outcome-title").text(getRand(firstfirst) + getRand(firstsecond) +
      " " + getRand(secondfirst) + getRand(secondsecond));
 
-     var output = getRand(races)+" "+getRand(jobs).toLowerCase() + ".";
+     var output = getRand(races)
+
+     if (Math.random() < .1) {
+         output += " " + getRand(classes).toLowerCase() + "."
+     } else {
+         output +=" "+getRand(jobs).toLowerCase() + ".";
+     }
 
      if (Math.random() < .2) {
          output += " " + getRand(voicequality) + "-voiced."
@@ -12,8 +18,77 @@ function randNPC() {
          output += " " + getRand(accent) + " accent."
      }
 
+
+     if (Math.random() < .8) {
+         output += " " + getRand(eyes)
+     }
+
+     if (Math.random() < .2) {
+         output += " " + getRand(ears)
+     }
+
+     if (Math.random() < .2) {
+         output += " " + getRand(mouth)
+     }
+
+     if (Math.random() < .2) {
+         output += " " + getRand(nose)
+     }
+
+     if (Math.random() < .2) {
+         output += " " + getRand(chin)
+     }
+
+     if (Math.random() < .8) {
+         output += " " + getRand(hair)
+     }
+
+     if (Math.random() < .3) {
+         output += " " + getRand(other)
+     }
+
+     if (Math.random() < .3) {
+         output += " " + getRand(other)
+     }
+
+     if (Math.random() < .9) {
+         output += " " + getRand(height)
+     }
+
+     if (Math.random() < .6) {
+         output += " " + getRand(bodytype)
+     }
+
+     if (Math.random() < .3) {
+         output += " " + getRand(hands)
+     }
+
      if (Math.random() < .1) {
-         output += " " + getRand(classes) + "."
+         output += " " + getRand(scar)
+     }
+
+     if (Math.random() < .1) {
+         output += " " + getRand(tattoo)
+     }
+
+     if (Math.random() < .1) {
+         output += " " + getRand(jewelry)
+     }
+
+     if (Math.random() < .5) {
+         output += " " + getRand(personality) + "."
+     }
+
+     if (Math.random() < .3) {
+         output += " " + getRand(faith)
+     }
+
+     if (Math.random() < .4) {
+         output += " Hates " + getRand(hates).toLowerCase()
+     }
+
+     if (Math.random() < .3) {
+         output += " " + getRand(flaws)
      }
 
     $("#outcome-text").text(output)
@@ -51,7 +126,7 @@ var secondsecond = [
 ]
 
 var races = [
-    "Human", "Dwarf", "Elf", "Gnome", "Halfling", "Half-elf", "Half-orc", "Tiefling"
+    "Human", "Dwarf", "Elf", "Gnome", "Halfling", "Half-elf", "Half-orc"
 ]
 
 var classes = [
@@ -142,7 +217,7 @@ var bodytype = [
     "Thin and delicate.", "Of average build.", "Well-muscled.", "Slightly overweight.", "Grotesquely obese.",
     "Lean and lanky.", "Lithe and lean.", "Thin and wiry.", "Sinewy and strong.", "Flabby and weak.",
     "Lumpy or bent.", "Thin and flimsy.", "Soft and chubby.", "Thin and petite.", "Pudgy.", "Big and broad.",
-    "Stocky and strong.", "Bony.", "Wide and ponderous.", "Covered in hair.",
+    "Stocky and strong.", "Bony.", "Wide and ponderous."
 ]
 
 var hands = [
@@ -178,7 +253,7 @@ var faith = [
 ]
 
 var hates = [
-    "Other genders.", "Children.", "Teenagers.", "Elderly.", "Ruling class and authority figures.",
+    "Other genders.", "Children.", "Teenagers.", "The elderly.", "Ruling class and authority figures.",
     "Powerful rich.", "Destitute poor.", "Beggars.", "Drunks.", "Drug-users.", "Farmers.", "Artists.",
     "Clergy.", "Soldiers.", "Fishermen.", "Harlots.", "Miners.", "Merchants.", "Scholars.", "Herders.",
     "Sailors.", "Mages.", "Dwarves.", "Elves.", "Gnomes.", "Goblins.", "Halflings.", "Humans.", "Orcs.", "Reptiles.",
