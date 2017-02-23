@@ -1,21 +1,24 @@
-function flash() {
-		var red = false;
-		var flashCount = 0;
-		var flashing = window.setInterval(function() {
+var day = false;
 
-			if (!red) {
-				document.body.style.backgroundColor = "red"
-				red = true
+if (localStorage.getItem("day") != null	) {
+	day = localStorage.getItem("day") == "true"
+}
 
-			} else {
-				document.body.style.backgroundColor = "white"
-				red = false
-			}
-			flashCount++
-			if (flashCount >= 200) {
-				clearInterval(flashing)
-			}
-		}, 10);
+if (!day) {
+	$("head").append('<link id="nightcss" href="dnd.css" rel="stylesheet"/>')
+} else {
+	$("head").append('<link id="daycss" href="day.css" rel="stylesheet"/>')
+}
+
+function toggleDay() {
+	day = !day;
+	$("#daycss, #nightcss").remove();
+	if (!day) {
+		$("head").append('<link id="nightcss" href="dnd.css" rel="stylesheet"/>')
+	} else {
+		$("head").append('<link id="daycss" href="day.css" rel="stylesheet"/>')
+	}
+	localStorage.setItem("day", day)
 }
 
 function randomName() {

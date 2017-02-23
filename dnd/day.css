@@ -7,7 +7,7 @@ body {
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
-  background: rgba(2,0,25,1);
+  background-color: white;
   margin: 0;
   height: 100%;
 }
@@ -30,28 +30,19 @@ body {
 	display: inline-block;
 	cursor: pointer;
 	padding: 5px;
-	color: blue;
-	border-bottom: 2px solid blue;
-	border-top: 2px solid rgba(0, 0, 0, 0);
-	border-left: 2px solid rgba(0, 0, 0, 0);
-	border-right: 2px solid rgba(0, 0, 0, 0);
+	color: black;
+	border: 2px solid black;
 	transition: .2s ease;
 }
 
 .dicebutton:hover {
-	color: #00aaff;
-	border-bottom-color: #00aaff;
-}
-
-.dicebutton:active {
-	color: #00aaff;
-	border-bottom-color: #00aaff;
-	background-color: rgba(0, 0, 255, .2)
+	color: blue;
+	border-color: blue;
 }
 
 .roll-outcome {
 	padding: 0vw 2vw;
-	color: blue;
+	color: black;
 	cursor: default;
 	display: inline-block;
 }
@@ -67,7 +58,7 @@ body {
 }
 
 #outcome-container {
-	color: blue;
+	color: black;
 }
 
 #outcome-title {

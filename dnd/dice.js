@@ -1,6 +1,7 @@
 
 var modifier = 0;
 var dice = 1;
+var airhornEnabled = true;
 
 var diceNumbers = [
 	2, 4, 6, 8, 10, 12, 20, 100
@@ -11,16 +12,14 @@ var maxDice = 10
 function rollDie(sides) {
 	/* var outcome = Math.floor(Math.random() * sides) + 1
 	document.getElementById("roll-outcome1").innerHTML = outcome */
-	console.log("rolling d" + sides)
 	var element
 	var outcome
 	for (var i=1; i<=10; i++) {
 		outcome = Math.floor(Math.random() * sides) + 1
-		console.log("got " + outcome)
 		element = "roll-outcome" + i
 
 		var elementId = "#" + "roll-outcome" + i
-		if (outcome == sides && $(elementId).is(":visible")) {
+		if (outcome == sides && $(elementId).is(":visible") && airhornEnabled) {
 			playAirhorn();
 		}
 		document.getElementById(element).innerHTML = outcome + Number(modifier)
