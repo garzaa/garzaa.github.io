@@ -25,13 +25,14 @@ function randomWeapon() {
     $("#outcome-text").html(bodyText)
 }
 var weaponEffects = [
+    ["Returning", "of Calling", "The owner of this weapon can summon it to their hand as long as it's less than 60 feet from them. This weapon can be drawn as a bonus action."],
     ["Invisible", "of Hiding", "The bearer can draw this weapon as a bonus action. This weapon cannot be seen by the naked eye. If dropped, finding it takes a Perception check against a DC of 15."]
     ["Blood", "of Bleeding", "+1 to attack rolls. On a critical hit, the bearer of this weapon bleeds from a random orifice for 1d4 damage."],
     ["Cold 'n' Sweaty", "of Cold Sweats", "On a critical failure, this weapon slips out of the user's grasp."],
     ["Stupefying", "of stupidity", "On a hit, the INT score of the afflicted drops by 1d4 for 1d6 hours. On a critical miss, the user is affected instead."],
     ["Adamantine", "of Adamantine", "This item is indestructible."],
     ["Alien", "of Lunacy", "Once attuned, the bearer constantly hears the ongoing, utterly insane mutterings of an alien intelligence trapped inside this weapon. Should this weapon be destroyed, the being will be released."],
-    ["Ancient", "of Old", "This worn weapon inscribed with ancient runes can be used as a Spellcasting Focus"],
+    ["Ancient", "of Old", "This worn weapon inscribed with ancient runes can be used as a Spellcasting Focus."],
     ["Antikytheran", "of Mechanisms", "An ancient mechanism is housed within this weapon that never configures the same way twice. Once per long rest the bearer can spend one minute to attempt a DC 20 investigation check to configure the device. If successful, the weapon becomes a +1 weapon until the end of the next long rest."],
     ["Arcane", "of Arcana", "This weapon can project a spectral tome suspended in mid-air that the bearer can interact with like a physical book. This tome can be used as a spellbook and may contain some spells from its previous bearer."],
     ["Arctic", "of Snow", "Icy wind and snowflakes bluster around this weapon, even in warm environments. The bearer can walk on the surface of the lightest snow, leaving no footprints."],
@@ -216,8 +217,8 @@ var weapons = [
 	"estoc", "axe", "cane", "pickaxe", "whip", "hammer", "crossbow", "chakram",
 	"javelin", "handaxe", "greataxe", "sledgehammer",
 	"sword", "shank", "claymore", "war pick", "maul", "pike", "spork",
-	"arrow",
-	"shield",
+	"longbow",
+    "cleaver",
 	"arrow",
 	"katana",
     "spear",
