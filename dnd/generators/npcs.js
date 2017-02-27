@@ -68,7 +68,7 @@ function randNPC() {
      }
 
      if (Math.random() < .1) {
-         output += " " + getRand(tattoo)
+         output += " " + getRand(tattoo)+" "+getRand(tatlocations)+"."
      }
 
      if (Math.random() < .1) {
@@ -111,6 +111,8 @@ var firstfirst = [
 var firstsecond = [
     "on", "el", "or", "rey", "ram", "ithe", "over", "'em", "yl", "ixe", "ig", "elon",
     "emon", "ek", "aw", "anel", "us", "yme", "ival",
+    "onne", "elle", "ora", "reya", "ithe", "ylia", "igna", "elonia",
+    "awn", "anela", "usse", "ivala", "ina", "enne", "ama"
 ]
 
 var secondfirst = [
@@ -181,7 +183,7 @@ var ears = [
 ]
 
 var mouth = [
-    "Full lips.", "Buck-teeth.", "Thin lips.", "Rotting teeth.", "Crooked teeth.", "A broken or missing tooth.",
+    "Full lips.", "Buck teeth.", "Thin lips.", "Gray teeth.", "Crooked teeth.", "A broken or missing tooth.",
     "Pursed lips.", "Dry, cracked lips.", "One or more false teeth.", "A mouth that hangs open.",
 ]
 
@@ -204,7 +206,7 @@ var hair = [
 ]
 
 var other = [
-    "High cheekbones.", "Tight, drawn cheeks.", "Chubby cheeks.", "An unpleasant pustule.",
+    "High cheekbones.", "Tight, drawn cheeks.", "Chubby cheeks.",
     "A large mole.", "A beauty mark.", "Freckles.", "Terrible scarring.",
 ]
 
@@ -229,9 +231,14 @@ var scar = [
 ]
 
 var tattoo = [
-    "A dagger tattoo.", "An arrow tattoo.", "An anchor tattoo.", "A skull tattoo.", "A pair of crossed bones tattoo.",
-    "A snake tattoo.", "A scorpion tattoo.", "A spider web tattoo.", "A heart tattoo.", "A ring of thorns tattoo.",
-    "A mermaid tattoo.", "A dragon tattoo.",
+    "A dagger tattoo", "An arrow tattoo", "An anchor tattoo", "A skull tattoo", "A pair of crossed bones tattoo",
+    "A snake tattoo", "A scorpion tattoo", "A spider web tattoo", "A heart tattoo", "A ring of thorns tattoo",
+    "A mermaid tattoo", "A dragon tattoo", "A tattoo with their mother's name"
+]
+
+var tatlocations = [
+    "under the left nipple", "on the chest", "on the side of the neck", "under one eye", "on the lower back",
+    "on their arm", "on their wrist", "around one bicep", "on their leg",
 ]
 
 var jewelry = [
@@ -264,6 +271,6 @@ var flaws = [
     "Fidgets.", "Drinks too much.", "Eats too much.", "Swears often.", "Has poor hygiene.", "Can’t resist flirting.",
     "Can’t stop staring.", "Sweats profusely and easily.", "Is a habitual liar.", "Embellishes the truth.",
     "Exaggerates details.", "Has a short temper.", "Is melodramatic.", "Gossips.", "Chews with an open mouth.",
-    "Often sniffs audibly.", "Believes what you tell him/her.", "Is skeptical of everything.",
+    "Often sniffs audibly.", "Believes what you tell them.", "Is skeptical of everything.",
     "Paces.", "Makes poor eye contact.",
 ]
