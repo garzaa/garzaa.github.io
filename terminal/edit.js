@@ -10,6 +10,8 @@ var fileFunctions = [
     'cat',
 ]
 
+var lastTitle = document.title
+
 //files are stored as an object with keys (filenames) and values (innerHTML)
 
 //add some grabbing from local storage here, package files into a json dict
@@ -49,6 +51,9 @@ function edit(fileName) {
     editing = true;
     files[currentFileName] = editArea.value;
     localStorage.setItem("textFiles", JSON.stringify(files))
+
+    //update the title
+    document.title += "/" + fileName
 }
 
 function save() {
@@ -74,6 +79,7 @@ function close() {
     localStorage.setItem("textFiles", JSON.stringify(files))
     $("#editWrapper").remove();
 	$("#filename").html("");
+	document.title = lastTitle
 }
 
 function rm(fileName) {
@@ -90,6 +96,7 @@ function rm(fileName) {
 			$("#filename").html("");
 			$("#input").unbind("keydown.vim");
             editing = false;
+            document.title = lastTitle
         }
     } else {
         print(fileName + " doesn't exist.")
