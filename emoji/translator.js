@@ -1,32 +1,50 @@
 var repeat = false;
+var lastChar = ""
+var lastEmoji = ""
 
 function convert() {
 	//document.getElementById("input").value = '';
 	var inputStr = document.getElementById("input").value;
 	var outputSpan = $("#output");
-	outputSpan.html("");
+
+	if (inputStr == "") {
+		outputSpan.html("&nbsp;")
+		return;
+	}
+
+	inputStr = inputStr.toLowerCase();
 
 	inputStr = replaceAll(inputStr);
 
-	console.log(inputStr)
+	outStr = ""
 
 	for (var i=0; i < inputStr.length; i++) {
-		outputSpan.append(lookup(inputStr[i]))
+		outStr += (lookup(inputStr, i))
 	}
+
+	outputSpan.html(outStr)
 
 }
 
 
-function lookup(str) {
-	if (aliases.hasOwnProperty(str)) {
-		return getRand(aliases[str]);
+function lookup(str, index) {
+	if (lastChar == str[index]) {
+		return lastEmoji
+	}
+
+	if (aliases.hasOwnProperty(str[index])) {
+		lastChar = str[index]
+		lastEmoji = getRand(aliases[str[index]]);
+		return lastEmoji;
 	} else {
-		return str;
+		lastChar = str[index]
+		return str[index];
 	}
 }
 
 function replaceAll(str) {
-	for (var alias in multialiases) {
+	var alias;
+	for (alias in multialiases) {
 		if (multialiases.hasOwnProperty(alias)) {
 			str = str.replace(alias, multialiases[alias])
 		}
@@ -43,10 +61,10 @@ var aliases = {
 	a: ["🅰️️"],
 	b: ["🅱️️"],
 	c: ["©️️", "☪️"],
-	d: ["🆔"],
-	e: ["3️⃣"],
-	f: ["f"],
-	g: ["↪️"],
+	d: ["🇩"],
+	e: ["3⃣"],
+	f: ["🇫"],
+	g: ["🇬"],
 	h: ["♓"],
 	i: ["ℹ️️"],
 	j: ["⤴️"],
@@ -54,11 +72,11 @@ var aliases = {
 	l: ["🕒"],
 	m: ["〽", "♏", "Ⓜ️️"],
 	n: ["♑"],
-	o: ["⭕", "0️⃣", "➰"],
+	o: ["⭕", "➰", "😩", "😂"],
 	p: ["🅿️️"],
 	q: ["♎"],
 	r: ["®️"],
-	s: ["5️⃣"],
+	s: ["💲", "5⃣	"],
 	t: ["✝️", "➕"],
 	u: ["⛎"],
 	v: ["☑️️", "✅", "✔️️"],
@@ -66,18 +84,32 @@ var aliases = {
 	x: ["✖️", "❌"],
 	y: ["💹"],
 	z: ["💤"],
-	" ": ["&nbsp;"],
+	" ": ["&nbsp;&nbsp;"],
 	"!": ["❗", "❕"]
 }
 
 var multialiases = {
 	id: "🆔",
 	wc: "🚾",
-	oo: "➿",
 	cool: "🆒",
 	free: "🆓",
 	cl: "🆑",
 	ng: "🆖",
 	ok: "🆗",
 	zzz: "💤",
+	back: "🔙",
+	end: "🔚",
+	on: "🔛",
+	soon: "🔜",
+	top: "🔝",
+	new: "🆕",
+	up: "🆙",
+	vs: "🆚",
+	sos: "🆘"
 }
+
+document.getElementById('input').onkeydown = function(e){
+   if(e.keyCode == 13){
+	     convert();
+   }
+};
