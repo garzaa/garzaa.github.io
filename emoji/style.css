@@ -1,9 +1,6 @@
 .container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -50%);
+    text-align: center;
+    margin-top: 30vh;
 }
 
 input, button, #output {
@@ -35,12 +32,22 @@ button:active {
     background-color: deepskyblue;
 }
 
+#output {
+    margin-top: 5vh;
+    text-align: left;
+    display: inline-block;
+}
+
 @media (min-width: 800px) {
     input {
         width: 30vw;
     }
     button {
         width: 10vw;
+    }
+    #output {
+        word-wrap: normal;
+        max-width: 40vw;
     }
 }
 

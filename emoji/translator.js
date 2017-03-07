@@ -37,7 +37,6 @@ function lookup(str, index) {
 		lastEmoji = getRand(aliases[str[index]]);
 		return lastEmoji;
 	} else {
-		lastChar = str[index]
 		return str[index];
 	}
 }
@@ -46,7 +45,10 @@ function replaceAll(str) {
 	var alias;
 	for (alias in multialiases) {
 		if (multialiases.hasOwnProperty(alias)) {
-			str = str.replace(alias, multialiases[alias])
+			//multiple passes for compression
+			while (str.indexOf(alias) >= 0) {
+				str = str.replace(alias, multialiases[alias])
+			}
 		}
 	}
 	return str;
@@ -61,15 +63,15 @@ var aliases = {
 	a: ["🅰️️"],
 	b: ["🅱️️"],
 	c: ["©️️", "☪️"],
-	d: ["🇩"],
+	d: ["↩️"],
 	e: ["3⃣"],
-	f: ["🇫"],
+	f: ["🎏"],
 	g: ["🇬"],
 	h: ["♓"],
 	i: ["ℹ️️"],
 	j: ["⤴️"],
-	k: ["k"],
-	l: ["🕒"],
+	k: ["🇰"],
+	l: ["🕒", "👢"],
 	m: ["〽", "♏", "Ⓜ️️"],
 	n: ["♑"],
 	o: ["⭕", "➰", "😩", "😂"],
@@ -82,10 +84,22 @@ var aliases = {
 	v: ["☑️️", "✅", "✔️️"],
 	w: ["🇼"],
 	x: ["✖️", "❌"],
-	y: ["💹"],
+	y: ["🔱"],
 	z: ["💤"],
-	" ": ["&nbsp;&nbsp;"],
-	"!": ["❗", "❕"]
+	" ": ["&nbsp;"],
+	"!": ["❗", "❕"],
+	"?": ["❔", "❓"],
+	"1": ["1⃣"],
+	"2": ["2⃣"],
+	"3": ["3⃣"],
+	"4": ["4⃣"],
+	"5": ["5⃣"],
+	"6": ["6⃣"],
+	"7": ["7⃣"],
+	"8": ["8⃣"],
+	"9": ["9⃣"],
+	"0": ["0⃣"],
+
 }
 
 var multialiases = {
@@ -105,7 +119,9 @@ var multialiases = {
 	new: "🆕",
 	up: "🆙",
 	vs: "🆚",
-	sos: "🆘"
+	sos: "🆘",
+	"!!": "‼️️",
+	"!?": "⁉️️",
 }
 
 document.getElementById('input').onkeydown = function(e){
