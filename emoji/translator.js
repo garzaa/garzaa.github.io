@@ -23,7 +23,6 @@ function convert() {
 	}
 
 	outputSpan.html(outStr)
-
 }
 
 
