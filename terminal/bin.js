@@ -1,3 +1,5 @@
+var timerActive = false;
+
 $(document).ready(function() {weather()});
 
 function hook(str, args) {
@@ -101,6 +103,7 @@ var hookCommands = [
     'reddit',
     'time',
     'weather',
+    'timer',
 ];
 
 var bookmarks = [
@@ -229,4 +232,75 @@ function chan(s) {
 
 function dice(s) {
     print("Usage: [number]d[number]+[modifier]")
+}
+
+function timer(s) {
+    //example: 12h5m30s or 12h5s
+    var timerRegex = /^([0-9]+h)?([0-9]+m)?([0-9]+s)?$/
+
+    if (!timerRegex.test(s) || s == "") {
+        print("Usage: timer XhXmXs")
+        return
+    }
+
+    //get the total time in seconds. this is gross, but i'm tired.
+    var hours, minutes, seconds
+    if (s.includes("h")) {
+        hours = Number(s.split("h")[0])
+        s = s.split("h")[1]
+    }
+    if (s.includes("m")) {
+        minutes = Number(s.split("m")[0])
+        s = s.split("m")[1]
+    }
+    if (s.includes("s")) {
+        seconds = Number(s.split("s")[0])
+    }
+    if (typeof(hours) == "undefined") hours = 0;
+    if (typeof(minutes) == "undefined") minutes = 0;
+    if (typeof(seconds) == "undefined") seconds = 0;
+    seconds = hours * 3600 + minutes * 60 + seconds
+
+    if (seconds <= 0) {
+        print("Try an actual number :^)")
+        return
+    }
+
+    if (timerActive) {
+        print("You already have a timer running.")
+        return;
+    }
+
+    var totalSeconds = seconds
+    $("#gradientBar").addClass("secondTransition")
+    setCloseConfirm(true)
+    timerActive = true;
+    $("#gradientBar").css("width", ((seconds-1)/totalSeconds)*100 + "%")
+
+    var timerObject = $("<div id='timer'></div>").insertBefore("#prompt")
+    var date = new Date(null);
+    date.setSeconds(seconds); // specify value for SECONDS here
+    var result = date.toISOString().substr(11, 8);
+    $("#timer").html(result)
+
+    var timerCounter = setInterval(function() {
+        seconds--;
+        $("#gradientBar").css("width", (seconds-1)/totalSeconds*100 + "%")
+
+        var date = new Date(null);
+        date.setSeconds(seconds); // specify value for SECONDS here
+        var result = date.toISOString().substr(11, 8);
+        $("#timer").html(result)
+        if (seconds <= 0) {
+            $("#gradientBar").removeClass("secondTransition")
+            $("#gradientBar").css("width", "100%")
+            clearInterval(timerCounter)
+            setCloseConfirm(false)
+            timerActive = false;
+            $("#timer").remove();
+            if (document.hidden) playAirhorn();
+            fancyRender("time's up", "dodgerblue")
+        }
+    }, 1000)
+
 }

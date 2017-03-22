@@ -484,3 +484,39 @@ function renderBookmarks() {
     }
     print(outputstr)
 }
+
+//if true, ask for confirmation to close the tab
+function setCloseConfirm(bool) {
+    if (bool) {
+        window.onbeforeunload = function (e) {
+            e = e || window.event;
+
+            // For IE and Firefox prior to version 4
+            if (e) {
+                e.returnValue = 'Sure?';
+            }
+
+            // For Safari
+            return 'Sure?';
+        };
+    } else {
+        window.onbeforeunload = function() {}
+    }
+}
+
+function playAirhorn() {
+		var airhorn = new Audio("airhorn.mp3");
+		airhorn.play();
+		airhorn.currentTime = 0;
+		if (epilepsy == true) { flash() }
+		if (localStorage.airhorncount) {
+			localStorage.airhorncount++;
+			if (localStorage.airhorncount == 100 ||
+				localStorage.airhorncount % 100 == 0) {
+				prompt("Congratulations!\nYou've been dank af " + localStorage.airhorncount + " times!")
+			}
+		} else {
+			localStorage.airhorncount = 1
+		}
+		console.log("%cAirhorned " + localStorage.airhorncount + " times", "color: red; font-size: 24pt;")
+}

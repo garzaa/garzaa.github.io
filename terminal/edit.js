@@ -54,6 +54,7 @@ function edit(fileName) {
 
     //update the title
     document.title += "/" + fileName
+    setCloseConfirm(true);
 }
 
 function save() {
@@ -80,6 +81,7 @@ function close() {
     $("#editWrapper").remove();
 	$("#filename").html("");
 	document.title = lastTitle
+    setCloseConfirm(false)
 }
 
 function rm(fileName) {
@@ -102,6 +104,7 @@ function rm(fileName) {
         print(fileName + " doesn't exist.")
     }
     localStorage.setItem("textFiles", JSON.stringify(files))
+    setCloseConfirm(false)
 }
 
 function cat(fileName) {
