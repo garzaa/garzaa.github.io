@@ -275,7 +275,6 @@ function timer(s) {
     if (typeof(minutes) == "undefined") minutes = 0;
     if (typeof(seconds) == "undefined") seconds = 0;
     seconds = hours * 3600 + minutes * 60 + seconds
-
     if (seconds <= 0) {
         print("Try an actual number :^)")
         return
@@ -286,12 +285,12 @@ function timer(s) {
         return;
     }
 
-    var totalSeconds = seconds
+    var totalSeconds = seconds-1
     $("#gradientBar").addClass("secondTransition")
     setCloseConfirm(true)
     timerActive = true;
+    seconds--;
     $("#gradientBar").css("width", ((seconds-1)/totalSeconds)*100 + "%")
-
     var timerObject = $("<div id='timer'></div>").insertBefore("#prompt")
     var date = new Date(null);
     date.setSeconds(seconds); // specify value for SECONDS here
