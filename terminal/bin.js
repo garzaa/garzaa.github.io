@@ -1,4 +1,5 @@
 var timerActive = false;
+var timerCounter;
 
 $(document).ready(function() {weather()});
 
@@ -235,11 +236,25 @@ function dice(s) {
 }
 
 function timer(s) {
+    if (s == "stop") {
+        if (typeof(timerCounter) == "undefined") {
+            print("No active timer.")
+        } else {
+            $("#gradientBar").removeClass("secondTransition")
+            $("#gradientBar").css("width", "100%")
+            clearInterval(timerCounter)
+            setCloseConfirm(false)
+            timerActive = false;
+            $("#timer").remove();
+        }
+        return;
+    }
+
     //example: 12h5m30s or 12h5s
     var timerRegex = /^([0-9]+h)?([0-9]+m)?([0-9]+s)?$/
 
     if (!timerRegex.test(s) || s == "") {
-        print("Usage: timer XhXmXs")
+        print("Usage: timer XhXmXs || timer stop")
         return
     }
 
@@ -283,7 +298,7 @@ function timer(s) {
     var result = date.toISOString().substr(11, 8);
     $("#timer").html(result)
 
-    var timerCounter = setInterval(function() {
+    timerCounter = setInterval(function() {
         seconds--;
         $("#gradientBar").css("width", (seconds-1)/totalSeconds*100 + "%")
 
