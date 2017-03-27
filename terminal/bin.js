@@ -103,8 +103,8 @@ var hookCommands = [
     'dice',
     'reddit',
     'time',
-    'weather',
     'timer',
+    'weather',
 ];
 
 var bookmarks = [

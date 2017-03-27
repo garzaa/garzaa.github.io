@@ -513,10 +513,9 @@ function playAirhorn() {
 			localStorage.airhorncount++;
 			if (localStorage.airhorncount == 100 ||
 				localStorage.airhorncount % 100 == 0) {
-				prompt("Congratulations!\nYou've been dank af " + localStorage.airhorncount + " times!")
+				prompt("Congratulations!\nYou've airhorned " + localStorage.airhorncount + " times!")
 			}
 		} else {
 			localStorage.airhorncount = 1
 		}
-		console.log("%cAirhorned " + localStorage.airhorncount + " times", "color: red; font-size: 24pt;")
 }
