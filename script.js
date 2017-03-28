@@ -37,7 +37,6 @@ function updateTabs(input) {
 
     $("#line").css("width", tmpWidth + "px");
     $("#line").css("margin-left", tmpPos + "px");
-
 }
 
 updateTabs("about");
