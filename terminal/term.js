@@ -205,7 +205,8 @@ var terminalFunctions = [
     'search'];
 
 function clear(input) {
-    var data = '<p id="prompt" class="prompt">' + getName() + '@' + getMachine() + ':$&nbsp;</p><pre id="input" contenteditable="true" autofocus="true" spellcheck="false"></pre>'
+    var data = '<p id="prompt" class="prompt">' + getName() + '@' + getMachine() +
+    ':$&nbsp;</p><pre id="input" contenteditable="true" autofocus="true" spellcheck="false"></pre>'
     document.getElementById("terminal").innerHTML = data;
     init();
 }
@@ -472,7 +473,7 @@ function rollDie(args) {
     print(randRange(Number(args.substr(1))));
 }
 
-//returns a span with the color of a string, good for chaining with print()
+//returns a span with the color of a string, good for chaining
 function cssColor(string, colorName) {
     return "<span style='color:" + colorName + "'>" + string + "</span>"
 }
