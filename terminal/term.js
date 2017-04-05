@@ -427,7 +427,7 @@ function searchString(query) {
     query = query.slice(0, query.length-3); //remove " -x"
     switch (modifier) {
         case "-a":
-            window.location = "http://www.smile.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=" +
+            window.location = "https://smile.amazon.com/s/?url=search-alias%3Daps&field-keywords=" +
             query.replace(" ", "+");
             return true;
         case "-y":
