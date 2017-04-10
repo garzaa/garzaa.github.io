@@ -113,6 +113,7 @@ var bookmarks = [
     ['drive', "https://drive.google.com/drive/u/0/my-drive"],
     ['dnd', "https://drive.google.com/drive/u/0/folders/0B8tahvkUO31beDVKdk12M1QzWlE"],
     ['dynmap', "http://45.55.89.228:8123/"],
+    ['foobar', 'https://www.google.com/foobar/'],
     ['listentothis', "https://www.reddit.com/r/listentothis/"],
 	['linalg', "http://www.math.columbia.edu/~barraquand/teaching/spring2017.html"],
     ['messenger', "https://www.messenger.com/"],
