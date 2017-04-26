@@ -337,6 +337,7 @@ function search(s) {
 	print("i:   g-images")
 	print("g:   google")
     print("m:   wolfram alpha")
+    print("u:   go to a url")
     print("v:   vimeo")
     print("w:   wikipedia")
     print("y:   youtube")
@@ -459,6 +460,9 @@ function searchString(query) {
 			window.location =
 			"https://www.google.com/search?tbm=isch&q=" +
 			query.replace(" ", "+")
+			return true
+		case "-i":
+			window.location = encodeURI(query)
 			return true
     }
     return false;
