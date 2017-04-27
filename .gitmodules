@@ -1,0 +1,3 @@
+[submodule "streaker"]
+	path = streaker
+	url = https://github.com/adriangarza/streaker.git
