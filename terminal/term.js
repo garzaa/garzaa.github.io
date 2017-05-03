@@ -15,12 +15,6 @@ function handlePaste(e) {
 }
 
 $(document).ready(function() {
-    //le current year meme
-    if (navigator.appVersion.indexOf("Win")!=-1) {
-        echo((">using Windows in " + new Date().getFullYear()).split(" "))
-    } else if (navigator.appVersion.indexOf("Mac")!=-1) {
-        echo(">using MacOS".split(" "))
-    }
 	print(getTime())
     init();
 })

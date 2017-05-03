@@ -1,4 +1,4 @@
-var editElement = '<div id="editWrapper"><textarea id="editArea" rows="40" cols="80" spellcheck="false"></textarea></div>'
+var editElement = '<div id="editWrapper"><textarea id="editArea" rows="40" cols="120" spellcheck="false"></textarea></div>'
 var editing = false;
 var currentFileName = ""
 var files = {}
