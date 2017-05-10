@@ -8,7 +8,7 @@ function convert() {
 		return;
 	}
 
-	outStr = inputStr.replace(" ", "👏");
+	outStr = inputStr.split(" ").join("👏");
 
 	outputSpan.html(outStr)
 }
