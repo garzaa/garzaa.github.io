@@ -180,3 +180,10 @@ background-image: linear-gradient(to left, #f77062 0%, #fe5196 100%);
 	color: gray;
 	display: none;
 }
+
+
+.output {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;	
+}
