@@ -110,15 +110,12 @@ var hookCommands = [
 
 var bookmarks = [
 	['baristasim', "https://docs.google.com/document/d/1X72UfftLbP19X9M6KGtWqkI7VVozr-DyiREmMSbSwoU/edit"],
-	["databases", "http://www.cs.columbia.edu/~gravano/cs4111/"],
     ['drive', "https://drive.google.com/drive/u/0/my-drive"],
     ['dnd', "https://drive.google.com/drive/u/0/folders/0B8tahvkUO31beDVKdk12M1QzWlE"],
-    ['dynmap', "http://45.55.89.228:8123/"],
+	['diplomacy', "http://www.playdiplomacy.com/game_play.php?game_id=130638"],
     ['foobar', 'https://www.google.com/foobar/'],
     ['listentothis', "https://www.reddit.com/r/listentothis/"],
-	['linalg', "http://www.math.columbia.edu/~barraquand/teaching/spring2017.html"],
     ['messenger', "https://www.messenger.com/"],
-    ['ori', 'https://research.site.drupaldisttest.cc.columbia.edu/content/funding'],
     ['pawprint', 'https://pawprtprodmprt1.cuit.columbia.edu/myprintcenter/'],
     ['play', 'https://play.google.com/music/listen?hl=en&u=0#/wmp'],
     ['school', 'https://drive.google.com/drive/u/0/folders/0B57efURGOOGiVzFMWnl1QktUd2s'],
