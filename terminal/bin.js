@@ -1,5 +1,6 @@
 var timerActive = false;
 var timerCounter;
+var weatherLocation="Glendale,CA"
 
 $(document).ready(function() {weather()});
 
@@ -101,6 +102,7 @@ var hookCommands = [
     'chan',
     'date',
     'dice',
+	'forecast',
     'reddit',
     'time',
     'timer',
@@ -150,7 +152,7 @@ function weather() {
         }
     }
 
-    var json_url = "http://api.openweathermap.org/data/2.5/weather?q=Morningside+Heights,ny&appid=6e131a2916d5d45d8367b72a4675be0a";
+    var json_url = "http://api.openweathermap.org/data/2.5/weather?q="+weatherLocation+"&appid=6e131a2916d5d45d8367b72a4675be0a";
     $.when(
         $.getJSON(json_url)
     ).done(function(json_obj) {
@@ -361,6 +363,7 @@ function screenfetch(args) {
         var currentLine = ''
         if (i<artArray.length) {
             //add justifying spaces
+			console.log(width-artArray[i].length)
             currentLine += cssColor(artArray[i], 'hotpink') + (' '.repeat(width-artArray[i].length))
         }
         if (i<bodyArray.length) {
@@ -438,3 +441,174 @@ function getBrowser() {
 
     return browserName+' '+fullVersion
 }
+
+//concatenates multiline strings side by side for printing
+function hcat(str1, str2, spacer) {
+
+	//error handling
+	if (str1 == "") return str2;
+
+	//spacer is a string between the two strings, defaults to four spaces
+	if (typeof spacer === 'undefined') {
+		spacer = "    ";
+	}
+
+	var arr1 = str1.split('\n');
+	var arr2 = str2.split('\n');
+
+	//standardize width
+	var width = 0;
+	for (var i=0; i<arr1.length; i++) {
+		if (arr1[i].length > width) {
+			width = arr1[i].length;
+		}
+	}
+
+	var retLine = ''
+
+	for (var i=0; i<arr1.length || i<arr2.length; i++) {
+		var currentLine = (i==0 ? '' : '\n')
+		if (i<arr1.length) {
+			currentLine += arr1[i] + ' '.repeat(width-arr1[i].length);
+		}
+		if (i<arr2.length) {
+			currentLine += spacer + arr2[i]
+		}
+		retLine += currentLine;
+	}
+
+	return retLine
+}
+
+
+function forecast(args) {
+
+	//first check if the localStorage version is more than 20 minutes old
+    if (localStorage.getItem("cachedForecast") != null) {
+        var weatherData = JSON.parse(localStorage.getItem("cachedWeatherData"));
+        var now = new Date()
+        var then = weatherData.timestamp;
+        var diff = Math.abs(((now - then) / 1000)/60)
+        if (diff < 20) {
+            displayWeather(weatherData);
+            console.log("using cached weather data")
+            return;
+        }
+    }
+
+    var json_url = "http://api.openweathermap.org/data/2.5/forecast?q="+weatherLocation+"&appid=6e131a2916d5d45d8367b72a4675be0a";
+    $.when(
+        $.getJSON(json_url)
+    ).done(function(json_obj) {
+        displayForecast(json_obj)
+        //cache the new, updated weather data
+        json_obj.timestamp = new Date();
+        localStorage.setItem("cachedForecast", JSON.stringify(json_obj))
+	})
+}
+
+function displayForecast(w) {
+	console.log(w);
+	var hours = 5;
+	//don't want to start with a spacer
+	var fullString = ""//"+"+String(1)+":00\n"+formatWeather(w.list[0])+"\n";
+	var currentHour = new Date().getHours();
+	for (var i=0; i<hours; i++) {
+		tempHour = currentHour+(3*i);
+		tempHour = tempHour % 12;
+		if (tempHour > 12) {
+			tempHour -= 12;
+		}
+		if (tempHour == 0) {
+			tempHour = 12;
+		}
+		fullString = hcat(fullString, String(tempHour)+":00\n"+formatWeather(w.list[i])+"");
+	}
+
+	var temps = []
+	for (var i=0; i<hours; i++) {
+		temps.push(k_to_f(w.list[i]["main"]["temp_max"]));
+	}
+
+	//standardize by the lowest temperature
+	var lowest = temps[0];
+	var highest = temps[0];
+	for (var i=0; i<temps.length; i++) {
+		if (temps[i] < lowest) {
+			lowest = temps[i];
+		}
+		if (temps[i] > highest) {
+			highest = temps[i];
+		}
+	}
+	var range = highest+2-lowest;
+	graph = "";
+	for (var i=0; i<temps.length; i++) {
+		graph = hcat(graph, "\n         ".repeat(highest-temps[i])+"\n----------".repeat(temps[i]-lowest+2))
+	}
+	
+	weatherString = "";
+	for (var i=0; i<hours; i++) {
+		var weatherText = w.list[i].weather[0].main.toLowerCase();
+		var tempArt = weatherArt.sun;
+		if (weatherArt.hasOwnProperty(weatherText)) {
+			tempArt = weatherArt[weatherText];
+		}
+		weatherString = hcat(weatherString, tempArt);
+	}
+		
+	print(graph);
+	print(weatherString);
+	print(fullString+"\n");
+}
+
+function formatWeather(json_obj) {
+	var city = json_obj["name"];
+    var temp_curr = k_to_f(json_obj["main"]["temp"]);
+    var temp_low = k_to_f(json_obj["main"]["temp_min"]);
+    var temp_high = k_to_f(json_obj["main"]["temp_max"]);
+    var description = json_obj.weather[0].description;
+    var weatherCode = Number(json_obj["weather"][0]["id"]);
+    var humidity = Number(json_obj["main"]["humidity"])
+    var disgusting = (weatherCode > 500
+        && weatherCode < 800
+        || Number(temp_low) < 30
+        || Number(temp_high) > 95
+        || humidity > 75);
+    description = description.charAt(0).toUpperCase() + description.slice(1)
+    var weatherString = temp_curr + " degrees\n" //+ description + "\n"
+    disgusting ? weatherString += "Disgusting" : weatherString += "Not bad"
+	return weatherString
+}
+var weatherArt = {
+	sun:
+	" \n  \\    /  \n"+
+	"    ..   \n"+
+	" - (  ) -\n"+
+	"    ''\n"+
+	"  /    \\\n",
+
+	thunder:
+	"     ___\n"+
+	"   _(_  \\\n"+
+	" _(   \\__)\n"+
+	"(______)\n"+
+	" /_ /_\n"+
+	"   | /\n"+  
+	"    '",
+	clouds:
+	"     ___\n"+
+	"   _(_  \\\n"+
+	" _(   \\__)\n"+
+	"(______)\n"+
+	" \n"+
+	"   \n",
+	rain:
+	"     ___\n"+
+	"   _(_  \\\n"+
+	" _(   \\__)\n"+
+	"(______)\n"+
+	"// / / /\n"+
+	"/ // / \n",
+}
+
