@@ -116,6 +116,7 @@ var bookmarks = [
     ['dnd', "https://drive.google.com/drive/u/0/folders/0B8tahvkUO31beDVKdk12M1QzWlE"],
 	['diplomacy', "http://www.playdiplomacy.com/game_play.php?game_id=130638"],
     ['foobar', 'https://www.google.com/foobar/'],
+	['hackernews', 'https://news.ycombinator.com/'],
     ['listentothis', "https://www.reddit.com/r/listentothis/"],
     ['messenger', "https://www.messenger.com/"],
     ['pawprint', 'https://pawprtprodmprt1.cuit.columbia.edu/myprintcenter/'],
