@@ -106,11 +106,6 @@ $('body').keydown(function(e){
    }
 });
 
-function seek(e) {
-    var percent = e.offsetX / this.offsetWidth;
-    currentSong.currentTime = percent * currentSong.duration;
-}
-
 function pause() {
     if (firstClick === true) {
         play(songs[0]);
@@ -220,15 +215,6 @@ $(document).ready(function() {
     //$("#tracklist").append("<p><a href='songs.zip' target='_blank'> download all</a></p>")
     
     document.getElementById("trackbar-container").addEventListener("click", seek);
-
-    if (localStorage.getItem("volume") == "undefined" ||
-        localStorage.getItem("volume") == "NaN" ||
-        localStorage.getItem("volume" == null)) {
-        cachedVolume = 1;
-    } else {
-        cachedVolume = Number(localStorage.getItem("volume"));
-    }
-    updateVolume($('.volume').pageX, cachedVolume)
 })
 
 function setAlbumArt(path) {
@@ -255,8 +241,6 @@ function switchArt(newSong, direction) {
 var volumeDrag = false;
 $('.volume').on('mousedown', function (e) {
     volumeDrag = true;
-    currentSong.muted = false;
-    $('.sound').removeClass('muted');
     updateVolume(e.pageX);
 });
 $(document).on('mouseup', function (e) {
@@ -294,5 +278,10 @@ var updateVolume = function (x, vol) {
     //update volume bar and sound volume
     $('.volumeBar').css('width', percentage + '%');
     currentSong.volume = percentage / 100;
-    localStorage.setItem("volume", percentage / 100)
 };
+
+// trackbar dragginc controls
+function seek(e) {
+    var percent = e.offsetX / this.offsetWidth;
+    currentSong.currentTime = percent * currentSong.duration;
+}
