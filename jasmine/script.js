@@ -196,7 +196,7 @@ function updateTrackbar() {
 }
 
 function updateTime(song) {
-    if (!song.playing || song.currentTime == "NaN") return;
+    if (song.currentTime == "NaN") return;
     $("#time").text(
         formatTime(song.currentTime) + "/" + formatTime(song.duration)
     );
@@ -222,12 +222,12 @@ $(document).ready(function() {
     document.getElementById("trackbar-container").addEventListener("click", seek);
 
     if (localStorage.getItem("volume") == "undefined" ||
-        localStorage.getItem("volume") == "NaN") {
+        localStorage.getItem("volume") == "NaN" ||
+        localStorage.getItem("volume" == null)) {
         cachedVolume = 1;
     } else {
         cachedVolume = Number(localStorage.getItem("volume"));
     }
-    console.log("cached volume: " + cachedVolume)
     updateVolume($('.volume').pageX, cachedVolume)
 })
 
@@ -272,11 +272,12 @@ $(document).on('mousemove', function (e) {
 });
 
 var updateVolume = function (x, vol) {
+    if (vol == 0) vol = .001;
     var volume = $('.volume');
     var percentage;
     //if only volume have specificed
     //then direct update volume
-    if (vol) {
+    if (vol || vol === 0) {
         percentage = vol * 100;
     } else {
         var position = x - volume.offset().left;
@@ -293,6 +294,5 @@ var updateVolume = function (x, vol) {
     //update volume bar and sound volume
     $('.volumeBar').css('width', percentage + '%');
     currentSong.volume = percentage / 100;
-    console.log("vol to set: " + percentage / 100)
     localStorage.setItem("volume", percentage / 100)
 };
