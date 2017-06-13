@@ -185,6 +185,8 @@ function prev() {
 }
 
 function updateTrackbar() {
+    //don't move it if the trackbar is being dragged
+    if (trackbarDrag) return;
     var percent = (currentSong.currentTime / currentSong.duration) * 100
     percent += "%"
     $("#trackbar").css("width", percent)
@@ -243,15 +245,30 @@ $('.volume').on('mousedown', function (e) {
     volumeDrag = true;
     updateVolume(e.pageX);
 });
+$('#trackbar-container').on('mousedown', function(e) {
+    trackbarDrag = true;
+});
 $(document).on('mouseup', function (e) {
     if (volumeDrag) {
         volumeDrag = false;
         updateVolume(e.pageX);
     }
+    if (trackbarDrag) {
+        trackbarDrag = false;
+        seek(e)
+    }
 });
 $(document).on('mousemove', function (e) {
     if (volumeDrag) {
         updateVolume(e.pageX);
+    }
+    if (trackbarDrag) {
+        var position = e.pageX - $("#trackbar-container").offset().left;
+        var percent = 100 * position / $("#trackbar-container").width();
+        if (percent > 100) percent = 100;
+        if (percent < 0) percent = 0;
+        percent += "%"
+        $("#trackbar").css("width", percent)
     }
 });
 
@@ -281,7 +298,8 @@ var updateVolume = function (x, vol) {
 };
 
 // trackbar dragginc controls
+var trackbarDrag = false;
 function seek(e) {
-    var percent = e.offsetX / this.offsetWidth;
+    var percent = e.offsetX / document.getElementById("trackbar-container").offsetWidth;
     currentSong.currentTime = percent * currentSong.duration;
 }
