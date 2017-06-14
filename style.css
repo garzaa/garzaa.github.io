@@ -1,110 +1,101 @@
 html, body {
+	font-family: "Open Sans";
 	margin: 0;
 	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-
 }
 
-body {
-	background-color: #2b2b2d;
-	text-align: center;
-    background-repeat: no-repeat;
-	color: #FFF0D6;
+.hero-container {
+	height: 20rem;
+	min-height: 10vh;
+	width: 100vw;
 }
 
-a {
-    text-decoration: none;
-	color: inherit;
-    transition: color .1s ease;
-    -webkit-transition: color .1s ease;
+#mainpage {
+	width: 50rem;
+	max-width: 90vw;
+	margin: auto;
+	transform: translateY(-12rem);
+	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, .2);
+	animation: fadeup .4s;
 }
 
-a:hover, .activetab {
-    color: #EE7469;
-}
-
-h2 {
-	margin-top: 5vh;
-	font-family: "Roboto Mono";
-	font-size: 12pt;
-	font-weight: 200;
-}
-
-#tabs {
-    display: inline-block;
-    margin-top: 10pt;
-    padding-bottom: 5pt;
-}
-
-.tab {
-	transition: .2s;
-    cursor: pointer;
-    font-family: "Open Sans", sans-serif;
-    font-size: 20pt;
-    font-weight:600;
-	color: #FFF0D6;
-    transition: color .2s ease;
-    padding-bottom: 10pt;
-}
-
-.activetab {
-	color: #EE7469;
-}
-
-
-    #apps{
-        margin-left: 3vw;
-    }
-
-	#games {
-		margin: 0vw 3vw;
-	}
-
-	#writing {
-		margin-right: 3vw;
-	}
-
-#aboutlist>li {
-    text-align: left;
-    margin-top: 2em;
-	color: #FFF0D6;
-	font-weight: 400;
-}
-
-#aboutlist {
-    width: 30vw;
-    min-width: 20em;
-}
-
-ul {
-    margin-top: 15pt;
-	font-family: "Open Sans";
-	font-weight: 500;
-	font-style: normal;
-    list-style-type: none;
-	display: inline-block;
-
-}
-
-li {
-        margin-top: 5vh;
-		color: #EE7469;
+.content {
+	padding: 5rem;
+	animation: fadein .4s;
 }
 
 h1 {
-	font-size: 3em;
-	font-family: "Open Sans";
-	font-weight: 600;
-    margin-bottom: 1vh;
-	color: #FFF0D6;
+	margin: 0;
+	margin-bottom: 2rem;
 }
 
-#line {
-    width: 100%;
-    height: 2px;
-    background-color: #EE7469;
-    transition: .2s ease;
+h1:not(:first-child) {
+	margin-top: 3rem;
+	margin-bottom: 2rem;
+}
+
+p {
+	font-size: 10pt;
+}
+
+#nav-links {
+	position: absolute;
+	top: 21rem;
+	left: 0;
+	display: none;
+}
+
+li {
+	list-style: none;
+	list-style-type: none;
+	font-size: 10pt;
+	font-weight: 600;
+	padding-bottom: .2rem;
+}
+
+hr {
+	margin: 2rem 0rem;
+	height: 1px;
+	border: none;
+	background-color: black;
+}
+
+a {
+	text-decoration: none;
+	transition: color .1s;
+}
+
+h2 {
+	margin: 1rem 0rem;
+	margin-bottom: 0rem;
+}
+
+@media(min-width: 70rem) {
+	#nav-links {
+		display: block;
+	}
+}
+
+@keyframes fadeup {
+	from {
+		transform: translateY(-9rem);
+	}
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+}
+
+#nav-links.sticky {
+     position: fixed;
+     top: 0;
+}
+
+#secrets {
+	font-size: 9pt;
+	transform: translateY(-6rem);
+	width: 100vw;
+	text-align: center;
 }
