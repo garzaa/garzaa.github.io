@@ -1,7 +1,7 @@
 var terminalFunctions = [
 "clear",
 "help",
-"history",
+"log",
 "ls",
 "machine",
 "re",
@@ -78,7 +78,7 @@ var re = {
 	helpText: "Reloads the current window."
 }
 
-var history = {
+var log = {
 	main: function() {
 		for (var h=lastInputs.length-1; h>=0; h--) print(lastInputs[h]);
 	},
