@@ -11,11 +11,11 @@ var terminalFunctions = [
 var help = {
 	main: function(args) {
 		if (args.length == 0) {
-			print("Usage: help [function]");
+			render("Usage: help [function]");
 			return;
 		}
 		if (terminalFunctions.includes(args[0])) {
-			print(window[args[0]].helpText)
+			render(window[args[0]].helpText)
 		} else {
 			print ("Command not found.");
 		}
@@ -26,7 +26,7 @@ var help = {
 var ls = {
 	main: function(args) {
 		for(var i=0; i<terminalFunctions.length; i++) {
-			print(terminalFunctions[i]);
+			render(terminalFunctions[i]);
 		}
 	},
 	helpText: 'Lists all functions and files.'
@@ -35,7 +35,7 @@ var ls = {
 var machine = {
 	main: function(args) {
 		if (args.length == 0) {
-			print("Usage: machine [newname]");
+			render("Usage: machine [newname]");
 		} else {
 			setMachine(args[0]);
 		}
@@ -46,7 +46,7 @@ var machine = {
 var user = {
 	main: function(args) {
 		if (args.length == 0) {
-			print("Usage: name [newname]");
+			render("Usage: name [newname]");
 		} else {
 			setName(args[0]);
 		}
@@ -80,7 +80,7 @@ var re = {
 
 var log = {
 	main: function() {
-		for (var h=lastInputs.length-1; h>=0; h--) print(lastInputs[h]);
+		for (var h=lastInputs.length-1; h>=0; h--) render(lastInputs[h]);
 	},
 	helpText: "Shows the command history."
 }

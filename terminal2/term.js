@@ -77,7 +77,7 @@ function getName() {
 
 function setName(name) {
     if(name == "") {
-        print("usage: t [newname]")
+        render("usage: t [newname]")
         return;
     }
     
@@ -92,7 +92,7 @@ function getMachine() {
 
 function setMachine(str) {
     if(str == "") {
-        print("usage: machine [newname]")
+        render("usage: machine [newname]")
         return;
     }
 
@@ -113,7 +113,7 @@ function handleInput() {
 
     //intercepting the function here to search
     if (searchString(rawInput)) {
-        print("Searching for " + input.slice(0, input.length-3) + "...")
+        render("Searching for " + input.slice(0, input.length-3) + "...")
         return;
     }
 
@@ -136,7 +136,7 @@ function appendLastInput(text) {
 	$(inputPre+text+inputSuf).insertBefore("#prompt");
 }
 
-function print(text) {
+function render(text) {
 	var pre = '<p class="output">'
 	var suf = '</p>'
 	$(pre+text+suf).insertBefore("#prompt");
@@ -230,7 +230,7 @@ function randRange(n) {
 }
 
 function rollDie(args) {
-    print(randRange(Number(args.substr(1))));
+    render(randRange(Number(args.substr(1))));
 }
 
 //returns a span with the color of a string, good for chaining
@@ -254,6 +254,6 @@ function getTime() {
 }
 
 function loadURL(url) {
-    print("Loading " + url + "...")
+    render("Loading " + url + "...")
     window.location = url
 }
