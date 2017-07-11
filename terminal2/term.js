@@ -124,7 +124,7 @@ function handleInput() {
 		//call the function and supply the array of args
 		window[firstWord].main(args);
 	} else {
-		print ("Command "+firstWord+" not found. Try 'ls' for all commands.")
+		render("Command "+firstWord+" not found. Try 'ls' for all commands.")
 	}
 
 	document.getElementById("input").scrollIntoView();
