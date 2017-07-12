@@ -78,8 +78,6 @@ var close = {
             return
         }
         editing = false;
-        //save the file
-        console.log(editArea.value)
         files[currentFileName] = editArea.value;
         localStorage.setItem("textFiles", JSON.stringify(files))
         $("#editWrapper").remove();
@@ -128,5 +126,5 @@ var cat = {
 
         render("No file named '" + fileName + "'.")
     },
-    helpText: 'Renders a file.'
+    helpText: 'Renders the contents of a file to the terminal.'
 }  

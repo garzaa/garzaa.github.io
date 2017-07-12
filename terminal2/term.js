@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	init();
     //calling bin functions
-    startup();
+    binStartup();
 });
 
 var editing = false;
@@ -9,11 +9,24 @@ var editing = false;
 var terminal = {
 	userName: "guest",
 	userMachine: "start",
+    greeting: "",
 	body1: "lightgray",
 	body2: "gray",
 	bg1: "#2b2b2d",
 	bg2: "#1b1b1d",
+    shadow: "#0b0b0d",
+    editbg: "#0b0b0d"
 }
+//user-defined style properties need to go here as well as in terminal above
+var styleProps = [
+    'body1', 'body2',
+    'bg1', 'bg2',
+    'shadow',
+    'editbg'
+]
+
+//to be loaded from a local file
+var userBookmarks = []
 
 function saveTerminal() {
 	localStorage.setItem("terminal", JSON.stringify(terminal))
@@ -23,34 +36,9 @@ function clearTerminalSave() {
 }
 
 function init() {
-	//load saved terminal config
-	/*if (localStorage.getItem("terminal")) {
-		terminal = JSON.parse(localStorage.getItem("terminal"))
-	}*/
-    //try to read the data after formatting it
-    if (files[".config"]) {
-        var fileData = files[".config"];
 
-        //split into an array of separate lines
-        var fileLines = fileData.split("\n");
-        for (var i=0; i<fileLines.length; i++) {
-            //surround each line in quotes for JSON parsing
-            fileLines[i] = '"'+fileLines[i]+'"';
-        }
-        fileData = fileLines.join("\n");
-
-        //and then put the other quotes around the colon, removing spaces in the middle
-        fileData.replace(/\ *:\ */g, '":"');
-
-        //replace newlines with commas
-        fileData.replace(/\n/g, ',');
-
-        //then surround with brackets
-        fileData = "{" + fileData + "}";
-
-        console.log(fileData);
-        console.log(JSON.parse(fileData));
-    }
+    loadConfig();
+    loadBookmarks();
 
 	updatePrompt();
 	updateStyle();
@@ -58,6 +46,37 @@ function init() {
 	addListeners();
 
     $("#input").focus();
+}
+
+function loadConfig() {
+    //load saved terminal config
+    /*if (localStorage.getItem("terminal")) {
+        terminal = JSON.parse(localStorage.getItem("terminal"))
+    }*/
+    //try to read the data after formatting it
+    if (files[".config"]) {
+        userConfig = formatToJSON(files[".config"]);
+
+        //then load any similarities into terminal and proceed as normal
+        Object.keys(userConfig).forEach(function(key, index) {
+            if (key in terminal) {
+                 terminal[key] = userConfig[key];
+            }
+        });
+    }
+}
+
+function loadBookmarks() {
+    //load saved bookmarks from a file
+    if (files[".bookmarks"]) {
+        localBookmarks = formatToJSON(files[".bookmarks"])
+    } else {
+        return false;
+    }
+    //create an array of elements with the first key as the key and the second as the value
+    Object.keys(localBookmarks).forEach(function(key, value) {
+        userBookmarks.push([key, localBookmarks[key]])
+    });
 }
 
 function addListeners() {
@@ -103,7 +122,7 @@ function getName() {
 
 function setName(name) {
     if(name == "") {
-        render("usage: t [newname]")
+        render("usage: user [newname]")
         return;
     }
     
@@ -143,6 +162,11 @@ function handleInput() {
         return;
     }
 
+    //do everything else here
+    if (preCheck(rawInput)) {
+        return;
+    }
+
 	var firstWord = rawInput.split(" ")[0];
 	var args = rawInput.split(" ").slice(1); //remove the first word
 
@@ -158,20 +182,95 @@ function handleInput() {
 	document.getElementById("input").scrollIntoView();
 }
 
+//intercepts the pipeline before it looks for a named command
+//contains things like dice, searching, 4chan/reddit jumping
+function preCheck(str) {
+    //first, search for bookmarks
+    if (userBookmarks.length > 0) {
+        for (var i=0; i<userBookmarks.length; i++) {
+            if(userBookmarks[i][0] === str) {
+                loadURL(userBookmarks[i][1])
+                return true;
+            }
+        }
+    }
+
+    //:^)
+    if (str[0] == '~') {
+        eval(str.slice(1, str.length))
+        return true
+    }
+
+    //check for a subreddit
+    if (str.slice(0,3) === "/r/" || str.slice(0,3) === "/u/") {
+        loadURL("https://www.reddit.com" + str)
+        return true
+    }
+
+    //check for a 4chan board
+    if(str[0] === "/" && (
+        str[str.length-1] === "/" || str.length < 5)) {
+        //then it's not guaranteed to be a 4chan board, but let's try it anyway
+        //everything but the slash at the beginning
+        loadURL("https://boards.4chan.org/" + str.substr(1))
+        return true
+    }
+
+    //test for a web url
+    var pattern = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
+        if (pattern.test(str)) {
+            if (!str.startsWith("http")) {
+                str = "https://" + str;
+            }
+            loadURL(str);
+            return true;
+    }
+
+    //regex for dice matching, either straight or with a modifier (+x)
+    if (/^[0-9]*[d][0-9]+$/.test(str)) {
+
+        var tempArr = str.split('d')
+        var numDice = Number(tempArr[0])
+        if (numDice === 0) numDice = 1
+        var numSides = Number(tempArr[1])
+        var output = ""
+        for (var i=0; i<numDice; i++) {
+            var outcome = randRange(numSides)
+            output += outcome + " "
+        }
+        render(output);
+        return true
+    } else if (/^[0-9]*[d][0-9]+[+][0-9]+$/.test(str)) {
+        var regex = /[+][0-9]+/.exec(str)[0];
+        modifier = Number(regex.slice(1)) //remove the + to get the modifier
+        console.log(modifier)
+
+        var tempArr = str.split('d')
+        var numDice = Number(tempArr[0])
+        if (numDice === 0) numDice = 1
+        var numSides = Number(tempArr[1].split("+")[0]) //gross, but works
+        var output = ""
+        for (var i=0; i<numDice; i++) {
+            var outcome = randRange(numSides)
+            var temp = outcome + modifier
+            //highlight max rolls
+            if (outcome === numSides) temp = cssColor(temp, "#b0b0b0")
+            output += temp + " "
+        }
+        render(output);
+        return true
+    }
+}
+
 function appendLastInput(text) {
 	var inputPre = '<p><span class="prompt">'+getName()+'@'+getMachine()+':$&nbsp;</span><span class="input-old">';
 	var inputSuf = '</span></p>';
 	$(inputPre+text+inputSuf).insertBefore("#prompt");
 }
 
-function render(text, color, size) {
+function render(text, color) {
 
-    //if both are specified, surround the text with a styled span
-    if (typeof(color) != 'undefined' && typeof(size) != 'undefined') {
-        text = '<span style="color:'+color+'; font-size:'+size+';">'+text+"</span>";
-    } 
-    //otherwise, just color it
-    else if (typeof(color) != 'undefined') {
+    if (typeof(color) != 'undefined') {
         text = '<span style="color:'+color+';">'+text+"</span>";
     }
 
@@ -187,12 +286,12 @@ function updateStyle() {
 	}
 	var pre = '<style id="terminalStyle">'
 	
-    style = ":root{"+
-        "--body1: "+terminal.body1+";"+
-        "--body2: "+terminal.body2+";"+
-        "--bg1: "+terminal.bg1+";"+
-        "--bg2: "+terminal.bg2+";"+
-    +"}"
+    //build the style object with variables
+    style = ":root{"
+    for(var i=0; i<styleProps.length; i++) {
+        style += "--"+styleProps[i]+":"+terminal[styleProps[i]]+";"
+    }
+    style += "}"
 
 	var suf = '</style>'
 
@@ -319,7 +418,28 @@ function setCloseConfirm(bool) {
     }
 }
 
-//horizontally concatenates multiline strings
+function formatToJSON(fileData) {
+    //loads a bunch of lines that look like "key:value\n"
+
+    //split into an array of separate lines
+    var fileLines = fileData.split("\n");
+    for (var i=0; i<fileLines.length; i++) {
+        //surround each line in quotes for JSON parsing
+        fileLines[i] = '"'+fileLines[i]+'"';
+    }
+    fileData = fileLines.join("\n");
+
+    //and then put the other quotes around the colon, removing spaces in the middle
+    fileData = fileData.replace(/ *: */g, '":"');
+
+    //replace newlines with commas
+    fileData = fileData.replace(/\n/g, ',');
+
+    //then surround with brackets
+    return JSON.parse("{" + fileData + "}");
+}
+
+//horizontally concatenates two multiline strings
 function hcat(str1, str2, spacer) {
 
     //error handling
@@ -383,10 +503,10 @@ function autocomplete(string) {
         }
     }
 
-    if (typeof bookmarks != "undefined" && bookmarks.length > 0) {
-        for (var i=0; i<bookmarks.length; i++) {
-            if(bookmarks[i][0].indexOf(string) === 0) {
-                document.getElementById("input").innerHTML = bookmarks[i][0];
+    if (typeof userBookmarks != "undefined" && userBookmarks.length > 0) {
+        for (var i=0; i<userBookmarks.length; i++) {
+            if(userBookmarks[i][0].indexOf(string) === 0) {
+                document.getElementById("input").innerHTML = userBookmarks[i][0];
                 return
             }
         }

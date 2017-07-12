@@ -1,15 +1,19 @@
-function startup() {
+function binStartup() {
 	render(getTime());
+	if (terminal.greeting != "") {
+		render(terminal.greeting);
+	}
 }
 
 var terminalFunctions = [
+"about",
 "clear",
 "help",
 "log",
 "ls",
 "machine",
 "re",
-"reboot",
+"purge",
 "user",
 ]
 
@@ -19,20 +23,21 @@ var help = {
 			render("Usage: help [function]");
 			return;
 		}
-		if (terminalFunctions.includes(args[0])) {
+		if (terminalFunctions.includes(args[0]) || editFunctions.includes(args[0])) {
 			render(window[args[0]].helpText)
 		} else {
 			render("Command not found.");
 		}
 	},
-	helpText: 'Prints the documentation for a function.',
+	helpText: ':^)',
 }
 
 var ls = {
 	main: function(args) {
-		for(var i=0; i<terminalFunctions.length; i++) {
-			render(terminalFunctions[i]);
-		}
+		render(hcat(
+			terminalFunctions.join('\n'), 
+			editFunctions.join('\n')
+		));
 	},
 	helpText: 'Lists all functions and files.'
 }
@@ -80,7 +85,7 @@ var re = {
 	main: function() {
 		location.reload();
 	},
-	helpText: "Reloads the current window."
+	helpText: "Reloads the page."
 }
 
 var log = {
@@ -90,17 +95,29 @@ var log = {
 	helpText: "Shows the command history."
 }
 
-var reboot = {
+var purge = {
 	main: function(args) {
 		if (args[0] === "-force") {
 			localStorage.clear();
 			render("Local storage cleared. Reloading...");
 			re.main();
 		} else {
-			render("Are you sure you want to purge local storage?");
-			render("This will delete all userprefs and files.");
+			render("Are you sure you want to delete local storage?");
+			render("This will delete all userprefs, bookmarks, and files.");
 			render("Rerun with '-force' to confirm.");
 		}
 	},
-	helpText: 'Purges local storage. Mostly for debugging.',	
+	helpText: 'Clears all local storage. Requires confirmation.'	
+}
+
+var about = {
+	main: function() {
+		render("Terminal v2", "pink");
+		render(
+			"Features include file editing, history, tab autocompletion, weather, and extensibility.\n"+
+			"For local configuration, save a file called .config with the properties you want to override.\n"+
+			"Run 'terminal' in the console to see the possible overrides."
+		)
+	},
+	helpText: ""
 }
