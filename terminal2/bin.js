@@ -1,3 +1,7 @@
+function startup() {
+	render(getTime());
+}
+
 var terminalFunctions = [
 "clear",
 "help",

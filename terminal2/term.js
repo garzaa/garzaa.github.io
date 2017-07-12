@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	init();
+    //calling bin functions
+    startup();
 });
 
 var editing = false;
@@ -136,7 +138,17 @@ function appendLastInput(text) {
 	$(inputPre+text+inputSuf).insertBefore("#prompt");
 }
 
-function render(text) {
+function render(text, color, size) {
+
+    //if both are specified, surround the text with a styled span
+    if (typeof(color) != 'undefined' && typeof(size) != 'undefined') {
+        text = '<span style="color:'+color+'; font-size:'+size+';">'+text+"</span>";
+    } 
+    //otherwise, just color it
+    else if (typeof(color) != 'undefined') {
+        text = '<span style="color:'+color+';">'+text+"</span>";
+    }
+
 	var pre = '<p class="output">'
 	var suf = '</p>'
 	$(pre+text+suf).insertBefore("#prompt");
