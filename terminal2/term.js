@@ -7,12 +7,12 @@ $(document).ready(function() {
 var editing = false;
 
 var terminal = {
-	userName: "adrian",
-	userMachine: "potionseller",
-	promptColor: "lightgray",
-	outputColor: "gray",
-	bodyBg: "#2b2b2d",
-	termBg: "#1b1b1d",
+	userName: "guest",
+	userMachine: "start",
+	body1: "lightgray",
+	body2: "gray",
+	bg1: "#2b2b2d",
+	bg2: "#1b1b1d",
 }
 
 function saveTerminal() {
@@ -24,9 +24,33 @@ function clearTerminalSave() {
 
 function init() {
 	//load saved terminal config
-	if (localStorage.getItem("terminal")) {
+	/*if (localStorage.getItem("terminal")) {
 		terminal = JSON.parse(localStorage.getItem("terminal"))
-	}
+	}*/
+    //try to read the data after formatting it
+    if (files[".config"]) {
+        var fileData = files[".config"];
+
+        //split into an array of separate lines
+        var fileLines = fileData.split("\n");
+        for (var i=0; i<fileLines.length; i++) {
+            //surround each line in quotes for JSON parsing
+            fileLines[i] = '"'+fileLines[i]+'"';
+        }
+        fileData = fileLines.join("\n");
+
+        //and then put the other quotes around the colon, removing spaces in the middle
+        fileData.replace(/\ *:\ */g, '":"');
+
+        //replace newlines with commas
+        fileData.replace(/\n/g, ',');
+
+        //then surround with brackets
+        fileData = "{" + fileData + "}";
+
+        console.log(fileData);
+        console.log(JSON.parse(fileData));
+    }
 
 	updatePrompt();
 	updateStyle();
@@ -122,11 +146,13 @@ function handleInput() {
 	var firstWord = rawInput.split(" ")[0];
 	var args = rawInput.split(" ").slice(1); //remove the first word
 
-	if (terminalFunctions.includes(firstWord)) {
+    //if the command is valid
+	if (terminalFunctions.includes(firstWord) ||
+        editFunctions.includes(firstWord)) {
 		//call the function and supply the array of args
 		window[firstWord].main(args);
 	} else {
-		render("Command "+firstWord+" not found. Try 'ls' for all commands.")
+		render("Command \""+firstWord+"\" not found. Try \"ls\" for all commands.")
 	}
 
 	document.getElementById("input").scrollIntoView();
@@ -160,10 +186,14 @@ function updateStyle() {
 		$("#terminalStyle").remove();
 	}
 	var pre = '<style id="terminalStyle">'
-	var style = '.prompt, .input-old, #input {color: '+terminal.promptColor+';}\
-	.output {color: '+terminal.outputColor+';}\
-	body {'+terminal.bodyBg+'};\
-	#terminal-container {'+terminal.termBg+'}';
+	
+    style = ":root{"+
+        "--body1: "+terminal.body1+";"+
+        "--body2: "+terminal.body2+";"+
+        "--bg1: "+terminal.bg1+";"+
+        "--bg2: "+terminal.bg2+";"+
+    +"}"
+
 	var suf = '</style>'
 
 	$("head").append(pre+style+suf);
@@ -183,9 +213,9 @@ function addInput(str) {
     if (str === "" || /^[ ]+$/.test(str)) {
         return;
     }
-    if (lastInputs.length > 0) {
-        if (lastInputs[lastInputs.length - 1] != str) lastInputs.unshift(str)
-    } else lastInputs.unshift(str);
+
+    lastInputs.unshift(str);
+
     localStorage.setItem("history", JSON.stringify(lastInputs))
 }
 
@@ -268,4 +298,127 @@ function getTime() {
 function loadURL(url) {
     render("Loading " + url + "...")
     window.location = url
+}
+
+//if true, ask for confirmation to close the tab
+function setCloseConfirm(bool) {
+    if (bool) {
+        window.onbeforeunload = function (e) {
+            e = e || window.event;
+
+            // For IE and Firefox prior to version 4
+            if (e) {
+                e.returnValue = 'Sure?';
+            }
+
+            // For Safari
+            return 'Sure?';
+        };
+    } else {
+        window.onbeforeunload = function() {}
+    }
+}
+
+//horizontally concatenates multiline strings
+function hcat(str1, str2, spacer) {
+
+    //error handling
+    if (str1 == "") return str2;
+
+    //spacer is a string between the two strings, defaults to four spaces
+    if (typeof spacer === 'undefined') {
+        spacer = "    ";
+    }
+
+    var arr1 = str1.split('\n');
+    var arr2 = str2.split('\n');
+
+    //standardize width: get the longest line of the first array
+    var width = 0;
+    for (var i=0; i<arr1.length; i++) {
+        if (arr1[i].length > width) {
+            width = arr1[i].length;
+        }
+    }
+
+    var retLine = ''
+
+    for (var i=0; i<arr1.length || i<arr2.length; i++) {
+
+        //the value of the current line
+        var currentLine = (i==0 ? '' : '\n')
+
+        //if it's inside the first array, add the contents of the first array,
+        //plus enough space to make the current line match the longest line
+        if (i<arr1.length) {
+            currentLine += arr1[i] + ' '.repeat(width-arr1[i].length);
+        }
+
+        //if it's inside the second array but not the first, add enough spaces to 
+        //simulate an empty line in the first array
+        if (i>=arr1.length && i<arr2.length) {
+            currentLine += ' '.repeat(width);
+        }
+
+        //if it's inside the second array, add the contents
+        if (i<arr2.length) {
+            currentLine += spacer + arr2[i]
+        }
+
+        //then return
+        retLine += currentLine;
+    }
+
+    return retLine
+}
+
+//====================  TAB AUTO-COMPLETION ========================
+function autocomplete(string) {
+
+    //first search term commands, then maybe hooked commands
+    for (var i=0; i<terminalFunctions.length; i++) {
+        if (terminalFunctions[i].indexOf(string) === 0) {
+            document.getElementById("input").innerHTML = terminalFunctions[i];
+            return
+        }
+    }
+
+    if (typeof bookmarks != "undefined" && bookmarks.length > 0) {
+        for (var i=0; i<bookmarks.length; i++) {
+            if(bookmarks[i][0].indexOf(string) === 0) {
+                document.getElementById("input").innerHTML = bookmarks[i][0];
+                return
+            }
+        }
+    }
+
+    if (typeof editFunctions != "undefined" && editFunctions.length > 0   ) {
+        for (var i=0; i<editFunctions.length; i++) {
+            if (editFunctions[i].indexOf(string) === 0) {
+                document.getElementById("input").innerHTML = editFunctions[i];
+                return
+            }
+        }
+    }
+
+    //autocompleting based on filenames
+    var tempCommand = string.split(" ")[0];
+    if (editFunctions.indexOf(tempCommand) >= 0
+            && string.split(" ").length > 1) {
+        var beginName = string.split(" ")[1];
+        Object.keys(files).forEach(function(key, index) {
+            if (key.indexOf(beginName) === 0)   {
+                document.getElementById("input").innerHTML = tempCommand + " " + key
+                return
+            }
+        })
+    }
+
+    //looking through history
+    for (var i=0; i<lastInputs.length; i++) {
+        if (lastInputs[i].indexOf(string) === 0) {
+            document.getElementById("input").innerHTML = lastInputs[i];
+            return
+        }
+    }
 }
