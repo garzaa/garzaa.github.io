@@ -3,7 +3,6 @@ function binStartup() {
 	if (terminal.greeting != "") {
 		render(terminal.greeting);
 	}
-	weather.main()
 }
 
 var terminalFunctions = [
@@ -117,6 +116,7 @@ var about = {
 			"Run 'terminal' in the dev console to see the possible override properties.\n"+
 			"You can also create a .bookmarks file (linkTitle http://link.com/).\n"+
 			"Put something in a file called .art to add your custom ASCII art to screenfetch.\n"+
+			"Finally, you can put arbitrary startup code to execute in your .startup file. Errors are handled automatically."+
 			"\nTo see the full functionality, type 'ls'."
 		)
 	},
