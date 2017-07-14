@@ -350,7 +350,7 @@ function searchString(query) {
 			"https://www.google.com/search?tbm=isch&q=" +
 			query.replace(" ", "+")
 			return true
-		case "-i":
+		case "-u":
 			window.location = encodeURI(query)
 			return true
     }
