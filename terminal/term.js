@@ -48,7 +48,22 @@ function init() {
 
 	addListeners();
 
+    //user-defined startup
+    evalStartup();
+
     $("#input").focus();
+}
+
+function evalStartup() {
+    if (files[".startup"]) {
+        try {
+            eval(files[".startup"]);
+        }
+        catch (e) {
+            render("Error in .startup!", "indianred")
+            render(e, "indianred");
+        }
+    }
 }
 
 function loadCSS() {
@@ -56,8 +71,10 @@ function loadCSS() {
 }
 
 function loadLocation() {
-    terminal.lat = JSON.parse(localStorage.getItem("terminal")).lat
-    terminal.lon = JSON.parse(localStorage.getItem("terminal")).lon
+    if (localStorage.getItem("terminal")) {
+        terminal.lat = JSON.parse(localStorage.getItem("terminal")).lat 
+        terminal.lon = JSON.parse(localStorage.getItem("terminal")).lon 
+    }
 }
 
 function loadConfig() {
