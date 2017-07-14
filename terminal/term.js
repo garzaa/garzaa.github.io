@@ -9,7 +9,6 @@ var editing = false;
 var terminal = {
 	userName: "guest",
 	userMachine: "start",
-    greeting: "",
 	body1: "lightgray",
 	body2: "gray",
 	bg1: "#2b2b2d",
@@ -119,9 +118,9 @@ function addListeners() {
 	input = document.getElementById("input");
     input.addEventListener("keydown", function(a){
         var key = a.keyCode;
-        if(key == 13){ //enter
+        if(key == 13){ //enterf
             a.preventDefault();
-            handleInput();
+            handleInput($("#input").html());
             inputIndex = 0;
         } else if (key === 38) { //up arrow
             document.getElementById("input").innerHTML = lastInputs[inputIndex];
@@ -156,8 +155,7 @@ function getMachine() {
 }
 
 //the main terminal pipeline
-function handleInput() {
-	var rawInput = $("#input").html();
+function handleInput(rawInput) {
 	$("#input").html("");
 
 	appendLastInput(rawInput);
@@ -322,7 +320,9 @@ function addInput(str) {
         return;
     }
 
-    lastInputs.unshift(str);
+    if (lastInputs[0] == str) {
+        lastInputs.unshift(str);
+    }
 
     localStorage.setItem("history", JSON.stringify(lastInputs))
 }
