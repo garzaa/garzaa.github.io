@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,100' rel='stylesheet' type='text/css'/>
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<link href="style.css" rel="stylesheet"/>
+	<link href="ripple.css" rel="stylesheet"/>
+	<link href="scrollbar.css" rel="stylesheet"/>
+	<meta charset="utf-8">
+	<title>~</title>
+</head>
+<body>
+	<div id="main">
+		 <div id="art-container">
+		 	<img id="current-art" src="art/artangels.jpg">
+		 	<img id="new-art" src="">
+		 </div>
+		 <div id="tracklist">
+
+		 </div>
+	</div>
+
+	<div id="info-controls" class="noselect">
+
+		<div id="trackbar-container">
+			<div id="trackbar">
+				<div id="trackbar-handle"></div>
+			</div>
+		</div>
+
+		<div id="songinfo=wrapper">
+			<div id="songinfo">
+				
+			</div>
+		</div>
+
+		<div id= "controls">
+			<div id="buttons-wrapper">
+				<button onclick="prev()" class="skip" ripple="ripple" id="prev">
+						<i class="material-icons" id="prevIcon">skip_previous</i>
+				</button>
+				<button onclick="pause()" class="play" ripple="ripple" id="play">
+					<i class="material-icons" id="playIcon">play_arrow</i>
+				</button>
+				<button onclick="next()" class="skip" ripple="ripple" id="next">
+					<i class="material-icons" id="nextIcon">skip_next</i>
+				</button>
+			</div>
+		</div>
+
+		<div id="benis">
+			<div id="time">
+			0:00/0:00
+			</div>
+			<div class="volume" title="Set volume">
+				<div class="volumeContainer">
+					<div class="volumeBar"></div>
+					<div class="volumeTrack"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bg-container noselect">
+		<img id="bg-image">
+		<img id="new-bg">
+	</div>
+<script src="script.js"></script>
+<script src="ripple.js"></script>
+<script src="songs.js"></script>
+</body>
+</html>
