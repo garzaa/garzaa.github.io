@@ -49,6 +49,7 @@ var spell2 = [
 	"storm",
 	"cyclone",
 	"whirlwind",
+	"juice",
 	"storm",
 	"meteor",
 	"spray",
@@ -121,5 +122,6 @@ var spell3 = [
     "healing",
     "dread",
     "paralysis",
-    "drowsiness",
+	"drowsiness",
+	"bone hurting"
 ]

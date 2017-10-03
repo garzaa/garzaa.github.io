@@ -48,6 +48,7 @@ var curse3 = [
 	"hallucinations",
 	"violation",
 	"pain",
+	"bone hurting",
 	"stupidity",
 	"cold sweats",
 	"terror",
