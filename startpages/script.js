@@ -30,7 +30,7 @@ function ktos(key) {
 }
 
 //focus columns depending on the code
-$("body").keydown(function(e) {
+$(document).keydown(function(e) {
 	var key = e.keycode || e.which;
 	var keychar = ktos(key).toLowerCase();
 
