@@ -134,7 +134,7 @@ function displayWeather(o) {
     || humid > 75);
 
     description = description.charAt(0).toUpperCase() + description.slice(1)+"."
-    var weatherString = "It's " + tCurr + "&deg; out. "// + description + ". "
+    var weatherString = tCurr + "&deg;."// + description + ". "
     //disgusting ? weatherString += "Disgusting." : weatherString += "Not bad."
     $("#weather").html(weatherString);
     $("#description").html(description);
