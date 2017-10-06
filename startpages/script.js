@@ -17,6 +17,8 @@ $(document).ready(function() {
 	$("#col4 li").each(function(index, li) {
 		$(li).prepend(makeHeader(letters[index]));
 	})
+
+	weather();
 })
 
 function makeHeader(number) {
@@ -84,4 +86,61 @@ function hiClr() {
 
 function hiCol(objId) {
 	$(objId).addClass("highlight")
+}
+
+function weather() {
+	//first check if the localStorage version is more than 20 minutes old
+    if (localStorage.getItem("cachedWeatherData") != null) {
+        var weatherData = JSON.parse(localStorage.getItem("cachedWeatherData"));
+        var now = new Date()
+        var then = weatherData.timestamp;
+        var diff = Math.abs(((now - then) / 1000)/60)
+        if (diff < 20) {
+            displayWeather(weatherData);
+            console.log("using cached weather data")
+            return;
+        }
+    } 
+
+    //set up the right parameters
+	apiKey="1ecd8e37533eef0b7c3f92e9026bab07";
+
+	var endpoint = "http://api.openweathermap.org/data/2.5/weather?q=New+York&appid="+apiKey;
+
+	//retrieve+format data for storage
+	$.when($.getJSON(endpoint)).done(function(o) {
+		displayWeather(o);
+		o.timestamp = new Date();
+		localStorage.setItem("cachedWeatherData", JSON.stringify(o))
+	})
+}
+
+function displayWeather(o) {
+	console.log(o)
+	//where most of the numerical data is stored in the weather object
+	//contains lows, highs, etc
+	var wmain = o.main;
+	var tCurr = ktof(wmain.temp);
+	var tLo = ktof(wmain.temp_min);
+	var tHi = ktof(wmain.temp_max);
+	var description = o.weather[0].description;
+	var code = Number(o.weather[0].id);
+	var humid = Number(wmain.humidity);
+
+    var disgusting = (code > 500
+    && code < 800
+    || Number(tLo) < 30
+    || Number(tHi) > 95
+    || humid > 75);
+
+    description = description.charAt(0).toUpperCase() + description.slice(1)+"."
+    var weatherString = "It's " + tCurr + "&deg; out. "// + description + ". "
+    //disgusting ? weatherString += "Disgusting." : weatherString += "Not bad."
+    $("#weather").html(weatherString);
+    $("#description").html(description);
+
+}
+
+function ktof(kelvin) {
+    return ((9 / 5) * (kelvin - 273) + 32).toFixed(0);
 }
