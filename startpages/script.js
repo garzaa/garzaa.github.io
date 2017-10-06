@@ -116,7 +116,6 @@ function weather() {
 }
 
 function displayWeather(o) {
-	console.log(o)
 	//where most of the numerical data is stored in the weather object
 	//contains lows, highs, etc
 	var wmain = o.main;
@@ -135,9 +134,11 @@ function displayWeather(o) {
 
     description = description.charAt(0).toUpperCase() + description.slice(1)+"."
     var weatherString = tCurr + "&deg;."// + description + ". "
-    //disgusting ? weatherString += "Disgusting." : weatherString += "Not bad."
+    var commentary = "";
+    disgusting ? commentary += "Disgusting." : commentary += "Not bad."
     $("#weather").html(weatherString);
     $("#description").html(description);
+    $("#commentary").html(commentary);
 
 }
 
