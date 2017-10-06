@@ -132,10 +132,10 @@ function displayWeather(o) {
     || Number(tHi) > 95
     || humid > 75);
 
-    description = description.charAt(0).toUpperCase() + description.slice(1)+"."
-    var weatherString = tCurr + "&deg;."// + description + ". "
+    description = description.charAt(0).toUpperCase() + description.slice(1)
+    var weatherString = tCurr + "&deg;"// + description + ". "
     var commentary = "";
-    disgusting ? commentary += "Disgusting." : commentary += "Not bad."
+    disgusting ? commentary += "Disgusting" : commentary += "Not bad"
     $("#weather").html(weatherString);
     $("#description").html(description);
     $("#commentary").html(commentary);
