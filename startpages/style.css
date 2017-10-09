@@ -41,6 +41,7 @@ html, body {
 
 .link-column {
 	padding: 12pt;
+	height: 100%;
 }
 
 ul {
@@ -88,6 +89,18 @@ h2 {
 	color: white;
 }
 
+h1, h2 {
+	transition: opacity .1s;
+}
+
 .highlight h1, h2.highlight {
+	opacity: .3;
+}
+
+li:hover > h2 {
+	opacity: .3;
+}
+
+.link-column:hover > h1 {
 	opacity: .3;
 }
