@@ -1,0 +1,143 @@
+:root {
+	--p0: #272222;
+	--p1: #815555;
+	--p2: #584343;
+	--p3: #402B2B;
+	--p4: #562929;
+	--p5: #111;
+}
+
+html, body {
+	padding: 0;
+	margin: 0;
+	background-color: var(--p0);
+	font-family: monospace;
+}
+
+#center-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+}
+
+#columns-container {
+	height: 30rem;
+	display: flex;
+	align-items: center;
+}
+
+#center-container > div {
+	border: 1px solid var(--p5);
+	background-color: var(--p3);
+	box-shadow: 2px 5px 0px 0px #111;
+	width: 50rem;
+
+}
+
+#columns-container > div {
+	height: 100%;
+	flex-grow: 1;
+	border: 1px solid var(--p5);
+	border-left: none;
+	color: var(--p5);
+}
+
+.link-column {
+	padding: 12pt;
+	height: 100%;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+a, a:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#col1 {
+	background-color: var(--p1);
+}
+
+#col2 {
+	background-color: var(--p2);
+}
+
+#col3 {
+	background-color: var(--p3);
+}
+
+#col4 {
+	background-color: var(--p4);
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
+	color: white;
+	opacity: .05;
+}
+
+h2 {
+	margin: 0;
+	display: inline;
+	margin-right: 10pt;
+	opacity: .05;
+	color: white;
+}
+
+h1, h2 {
+	transition: opacity .1s;
+}
+
+.highlight h1, h2.highlight {
+	opacity: .3;
+}
+
+li:hover > h2 {
+	opacity: .3;
+}
+
+.link-column:hover > h1 {
+	opacity: .3;
+}
+
+#searchbar-container {
+	margin-bottom: 3rem;
+}
+
+#searchbar {	
+	width: 100%;
+	height: 3rem;
+	-moz-appearance: none !important;
+	background-color: var(--p1);
+	border: none;
+	outline: none;
+	padding: 1rem;
+	font-family: monospace;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+::-moz-selection {
+	color: #999;
+	background: #111;
+}
+
+::selection {
+	color: #999;
+	background: #111;
+}
