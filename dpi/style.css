@@ -1,13 +1,45 @@
+#main-container {
+	padding-top: 5rem;
+	display: flex;
+	flex-direction: row;
+}
+
+#left-column {
+	display: flex;
+	flex-grow: 1;
+	height: 60vh;
+	justify-content: center;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#right-column {
+	flex-grow: 1;
+	flex-direction: column;
+	align-content: right;
+}
+
 #main-button {
-	max-width: 100%;
 	font-size: 36pt;
 	font-weight: 800;
 	color: #ee609c;
+	margin-top: 10rem;
 	cursor: pointer;
 	padding: 1rem 3rem;
 	background-color: #2b2b2d;
 	transform: scale(1.03);
-	transition: .1s;
+	transition: .05s;
+	animation: jumpin .5s;
+	display: inline-block;
+	align-self: center;
+}
+
+#counter, #ips-counter {
+	font-size: 16pt;
+	font-family: "Roboto Mono", monospace;
+	color: #3b3b3d;
+	animation: jumpin 1s;
+	align-self: center;
 }
 
 #main-button:active {
@@ -16,14 +48,6 @@
 
 #main-button:hover {
 	transform: scale(1.05);
-}
-
-
-#center-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
 }
 
 html, body {
@@ -41,17 +65,68 @@ html, body {
     -o-user-select: none;
 } 
 
-#counter {
-	position: absolute;
-	bottom: 3rem;
-	right: 3rem;
-	font-size: 16pt;
-	font-family: "Roboto Mono", monospace;
-	color: #3b3b3d;
-}
-
-#indulgences {
+#indulgences, #ips {
 	font-size: 18pt;
 	font-weight: bold;
 	color: #ee609c;
+}
+
+@keyframes blurin {
+	from {
+		opacity: 0;
+		filter: blur(10px);
+	}
+}
+
+@keyframes jumpin {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+}
+
+#shop {
+	display: flex;
+	font-size: 16pt;
+	padding-right: 2rem;
+	flex-direction: column;
+	color: #6b6b6d;
+	float: right;
+	width: 60rem;
+	max-width: 100%;
+}
+
+#shop > div {
+	padding: .6rem 1rem;
+	border: .3rem solid #1b1b1c;
+	background-color: #2b2b2d;
+	margin-bottom: .3rem;
+	cursor: pointer;
+	max-width: 50rem;
+	transition: .2s;
+}
+
+#shop > div:hover {
+	border: .3rem solid #3b3b3d;
+}
+
+#shop > div:active {
+	transform: scale(.99);
+}
+
+h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.description {
+	float: left;
+}
+
+.price {
+	float: right;
+}
+
+.price::after {
+	content: "ℹ️";
 }

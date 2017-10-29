@@ -9,12 +9,33 @@
 	<meta charset="utf-8"> 
 </head>
 <body>
-	<div id="center-container">
-		<div id="main-button" class="noselect">
-			INDULGE
+	<div id="main-container" class="noselect">
+		<div id="left-column">
+			<div id="main-button" class="noselect">
+				INDULGE
+			</div>
+			<div id="counter">
+				indulgences: <span id="indulgences">0</span>
+				<div id="ips-counter">
+				indulgences per second: <span id="ips">0</span>
+			</div>
+			</div>
 		</div>
-		<div id="counter">
-			indulgences: <span id="indulgences">0</span>
+		<div id="right-column">
+			<div id="shop">
+				<div>
+					<h2>auto-indulger</h2>
+					<div class="description">
+						+1 ips
+					</div>
+					<div class="price">
+						25
+					</div>
+				</div>
+				<div>
+					more
+				</div>
+			</div>
 		</div>
 	</div>
 <script src="script.js"></script>
