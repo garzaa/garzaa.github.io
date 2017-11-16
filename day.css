@@ -19,5 +19,9 @@ a:hover {
 }
 
 #secrets a {
-	color: #ddd;
+	color: #aaa;
+}
+
+#portrait-container {
+	background-color: white;
 }

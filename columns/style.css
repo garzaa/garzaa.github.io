@@ -141,3 +141,26 @@ input[type="search"]::-webkit-search-results-decoration {
 	color: #999;
 	background: #111;
 }
+
+#boxtest {
+	margin-top: 10rem;
+	box-shadow: none !important;
+}
+
+#boxtest::after {
+	width: 100%;
+	height: 1rem;
+	content: "";
+	background-color: #111;
+	position: relative;
+	display: block;
+	float: right;	
+}
+
+#boxtest::before {
+	width: 1rem;
+	height: 100%;
+	content: "";
+	background-color: #111;
+	display: block;
+}
