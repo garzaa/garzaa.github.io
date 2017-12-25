@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" href="style.css" />
+	<!-- <link rel="stylesheet" href="day.css" />-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<title> Adrian Garza </title>
+</head>
+<body>
+	<div class="container">
+		<div id="description" style="text-align: center;">
+			<br>
+			Paste in any text and the page will automatically generate a new version based on frequent words in the original. More words = more variety.
+			<br>
+			<br>
+		</div>
+
+		<textarea id="input" rows='40' cols='80'>
+		</textarea>
+		<br>
+		<div style="text-align: center">
+			<input type="text" placeholder="wordcount (optional)" id="wordcount"> 
+			<button onclick="generate()">Generate!</button>
+		</div>
+		<br>
+		<div id="output">
+
+		</div>
+	</div>
+
+<script src="bigram.js"></script>
+</body>
+</html>
