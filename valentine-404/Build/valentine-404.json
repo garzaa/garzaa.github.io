@@ -1,0 +1,9 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "valentine-404.data.unityweb",
+"asmCodeUrl": "valentine-404.asm.code.unityweb",
+"asmMemoryUrl": "valentine-404.asm.memory.unityweb",
+"asmFrameworkUrl": "valentine-404.asm.framework.unityweb",
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
