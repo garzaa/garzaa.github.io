@@ -1,5 +1,5 @@
 html, body {
-	font-family: "Open Sans";
+	font-family: "Roboto";
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
@@ -28,6 +28,8 @@ html, body {
 h1 {
 	margin: 0;
 	margin-bottom: 2rem;
+	font-family: "Fira Sans Condensed", sans-serif;
+	font-weight: bold;
 }
 
 h1:not(:first-child) {
@@ -36,7 +38,7 @@ h1:not(:first-child) {
 }
 
 p {
-	font-size: 10pt;
+	font-size: 11pt;
 }
 
 #nav-links {
@@ -67,6 +69,8 @@ a {
 }
 
 h2 {
+	font-family: "Fira Sans Condensed";
+	font-style: italic;
 	margin: 1rem 0rem;
 	margin-bottom: 0rem;
 }
