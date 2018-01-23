@@ -71,6 +71,7 @@ a {
 h2 {
 	font-family: "Fira Sans Condensed";
 	font-style: italic;
+	font-weight: normal !important;
 	margin: 1rem 0rem;
 	margin-bottom: 0rem;
 }
