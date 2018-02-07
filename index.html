@@ -4,35 +4,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed" rel="stylesheet">
 	<link rel="stylesheet" href="style.css" />
-	<!-- <link rel="stylesheet" href="day.css" />-->
+	<link rel="stylesheet" href="day.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<title> Adrian Garza </title>
 </head>
 <body>
-<script>
-var day = true;
-
-if (localStorage.getItem("day") != null	) {
-	day = localStorage.getItem("day") == "true"
-}
-
-if (!day) {
-	$("head").append('<link id="nightcss" href="night.css" rel="stylesheet"/>')
-} else {
-	$("head").append('<link id="daycss" href="day.css" rel="stylesheet"/>')
-}
-
-function toggleDay() {
-	day = !day;
-	$("#daycss, #nightcss").remove();
-	if (!day) {
-		$("head").append('<link id="nightcss" href="night.css" rel="stylesheet"/>')
-	} else {
-		$("head").append('<link id="daycss" href="day.css" rel="stylesheet"/>')
-	}
-	localStorage.setItem("day", day)
-}
-</script>
 
 	<div class="hero-container" id="about">
 	</div>
@@ -131,11 +107,6 @@ function toggleDay() {
 			<h2><a href="https://www.linkedin.com/in/adrian-garza-739957b4" target="_blank">My Profile</a></h2>
 			<p>
 				on LinkedIn
-			</p>
-
-			<h2><a href="http://pixeltheosis.tumblr.com" target="_blank">My Art</a></h2>
-			<p>
-				a blog
 			</p>
 
 			<h2><a>Me</a></h2>
