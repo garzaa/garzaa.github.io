@@ -1,3 +1,6 @@
 [submodule "streaker"]
 	path = streaker
 	url = https://github.com/adriangarza/streaker.git
+[submodule "cu-lunch"]
+	path = cu-lunch
+	url = https://github.com/adriangarza/cu-lunch.git
