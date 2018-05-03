@@ -223,3 +223,11 @@ a:focus,
 a:active {
   color: #2980b9;
 }
+
+hr {
+  height: 1px;
+  padding: 0 !important;
+  color: #999;
+  background-color: darkgray;
+  border: none;
+}

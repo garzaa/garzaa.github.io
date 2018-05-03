@@ -97,3 +97,15 @@ body {
 		box-shadow: 0px 0px 0px 0px var(--shadow);
 	}
 }
+
+#terminal > .output {
+	animation: fadeup .2s;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadeup {
+	from {
+		opacity: 0;
+		transform: translateX(-.5rem);
+	}
+}
