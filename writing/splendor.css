@@ -196,7 +196,7 @@ h1 {
 /*  === End gross hack */
 
 p {
-  color: #555;
+  color: #111;
   height: auto;
   line-height: 1.45;
 }
@@ -227,7 +227,7 @@ a:active {
 hr {
   height: 1px;
   padding: 0 !important;
-  color: #999;
+  color: #555;
   background-color: darkgray;
   border: none;
 }
