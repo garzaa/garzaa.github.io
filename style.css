@@ -118,3 +118,7 @@ h2 {
 	max-width: 100%;
 	height: auto;
 }
+
+h2 > a {
+	text-decoration: underline;
+}
