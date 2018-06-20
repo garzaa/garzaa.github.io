@@ -9,7 +9,6 @@ function setup() {
 function draw() {
 	background(220);
 
-	push();
 	stroke(0);
 	strokeWeight(1);
 	fill("rgba(0, 0, 0, 0)");
@@ -21,6 +20,4 @@ function draw() {
 		ellipse(0, newRadius + 4, 4, 4);
 		rotate(TAU/steps);
 	}
-
-	pop();
 }
