@@ -22,8 +22,6 @@ function draw() {
 	
 	var startPixel = -radius;
 	var endPixel = radius;
-
-	console.log(startPixel);
 	
 	for (var i = startPixel+1; i < endPixel; i++) {
 		currentRadius = sqrt((radius * radius) - (i * i));
