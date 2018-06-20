@@ -1,0 +1,44 @@
+iframe {
+	width: 800px;
+	height: 800px;
+	margin: auto;
+	display: block;
+	outline: none;
+	border: none;
+	overflow: hidden;
+}
+
+ul {
+	width: 800px;
+	margin: auto;
+	font-family: "Roboto Mono";
+	font-weight: 300;
+	list-style: none;
+	padding: 0;
+	margin-top: 12pt;
+	font-size: 32pt;
+	color: #222;
+}
+
+li {
+	cursor: pointer;
+	display: block;
+	padding-left: 12pt;
+	transition: .2s;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+	     -moz-user-select: none; /* Firefox */
+	      -ms-user-select: none; /* Internet Explorer/Edge */
+	          user-select: none; /* Non-prefixed version, currently
+	                                supported by Chrome and Opera */
+}
+
+li:hover {
+	background-color: rgb(240, 240, 240);
+}
+
+li:active {
+	background-color: rgb(230, 230, 230);
+}
