@@ -39,6 +39,6 @@ li:hover {
 	background-color: rgb(240, 240, 240);
 }
 
-li:active {
-	background-color: rgb(230, 230, 230);
+li:active, .selected-sketch {
+	background-color: rgb(220, 220, 220);
 }
