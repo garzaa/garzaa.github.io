@@ -1,9 +1,9 @@
 var canvasDiameter = 800;
 var innerRadius = 400;
 var outerRadius = 600;
-var numParticles = 1024;
+var numParticles = 36;
 var system;
-var speed = .5;
+var speed = .2;
 
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
@@ -17,7 +17,21 @@ function setup() {
 function draw() {
 	translate(canvasDiameter/2, canvasDiameter/2);
 	background("#4B4E6D");
+	strokeWeight(1);
+	noFill();
+	stroke("white");
+	ellipse(0, 0, 150, 150);
 	rotate((frameCount/512));
+
+	//moon and orbital path
+	push()
+	rotate(-(frameCount/256));
+	ellipse(0, 0, 240, 240);
+	fill("#4B4E6D")
+	ellipse(120, 0, 20, 20);
+	pop();
+
+	//stars
 	system.run();
 }
 
@@ -42,12 +56,34 @@ Particle.prototype.update = function(){
 		this.velocity = this.velocity.sub(secondTerm);
 	}
 	this.position.add(this.velocity);
+
+	//draw lines to the two nearest particles
+	var minDistance1 = Infinity;
+	var minDistance2 = Infinity;
+	var closest1 = null;
+	var closest2 = null;
+	for (var i=0; i<system.particles.length; i++) {
+		var currDistance = this.position.dist(system.particles[i].position);
+		if (currDistance < minDistance2 && currDistance != 0) {
+			if (currDistance < minDistance1) {
+				minDistance1 = currDistance;
+				closest1 = system.particles[i];
+			} else {
+				minDistance2 = currDistance;
+				closest2 = system.particles[i];
+			}
+		}
+	}
+	strokeWeight(1);
+	stroke("white");
+	line(this.position.x, this.position.y, closest1.position.x, closest1.position.y);
+	//line(this.position.x, this.position.y, closest2.position.x, closest2.position.y);
 };
   
 Particle.prototype.display = function() {
 	fill("white");
 	strokeWeight(0);
-	ellipse(this.position.x, this.position.y, 4, 4);
+	ellipse(this.position.x, this.position.y, 5, 5);
 };
 
 var ParticleSystem = function() {
