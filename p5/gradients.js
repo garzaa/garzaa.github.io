@@ -3,15 +3,25 @@ function getCanvas(canvasNum) {
 	return document.getElementById('defaultCanvas'+canvasNum);
 }
 
-function linearGradient(x0, y0, x1, y1, w, h, startColor, endColor, canvasNum) {
+function linearGradient(x0, y0, x1, y1, w, startColor, endColor, canvasNum) {
 	var canvas = getCanvas(canvasNum);
 	var ctx = canvas.getContext("2d");
 
-	var gradient = ctx.createLinearGradient(x0, y0, x1, y1);
-	gradient.addColorStop(0, startColor);
-	gradient.addColorStop(1, endColor);
-	ctx.fillStyle = gradient;
-	ctx.fillRect(x0, y0, w, h);
+	//this is actually just a really thick line
+	ctx.lineWidth = 1;
+	ctx.lineCap = "square";
+
+	var grad= ctx.createLinearGradient(x0, y0, x1, y1);
+	grad.addColorStop(0, startColor);
+	grad.addColorStop(1, endColor);
+
+	ctx.strokeStyle = grad;
+
+	ctx.beginPath();
+	ctx.moveTo(x0, y0);
+	ctx.lineTo(x1, y1);
+
+	ctx.stroke();
 }
 
 function radialGradient(x, y, radius, innerColor, outerColor, canvasNum) {
