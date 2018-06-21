@@ -1,5 +1,5 @@
 $("li").click(function() {
-	numSketch = parseInt($(this).text());
+	numSketch = parseInt($(this).text().split(" ")[0]);
 	$("#p5sketch").attr("src", numSketch + "/index.html");
 	window.scrollTo(0, 0);
 });
