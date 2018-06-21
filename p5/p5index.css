@@ -42,3 +42,7 @@ li:hover {
 li:active, .selected-sketch {
 	background-color: rgb(220, 220, 220);
 }
+
+li span {
+	color: #999;
+}
