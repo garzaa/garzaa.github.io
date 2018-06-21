@@ -32,20 +32,12 @@ Particle.prototype.run = function() {
 };
 
 Particle.prototype.update = function(){
-	if (dist(this.position.x, this.position.y, 0, 0) > outerRadius/2) {
+	if (dist(this.position.x, this.position.y, 0, 0) > outerRadius/2 
+		|| dist(this.position.x, this.position.y, 0, 0) < innerRadius/2) {
 		var normal = createVector(this.position.x, this.position.y, 0, 0).normalize();
 		var d = this.velocity;
 		//newVelocity = d - 2(d * n)n
 		var innerParens = p5.Vector.dot(d, normal) * 2;
-		var secondTerm = normal.mult(innerParens);
-		this.velocity = this.velocity.sub(secondTerm);
-	}
-	else if (dist(this.position.x, this.position.y, 0, 0) < innerRadius/2) {
-		var normal = createVector(this.position.x, this.position.y, 0, 0).normalize();
-		var d = this.velocity;
-		//newVelocity = d - 2(d * n)n
-		var innerParens = p5.Vector.dot(d, normal) * 2;
-		console.log(innerParens);
 		var secondTerm = normal.mult(innerParens);
 		this.velocity = this.velocity.sub(secondTerm);
 	}
@@ -53,9 +45,7 @@ Particle.prototype.update = function(){
 };
   
 Particle.prototype.display = function() {
-	var hue = (165 + abs(sin(frameCount/32)));
-	colorMode(HSB);
-	fill(hue, 56, 69);
+	fill("white");
 	strokeWeight(0);
 	ellipse(this.position.x, this.position.y, 4, 4);
 };
