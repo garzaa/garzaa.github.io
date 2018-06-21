@@ -17,11 +17,12 @@ function setup() {
 function draw() {
 	translate(canvasDiameter/2, canvasDiameter/2);
 	background("#4B4E6D");
+	rotate((frameCount/512));
 	system.run();
 }
 
 var Particle = function(x, y) {
-	this.velocity = createVector(random(-1, 1), random(1, -1)).normalize().mult(speed);
+	this.velocity = createVector(random(-1, 1), random(1, -1)).mult(speed);
 	this.position = createVector(x, y);
 };
 
