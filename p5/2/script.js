@@ -11,18 +11,15 @@ function setup() {
 }
 
 function draw() {
-	background("#F5E3E0");
+	background("#DCCDE8");
 
 	translate(canvasDiameter/2, canvasDiameter/2);
-
-	stroke("#F9B4ED");
-	strokeCap(ROUND);
-	strokeWeight(1);
-	fill("rgba(0, 0, 0, 0)");
 	
 	var startPixel = -radius;
 	var endPixel = radius;
 	
+	var widths = [];
+
 	for (var i = startPixel+1; i < endPixel; i++) {
 		currentRadius = sqrt((radius * radius) - (i * i));
 		if (i < 0) {
@@ -30,7 +27,17 @@ function draw() {
 		} else {
 			currentRadius += sin((-frameCount / speed) + (i / waveLength)) * magnitude * pow(abs(i/ 200), 2);
 		}
-		line(-currentRadius, i, currentRadius, i);
+		widths.push(currentRadius);
 	}
 
+	noStroke();
+	fill("#B37BA4");
+	beginShape();
+	for (var j=0; j<widths.length; j++) {
+		vertex(widths[j], j+startPixel);
+	}
+	for (var j=widths.length-1; j>=0; j--) {
+		vertex(-widths[j], j+startPixel);
+	}
+	endShape(CLOSE);
 }
