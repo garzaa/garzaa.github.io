@@ -47,7 +47,7 @@ function draw() {
             var y = cos((shapeWidth/2 - j) / (shapeWidth/(PI)));
             var currHeight = (noise(newYoff+.01 * j) * 4) * y * noise(xoff + i/16);
             var normalizedHeight = -shapeHeight * currHeight/(i);
-            heights.push(normalizedHeight * 1.2)
+            heights.push(normalizedHeight)
         }
 
         console.log(heights);
