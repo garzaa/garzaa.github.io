@@ -5,10 +5,14 @@ var lineWidth = 3;
 var lineGap = 40;
 
 var lines = [];
+var img;
+
+function preload() {
+	img = loadImage("heatwave.png"); 
+}
 
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
-	img = loadImage("heatwave.png"); 
 	
 	//starting at (lineGap % canvasDiameter) / 2 is to center the grid in the canvas
 	for (var i=-(lineGap % canvasDiameter) / 2; i<canvasDiameter+lineGap; i += lineGap) {
