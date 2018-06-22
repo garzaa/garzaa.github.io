@@ -1,93 +1,110 @@
 var canvasDiameter = 800;
 var circleRadius = 100;
-var numParticles = 36;
+var numCircles = 10;
 var circles = [];
+var points = [];
+
+//perlin noise
+var yoff = 0.0;
+var xoff = 0.0;
 
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
-	for (var i=0; i<numParticles; i++) {
+	for (var i=0; i<numCircles; i++) {
 		circles.push(createGoodVector());
+	}
+
+	for (var i=0; i<circles.length; i++) {
+		var p = circles[i];
+		var x = p.x + map(noise(xoff + i/2), 0, 1, -circleRadius,circleRadius);
+		var y = p.y + map(noise(yoff + i/2), 0, 1, -circleRadius,circleRadius);
+		ellipse(x, y, 10, 10);
+		points.push(new Particle(x, y));
+	}
+
+	//then get initial closest points
+	for (var j=0; j<points.length; j++) {
+		var minDistance1 = Infinity;
+		var minDistance2 = Infinity;
+		var closest1 = null;
+		var closest2 = null;
+		for (var i=0; i<points.length; i++) {
+			var currDistance = points[j].position.dist(points[i].position);
+			if (currDistance < minDistance2 && currDistance != 0) {
+				if (currDistance < minDistance1) {
+					minDistance1 = currDistance;
+					closest1 = points[i];
+				} else {
+					minDistance2 = currDistance;
+					closest2 = points[i];
+				}
+			}
+		}
+		points[j].closest1 = closest1;
+		points[j].closest2 = closest2;
 	}
 }
 
 //"good": no collisions between circles
 function createGoodVector() {
-	var tempVec = createVector(canvasDiameter);
+	var tempVec = createVector(
+		random(circleRadius, canvasDiameter-circleRadius),
+		random(circleRadius, canvasDiameter-circleRadius)
+	);
+	var collision = true;
+	while (collision) {
+		collision = false;
+		for (var i=0; i<circles.length; i++) {
+			if (tempVec.dist(circles[i]) < circleRadius) {
+				collision = true;
+				break;
+			}
+		}
+		if (collision) {
+			tempVec = createVector(
+				random(circleRadius, canvasDiameter-circleRadius),
+				random(circleRadius, canvasDiameter-circleRadius)
+			);
+		}
+	}
+	return tempVec;
 }
 
 function draw() {
-	translate(canvasDiameter/2, canvasDiameter/2);
 	background("#FF6435");
 	strokeWeight(1);
-	noFill();
+	fill("#FF6435");
 	stroke("white");
 
-	//stars
-	
+	//get new perlin random position for points
+	for (var i=0; i<points.length; i++) {
+		var p = circles[i];
+		var x = p.x + map(noise(xoff + i/2), 0, 1, -circleRadius,circleRadius);
+		var y = p.y + map(noise(yoff + i/2), 0, 1, -circleRadius,circleRadius);
+		points[i].position = createVector(x, y);
+	}
+
+	xoff += 0.001;
+	yoff += 0.002;
+
+	for (var j=0; j<points.length; j++) {
+		var p = points[j];
+		var v1 = p.position;
+		var v2 = p.closest1.position;
+		var v3 = p.closest2.position;
+		triangle(
+			v1.x, 
+			v1.y, 
+			v2.x, 
+			v2.y, 
+			v3.x, 
+			v3.y
+		)
+	}
 }
 
 var Particle = function(x, y) {
-	this.velocity = createVector(random(-1, 1), random(1, -1)).mult(speed);
 	this.position = createVector(x, y);
-};
-
-Particle.prototype.run = function() {
-	this.update();
-	this.display();
-};
-
-Particle.prototype.update = function(){
-	if (dist(this.position.x, this.position.y, 0, 0) > outerRadius/2 
-		|| dist(this.position.x, this.position.y, 0, 0) < innerRadius/2) {
-		var normal = createVector(this.position.x, this.position.y, 0, 0).normalize();
-		var d = this.velocity;
-		//newVelocity = d - 2(d * n)n
-		var innerParens = p5.Vector.dot(d, normal) * 2;
-		var secondTerm = normal.mult(innerParens);
-		this.velocity = this.velocity.sub(secondTerm);
-	}
-	this.position.add(this.velocity);
-
-	//draw lines to the two nearest particles
-	var minDistance1 = Infinity;
-	var minDistance2 = Infinity;
-	var closest1 = null;
-	var closest2 = null;
-	for (var i=0; i<system.particles.length; i++) {
-		var currDistance = this.position.dist(system.particles[i].position);
-		if (currDistance < minDistance2 && currDistance != 0) {
-			if (currDistance < minDistance1) {
-				minDistance1 = currDistance;
-				closest1 = system.particles[i];
-			} else {
-				minDistance2 = currDistance;
-				closest2 = system.particles[i];
-			}
-		}
-	}
-	strokeWeight(1);
-	stroke("white");
-	line(this.position.x, this.position.y, closest1.position.x, closest1.position.y);
-	//line(this.position.x, this.position.y, closest2.position.x, closest2.position.y);
-};
-  
-Particle.prototype.display = function() {
-	fill("white");
-	strokeWeight(0);
-	ellipse(this.position.x, this.position.y, 5, 5);
-};
-
-var ParticleSystem = function() {
-	this.particles = [];
-};
-  
-ParticleSystem.prototype.addParticle = function(x, y) {
-	this.particles.push(new Particle(x, y));
-};
-
-ParticleSystem.prototype.run = function() {
-	for (var i=0; i<this.particles.length; i++) {
-		var p = this.particles[i];
-		p.run();
-	}
-};
+	this.closest1 = null;
+	this.closest2 = null;
+}
