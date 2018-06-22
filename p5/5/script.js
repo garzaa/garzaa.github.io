@@ -37,8 +37,8 @@ function draw() {
 		for (var j=0; j<lines[i].length; j++) {
 			var currPoint = lines[i][j];
 			tempLine.push({
-				x: currPoint.x + sin(frameCount / 16 + i) * 8,
-				y: currPoint.y + sin(frameCount / 16 + j) * 8
+				x: currPoint.x + sin(frameCount / 16 + i+j) * 8,
+				y: currPoint.y + sin(frameCount / 16 + i+j) * 8
 			});
 		}
 		newLines.push(tempLine);
@@ -50,8 +50,8 @@ function draw() {
 			if (i != newLines.length-1 && j != newLines[i].length - 1) {
 				var currPoint = newLines[i][j];
 				//draw the line down and to the right
-				line(currPoint.x, currPoint.y, currPoint.x, newLines[i][j+1].y);
-				line(currPoint.x, currPoint.y, newLines[i+1][j].x, currPoint.y);
+				line(currPoint.x, currPoint.y, newLines[i][j+1].x, newLines[i][j+1].y);
+				line(currPoint.x, currPoint.y, newLines[i+1][j].x,  newLines[i+1][j].y);
 			}
 		}
 	}
