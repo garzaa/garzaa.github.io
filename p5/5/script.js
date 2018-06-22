@@ -62,9 +62,9 @@ function draw() {
 
 	image(
 		img, 
-		0 - sin(frameCount / 16) * 4, 
-		0 + cos(frameCount / 16) * 2, 
-		800 + sin(frameCount / 16) * 4, 
-		800 - cos(frameCount / 16) * 2	
+		0, 
+		0, 
+		800,
+		800	
 	);
 }
