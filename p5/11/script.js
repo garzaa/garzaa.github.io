@@ -47,7 +47,8 @@ function draw() {
             var y = cos((shapeWidth/2 - j) / (shapeWidth/(PI)));
             var currHeight = (noise(newYoff+.01 * j) * 4) * y * noise(xoff + i/16);
             var normalizedHeight = -shapeHeight * currHeight/(i);
-            heights.push(normalizedHeight)
+            var m = (frameCount < 500 ? frameCount/500 : 1);
+            heights.push(normalizedHeight * m);
         }
         
         for (var j=0; j<heights.length; j++) {
