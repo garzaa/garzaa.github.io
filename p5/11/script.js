@@ -49,9 +49,7 @@ function draw() {
             var normalizedHeight = -shapeHeight * currHeight/(i);
             heights.push(normalizedHeight)
         }
-
-        console.log(heights);
-
+        
         for (var j=0; j<heights.length; j++) {
             vertex(j, heights[j]);
         }
