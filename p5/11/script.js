@@ -17,8 +17,8 @@ function setup() {
 }
 
 function draw() {
-    var upperColor = color("#fff");
-    var lowerColor = color("#14BDEB");
+    var upperColor = color("#fe3b58");
+    var lowerColor = color("#ff7272");
 
     background(bg);
     translate(canvasDiameter/2, canvasDiameter/2);
