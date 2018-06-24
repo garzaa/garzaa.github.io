@@ -31,7 +31,6 @@ $(document).keypress(function(e) {
 })
 
 function loadSketch(numSketch) {
-	console.log("loading " + numSketch);
 	currentSketch = numSketch;
 	$("#p5sketch").attr("src", numSketch + "/index.html");
 	$("li").removeClass("selected-sketch");
