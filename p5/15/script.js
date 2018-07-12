@@ -28,7 +28,6 @@ function draw() {
 		var currentRadius = (radius - (i**2)/2) - abs(sin(frameCount / 64)+1) * i/4;
 		var p1 = ptoc(currentRadius, 0);
 		var p2 = ptoc(currentRadius, TAU/3);
-		var p3 = ptoc(currentRadius, 2*TAU/3);	
 		
 		//draw points along each line, increasing with the number of layers and starting with one
 		//starting from the outside despite i increasing
