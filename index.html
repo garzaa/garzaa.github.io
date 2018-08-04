@@ -1,122 +1,35 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Fira+Sans;300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono;200" rel="stylesheet">
 	<link rel="stylesheet" href="style.css" />
-	<link rel="stylesheet" href="day.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+	<script src="script.js"></script>
 	<title> Adrian Garza </title>
 </head>
 <body>
-
-	<div class="hero-container" id="about">
+<div class="splash-container">
+	<div id="canvas-container">
 	</div>
-
-	<div id="mainpage">
-		<div class="content">
-			<h1>Adrian Garza</h1>
-			<p>
-				Howdy. I just graduated Columbia University with a BA in Computer Science. In my free time these days I often work on small pieces of art and media.
-			</p>
-			<p>
-				I'm a full-time software engineer and dev/ops goblin at Autodesk SF.
-			</p>
-
-			<h1 id="apps">Apps</h1>
-
-			<h2><a href="https://foodbridge.herokuapp.com/">Fridge</a></h2>
-			<p>
-				Winner of People's Choice at the 2017 Code2040 Fellows Hackathon, Fridge aims to connect charities and food banks with companies and private events that end up with extra food.
-			</p>
-
-			<h2><a href="http://garzaa.github.io/dnd/">D&amp;D</a></h2>
-			<p>
-				An all-in-one Dungeons and Dragons dice roller/item generator. A lot of the data was gathered from <a href="https://www.reddit.com/r/BehindTheTables/">/r/BehindTheTables</a>, but a good deal of it is my own creation.
-			</p>
-
-			<h2><a href="http://garzaa.github.io/terminal/">Terminal</a></h2>
-			<p>
-				An html/css/js terminal emulator. I made it in a day for a coding challenge and have since expanded upon it by adding various small, helpful functions.
-			</p>
-
-			<h1 id="games">Art and Design</h1>
-			<h2><a href="http://garzaa.github.io/p5/">p5.js sketches</a></h2>
-			<p>
-				Small motion graphics made with <a href="https://p5js.org/">p5.js</a>.
-			</p>
-
-			<h2><a href="https://jasminedon.github.io/" target="_blank">jasminedon.github.io</a></h2>
-			<p>
-				A website made for my friend to showcase her writing.
-			</p>
-
-
-			<h2><a href="http://garzaa.github.io/game-demo/">Vapor Trails</a></h2>
-			<p>
-				A 2D metroidvania. Open source and still in development.
-			</p>
-
-			<h2><a href="http://garzaa.github.io/re/">/re/</a></h2>
-			<p>
-				My final project for my reincarnation class: a simple platformer where your past bodies stay in the level and need to be used to get past hazards and over gaps. Check out the source code <a href="http://github.com/adriangarza/re/">here</a>. 
-			</p>
-
-			<h2><a href="https://dr-slunch.itch.io/baristasim">BaristaSim</a></h2>
-			<p>
-				Create endless, diverse coffee orders for a hungry, pumpkin-esque humanoid. There's a story in the works (much like the bartending game <a href="http://store.steampowered.com/app/447530/VA11_HallA_Cyberpunk_Bartender_Action/" target="_blank"> VA-11 Hall-A</a>) but for now, enjoy the faithful representation of making an endless stream of drinks for one volatile customer.
-			</p>
-
-
-			<h2><a href="http://www.indiedb.com/games/morrow-peak/" target="_blank">Morrow Peak</a></h2>
-			<p>
-				A project that was never fully realized, Morrow Peak boasts an inventory system, full-featured NPC interactions, a hybrid 2D/2.5D system, and some of my finest pixel art and character animations. It also has three levels in total. 
-			</p>
-
-			<h1 id="fiction">Fiction</h1>
-			<h2><a href="http://garzaa.github.io/writing/timestamp/" target="_blank">Timestamp</a></h2>
-			<p>
-				The short story that inspired Morrow Peak. Or maybe it was the other way around. I recommend checking out both for the full experience.
-			</p>
-
-			<h2><a href="http://garzaa.github.io/writing/soulrecall/" target="_blank">Soul Recall</a></h2>
-			<p>
-				A one-off short story about space travel and asteroid mining. It follows a specific found-documentation format from a short story class assignment.
-			</p>
-
-
-			<h1 id="personal">Personal</h1>
-
-			<h2><a href="http://garzaa.github.io/resume.pdf">My Resume</a></h2>
-			<p>
-				a PDF
-			</p>
-
-			<h2><a href="https://www.linkedin.com/in/adrian-garza-739957b4" target="_blank">My Profile</a></h2>
-			<p>
-				on LinkedIn
-			</p>
-
-			<h2><a>Me</a></h2>
-			<p>
-				a man
-			</p>
-
-			<div id="portrait-container">
-				<img src="portrait.jpg" id="portrait">
-			</div>
-		</div>
+	<h1>Adrian Garza</h1>
+</div>
+<div class="splash-container" id="content">
+	<div class="text-container">
+		<p>
+			In my free time I like to make <a href="https://garzaa.github.io/p5/">art</a> and <a href="https://dr-slunch.itch.io/" target="_blank">games</a>.
+			<br>
+			Sometimes I write <a href="https://garzaa.github.io/writing/timestamp/">short</a> <a href="https://garzaa.github.io/writing/soulrecall/">stories</a>.
+		</p>
+		<p>
+			I'm also occasionally available for <a href="https://jasminedon.github.io/" target="_blank">website design</a>.
+		</p>
+		<p>
+			I work as a software/devops engineer at Autodesk. I graduated from Columbia University in 2018.
+			<br>
+			(<a href="https://garzaa.github.io/resume.pdf" target="_blank">resume</a>, <a href="https://www.linkedin.com/in/adrian-garza-739957b4/" target="_blank">linkedin</a>)
+		</p>
 	</div>
-	<div id="secrets"><a href="http://garzaa.github.io/secrets/">:^)</a></div>
-<script>
-//keep navlinks in view 
-var $window = $(window),
-   $stickyEl = $('#nav-links'),
-   elTop = $stickyEl.offset().top;
-
-$window.scroll(function() {
-    $stickyEl.toggleClass('sticky', $window.scrollTop() > elTop);
-});
-</script>
+</div>
 </body>
 </html>

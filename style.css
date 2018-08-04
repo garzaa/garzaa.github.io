@@ -1,124 +1,51 @@
+h1 {
+	font-family: "Roboto Mono";
+	font-size: 64pt;
+	color: #e41b49;
+	font-weight: 200;
+	max-width: 50%;
+}
+
+.splash-container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #2a2a2c;
+	flex-direction: column;
+}
+
 html, body {
-	font-family: "Roboto";
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
 }
 
-.hero-container {
-	height: 20rem;
-	min-height: 10vh;
-	width: 100vw;
+#content {
+	font-family: "Fira Sans";
+	background-color: rgb(240, 240, 240);
 }
 
-#mainpage {
-	width: 50rem;
-	max-width: 90vw;
-	margin: auto;
-	transform: translateY(-12rem);
-	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, .2);
-	animation: fadeup .4s;
-}
-
-.content {
-	padding: 5rem;
-	animation: fadein .4s;
-}
-
-h1 {
-	margin: 0;
-	margin-bottom: 2rem;
-	font-family: "Fira Sans Condensed", sans-serif;
-	font-weight: bold;
-}
-
-h1:not(:first-child) {
-	margin-top: 3rem;
-	margin-bottom: 2rem;
+.text-container {
+	max-width: 40em;
 }
 
 p {
-	font-size: 12pt;
-}
-
-#nav-links {
-	position: absolute;
-	top: 21rem;
-	left: 0;
-	display: none;
-}
-
-li {
-	list-style: none;
-	list-style-type: none;
-	font-size: 10pt;
-	font-weight: 600;
-	padding-bottom: .2rem;
-}
-
-hr {
-	margin: 2rem 0rem;
-	height: 1px;
-	border: none;
-	background-color: black;
+	font-size: 14pt;
+	color: #2b2b2d;
 }
 
 a {
-	text-decoration: none;
-	transition: color .1s;
+	color: inherit;
+	transition: .2s;
 }
 
-h2 {
-	font-family: "Fira Sans Condensed";
-	font-style: italic;
-	font-weight: normal !important;
-	margin: 1rem 0rem;
-	margin-bottom: 0rem;
+a:hover {
+	color: rgb(228, 27, 73)
 }
 
-@media(min-width: 70rem) {
-	#nav-links {
-		display: block;
-	}
-}
-
-@keyframes fadeup {
-	from {
-		transform: translateY(-9rem);
-	}
-}
-
-@keyframes fadein {
-	from {
-		opacity: 0;
-	}
-}
-
-#nav-links.sticky {
-     position: fixed;
-     top: 0;
-}
-
-#secrets {
-	font-size: 9pt;
-	transform: translateY(-6rem);
-	width: 100vw;
-	text-align: center;
-}
-
-#portrait-container {
-	width: 50%;
-	margin:auto;
+.text-container {
+	border: 1px dotted #e41b49;
 	padding: 2rem;
-	padding-bottom: 3rem;
-	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, .2);
-}
-
-#portrait {
-	max-width: 100%;
-	height: auto;
-}
-
-h2 > a {
-	text-decoration: underline;
 }
