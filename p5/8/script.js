@@ -3,7 +3,8 @@ var innerRadius = 400;
 var outerRadius = 600;
 var numParticles = 36;
 var system;
-var speed = .2;
+var speed = 0.05;
+var rotationDiv = 1024;
 
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
@@ -21,11 +22,11 @@ function draw() {
 	noFill();
 	stroke("white");
 	ellipse(0, 0, 150, 150);
-	rotate((frameCount/512));
+	rotate((frameCount/rotationDiv));
 
 	//moon and orbital path
 	push()
-	rotate(-(frameCount/256));
+	rotate(-(frameCount/rotationDiv));
 	ellipse(0, 0, 240, 240);
 	fill("#4B4E6D")
 	ellipse(120, 0, 20, 20);
@@ -81,9 +82,12 @@ Particle.prototype.update = function(){
 };
   
 Particle.prototype.display = function() {
+	if (!('size' in this)) {
+		this.size = Math.floor(Math.random() * (7 - 3)) + 3;
+	}
 	fill("white");
 	strokeWeight(0);
-	ellipse(this.position.x, this.position.y, 5, 5);
+	ellipse(this.position.x, this.position.y, this.size, this.size);
 };
 
 var ParticleSystem = function() {
