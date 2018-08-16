@@ -26,7 +26,7 @@ function draw() {
 
 	//moon and orbital path
 	push()
-	rotate(-(frameCount/rotationDiv));
+	rotate(-(frameCount/rotationDiv) / 2);
 	ellipse(0, 0, 240, 240);
 	fill("#4B4E6D")
 	ellipse(120, 0, 20, 20);
