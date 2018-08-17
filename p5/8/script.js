@@ -6,6 +6,11 @@ var system;
 var speed = 0.05;
 var rotationDiv = 1024;
 var maxParticleDistance = 65;
+var orbitalRadius = 115;
+var earthRadius = 200;
+var moonBehindEarth = false;
+var lastMoonPos = null;
+var negSignLastFrame = false;
 
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
@@ -20,15 +25,14 @@ function draw() {
 	translate(canvasDiameter/2, canvasDiameter/2);
 	background("#4B4E6D");
 	strokeWeight(1);
+	push();
 	noFill();
 	stroke("white");
-	ellipse(0, 0, 100, 100);
 	rotate((frameCount/rotationDiv));
-
-	drawMoon();
-
 	//stars
 	system.run();
+	pop();
+	drawMoon();
 }
 
 var Particle = function(x, y) {
@@ -103,12 +107,40 @@ ParticleSystem.prototype.run = function() {
 	}
 };
 
-
 function drawMoon() {
 	push();
-	rotate(-(frameCount/rotationDiv) * 2);
-	ellipse(0, 0, 240, 240);
-	fill("#4B4E6D")
-	ellipse(120, 0, 20, 20);
+	stroke(255);
+	fill("#4B4E6D");
+	var xPos = sin(frameCount / (rotationDiv / 2)) * orbitalRadius;
+	var yPos = -sin(frameCount / (rotationDiv / 2)) * orbitalRadius / 2;
+
+	checkFlip(createVector(xPos, yPos));
+
+	if (moonBehindEarth) {
+		ellipse(xPos, yPos, 20, 20);
+		//then draw the line in front of the moon
+	}
+
+	//earth
+	ellipse(0, 0, earthRadius, earthRadius);
+
+	if (!moonBehindEarth) {
+		ellipse(xPos, yPos, 20, 20);
+	}
+	lastMoonPos = createVector(xPos, yPos);
 	pop();
+}
+
+function checkFlip(moonPos) {
+	if (lastMoonPos == null) {
+		return;
+	}
+
+	var diff = p5.Vector.sub(moonPos, lastMoonPos);
+	if ((diff.x > 0 && negSignLastFrame) || (diff.x < 0 && !negSignLastFrame)) {
+		print("flipped!");
+		moonBehindEarth = !moonBehindEarth;
+	}
+
+	negSignLastFrame = diff.x < 0;
 }
