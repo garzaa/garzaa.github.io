@@ -5,6 +5,7 @@ var numParticles = 36;
 var system;
 var speed = 0.05;
 var rotationDiv = 1024;
+var maxParticleDistance = 65;
 
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
@@ -24,13 +25,7 @@ function draw() {
 	ellipse(0, 0, 100, 100);
 	rotate((frameCount/rotationDiv));
 
-	//moon and orbital path
-	push()
-	rotate(-(frameCount/rotationDiv) / 2);
-	ellipse(0, 0, 240, 240);
-	fill("#4B4E6D")
-	ellipse(120, 0, 20, 20);
-	pop();
+	drawMoon();
 
 	//stars
 	system.run();
@@ -78,12 +73,15 @@ Particle.prototype.update = function(){
 	strokeWeight(1);
 	stroke("white");
 	line(this.position.x, this.position.y, closest1.position.x, closest1.position.y);
-	//line(this.position.x, this.position.y, closest2.position.x, closest2.position.y);
+
+	if (p5.Vector.dist(this.position, closest2.position) < maxParticleDistance) {
+		line(this.position.x, this.position.y, closest2.position.x, closest2.position.y);
+	}
 };
   
 Particle.prototype.display = function() {
 	if (!('size' in this)) {
-		this.size = Math.floor(Math.random() * (7 - 3)) + 3;
+		this.size = Math.floor(Math.random() * (8 - 5)) + 5;
 	}
 	fill("white");
 	strokeWeight(0);
@@ -104,3 +102,13 @@ ParticleSystem.prototype.run = function() {
 		p.run();
 	}
 };
+
+
+function drawMoon() {
+	push();
+	rotate(-(frameCount/rotationDiv) * 2);
+	ellipse(0, 0, 240, 240);
+	fill("#4B4E6D")
+	ellipse(120, 0, 20, 20);
+	pop();
+}
