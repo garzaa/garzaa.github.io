@@ -37,3 +37,7 @@ function draw() {
 	}
 	endShape();
 }
+
+document.addEventListener("click", function() {
+    window.location = "https://creamygelato.bandcamp.com/track/yoga-pants";
+});
