@@ -13,7 +13,6 @@ $(document).ready(function() {
 $(document).keypress(function(e) {
 	console.log(e.which);
 	if (e.which == 100) {
-		console.log("adsb");
 		//D
 		if (currentSketch < totalSketches) {
 			loadSketch(currentSketch+1);
