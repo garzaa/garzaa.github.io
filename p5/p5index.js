@@ -8,6 +8,15 @@ var totalSketches = 1;
 
 $(document).ready(function() {
 	totalSketches = $("#sketches").children().length;
+	if (window.location.hash) {
+		var num = parseInt(window.location.hash.substring(1));
+		if (!isNaN(num)) {
+			if (num <= totalSketches) {
+				loadSketch(num);
+			}
+		}
+	
+	}
 });
 
 $(document).keypress(function(e) {
