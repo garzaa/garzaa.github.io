@@ -6,7 +6,9 @@ function preload() {
   }
 
 function setup() {
-	createCanvas(canvasDiameter, canvasDiameter);
+	var cnv = createCanvas(canvasDiameter, canvasDiameter);
+
+	cnv.parent('canvas_parent')
 
 	song.loop();
 	
@@ -37,7 +39,3 @@ function draw() {
 	}
 	endShape();
 }
-
-document.addEventListener("click", function() {
-    window.location = "https://creamygelato.bandcamp.com/track/yoga-pants";
-});
