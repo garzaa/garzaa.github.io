@@ -1,4 +1,4 @@
-var canvasDiameter = 1000;
+var canvasDiameter = 800;
 var song, analyzer;
 
 var radius = 500;
