@@ -17,7 +17,6 @@ function setup() {
 	
 	// frequency sensor
 	fft = new p5.FFT();
-	amp = new p5.Amplitude();
 }
 
 function draw() {
@@ -31,8 +30,6 @@ function draw() {
 
 	// draw the frequency thing
 	var waveform = fft.waveform(); 
-
-	var level = amp.getLevel();
 
 	rotate(frameCount/16);
 	beginShape();
