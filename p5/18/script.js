@@ -25,18 +25,18 @@ function draw() {
 	background(0);
 	stroke('red');
 	strokeWeight(5);
-	noFill();
+	fill(0);
 
 	translate(canvasDiameter/2, canvasDiameter/2);
 
 	lvl = song.getLevel();
 
-	for (var j=1; j<=numShapes; j++) {
+	for (var j=numShapes-1; j>0; j--) {
 		push();
 		rotate(sin((j+1) * frameCount/256) * (j % 2 == 0 ? 1 : -1));
 		print("starting a new shape");
 		// i = number of sides
-		numSides = j + 2
+		numSides = 5
 		beginShape();
 		for (var i=0; i<numSides; i++) {
 			var rot = (i/numSides) * TAU;
