@@ -3,3 +3,17 @@ html, body, canvas {
   padding: 0;
   overflow: hidden;
 }
+
+/* if it's not in an iframe */
+@media(min-width: 801px) {
+	html, body {
+		background-color: black;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
