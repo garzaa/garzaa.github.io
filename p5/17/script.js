@@ -1,4 +1,5 @@
-var canvasDiameter = 800;
+var w = window.innerWidth;
+var h = window.innerHeight;
 var song, analyzer;
 
 var radius = 500;
@@ -9,7 +10,7 @@ function preload() {
   }
 
 function setup() {
-	createCanvas(canvasDiameter, canvasDiameter);
+	createCanvas(w, h);
 
 	song.start();
 	
@@ -25,7 +26,7 @@ function draw() {
 	strokeWeight(3);
 	noFill();
 
-	translate(canvasDiameter/2, canvasDiameter/2);
+	translate(w/2, h/2);
 
 	// draw the frequency thing
 	var waveform = fft.waveform(); 

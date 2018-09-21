@@ -1,8 +1,9 @@
-var canvasDiameter = 800;
+var w = window.innerWidth;
+var h = window.innerHeight;
 var song, analyzer, amp;
 
 var radius = 500;
-var amplitude = 10;
+var amplitude = 50;
 
 var numShapes = 10;
 var shapeGap = 70;
@@ -12,7 +13,7 @@ function preload() {
   }
 
 function setup() {
-	createCanvas(canvasDiameter, canvasDiameter);
+	createCanvas(w, h);
 
 	song.start();
 	
@@ -27,7 +28,7 @@ function draw() {
 	strokeWeight(5);
 	fill(0);
 
-	translate(canvasDiameter/2, canvasDiameter/2);
+	translate(w/2, h/2);
 
 	lvl = song.getLevel();
 
