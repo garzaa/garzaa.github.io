@@ -1,63 +1,122 @@
 var radius = 400;
 var canvasDiameter = 600;
-var lineGap = 25;
-var lineLength = lineGap - 8;
-var lines = [];
-var margin = 0;
-var rectWidth = 600;
-var rectHeight = 800;
-var scalar = 2;
+
+var offWhite = 'rgba(240, 240, 255, 0.5)'
+
+var w = window.innerWidth;
+var h = window.innerHeight;
+
+var leftParticles = []
+var rightParticles = []
+
+var lastMousePos = null;
+
+var pixelsPerParticle = 10;
+var maxParticleDistance = 60;
+var minParticleDistance = 10;
+var particleLifetime = 240;
+
+var cDistance = 0;
 
 function setup() {
-    var cnv = createCanvas(800, 600);
-    cnv.parent("canvas-container")
-    
-    for (var i=margin + (lineGap % rectWidth) / 2; i<rectWidth-margin; i+=lineGap) {
-    tempLine = [];
-    for (var j=margin + (lineGap % rectHeight) / 2; j<rectHeight-margin; j+=lineGap) {
-      	var currPoint = {
-       		x: j,
-       		y: i
-		};
-		tempLine.push(currPoint);
-    }
-    lines.push(tempLine);
-    }
+    var cnv = createCanvas(w, h);
+	cnv.parent("canvas-container")
+	lastMousePos = createVector(mouseX, mouseY);
 }
 
 function draw() {
-    background('rgb(42, 42, 44)');
-    translate(800/2, 600/2);
+    background('#255ed5');
+	stroke(offWhite);
+	strokeWeight(3);
+	noFill();
 
-    noStroke();
-    fill('rgb(42, 42, 44)');
-    rect(-rectHeight/2, -rectWidth/2, rectHeight, rectWidth);
+	var currMousePos = createVector(mouseX, mouseY);
+	var mouseDistance = currMousePos.dist(lastMousePos);
+	if (mouseDistance > pixelsPerParticle || (cDistance > pixelsPerParticle)) {
+		cDistance = 0
+		createParticlePair(currMousePos, p5.Vector.sub(lastMousePos, currMousePos).normalize());
+	} else {
+		cDistance += mouseDistance;
+	}
 
-	stroke('rgba(228, 27, 73, 0.3)');
-	strokeWeight(2);
-	for (var i=0; i<lines.length; i++) {
-		for (var j=0; j<lines[i].length; j++) {
-			var currPoint = lines[i][j];
-			var current = createVector(rectHeight/2 - currPoint.x, rectWidth/2 - currPoint.y);
-			var towards = createVector(sin(frameCount/32)*64, -cos(frameCount/32)*64).sub(current);
-			var newVec = current.add(towards.div(16));
-			createX(newVec.x, newVec.y, 3);  
+	lastMousePos = currMousePos;
+
+	runParticles(leftParticles);
+	runParticles(rightParticles);
+}
+
+function createParticlePair(posVec, dirVec) {
+	dirVec.normalize();
+	leftParticles.push(new Particle(posVec, dirVec.rotate(PI), leftParticles));
+	//rightParticles.push(new Particle(posVec, dirVec.rotate(PI), rightParticles));
+}
+
+class Particle {
+	constructor(posVec, dirVec, otherParticles) {
+		this.otherParticles = null;
+		this.lifetime = particleLifetime;
+		this.velocity = dirVec;
+		this.position = posVec;
+		this.otherParticles = otherParticles;
+	}
+
+	update() {
+		this.position.add(this.velocity);
+
+		var closest = [];
+		for (var i = 0; i < this.otherParticles.length; i++) {
+			var currDistance = this.position.dist(this.otherParticles[i].position);
+			if (currDistance < maxParticleDistance && currDistance != 0) {
+				closest.push(this.otherParticles[i])
+			}
+		}
+
+		if (closest.length == 0) {
+			var closestParticle = null;
+			var maxDistance = Infinity;
+			this.otherParticles.forEach(i => {
+				var d = this.position.dist(i.position);
+				if (d < maxDistance && i.closest != this && d > minParticleDistance) {
+					closestParticle = i;
+					maxDistance = d;
+				}
+			})
+			if (closestParticle != null) {
+				closest.push(closestParticle);
+			}
+		}
+
+		strokeWeight(1);
+
+		closest.forEach(i => {
+			line(this.position.x, this.position.y, i.position.x, i.position.y);
+			ellipse(this.position.x, this.position.y, 3, 3);
+		});
+
+		this.lifetime--;
+	}
+
+	display() {
+		fill("white");
+		strokeWeight(0);
+	}
+
+	run() {
+		this.update();
+		this.display();
+	}
+}
+
+function runParticles(particleArray) {
+	var toSplice = []
+	for (var i=0; i<particleArray.length; i++) {
+		particleArray[i].run();
+		if (particleArray[i].lifetime < 0) {
+			toSplice.push(i);
 		}
 	}
 
-    stroke('rgba(228, 27, 73, 0.5)');
-    for (var i=0; i<lines.length; i++) {
-		for (var j=0; j<lines[i].length; j++) {
-			var currPoint = lines[i][j];
-			var current = createVector(rectHeight/2 - currPoint.x, rectWidth/2 - currPoint.y);
-			var towards = createVector(sin(frameCount/32)*64, -cos(frameCount/32)*64).sub(current);
-			var newVec = current.add(towards.div(32));
-			createX(newVec.x, newVec.y, 3);
-		}
-    }
-}
-
-function createX(xcoord, ycoord, width) {
-	line(xcoord-width, ycoord-width, xcoord+width, ycoord+width);
-	line(xcoord-width, ycoord+width, xcoord+width, ycoord-width);
+	toSplice.forEach(index => {
+		particleArray.splice(index, 1);
+	});
 }
