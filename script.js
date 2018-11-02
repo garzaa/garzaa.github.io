@@ -112,6 +112,7 @@ function runParticles(particleArray) {
 	for (var i=0; i<particleArray.length; i++) {
 		particleArray[i].run();
 		if (particleArray[i].lifetime < 0) {
+			// avoid modifying in place
 			toSplice.push(i);
 		}
 	}

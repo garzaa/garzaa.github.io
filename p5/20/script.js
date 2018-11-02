@@ -18,7 +18,7 @@ var particleLifetime = 240;
 var cDistance = 0;
 
 function setup() {
-    var cnv = createCanvas(w, h);
+    createCanvas(w, h);
 	lastMousePos = createVector(mouseX, mouseY);
 }
 
@@ -88,9 +88,9 @@ class Particle {
 
 		closest.forEach(i => {
 			line(this.position.x, this.position.y, i.position.x, i.position.y);
-			ellipse(this.position.x, this.position.y, 3, 3);
 		});
-
+		
+		ellipse(this.position.x, this.position.y, 3, 3);
 		this.lifetime--;
 	}
 
@@ -110,6 +110,7 @@ function runParticles(particleArray) {
 	for (var i=0; i<particleArray.length; i++) {
 		particleArray[i].run();
 		if (particleArray[i].lifetime < 0) {
+			// avoid modifying in place
 			toSplice.push(i);
 		}
 	}
