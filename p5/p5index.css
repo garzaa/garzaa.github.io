@@ -25,6 +25,7 @@ li {
 	display: block;
 	padding-left: 12pt;
 	transition: .2s;
+	display: block;
 
 	-webkit-touch-callout: none; /* iOS Safari */
 	  -webkit-user-select: none; /* Safari */
@@ -45,4 +46,10 @@ li:active, .selected-sketch {
 
 li span {
 	color: #999;
+}
+
+.feature {
+	margin-left: 1em;
+	filter: grayscale();
+	opacity: 0.2;
 }

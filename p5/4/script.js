@@ -4,7 +4,6 @@ var canvasDiameter = 800;
 var speed = 32;
 var magnitude = 10;
 var waveLength = 4;
-var lineWidth = 3;
 
 var numVertices = 6;
 var numLayers = 10;
@@ -33,7 +32,7 @@ function draw() {
 			var currColor = lerpColor(outsideColor, insideColor, j/numLayers)
 			fill(currColor);
 			var newRadius = radius - (j*j) * 2;
-			ellipse(0, newRadius, lineWidth, lineWidth);
+			ellipse(0, newRadius, 5, 5);
 			pop();
 		}
 
