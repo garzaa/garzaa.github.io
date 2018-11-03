@@ -20,7 +20,6 @@ $(document).ready(function() {
 });
 
 $(document).keypress(function(e) {
-	console.log(e.which);
 	if (e.which == 100) {
 		//D
 		if (currentSketch < totalSketches) {

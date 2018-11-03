@@ -58,7 +58,6 @@ function draw() {
 		//propagate on delay
 		if ((frameCount+ i) % 5 == 0 
 			&& i > 0) {
-			print("propageted");
 			currPoint.radius = shapes[i-1].radius;
 		}
 

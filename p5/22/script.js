@@ -62,29 +62,41 @@ function isEven(i) {
 
 class swappableCircle {
 	constructor(idx, c) {
-		this.swappingWith = null;
-		this.swapping = false;
 		this.c = c;
 		this.idx = idx;
-		this.originalPosition = getCoords(index);
+		this.position = this.originalPosition;
+		this.swapping = false;
+		this.targetPosition = null;
 	}
 
 	display() {
 		push();
-		if (!this.swapping) {
 			fill(this.c);
-			posVec = getCoords(this.idx);
-			ellipse()
-		}
+			ellipse(this.position.x, this.position.y, circleDiameter, circleMargin);
 		pop();
 	}
 
 	update() {
-
+		if (this.swapping) {
+			//lerp towards target
+			//if difference is less than 1 pixel, just move there	
+		}
 	}
 
 	run() {
 		this.update();
 		this.display();
 	}
+
+	startSwap(i, initiator=false) {
+		this.swapping = true;
+		this.targetPosition = colors[i].position;
+		if (initiator) {
+			colors[i].startSwap(this.idx, false);
+		}
+	}
+}
+
+function randomSwap(i) {
+	var otherIdx = Math.floor(Math.random() * 2 == 0) ? 1 : -1;
 }

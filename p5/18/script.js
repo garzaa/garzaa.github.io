@@ -35,7 +35,6 @@ function draw() {
 	for (var j=numShapes-1; j>0; j--) {
 		push();
 		rotate(sin((j+1) * frameCount/256) * (j % 2 == 0 ? 1 : -1));
-		print("starting a new shape");
 		// i = number of sides
 		numSides = 5
 		beginShape();
