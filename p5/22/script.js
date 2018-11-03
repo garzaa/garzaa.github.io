@@ -99,8 +99,6 @@ class SwappableCircle {
 		this.targetPosition = circles[otherIdx].position;
 		if (initiator) {
 			circles[otherIdx].startSwap(this.idx, false);
-			print(circles);
-			print(colors);
 		}
 	}
 }
@@ -119,6 +117,5 @@ function randomSwap() {
 			i2 = i1 + (Math.floor(Math.random() * 2 == 0) ? 2 : -1);
 		}
 	}
-	print(i1, i2);
 	circles[i1].startSwap(i2, true);
 }
