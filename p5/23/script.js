@@ -9,9 +9,10 @@ var margin = 200;
 var yoff = 0.0;
 var xoff = 0.0;
 
+var from, to;
+
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
-	colorMode(HSB, 1, 1, 1);
 
 	for (var i=margin + (lineGap % canvasDiameter) / 2; i<canvasDiameter-margin; i+=lineGap) {
 		tempLine = [];
@@ -21,10 +22,13 @@ function setup() {
 		}
 		lines.push(tempLine);
 	}
+
+	from = color("red");
+	to = color("blue");
 }
 
 function draw() {
-	background(0, 0, 0.1);
+	background("#0b0b0d");
 
 	strokeWeight(3);
 	noFill();
@@ -52,6 +56,5 @@ function calcVec(x, y) {
 }
 
 function getColor(theta) {
-	var currDist = map(theta/TAU, 0, 1, 0.3, 1);
-	stroke(currDist, 0.8, 0.9);
+	stroke(lerpColor(from, to, theta/TAU));
 }
