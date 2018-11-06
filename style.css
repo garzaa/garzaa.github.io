@@ -2,8 +2,15 @@ h1 {
 	font-family: "Roboto Mono", monospace;
 	font-size: 64pt;
 	color: rgb(240, 240, 255);
-	font-weight: 100;
 	max-width: 50%;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Safari */
+		-khtml-user-select: none; /* Konqueror HTML */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+				user-select: none; /* Non-prefixed version, currently
+									supported by Chrome and Opera */
 }
 
 .splash-container {
@@ -32,7 +39,8 @@ html, body {
 }
 
 p {
-	color: #2b2b2d;
+	color: rgb(240, 240, 255);
+	font-weight: 200;
 }
 
 a {
@@ -41,11 +49,11 @@ a {
 }
 
 a:hover {
-	color: #255ed5
+	color: white;
 }
 
 .text-container {
-	border: 1px dotted #255ed5;
+	background-color: #255ed5;
 	padding: 2rem;
 }
 
