@@ -28,7 +28,7 @@ function setup() {
 	}
 	strokeWeight(3);
 	noFill();
-	stroke("orange");
+	stroke("lightseagreen");
 }
 
 function draw() {
