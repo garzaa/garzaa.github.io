@@ -10,6 +10,12 @@ var from, to;
 var eye = null;
 var moveRadius = 100;
 
+var img;
+
+function preload() {
+	img = loadImage("bg.png"); 
+}
+
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
 
@@ -26,10 +32,18 @@ function setup() {
 	to = color("indigo");
 
 	eye = new p5.Vector(0, 0);
+
+	stroke("mediumpurple");
 }
 
 function draw() {
-	background("#0b0b0d");
+	image(
+		img, 
+		0, 
+		0, 
+		800,
+		800	
+	);
 
 	// update eye pos
 	var offset = frameCount/256;
@@ -44,7 +58,7 @@ function draw() {
 			var a = calcVec(currPoint.x - eye.x, currPoint.y - eye.y);
 			push();
 				translate(currPoint.x, currPoint.y);
-				getColor(currPoint);
+				//getColor(currPoint);
 				rotate(a.heading());
 				rotate(-frameCount/128);
 				line(-lineLength/2, 0, lineLength/2, 0);

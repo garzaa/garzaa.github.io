@@ -11,6 +11,12 @@ var xoff = 0.0;
 
 var from, to;
 
+var img;
+
+function preload() {
+	img = loadImage("bg.png"); 
+}
+
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
 
@@ -25,10 +31,18 @@ function setup() {
 
 	from = color("lime");
 	to = color("blue");
+
+	stroke("limegreen");
 }
 
 function draw() {
-	background("#0b0b0d");
+	image(
+		img, 
+		0, 
+		0, 
+		800,
+		800	
+	);
 
 	strokeWeight(3);
 	noFill();
@@ -41,7 +55,7 @@ function draw() {
 			var currPoint = lines[i][j];
 			push();
 				translate(currPoint.x, currPoint.y);
-				getColor(theta);
+				//getColor(theta);
 				rotate(theta);
 				//rotate(-frameCount/128);
 				line(-lineLength/2, 0, lineLength/2, 0);
