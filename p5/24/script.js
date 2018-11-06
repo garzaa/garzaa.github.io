@@ -5,11 +5,10 @@ var lineLength = lineGap - 8;
 var lines = [];
 var margin = 200;
 
-//perlin noise
-var yoff = 0.0;
-var xoff = 0.0;
-
 var from, to;
+
+var eye = null;
+var moveRadius = 100;
 
 function setup() {
 	createCanvas(canvasDiameter, canvasDiameter);
@@ -23,34 +22,42 @@ function setup() {
 		lines.push(tempLine);
 	}
 
-	from = color("lime");
-	to = color("blue");
+	from = color("orange");
+	to = color("indigo");
+
+	eye = new p5.Vector(0, 0);
 }
 
 function draw() {
 	background("#0b0b0d");
 
+	// update eye pos
+	var offset = frameCount/256;
+	eye.x = (canvasDiameter/2) - (cos(offset) * moveRadius);
+	eye.y = (canvasDiameter/2) + (sin(offset) * moveRadius);
+
 	strokeWeight(3);
 	noFill();
 	for (var i=0; i<lines.length; i++) {
-		var currXOff = xoff + i/10;
 		for (var j=0; j<lines[i].length; j++) {
-			xoff += 0.00001
-			var currYOff = yoff + j/10;
-			var theta = map(noise(currXOff,currYOff),0,1,0,TAU);
 			var currPoint = lines[i][j];
+			var a = calcVec(currPoint.x - eye.x, currPoint.y - eye.y);
 			push();
 				translate(currPoint.x, currPoint.y);
-				getColor(theta);
-				rotate(theta);
+				getColor(currPoint);
+				rotate(a.heading());
 				rotate(-frameCount/128);
 				line(-lineLength/2, 0, lineLength/2, 0);
 			pop();
-			yoff += 0.00001;
 		}
 	}
 }
 
-function getColor(theta) {
-	stroke(lerpColor(from, to, theta/TAU));
+function calcVec(x, y) {
+	return new p5.Vector(y - x, -x - y);
+}
+
+function getColor(a) {
+	b = map(a.dist(eye), 0, 200, 0, 1)
+	stroke(lerpColor(from, to, b));
 }
