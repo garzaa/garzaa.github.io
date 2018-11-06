@@ -28,7 +28,7 @@ function setup() {
 	}
 	strokeWeight(3);
 	noFill();
-	stroke("lightseagreen");
+	stroke("coral");
 }
 
 function draw() {
