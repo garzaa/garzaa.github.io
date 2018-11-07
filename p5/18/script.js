@@ -36,7 +36,7 @@ function draw() {
 		push();
 		rotate(sin((j+1) * frameCount/256) * (j % 2 == 0 ? 1 : -1));
 		// i = number of sides
-		numSides = 5
+		numSides = 5;
 		beginShape();
 		for (var i=0; i<numSides; i++) {
 			var rot = (i/numSides) * TAU;
