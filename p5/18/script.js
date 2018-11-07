@@ -10,7 +10,7 @@ var shapeGap = 70;
 
 function preload() {
 	song = new p5.AudioIn();
-  }
+}
 
 function setup() {
 	createCanvas(w, h);
