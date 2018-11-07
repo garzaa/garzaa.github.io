@@ -14,7 +14,7 @@ var xoff = 0.0;
 var corner;
 
 function preload() {
-	//img = loadImage("bg.png"); 
+	img = loadImage("bg.png"); 
 }
 
 function setup() {
@@ -31,19 +31,18 @@ function setup() {
 	strokeWeight(3);
 	noFill();
 	stroke("#15d8f2");
-	corner = new p5.Vector(canvasDiameter-margin, canvasDiameter-margin);
+	corner = new p5.Vector(margin, canvasDiameter-margin);
 }
 
 function draw() {
-	//image(img, 0, 0, 800, 800);
-	background(240);
+	image(img, 0, 0, 800, 800);
 	strokeWeight(3);
 	noFill();
 	for (var i=0; i<lines.length; i++) {
 		var currXOff = xoff + i/10;
 		for (var j=0; j<lines[i].length; j++) {
 			var currPoint = lines[i][j];
-			var theta = sin(currPoint.dist(corner) / (lineGap) - frameCount/32);
+			var theta = sin(currPoint.dist(corner) / (lineGap*3) - frameCount/32);
 			push();
 				translate(currPoint.x, currPoint.y);
 				rotate(theta);
