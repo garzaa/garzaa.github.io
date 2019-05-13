@@ -8,7 +8,17 @@ iframe {
 	overflow: hidden;
 }
 
-ul {
+#nav {
+	display: flex;
+	flex-direction: row;
+}
+
+.nav-button {
+	flex-grow: 1;
+	text-align: center;
+}
+
+ul, #nav {
 	width: 800px;
 	margin: auto;
 	font-family: "Roboto Mono";
@@ -20,12 +30,10 @@ ul {
 	color: #222;
 }
 
-li {
+li, .nav-button {
 	cursor: pointer;
-	display: block;
 	padding-left: 12pt;
 	transition: .2s;
-	display: block;
 
 	-webkit-touch-callout: none; /* iOS Safari */
 	  -webkit-user-select: none; /* Safari */
@@ -36,11 +44,15 @@ li {
 	                                supported by Chrome and Opera */
 }
 
-li:hover {
+li {
+	display: block;
+}
+
+li:hover, .nav-button:hover {
 	background-color: rgb(240, 240, 240);
 }
 
-li:active, .selected-sketch {
+li:active, .selected-sketch, .nav-button:active {
 	background-color: rgb(220, 220, 220);
 }
 

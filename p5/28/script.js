@@ -34,12 +34,6 @@ function draw() {
 		ellipse(0, 0, circleRadius, circleRadius);
 		radiusTriangle(0, 0, 100);
 	pop();
-	push();
-		translate(circleRadius/2, 0);
-		rotate(-frameCount/SPEED);
-		ellipse(0, 0, circleRadius, circleRadius);
-		radiusTriangle(0, 0, 100);
-	pop();
 
 	push();
 		rotate(-frameCount/SPEED + 2*TAU/3);	
@@ -48,19 +42,17 @@ function draw() {
 		radiusTriangle(0, 0, 100);
 	pop();
 	push();
-		translate(circleRadius/2, 0);
-		rotate(-frameCount/SPEED + 2*TAU/3);
-		ellipse(0, 0, circleRadius, circleRadius);
-		radiusTriangle(0, 0, 100);
-	pop();
-	
-	push();
 		rotate(-frameCount/SPEED + TAU/3);	
 		translate(-circleRadius/2, 0);
 		ellipse(0, 0, circleRadius, circleRadius);
 		radiusTriangle(0, 0, 100);
 	pop();
-	
+	push();
+		translate(circleRadius/2, 0);
+		rotate(1 * (-frameCount/SPEED + 2*TAU/3));
+		ellipse(0, 0, circleRadius, circleRadius);
+		radiusTriangle(0, 0, 100);
+	pop();
 }
 
 function radiusTriangle(x, y, rad) {

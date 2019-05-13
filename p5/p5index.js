@@ -21,19 +21,9 @@ $(document).ready(function() {
 
 $(document).keypress(function(e) {
 	if (e.which == 100) {
-		//D
-		if (currentSketch < totalSketches) {
-			loadSketch(currentSketch+1);
-		} else {
-			loadSketch(1);
-		}
+		d();
 	} else if (e.which == 97) {
-		//A
-		if (currentSketch > 1) {
-			loadSketch(currentSketch-1);
-		} else {
-			loadSketch(totalSketches);
-		}
+		a();
 	}
 })
 
@@ -43,4 +33,29 @@ function loadSketch(numSketch) {
 	$("li").removeClass("selected-sketch");
 	$("#sketches li:nth-child("+numSketch+")").addClass("selected-sketch");
 	window.scrollTo(0, 0);
+}
+
+$("#d").click(function() {
+	d();
+})
+
+
+$("#a").click(function() {
+	a();
+})
+
+function a() {
+	if (currentSketch > 1) {
+		loadSketch(currentSketch-1);
+	} else {
+		loadSketch(totalSketches);
+	}
+}
+
+function d() {
+	if (currentSketch < totalSketches) {
+		loadSketch(currentSketch+1);
+	} else {
+		loadSketch(1);
+	}
 }
