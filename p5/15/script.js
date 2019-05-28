@@ -1,41 +1,53 @@
-var canvasDiameter = 800
-var song, analyzer
+var w = window.innerWidth;
+var h = window.innerHeight;
+var song, analyzer;
+
+var radius = 500;
+var amplitude = 10;
 
 function preload() {
-	song = loadSound('yogapants.mp3');
+	song = new p5.AudioIn();
   }
 
 function setup() {
-	var cnv = createCanvas(canvasDiameter, canvasDiameter);
+	createCanvas(w, h);
 
-	cnv.parent('canvas_parent')
-
-	song.loop();
+	song.start();
 	
 	// frequency sensor
 	fft = new p5.FFT();
+	fft.setInput(song);
 }
 
 function draw() {
-	background('#ffd1d7');
+	background(0);
 	strokeCap(PROJECT);
-	stroke(100);
+	stroke('255');
 	strokeWeight(3);
 	noFill();
-	// draw the top 3 lines of the square
-	line(canvasDiameter/2-200, canvasDiameter/2-200, canvasDiameter/2+200, canvasDiameter/2-200)
-	line(canvasDiameter/2+200, canvasDiameter/2+200, canvasDiameter/2+200, canvasDiameter/2-200)
-	line(canvasDiameter/2-200, canvasDiameter/2+200, canvasDiameter/2-200, canvasDiameter/2-200)
+
+	translate(w/2, h/2);
 
 	// draw the frequency thing
 	var waveform = fft.waveform(); 
 
+	rotate(frameCount/16);
 	beginShape();
 	for (var i = 0; i< waveform.length; i++){
-		var x = map(i, 0, waveform.length, 1, 400);
-		var y = map( waveform[i], -1, 1, -100, 100);
-		y *= sin((i/waveform.length)*PI)
-		vertex(canvasDiameter/2-200 + x,canvasDiameter/2+202 + y);
+		var deg = map(i, 0, waveform.length, 0, TAU*12);
+		// scale waveform
+		var rad = map(logTransform(waveform[i]), 0, 1, 0, amplitude);
+		rad += 100;
+		rad *= log(i/waveform.length);
+		vertex(
+			cos(deg) * rad,
+			sin(deg) * rad
+		)
 	}
 	endShape();
+}
+
+function logTransform(x) {
+	// initial spike and gradually level off as x reaches 1
+	return log(15*x + 18) - 0.5
 }

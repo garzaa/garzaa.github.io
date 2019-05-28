@@ -1,70 +1,112 @@
-var w = window.innerWidth;
-var h = window.innerHeight;
+var radius = 400;
 
-var song, analyzer, amp;
+var bg = 220
+var fg = 50
 
-var margin = 50;
-var origShapeSize = 10;
-var amplitude = 40;
-var shapes = []
+var w = 800;
+var h = 800;
+var margin = 200;
+var mean = 0;
+var sd = 0.5;
 
-function preload() {
-	song = new p5.AudioIn();
-  }
+var particleInterval = 10;
+var minParticleDistance = 10;
+var maxParticleDistance = 200;
+var particleLifetime = 100;
+
+var particleArray = [];
 
 function setup() {
-	createCanvas(w, h);
-
-	song.start();
-	
-	// frequency sensor
-	fft = new p5.FFT();
-	fft.setInput(song);
-	background(0);
-	noFill();
-
-	for (var i=margin + (margin % w) / 2; i<w-margin; i+=margin+origShapeSize/2) {
-		tempShape = [];
-		for (var j=margin + (margin % h) / 2; j<h-margin; j+=margin+origShapeSize/2) {
-			var currPoint = {
-				x: i,
-				y: j,
-				radius: origShapeSize/2
-			};
-			stroke(255);
-			strokeWeight(2);
-			tempShape.push(currPoint);
-			ellipse(i, j, 10, 10);
-		}
-		shapes.push(tempShape);
-	}
-	shapes = [].concat.apply([], shapes);
+    createCanvas(w, h);
+	lastMousePos = createVector(mouseX, mouseY);
+	background(bg);
+	fill(fg);
+	particleArray = [];
+	stroke(fg);
+	strokeWeight(1);
 }
 
 function draw() {
-	stroke(255);
-	strokeWeight(5);
-	background(0);
+	background(bg);
+	translate(w/2, h/2);
+	rotate(sin(frameCount/256) * HALF_PI)
+	runParticles();
 
-	lvl = song.getLevel();
-	var waveform = fft.waveform(); 
+	if (frameCount % particleInterval == 0) {
+		createParticle();
+	}
+}
 
-	amp = waveform[floor(waveform.length/2)]
-	shapes[0].radius = origShapeSize + (amp * amplitude);
+function createParticle() {
+	var posX = random(-(w/2) + margin, (w/2) - margin);
+	var posY = random(-(h/2) + margin, (h/2) - margin);
+	posVec = createVector(posX, posY);
 
-	for (var i=0; i<shapes.length; i++) {
-		var currPoint = shapes[i];
-		push();
-		//propagate on delay
-		if ((frameCount+ i) % 5 == 0 
-			&& i > 0) {
-			currPoint.radius = shapes[i-1].radius;
+	var dirX = randomGaussian(mean, sd);
+	var dirY = randomGaussian(mean, sd);
+	dirVec = createVector(dirX, dirY);
+
+	particleArray.push(new Particle(posVec, dirVec, particleArray));
+}
+
+class Particle {
+	constructor(posVec, dirVec, otherParticles) {
+		this.otherParticles = null;
+		this.lifetime = particleLifetime;
+		this.velocity = dirVec;
+		this.position = posVec;
+		this.otherParticles = otherParticles;
+		this.fillColor = randomGaussian(fg, 10);
+	}
+
+	update() {
+		this.position.add(this.velocity);
+
+		var closest = [];
+		for (var i = 0; i < this.otherParticles.length; i++) {
+			var currDistance = this.position.dist(this.otherParticles[i].position);
+			if (currDistance < maxParticleDistance && currDistance != 0) {
+				closest.push(this.otherParticles[i])
+			}
 		}
 
-		var rad = currPoint.radius;
-		translate(currPoint.x, currPoint.y);
-		line(-rad, rad, rad, -rad);
-		line(rad, rad, -rad, -rad);
-		pop();
+		closest.forEach(i => {
+			line(this.position.x, this.position.y, i.position.x, i.position.y);
+		});
+
+		fill(this.fillColor);
+		if (closest.length > 1) {
+			triangle(
+				this.position.x, this.position.y,
+				closest[0].position.x, closest[0].position.y,
+				closest[1].position.x, closest[1].position.y
+			)			
+		}
+
+		this.lifetime--;
 	}
+
+	display() {
+		//ellipse(this.position.x, this.position.y, 3, 3);
+	}
+
+	run() {
+		this.update();
+		this.display();
+	}
+}
+
+function runParticles() {
+	var toSplice = []
+	for (var i=0; i<particleArray.length; i++) {
+		particleArray[i].run();
+		if (particleArray[i].lifetime < 0) {
+			// avoid modifying in place
+			toSplice.push(i);
+		}
+	}
+
+	toSplice.forEach(index => {
+		particleArray.splice(index, 1);
+	});
 }

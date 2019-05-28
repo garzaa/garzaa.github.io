@@ -5,12 +5,13 @@ var lineLength = lineGap - 8;
 var lines = [];
 var margin = 200;
 
-var from, to;
-
-var eye = null;
-var moveRadius = 100;
-
 var img;
+
+//perlin noise
+var yoff = 0.0;
+var xoff = 0.0;
+
+var corner;
 
 function preload() {
 	img = loadImage("bg.png"); 
@@ -27,42 +28,28 @@ function setup() {
 		}
 		lines.push(tempLine);
 	}
-
-	from = color("orange");
-	to = color("indigo");
-
-	eye = new p5.Vector(0, 0);
-
-	stroke("mediumpurple");
+	strokeWeight(3);
+	noFill();
+	stroke("#15d8f2");
+	corner = new p5.Vector(margin, canvasDiameter-margin);
 }
 
 function draw() {
-	image(
-		img, 
-		0, 
-		0, 
-		800,
-		800	
-	);
-
-	// update eye pos
-	var offset = frameCount/256;
-	eye.x = (canvasDiameter/2) - (cos(offset) * moveRadius);
-	eye.y = (canvasDiameter/2) + (sin(offset) * moveRadius);
-
+	image(img, 0, 0, 800, 800);
 	strokeWeight(3);
 	noFill();
 	for (var i=0; i<lines.length; i++) {
+		var currXOff = xoff + i/10;
 		for (var j=0; j<lines[i].length; j++) {
 			var currPoint = lines[i][j];
-			var a = calcVec(currPoint.x - eye.x, currPoint.y - eye.y);
+			var theta = sin(currPoint.dist(corner) / (lineGap*3) - frameCount/32);
 			push();
 				translate(currPoint.x, currPoint.y);
-				//getColor(currPoint);
-				rotate(a.heading());
-				rotate(-frameCount/128);
+				rotate(theta);
+				//rotate(-frameCount/128);
 				line(-lineLength/2, 0, lineLength/2, 0);
 			pop();
+			yoff += 0.00001;
 		}
 	}
 }

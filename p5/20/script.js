@@ -1,121 +1,121 @@
-var radius = 400;
+var canvasDiameter = 800;
 
-var offWhite = 'rgba(240, 240, 255, 0.5)'
+var bg = "#F7F6C5";
 
-var w = 800;
-var h = 800;
+var colors = [
+	"#264653",
+	"rgba(0, 0, 0, 0)",
+	"#2A9D8F",
+	"#E9C46A",
+	"#F4A261",
+	"#E76F51"
+]
 
-var leftParticles = []
-var rightParticles = []
+var circles = []
 
-var lastMousePos = null;
+var circleDiameter = 40;
+var circleMargin = 20;
 
-var pixelsPerParticle = 10;
-var maxParticleDistance = 60;
-var minParticleDistance = 10;
-var particleLifetime = 240;
-
-var cDistance = 0;
+var lerpAmount = 0.12;
 
 function setup() {
-    createCanvas(w, h);
-	lastMousePos = createVector(mouseX, mouseY);
+	createCanvas(canvasDiameter, canvasDiameter);
+	noStroke();
+	colors.forEach(function(c, idx) {
+		circles.push(new SwappableCircle(c, idx))
+	});	
 }
 
 function draw() {
-    background('#255ed5');
-	stroke(offWhite);
-	strokeWeight(3);
-	noFill();
+	background(bg);
+	// center
+	translate(canvasDiameter/2, canvasDiameter/2);
 
-	var currMousePos = createVector(mouseX, mouseY);
-	var mouseDistance = currMousePos.dist(lastMousePos);
-	if (mouseDistance > pixelsPerParticle || (cDistance > pixelsPerParticle)) {
-		cDistance = 0
-		createParticlePair(currMousePos, p5.Vector.sub(lastMousePos, currMousePos).normalize());
-	} else {
-		cDistance += mouseDistance;
+	translate(
+		-(circleMargin/2) - (circleDiameter/2),
+		-circleMargin - circleDiameter
+	);
+
+	circles.forEach(circle => {
+		circle.run();
+	});
+
+	if (frameCount % 80 == 0) {
+		randomSwap();
 	}
-
-	lastMousePos = currMousePos;
-
-	runParticles(leftParticles);
-	runParticles(rightParticles);
 }
 
-function createParticlePair(posVec, dirVec) {
-	dirVec.normalize();
-	leftParticles.push(new Particle(posVec, dirVec.rotate(PI), leftParticles));
-	//rightParticles.push(new Particle(posVec, dirVec.rotate(PI), rightParticles));
+function getCoords(i) {
+	var xVal = isEven(i) ? 0 : 1;
+	xVal *= (circleDiameter + circleMargin);
+
+	var yVal = Math.floor(i/2);
+	yVal *= (circleDiameter + circleMargin);
+
+	return createVector(xVal, yVal);
 }
 
-class Particle {
-	constructor(posVec, dirVec, otherParticles) {
-		this.otherParticles = null;
-		this.lifetime = particleLifetime;
-		this.velocity = dirVec;
-		this.position = posVec;
-		this.otherParticles = otherParticles;
-	}
+function isEven(i) {
+	return i % 2 == 0;
+}
 
-	update() {
-		this.position.add(this.velocity);
-
-		var closest = [];
-		for (var i = 0; i < this.otherParticles.length; i++) {
-			var currDistance = this.position.dist(this.otherParticles[i].position);
-			if (currDistance < maxParticleDistance && currDistance != 0) {
-				closest.push(this.otherParticles[i])
-			}
-		}
-
-		if (closest.length == 0) {
-			var closestParticle = null;
-			var maxDistance = Infinity;
-			this.otherParticles.forEach(i => {
-				var d = this.position.dist(i.position);
-				if (d < maxDistance && i.closest != this && d > minParticleDistance) {
-					closestParticle = i;
-					maxDistance = d;
-				}
-			})
-			if (closestParticle != null) {
-				closest.push(closestParticle);
-			}
-		}
-
-		strokeWeight(1);
-
-		closest.forEach(i => {
-			line(this.position.x, this.position.y, i.position.x, i.position.y);
-		});
-		
-		ellipse(this.position.x, this.position.y, 3, 3);
-		this.lifetime--;
+class SwappableCircle {
+	constructor(c, idx) {
+		this.c = c;
+		this.idx = idx;
+		this.position = getCoords(idx);
+		this.swapping = false;
+		this.targetPosition = null;
 	}
 
 	display() {
-		fill("white");
-		strokeWeight(0);
+		push();
+			fill(this.c);
+			ellipse(this.position.x, this.position.y, circleDiameter, circleDiameter);
+		pop();
+	}
+
+	update() {
+		if (this.swapping) {
+			//lerp towards target
+			this.position = createVector(
+				lerp(this.position.x, this.targetPosition.x, lerpAmount),
+				lerp(this.position.y, this.targetPosition.y, lerpAmount)
+			)
+			//if difference is less than 1 pixel, just move there
+			if (this.position.dist(this.targetPosition) < 1) {
+				this.position = this.targetPosition;
+			}
+		}
 	}
 
 	run() {
 		this.update();
 		this.display();
 	}
-}
 
-function runParticles(particleArray) {
-	var toSplice = []
-	for (var i=0; i<particleArray.length; i++) {
-		particleArray[i].run();
-		if (particleArray[i].lifetime < 0) {
-			// avoid modifying in place
-			toSplice.push(i);
+	startSwap(otherIdx, initiator=false) {
+		this.swapping = true;
+		this.targetPosition = circles[otherIdx].position;
+		if (initiator) {
+			circles[otherIdx].startSwap(this.idx, false);
 		}
 	}
+}
 
-	toSplice.forEach(index => {
-		particleArray.splice(index, 1);
-	});
+function randomSwap() {
+	var i1 = Math.floor(Math.random() * circles.length);
+	var i2 = 0;
+	if (i1 == 0) {
+		i2 = 1;
+	} else if (i1 == circles.length-1) {
+		i2 = i1-1;
+	} else {
+		if (isEven(i1)) {
+			i2 = i1 + (Math.floor(Math.random() * 2 == 0) ? 1 : -2);
+		} else {
+			i2 = i1 + (Math.floor(Math.random() * 2 == 0) ? 2 : -1);
+		}
+	}
+	circles[i1].startSwap(i2, true);
 }

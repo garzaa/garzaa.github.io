@@ -1,46 +1,54 @@
-var canvasDiameter = 800;
-var song, analyzer;
+var w = window.innerWidth;
+var h = window.innerHeight;
+var song, analyzer, amp;
 
 var radius = 500;
-var amplitude = 200;
+var amplitude = 50;
+
+var numShapes = 10;
+var shapeGap = 70;
 
 function preload() {
-	song = loadSound('neoliberal.mp3');
-  }
+	song = new p5.AudioIn();
+}
 
 function setup() {
-	var cnv = createCanvas(canvasDiameter, canvasDiameter);
+	createCanvas(w, h);
 
-	cnv.parent('canvas_parent')
-
-	song.loop();
+	song.start();
 	
 	// frequency sensor
 	fft = new p5.FFT();
+	fft.setInput(song);
 }
 
 function draw() {
-	background('#99CAEB');
-	strokeCap(PROJECT);
-	stroke('255');
-	strokeWeight(3);
-	noFill();
+	background(0);
+	stroke('red');
+	strokeWeight(5);
+	fill(0);
 
-	translate(canvasDiameter/2, canvasDiameter/2);
+	translate(w/2, h/2);
 
-	// draw the frequency thing
-	var waveform = fft.waveform(); 
+	lvl = song.getLevel();
 
-	rotate(frameCount/16);
-	beginShape();
-	for (var i = 0; i< waveform.length; i++){
-		var deg = map(i, 0, waveform.length, 0, TAU*12);
-		var rad = map( waveform[i], -1, 1, 100, 100 + amplitude);
-		rad *= log(i/waveform.length);
-		vertex(
-			cos(deg) * rad,
-			sin(deg) * rad
-		)
+	for (var j=numShapes-1; j>0; j--) {
+		push();
+		rotate(sin((j+1) * frameCount/256) * (j % 2 == 0 ? 1 : -1));
+		// i = number of sides
+		numSides = 5;
+		beginShape();
+		for (var i=0; i<numSides; i++) {
+			var rot = (i/numSides) * TAU;
+			var rad = j * shapeGap;
+			rad *= log(rad) / 8;
+			rad += lvl * amplitude * j/2;
+			vertex(
+				cos(rot) * rad,
+				sin(rot) * rad
+			);
+		}
+		endShape(CLOSE);
+		pop();
 	}
-	endShape();
 }

@@ -1,112 +1,70 @@
-var radius = 400;
+var canvasDiameter = 800;
 
-var bg = 220
-var fg = 50
-
-var w = 800;
-var h = 800;
+var lineGap = 20;
+var lineLength = lineGap - 8;
+var lines = [];
 var margin = 200;
-var mean = 0;
-var sd = 0.5;
 
-var particleInterval = 10;
-var minParticleDistance = 10;
-var maxParticleDistance = 200;
-var particleLifetime = 100;
+//perlin noise
+var yoff = 0.0;
+var xoff = 0.0;
 
-var particleArray = [];
+var from, to;
+
+var img;
+
+function preload() {
+	img = loadImage("bg.png"); 
+}
 
 function setup() {
-    createCanvas(w, h);
-	lastMousePos = createVector(mouseX, mouseY);
-	background(bg);
-	fill(fg);
-	particleArray = [];
-	stroke(fg);
-	strokeWeight(1);
+	createCanvas(canvasDiameter, canvasDiameter);
+
+	for (var i=margin + (lineGap % canvasDiameter) / 2; i<canvasDiameter-margin; i+=lineGap) {
+		tempLine = [];
+		for (var j=margin + (lineGap % canvasDiameter) / 2; j<canvasDiameter-margin; j+=lineGap) {
+			var currPoint = new p5.Vector(i, j);
+			tempLine.push(currPoint);
+		}
+		lines.push(tempLine);
+	}
+
+	from = color("lime");
+	to = color("blue");
+
+	stroke("limegreen");
 }
 
 function draw() {
-	background(bg);
-	translate(w/2, h/2);
-	rotate(sin(frameCount/256) * HALF_PI)
-	runParticles();
+	image(
+		img, 
+		0, 
+		0, 
+		800,
+		800	
+	);
 
-	if (frameCount % particleInterval == 0) {
-		createParticle();
+	strokeWeight(3);
+	noFill();
+	for (var i=0; i<lines.length; i++) {
+		var currXOff = xoff + i/10;
+		for (var j=0; j<lines[i].length; j++) {
+			xoff += 0.00001
+			var currYOff = yoff //+ j/10;
+			var theta = map(noise(currXOff,currYOff),0,1,0,TAU);
+			var currPoint = lines[i][j];
+			push();
+				translate(currPoint.x, currPoint.y);
+				//getColor(theta);
+				rotate(theta);
+				//rotate(-frameCount/128);
+				line(-lineLength/2, 0, lineLength/2, 0);
+			pop();
+			//yoff += 0.00001;
+		}
 	}
 }
 
-function createParticle() {
-	var posX = random(-(w/2) + margin, (w/2) - margin);
-	var posY = random(-(h/2) + margin, (h/2) - margin);
-	posVec = createVector(posX, posY);
-
-	var dirX = randomGaussian(mean, sd);
-	var dirY = randomGaussian(mean, sd);
-	dirVec = createVector(dirX, dirY);
-
-	particleArray.push(new Particle(posVec, dirVec, particleArray));
-}
-
-class Particle {
-	constructor(posVec, dirVec, otherParticles) {
-		this.otherParticles = null;
-		this.lifetime = particleLifetime;
-		this.velocity = dirVec;
-		this.position = posVec;
-		this.otherParticles = otherParticles;
-		this.fillColor = randomGaussian(fg, 10);
-	}
-
-	update() {
-		this.position.add(this.velocity);
-
-		var closest = [];
-		for (var i = 0; i < this.otherParticles.length; i++) {
-			var currDistance = this.position.dist(this.otherParticles[i].position);
-			if (currDistance < maxParticleDistance && currDistance != 0) {
-				closest.push(this.otherParticles[i])
-			}
-		}
-
-		closest.forEach(i => {
-			line(this.position.x, this.position.y, i.position.x, i.position.y);
-		});
-
-		fill(this.fillColor);
-		if (closest.length > 1) {
-			triangle(
-				this.position.x, this.position.y,
-				closest[0].position.x, closest[0].position.y,
-				closest[1].position.x, closest[1].position.y
-			)			
-		}
-
-		this.lifetime--;
-	}
-
-	display() {
-		//ellipse(this.position.x, this.position.y, 3, 3);
-	}
-
-	run() {
-		this.update();
-		this.display();
-	}
-}
-
-function runParticles() {
-	var toSplice = []
-	for (var i=0; i<particleArray.length; i++) {
-		particleArray[i].run();
-		if (particleArray[i].lifetime < 0) {
-			// avoid modifying in place
-			toSplice.push(i);
-		}
-	}
-
-	toSplice.forEach(index => {
-		particleArray.splice(index, 1);
-	});
+function getColor(theta) {
+	stroke(lerpColor(from, to, theta/TAU));
 }

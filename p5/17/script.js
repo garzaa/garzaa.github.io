@@ -1,9 +1,12 @@
 var w = window.innerWidth;
 var h = window.innerHeight;
-var song, analyzer;
 
-var radius = 500;
-var amplitude = 10;
+var song, analyzer, amp;
+
+var margin = 50;
+var origShapeSize = 10;
+var amplitude = 40;
+var shapes = []
 
 function preload() {
 	song = new p5.AudioIn();
@@ -17,37 +20,51 @@ function setup() {
 	// frequency sensor
 	fft = new p5.FFT();
 	fft.setInput(song);
+	background(0);
+	noFill();
+
+	for (var i=margin + (margin % w) / 2; i<w-margin; i+=margin+origShapeSize/2) {
+		tempShape = [];
+		for (var j=margin + (margin % h) / 2; j<h-margin; j+=margin+origShapeSize/2) {
+			var currPoint = {
+				x: i,
+				y: j,
+				radius: origShapeSize/2
+			};
+			stroke(255);
+			strokeWeight(2);
+			tempShape.push(currPoint);
+			ellipse(i, j, 10, 10);
+		}
+		shapes.push(tempShape);
+	}
+	shapes = [].concat.apply([], shapes);
 }
 
 function draw() {
+	stroke(255);
+	strokeWeight(5);
 	background(0);
-	strokeCap(PROJECT);
-	stroke('255');
-	strokeWeight(3);
-	noFill();
 
-	translate(w/2, h/2);
-
-	// draw the frequency thing
+	lvl = song.getLevel();
 	var waveform = fft.waveform(); 
 
-	rotate(frameCount/16);
-	beginShape();
-	for (var i = 0; i< waveform.length; i++){
-		var deg = map(i, 0, waveform.length, 0, TAU*12);
-		// scale waveform
-		var rad = map(logTransform(waveform[i]), 0, 1, 0, amplitude);
-		rad += 100;
-		rad *= log(i/waveform.length);
-		vertex(
-			cos(deg) * rad,
-			sin(deg) * rad
-		)
-	}
-	endShape();
-}
+	amp = waveform[floor(waveform.length/2)]
+	shapes[0].radius = origShapeSize + (amp * amplitude);
 
-function logTransform(x) {
-	// initial spike and gradually level off as x reaches 1
-	return log(15*x + 18) - 0.5
+	for (var i=0; i<shapes.length; i++) {
+		var currPoint = shapes[i];
+		push();
+		//propagate on delay
+		if ((frameCount+ i) % 5 == 0 
+			&& i > 0) {
+			currPoint.radius = shapes[i-1].radius;
+		}
+
+		var rad = currPoint.radius;
+		translate(currPoint.x, currPoint.y);
+		line(-rad, rad, rad, -rad);
+		line(rad, rad, -rad, -rad);
+		pop();
+	}
 }

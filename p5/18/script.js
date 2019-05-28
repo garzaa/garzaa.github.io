@@ -1,54 +1,121 @@
-var w = window.innerWidth;
-var h = window.innerHeight;
-var song, analyzer, amp;
+var radius = 400;
 
-var radius = 500;
-var amplitude = 50;
+var offWhite = 'rgba(240, 240, 255, 0.5)'
 
-var numShapes = 10;
-var shapeGap = 70;
+var w = 800;
+var h = 800;
 
-function preload() {
-	song = new p5.AudioIn();
-}
+var leftParticles = []
+var rightParticles = []
+
+var lastMousePos = null;
+
+var pixelsPerParticle = 10;
+var maxParticleDistance = 60;
+var minParticleDistance = 10;
+var particleLifetime = 240;
+
+var cDistance = 0;
 
 function setup() {
-	createCanvas(w, h);
-
-	song.start();
-	
-	// frequency sensor
-	fft = new p5.FFT();
-	fft.setInput(song);
+    createCanvas(w, h);
+	lastMousePos = createVector(mouseX, mouseY);
 }
 
 function draw() {
-	background(0);
-	stroke('red');
-	strokeWeight(5);
-	fill(0);
+    background('#255ed5');
+	stroke(offWhite);
+	strokeWeight(3);
+	noFill();
 
-	translate(w/2, h/2);
-
-	lvl = song.getLevel();
-
-	for (var j=numShapes-1; j>0; j--) {
-		push();
-		rotate(sin((j+1) * frameCount/256) * (j % 2 == 0 ? 1 : -1));
-		// i = number of sides
-		numSides = 5;
-		beginShape();
-		for (var i=0; i<numSides; i++) {
-			var rot = (i/numSides) * TAU;
-			var rad = j * shapeGap;
-			rad *= log(rad) / 8;
-			rad += lvl * amplitude * j/2;
-			vertex(
-				cos(rot) * rad,
-				sin(rot) * rad
-			);
-		}
-		endShape(CLOSE);
-		pop();
+	var currMousePos = createVector(mouseX, mouseY);
+	var mouseDistance = currMousePos.dist(lastMousePos);
+	if (mouseDistance > pixelsPerParticle || (cDistance > pixelsPerParticle)) {
+		cDistance = 0
+		createParticlePair(currMousePos, p5.Vector.sub(lastMousePos, currMousePos).normalize());
+	} else {
+		cDistance += mouseDistance;
 	}
+
+	lastMousePos = currMousePos;
+
+	runParticles(leftParticles);
+	runParticles(rightParticles);
+}
+
+function createParticlePair(posVec, dirVec) {
+	dirVec.normalize();
+	leftParticles.push(new Particle(posVec, dirVec.rotate(PI), leftParticles));
+	//rightParticles.push(new Particle(posVec, dirVec.rotate(PI), rightParticles));
+}
+
+class Particle {
+	constructor(posVec, dirVec, otherParticles) {
+		this.otherParticles = null;
+		this.lifetime = particleLifetime;
+		this.velocity = dirVec;
+		this.position = posVec;
+		this.otherParticles = otherParticles;
+	}
+
+	update() {
+		this.position.add(this.velocity);
+
+		var closest = [];
+		for (var i = 0; i < this.otherParticles.length; i++) {
+			var currDistance = this.position.dist(this.otherParticles[i].position);
+			if (currDistance < maxParticleDistance && currDistance != 0) {
+				closest.push(this.otherParticles[i])
+			}
+		}
+
+		if (closest.length == 0) {
+			var closestParticle = null;
+			var maxDistance = Infinity;
+			this.otherParticles.forEach(i => {
+				var d = this.position.dist(i.position);
+				if (d < maxDistance && i.closest != this && d > minParticleDistance) {
+					closestParticle = i;
+					maxDistance = d;
+				}
+			})
+			if (closestParticle != null) {
+				closest.push(closestParticle);
+			}
+		}
+
+		strokeWeight(1);
+
+		closest.forEach(i => {
+			line(this.position.x, this.position.y, i.position.x, i.position.y);
+		});
+		
+		ellipse(this.position.x, this.position.y, 3, 3);
+		this.lifetime--;
+	}
+
+	display() {
+		fill("white");
+		strokeWeight(0);
+	}
+
+	run() {
+		this.update();
+		this.display();
+	}
+}
+
+function runParticles(particleArray) {
+	var toSplice = []
+	for (var i=0; i<particleArray.length; i++) {
+		particleArray[i].run();
+		if (particleArray[i].lifetime < 0) {
+			// avoid modifying in place
+			toSplice.push(i);
+		}
+	}
+
+	toSplice.forEach(index => {
+		particleArray.splice(index, 1);
+	});
 }

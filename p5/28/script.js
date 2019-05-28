@@ -1,66 +1,64 @@
+var radius = 400;
 var canvasDiameter = 800;
+var lineGap = 10;
+var lineLength = lineGap - 8;
+var lines = [];
+var margin = 0;
+var rectWidth = 600;
+var rectHeight = 600;
+var scalar = 0.07;
 
-var circleRadius = 200;
-
-var img;
-
-var SPEED = 256;
-
-function preload() {
-	img = loadImage("bg.png");
-}
+var bg = "#56797a";
+var color1 = "#445e42";
+var color2 = "#344f36";
+var color3 = "#243d2e";
+var pointGap = 20;
+var colors = [bg, color1, color2, color3];
 
 function setup() {
-	createCanvas(canvasDiameter, canvasDiameter);
-	noFill();
-	strokeWeight(2);
-	stroke(255);
+    createCanvas(canvasDiameter, canvasDiameter);
+    strokeCap(ROUND);
+
+    for (var i=margin + (lineGap % rectWidth) / 2; i<rectWidth-margin; i+=lineGap) {
+		tempLine = [];
+		for (var j=margin + (lineGap % rectHeight) / 2; j<rectHeight-margin; j+=lineGap) {
+			var currPoint = {
+				x: j,
+				y: i
+			};
+			tempLine.push(currPoint);
+		}
+		lines.push(tempLine);
+    }
 }
 
 function draw() {
-	image(
-		img, 
-		0, 
-		0, 
-		800,
-		800	
-	);
+    background(50);
+    
+    translate(canvasDiameter/2, canvasDiameter/2);
 
-	translate(canvasDiameter/2, canvasDiameter/2);
-	rotate(frameCount/(SPEED*2));
-	push();
-		rotate(-frameCount/SPEED);	
-		translate(-circleRadius/2, 0);
-		ellipse(0, 0, circleRadius, circleRadius);
-		radiusTriangle(0, 0, 100);
-	pop();
 
-	push();
-		rotate(-frameCount/SPEED + 2*TAU/3);	
-		translate(-circleRadius/2, 0);
-		ellipse(0, 0, circleRadius, circleRadius);
-		radiusTriangle(0, 0, 100);
-	pop();
-	push();
-		rotate(-frameCount/SPEED + TAU/3);	
-		translate(-circleRadius/2, 0);
-		ellipse(0, 0, circleRadius, circleRadius);
-		radiusTriangle(0, 0, 100);
-	pop();
-	push();
-		translate(circleRadius/2, 0);
-		rotate(1 * (-frameCount/SPEED + 2*TAU/3));
-		ellipse(0, 0, circleRadius, circleRadius);
-		radiusTriangle(0, 0, 100);
-	pop();
+    fill(bg);
+    noStroke();
+    rect(-rectWidth/2, -rectHeight/2, rectHeight, rectWidth);
+
+    stroke(200);
+    strokeWeight(1);
+    translate(-rectWidth/2, -rectHeight/2);
+
+    for (var m=0; m<lines.length; m++) {
+        for (var n=0; n<lines[m].length; n++) {
+            var mapped = parseInt(map(noise(scalar*m+frameCount/256, scalar*n+frameCount/256, frameCount/128), 0, 1, 0, colors.length));
+            var fillColor = colors[mapped];
+            noStroke();
+            fill(fillColor);
+            var rectPoint = lines[m][n];
+            rect(rectPoint.x-lineGap/2, rectPoint.y-lineGap/2, lineGap, lineGap);
+        }
+    }
 }
 
-function radiusTriangle(x, y, rad) {
-	angleMode(DEGREES);
-	triangle(
-		x-(cos(0)*rad), y+(sin(0)*rad),
-		x-(cos(120)*rad), y+(sin(120)*rad),
-		x-(cos(240)*rad), y+(sin(240)*rad)
-	);
-	angleMode(RADIANS);
+function cross(xPos, yPos, radius) {
+    line(xPos-radius, yPos-radius, xPos+radius, yPos+radius);
+    line(xPos-radius, yPos+radius, xPos+radius, yPos-radius);
 }

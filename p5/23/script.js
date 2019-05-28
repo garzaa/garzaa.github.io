@@ -5,13 +5,11 @@ var lineLength = lineGap - 8;
 var lines = [];
 var margin = 200;
 
+var img;
+
 //perlin noise
 var yoff = 0.0;
 var xoff = 0.0;
-
-var from, to;
-
-var img;
 
 function preload() {
 	img = loadImage("bg.png"); 
@@ -28,11 +26,9 @@ function setup() {
 		}
 		lines.push(tempLine);
 	}
-
-	from = color("lime");
-	to = color("blue");
-
-	stroke("limegreen");
+	strokeWeight(3);
+	noFill();
+	stroke("coral");
 }
 
 function draw() {
@@ -50,21 +46,25 @@ function draw() {
 		var currXOff = xoff + i/10;
 		for (var j=0; j<lines[i].length; j++) {
 			xoff += 0.00001
-			var currYOff = yoff //+ j/10;
+			var currYOff = yoff + j/10;
 			var theta = map(noise(currXOff,currYOff),0,1,0,TAU);
 			var currPoint = lines[i][j];
 			push();
 				translate(currPoint.x, currPoint.y);
-				//getColor(theta);
 				rotate(theta);
 				//rotate(-frameCount/128);
 				line(-lineLength/2, 0, lineLength/2, 0);
 			pop();
-			//yoff += 0.00001;
+			yoff += 0.00001;
 		}
 	}
 }
 
-function getColor(theta) {
-	stroke(lerpColor(from, to, theta/TAU));
+function calcVec(x, y) {
+	return new p5.Vector(y - x, -x - y);
+}
+
+function getColor(a) {
+	b = map(a.dist(eye), 0, 200, 0, 1)
+	stroke(lerpColor(from, to, b));
 }
