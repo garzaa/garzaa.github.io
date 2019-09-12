@@ -27,6 +27,7 @@ function setup() {
 
 function draw() {
     background(bg);
+    stroke(fg);
 
     rotateZ(frameCount / fmt);
     rotateX(frameCount / fmt);
@@ -34,7 +35,7 @@ function draw() {
     
     var waveform = fft.waveform();
 
-   iterateOnLines(lines, function(v) {
+    iterateOnLines(lines, function(v) {
        beginShape();
        for (var i=0; i<lineLength; i=Math.min(i+waveInterval, lineLength)) {
             var j = Math.floor(map(i, 0, lineLength, 0, waveform.length));
