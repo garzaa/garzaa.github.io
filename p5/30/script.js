@@ -19,7 +19,6 @@ var lines = pointGrid(0, 200, window.innerWidth, window.innerHeight);
 function setup() {
     fillWindowCanvas(WEBGL);
     noFill();
-    stroke(fg);
     strokeWeight(2);
     song.loop();
     fft = new p5.FFT();
