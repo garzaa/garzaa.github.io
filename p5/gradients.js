@@ -1,17 +1,20 @@
+var ctx;
+
 function getCanvas(canvasNum) {
 	canvasNum = canvasNum || 0;
 	return document.getElementById('defaultCanvas'+canvasNum);
 }
 
 function linearGradient(x0, y0, x1, y1, w, startColor, endColor, canvasNum) {
+	canvasNum = canvasNum || "0";
 	var canvas = getCanvas(canvasNum);
-	var ctx = canvas.getContext("2d");
+	ctx = canvas.getContext("2d");
 
 	//this is actually just a really thick line
-	ctx.lineWidth = 1;
+	ctx.lineWidth = w;
 	ctx.lineCap = "square";
 
-	var grad= ctx.createLinearGradient(x0, y0, x1, y1);
+	var grad = ctx.createLinearGradient(x0, y0, x1, y1);
 	grad.addColorStop(0, startColor);
 	grad.addColorStop(1, endColor);
 
