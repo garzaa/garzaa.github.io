@@ -90,3 +90,34 @@ function bindBoolToKeyPress(boolName, keyName) {
         }
     }) 
 }
+
+class ParticleSystem {
+    constructor() {
+        this.particles = [];
+    }
+
+    addParticle(p) {
+        this.particles.push(p);
+    }
+
+    run() {
+        for (var i=0; i<this.particles.length; i++) {
+            this.particles[i].run();
+        }
+    }
+}
+
+class Particle {
+    run() {
+       this.update();
+       this.display(); 
+    }
+
+    update() {
+
+    }
+
+    display() {
+
+    }
+}

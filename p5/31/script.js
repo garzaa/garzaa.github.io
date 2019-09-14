@@ -10,6 +10,8 @@ var waveInterval = 10;
 var amplitude = 20;
 var song, analyzer;
 
+bindBoolToKeyPress("doDraw", "k");
+
 function preload() {
     song = loadSound("song.mp3");
 }
