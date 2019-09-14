@@ -50,7 +50,6 @@ function timeLerp(variableNameString, to, seconds, callback) {
 	var i = setInterval(
 		function() {
             var frac = (frameCount - startFrameCount) / duration;
-            console.log(frac);
             if (frac > 1) {
                 clearInterval(i);
                 if (callback != undefined) {
@@ -66,4 +65,28 @@ function timeLerp(variableNameString, to, seconds, callback) {
 		},
 		50
 	)
+}
+
+function bindBoolToKey(boolName, keyName) {
+    document.addEventListener("keydown", function(e) {
+        if (e.key == keyName) {
+            window[boolName] = !window[boolName];
+        }
+    })
+}
+
+function bindBoolToKeyPress(boolName, keyName) {
+    console.log("added");
+    document.addEventListener("keydown", function(e) {
+        console.log(e.key);
+        if (e.key == keyName) {
+            window[boolName] = true;
+        }
+    })
+
+    document.addEventListener("keyup", function(e) {
+        if (e.key == keyName) {
+            window[boolName] = false;
+        }
+    }) 
 }

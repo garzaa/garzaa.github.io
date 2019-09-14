@@ -2,13 +2,15 @@ var canvasDiameter = 800;
 
 var bg = "#8BD7D2";
 var fg = "#FFFBFA";
-var hi = "white";
+var hi = "#D68FD6";
 var fmt = 512;
 var lineLength = 800;
 
 var waveInterval = 10;
 var amplitude = 20;
 var song, analyzer;
+
+bindBoolToKeyPress("doDraw", "k");
 
 function preload() {
     song = loadSound("song.mp3");
@@ -35,8 +37,8 @@ function draw() {
     var waveform = fft.waveform();
 
     iterateOnLines(lines, function(v) {
-       beginShape();
-       for (var i=0; i<lineLength; i=Math.min(i+waveInterval, lineLength)) {
+        beginShape();
+        for (var i=0; i<lineLength; i=Math.min(i+waveInterval, lineLength)) {
             var j = Math.floor(map(i, 0, lineLength, 0, waveform.length));
             var a = waveform[j] * amplitude * computeAmplitudeDecay(j, lineLength);
             vertex(
@@ -44,8 +46,8 @@ function draw() {
                 v.y - canvasDiameter/2,
                 i - lineLength/2
             )
-       }
-       endShape();
+        }
+        endShape();
     });
 }
 
