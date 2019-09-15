@@ -1,3 +1,5 @@
+// also includes ../utils.js
+
 var canvasDiameter = 800;
 
 var bg = 250;
