@@ -46,7 +46,6 @@ function bindBoolToKey(boolName, keyName) {
 }
 
 function bindBoolToKeyPress(boolName, keyName) {
-    console.log("added");
     document.addEventListener("keydown", function(e) {
         console.log(e.key);
         if (e.key == keyName) {
