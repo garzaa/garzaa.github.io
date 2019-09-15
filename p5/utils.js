@@ -1,37 +1,5 @@
-function pointGrid(
-    outsideMargin,
-    pointGap,
-    fieldSizeX,
-    fieldSizeY,
-    offset
-) {
-    var points = [];
-    offset = offset || {x: 0, y: 0};
-    for (var i=outsideMargin + (pointGap % fieldSizeY) / 2; i<fieldSizeY-outsideMargin; i+=pointGap) {
-		tempPoints = [];
-		for (var j=outsideMargin + (pointGap % fieldSizeX) / 2; j<fieldSizeX-outsideMargin; j+=pointGap) {
-			var currPoint = {
-				x: i + offset.x,
-				y: j + offset.y
-			};
-			tempPoints.push(currPoint);
-		}
-		points.push(tempPoints);
-    }
-    return points;
-}
-
 function scaleWaveform(point, amplitude) {
     return logTransform(point, 0, 1, 0, amplitude);
-}
-
-function iterateOnPoints(pointGrid, callback) {
-    for (var i=0; i<pointGrid.length; i++) {
-        for (var j=0; j<pointGrid.length; j++) {
-            var currPoint = pointGrid[i][j];
-            callback(currPoint);
-        }
-    }
 }
 
 function fillWindowCanvas(rendermode) {
@@ -121,6 +89,74 @@ class Particle {
 
     display() {
 
+    }
+}
+
+class PointGrid {
+    constructor(
+        outsideMargin,
+        pointGap,
+        fieldSizeX,
+        fieldSizeY,
+        offset
+    ) {
+        this.points = [];
+        this.occupiedPoints = [];
+        offset = offset || {x: 0, y: 0};
+        for (var i=outsideMargin + (pointGap % fieldSizeY) / 2; i<fieldSizeY-outsideMargin; i+=pointGap) {
+            var tempPoints = [];
+            var tempOccupiedPoints = [];
+            for (var j=outsideMargin + (pointGap % fieldSizeX) / 2; j<fieldSizeX-outsideMargin; j+=pointGap) {
+                var currPoint = {
+                    x: i + offset.x,
+                    y: j + offset.y
+                };
+                tempPoints.push(currPoint);
+                tempOccupiedPoints.push(false);
+            }
+            this.points.push(tempPoints);
+            this.occupiedPoints.push(tempOccupiedPoints);
+        }
+    }
+
+    iterateOnPoints(callback) {
+        for (var i=0; i<this.points.length; i++) {
+            for (var j=0; j<this.points.length; j++) {
+                var currPoint = this.points[i][j];
+                callback(currPoint);
+            }
+        } 
+    }
+
+    isOccupied(x, y) {
+        return this.occupiedPoints[x][y] === true;
+    }
+
+    getEmptyPoint() {
+        var visitedY = [];
+        while (visitedY.length < this.points.length) {
+            var tempY = randomInt(this.points.length);
+            if (visitedY.includes(tempY)) {
+                continue;
+            }
+            visitedY.push(tempY);
+            var visitedX = [];
+            while (visitedX.length < this.points[tempY].length) {
+                var tempX = randomInt(this.points[tempY].length);
+                if (visitedX.includes(tempX) || this.occupiedPoints[tempX][tempY] === true) {
+                    visitedX.push(tempX);
+                    continue;
+                }
+                this.occupiedPoints[tempX][tempY] = true;
+                return createVector(tempX, tempY);
+            }
+        }
+    
+        return null;
+    }
+
+    randomPoint() {
+        return randomChoice(randomChoice(this.points));
     }
 }
 
