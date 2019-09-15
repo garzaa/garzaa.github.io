@@ -2,15 +2,17 @@ function pointGrid(
     outsideMargin,
     pointGap,
     fieldSizeX,
-    fieldSizeY
+    fieldSizeY,
+    offset
 ) {
     var points = [];
+    offset = offset || {x: 0, y: 0};
     for (var i=outsideMargin + (pointGap % fieldSizeY) / 2; i<fieldSizeY-outsideMargin; i+=pointGap) {
 		tempPoints = [];
 		for (var j=outsideMargin + (pointGap % fieldSizeX) / 2; j<fieldSizeX-outsideMargin; j+=pointGap) {
 			var currPoint = {
-				x: i,
-				y: j
+				x: i + offset.x,
+				y: j + offset.y
 			};
 			tempPoints.push(currPoint);
 		}
@@ -23,10 +25,10 @@ function scaleWaveform(point, amplitude) {
     return logTransform(point, 0, 1, 0, amplitude);
 }
 
-function iterateOnLines(lineGrid, callback) {
-    for (var i=0; i<lineGrid.length; i++) {
-        for (var j=0; j<lineGrid.length; j++) {
-            var currPoint = lines[i][j];
+function iterateOnPoints(pointGrid, callback) {
+    for (var i=0; i<pointGrid.length; i++) {
+        for (var j=0; j<pointGrid.length; j++) {
+            var currPoint = pointGrid[i][j];
             callback(currPoint);
         }
     }
@@ -120,4 +122,18 @@ class Particle {
     display() {
 
     }
+}
+
+function rangeIter(range, fn) {
+    for (var x=0; x<range; x++) {
+        fn(x);
+    }
+}
+
+function randomChoice(arr) {
+    return arr[randomInt(arr.length)]
+}
+
+function randomInt(ceil) {
+    return Math.floor(Math.random() * ceil);
 }

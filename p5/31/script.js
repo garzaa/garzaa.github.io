@@ -1,59 +1,149 @@
 var canvasDiameter = 800;
 
-var bg = "#8BD7D2";
-var fg = "#FFFBFA";
-var hi = "#D68FD6";
-var fmt = 512;
-var lineLength = 800;
+var bg = 250;
+var fg = 50;
+var hi = "red";
+var pointRadius = 100;
+var subgridDensity = 5;
+var subgridSize = 80;
+var numLines = 3;
+var lineVariance = 1;
+var maxSegments = 6;
 
-var waveInterval = 10;
-var amplitude = 20;
-var song, analyzer;
-
-bindBoolToKeyPress("doDraw", "k");
-
-function preload() {
-    song = loadSound("song.mp3");
-}
-
-var lines = pointGrid(0, 200, window.innerWidth, window.innerHeight);
+var points = pointGrid(pointRadius, pointRadius * 2, canvasDiameter, canvasDiameter);
 
 function setup() {
-    fillWindowCanvas(WEBGL);
-    noFill();
-    strokeWeight(2);
-    song.loop();
-    fft = new p5.FFT();
+    createCanvas(canvasDiameter, canvasDiameter);
+    background(bg);
+    fill(fg);
+    noStroke();
+    noLoop();
 }
 
 function draw() {
     background(bg);
-    stroke(fg);
-
-    rotateZ(frameCount / fmt);
-    rotateX(frameCount / fmt);
-    rotateY(frameCount / fmt);
-    
-    var waveform = fft.waveform();
-
-    iterateOnLines(lines, function(v) {
-        beginShape();
-        for (var i=0; i<lineLength; i=Math.min(i+waveInterval, lineLength)) {
-            var j = Math.floor(map(i, 0, lineLength, 0, waveform.length));
-            var a = waveform[j] * amplitude * computeAmplitudeDecay(j, lineLength);
-            vertex(
-                v.x + a - canvasDiameter/2,
-                v.y - canvasDiameter/2,
-                i - lineLength/2
-            )
-        }
-        endShape();
-    });
+    iterateOnPoints(points, function(p) {
+        makeLines(p.x, p.y);
+    })
 }
 
-// peak in the middle
-function computeAmplitudeDecay(i, max) {
-    var x = i/max;
-    if (x > 1) x = 0;
-    return sin(x * PI);
+function makeLines(x, y) {
+    var subPoints = pointGrid(
+        0,
+        subgridSize/subgridDensity,
+        subgridSize,
+        subgridSize,
+        createVector(x-(subgridSize/2), y-(subgridSize/2))
+    );
+    iterateOnPoints(subPoints, function(p) {
+        ellipse(
+            p.x,
+            p.y,
+            1,
+            1
+        );
+    });
+    makeLineCluster(subPoints);
+}
+
+// return an int in the range (-lineVariance, lineVariance))
+function getRandomLineVariance() {
+    return numLines + Math.round(-lineVariance + (Math.random() * lineVariance * 2));
+}
+
+function makeLineCluster(pointGrid) {
+    push();
+        strokeWeight(4);
+        stroke(hi);
+        strokeCap(ROUND);
+        strokeJoin(ROUND);
+
+        var occupiedPoints = [];
+        rangeIter(pointGrid.length, function() {
+            var row = [];
+            rangeIter(pointGrid[0].length, x => row.push(false));
+            occupiedPoints.push(row);
+        });
+
+        var numLines = getRandomLineVariance();
+        for (var i=0; i<numLines; i++) {
+            var currLine = [];
+            // this is a reference, NOT a value
+            var currPoint = getEmptyPoint(pointGrid, occupiedPoints);
+            if (currPoint != null) {
+                currLine.push(currPoint);
+                for (var j=0; j<maxSegments; j++) {
+                    if (currPoint != null) {
+                        currPoint = getRandomDirection(pointGrid, occupiedPoints, currPoint.x, currPoint.y);
+                    }
+                    if (currPoint != null) {
+                        currLine.push(currPoint);
+                    }
+                }
+
+                if (currLine.length > 1) {
+                    for (var k=0; k<currLine.length-1; k++) {
+                        var refPt = currLine[k];
+                        var refPtNext = currLine[k+1];
+                        var currPoint = pointGrid[refPt.y][refPt.x];
+                        var nextPoint = pointGrid[refPtNext.y][refPtNext.x];
+                        line(currPoint.x, currPoint.y, nextPoint.x, nextPoint.y);
+                    }
+                }
+            }
+        }
+    pop();
+}
+
+function getRandomDirection(pointGrid, occupiedPoints, xIndex, yIndex) {
+    var options = [];
+    var xSize = pointGrid[0].length-1;
+    var ySize = pointGrid.length-1;
+    occupiedPoints[xIndex][yIndex] = true;
+    // only move in cardinal directions
+    if (xIndex > 0 && !isOccupied(xIndex-1, yIndex, occupiedPoints)) {
+        options.push(createVector(xIndex-1, yIndex));
+    }
+    if (xIndex < xSize && !isOccupied(xIndex+1, yIndex, occupiedPoints)) {
+        options.push(createVector(xIndex+1, yIndex));
+    }
+    if (yIndex > 0 && !isOccupied(xIndex, yIndex-1, occupiedPoints)) {
+        options.push(createVector(xIndex, yIndex-1));
+    }
+    if (yIndex < ySize && !isOccupied(xIndex, yIndex+1, occupiedPoints)) {
+        options.push(createVector(xIndex, yIndex+1));
+    }
+    if (options.length == 0) {
+        return null;
+    }
+    var choice = randomChoice(options);
+    occupiedPoints[choice.x][choice.y] = true;
+    return choice;
+}
+
+function isOccupied(x, y, occupiedPoints) {
+    return occupiedPoints[x][y] === true;
+}
+
+function getEmptyPoint(pointGrid, occupiedPoints) {
+    var visitedY = [];
+    while (visitedY.length < pointGrid.length) {
+        var tempY = randomInt(pointGrid.length);
+        if (visitedY.includes(tempY)) {
+            continue;
+        }
+        visitedY.push(tempY);
+        var visitedX = [];
+        while (visitedX.length < pointGrid[tempY].length) {
+            var tempX = randomInt(pointGrid[tempY].length);
+            if (visitedX.includes(tempX) || occupiedPoints[tempX][tempY] === true) {
+                visitedX.push(tempX);
+                continue;
+            }
+            occupiedPoints[tempX][tempY] = true;
+            return createVector(tempX, tempY);
+        }
+    }
+
+    return null;
 }
