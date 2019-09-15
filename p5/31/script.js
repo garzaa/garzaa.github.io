@@ -17,14 +17,30 @@ function setup() {
     background(bg);
     fill(fg);
     noStroke();
-    noLoop();
+    frameRate(1);
+    initialDraw();
 }
 
 function draw() {
+    redrawPoint(randomChoice(randomChoice(points)));
+}
+    
+
+function initialDraw() {
     background(bg);
     iterateOnPoints(points, function(p) {
         makeLines(p.x, p.y);
     })
+}
+
+function redrawPoint(p) {
+    push();
+        noStroke();
+        fill(bg);
+        rect(p.x-pointRadius, p.y-pointRadius, pointRadius*2, pointRadius*2);
+    pop();
+    drawSubgrid(p);
+    makeLines(p.x, p.y);
 }
 
 function makeLines(x, y) {
@@ -35,15 +51,12 @@ function makeLines(x, y) {
         subgridSize,
         createVector(x-(subgridSize/2), y-(subgridSize/2))
     );
-    iterateOnPoints(subPoints, function(p) {
-        ellipse(
-            p.x,
-            p.y,
-            1,
-            1
-        );
-    });
+    iterateOnPoints(subPoints, drawSubgrid);
     makeLineCluster(subPoints);
+}
+
+function drawSubgrid(p) {
+    ellipse(p.x, p.y, 1, 1);
 }
 
 // return an int in the range (-lineVariance, lineVariance))
