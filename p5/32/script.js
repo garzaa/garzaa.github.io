@@ -2,29 +2,42 @@
 
 var canvasDiameter = 800;
 
-var bg = 250;
-var fg = 50;
-var hi = "red";
-var pointRadius = 100;
-var subgridDensity = 5;
-var subgridSize = 80;
-var numLines = 3;
-var lineVariance = 1;
-var maxSegments = 6;
+var bg = "#E9B44C";
+var fg = "#44355B";
+var hi = "#EE5622";
+var pointRadius = 200;
+var subgridDensity = 11;
+var subgridSize = 300;
+var numArcs = 7;
+var arcVariance = 1;
+var radiusVariance = 3;
+var defaultRadius = 4;
+var maxSegments = 9;
+var noiseIncrement = 0.005;
+var arcLengths = [
+    Math.PI/2,
+    Math.PI,
+    Math.PI,
+    Math.PI + Math.PI/2,
+    Math.PI * 2
+];
+var subPoints;
 
 var points = new PointGrid(pointRadius, pointRadius * 2, canvasDiameter, canvasDiameter);
+var arcs = [];
 
 function setup() {
     createCanvas(canvasDiameter, canvasDiameter);
     background(bg);
     fill(fg);
     noStroke();
-    frameRate(1);
     initialDraw();
 }
 
 function draw() {
-    redrawPoint(points.randomPoint());
+    background(bg);
+    redrawSubgrid();
+    arcs.forEach(a => a.draw());
 }
     
 
@@ -35,96 +48,58 @@ function initialDraw() {
     });
 }
 
-function redrawPoint(p) {
-    push();
-        noStroke();
-        fill(bg);
-        rect(p.x-pointRadius, p.y-pointRadius, pointRadius*2, pointRadius*2);
-    pop();
-    drawSubgrid(p);
-    makeLines(p.x, p.y);
-}
-
 function makeLines(x, y) {
-    var subPoints = new PointGrid(
+    subPoints = new PointGrid(
         0,
         subgridSize/subgridDensity,
         subgridSize,
         subgridSize,
         createVector(x-(subgridSize/2), y-(subgridSize/2))
     );
-    subPoints.iterateOnPoints(drawSubgrid);
-    makeLineCluster(subPoints);
+    arcs = makeArcs(subPoints);
+    // makeLineCluster(subPoints);
 }
 
-function drawSubgrid(p) {
-    ellipse(p.x, p.y, 1, 1);
+function redrawSubgrid() {
+    subPoints.iterateOnPoints(drawSubPoint);
 }
 
-// return an int in the range (-lineVariance, lineVariance))
-function getRandomLineVariance() {
-    return numLines + Math.round(-lineVariance + (Math.random() * lineVariance * 2));
+function drawSubPoint(p) {
+    ellipse(p.x, p.y, 3, 3);
 }
 
-function makeLineCluster(subPoints) {
-    push();
-        strokeWeight(4);
-        stroke(hi);
-        strokeCap(ROUND);
-        strokeJoin(ROUND);
-
-        var numLines = getRandomLineVariance();
-        for (var i=0; i<numLines; i++) {
-            var currLine = [];
-            // this is a reference, NOT a value
-            var currPoint = subPoints.getEmptyPoint();
-            if (currPoint != null) {
-                currLine.push(currPoint);
-                for (var j=0; j<maxSegments; j++) {
-                    if (currPoint != null) {
-                        currPoint = getRandomDirection(subPoints, subPoints.occupiedPoints, currPoint.x, currPoint.y);
-                    }
-                    if (currPoint != null) {
-                        currLine.push(currPoint);
-                    }
-                }
-
-                if (currLine.length > 1) {
-                    for (var k=0; k<currLine.length-1; k++) {
-                        var refPt = currLine[k];
-                        var refPtNext = currLine[k+1];
-                        var currPoint = subPoints.points[refPt.y][refPt.x];
-                        var nextPoint = subPoints.points[refPtNext.y][refPtNext.x];
-                        line(currPoint.x, currPoint.y, nextPoint.x, nextPoint.y);
-                    }
-                }
-            }
-        }
-    pop();
+function makeArcs(subPoints) {
+    let tempArcs = [];
+    rangeIter(numArcs + randomPlusOrMinus(arcVariance), function() {
+        var p = subPoints.getEmptyPoint();
+        subPoints.occupy(p.x, p.y);
+        tempArcs.push(new Arc(subPoints.getPosition(p)));
+    })
+    return tempArcs;
 }
 
-function getRandomDirection(pointGrid, occupiedPoints, xIndex, yIndex) {
-    var options = [];
-    var xSize = pointGrid.points[0].length-1;
-    var ySize = pointGrid.points.length-1;
-    occupiedPoints[xIndex][yIndex] = true;
-    // only move in cardinal directions
-    if (xIndex > 0 && !pointGrid.isOccupied(xIndex-1, yIndex)) {
-        options.push(createVector(xIndex-1, yIndex));
+class Arc {
+    constructor(
+        position
+    ) {
+        this.position = position;
+        this.length = randomChoice(arcLengths);
+        this.rotation = randomChoice(arcLengths);
+        this.radius = (defaultRadius + randomPlusOrMinus(radiusVariance)) * (subgridSize/subgridDensity);
+        this.xoff = randomInt(100);
     }
-    if (xIndex < xSize && !pointGrid.isOccupied(xIndex+1, yIndex)) {
-        options.push(createVector(xIndex+1, yIndex));
+
+    draw() {
+        push();
+            stroke(hi);
+            strokeWeight(5);
+            strokeCap(ROUND);
+            strokeJoin(ROUND);
+            noFill();
+            this.xoff += noiseIncrement;
+            translate(this.position.x, this.position.y);
+            rotate(noise(this.xoff) * 2);
+            arc(0, 0, this.radius, this.radius, this.rotation, this.rotation + this.length);
+        pop();
     }
-    if (yIndex > 0 && !pointGrid.isOccupied(xIndex, yIndex-1)) {
-        options.push(createVector(xIndex, yIndex-1));
-    }
-    if (yIndex < ySize && !pointGrid.isOccupied(xIndex, yIndex+1)) {
-        options.push(createVector(xIndex, yIndex+1));
-    }
-    if (options.length == 0) {
-        return null;
-    }
-    var choice = randomChoice(options);
-    pointGrid.occupiedPoints[choice.x][choice.y] = true;
-    return choice;
 }

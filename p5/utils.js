@@ -127,6 +127,18 @@ class PointGrid {
         } 
     }
 
+    occupy(x, y) {
+        this.occupiedPoints[x][y] = true;
+    }
+
+    vacate(x, y) {
+        this.occupiedPoints[x][y] = false;
+    }
+
+    getPosition(p) {
+        return this.points[p.y][p.x];
+    }
+
     isOccupied(x, y) {
         return this.occupiedPoints[x][y] === true;
     }
@@ -171,4 +183,8 @@ function randomChoice(arr) {
 
 function randomInt(ceil) {
     return Math.floor(Math.random() * ceil);
+}
+
+function randomPlusOrMinus(variance) {
+    return Math.round(-variance + (Math.random() * variance * 2));
 }
