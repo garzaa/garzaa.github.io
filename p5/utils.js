@@ -1,3 +1,5 @@
+var drawRoutines = [];
+
 function scaleWaveform(point, amplitude) {
     return logTransform(point, 0, 1, 0, amplitude);
 }
@@ -187,4 +189,44 @@ function randomInt(ceil) {
 
 function randomPlusOrMinus(variance) {
     return Math.round(-variance + (Math.random() * variance * 2));
+}
+
+// inclusive
+function intRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function drawLineAtSpeed(start, end, speed, callback) {
+    // gotta insert this into the draw loop somehow
+    drawRoutines.push(new DrawRoutine(
+        {
+            start: start,
+            end: end,
+            speed: speed
+        }
+    ));
+
+    // don't overshoot it
+}
+
+class DrawRoutine {
+    constructor(params, fn) {
+        this.params = params;
+        this.fn = fn;
+    }
+
+    update() {
+        this.fn(params);
+    }
+
+    //also: what happens when it finishes
+}
+
+// bad
+function updateDrawRoutines() {
+    drawRoutines.forEach(x => x.update());
+}
+
+function randomBool() {
+    return Math.random() >= 0.5;
 }
