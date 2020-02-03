@@ -191,6 +191,10 @@ function randomPlusOrMinus(variance) {
     return Math.round(-variance + (Math.random() * variance * 2));
 }
 
+function xor(a, b) {
+    return ( a || b ) && !( a && b ); 
+}
+
 // inclusive
 function intRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -207,6 +211,10 @@ function drawLineAtSpeed(start, end, speed, callback) {
     ));
 
     // don't overshoot it
+}
+
+function exclusiveIntRange(min, max) {
+    return intRange(min+1, max-1);
 }
 
 class DrawRoutine {
@@ -229,4 +237,8 @@ function updateDrawRoutines() {
 
 function randomBool() {
     return Math.random() >= 0.5;
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
