@@ -7,10 +7,13 @@ var fg = 50;
 
 var cellSize = 24;
 var lineWeight = 2;
-var workingArea = 600;
-var cellCount = workingArea/cellSize;
+var xSize = 480;
+var ySize = 600;
+var xCount = xSize/cellSize;
+var yCount = ySize/cellSize;
 var ts = 12;
-var margin = (canvasSize-workingArea)/2;
+var xMargin = (canvasSize-xSize)/2;
+var yMargin = (canvasSize-ySize)/2;
 
 var N = 1;
 var S = 2;
@@ -48,7 +51,7 @@ var OPPOSITE = {
 }
 
 var rows = []
-rangeIter(cellCount, x=>rows.push(new Array(cellCount).fill(0)))
+rangeIter(yCount, x=>rows.push(new Array(xCount).fill(0)))
 
 function carvePassages(cx, cy, rows) {
     var directions = shuffle(["N", "S", "E", "W"]);
@@ -57,7 +60,7 @@ function carvePassages(cx, cy, rows) {
         var nx = cx + DX[direction];
         var ny = cy + DY[direction];
 
-        if ((ny>=0) && (ny<cellCount) && (nx>=0) && (nx<cellCount) && !rows[ny][nx]) {
+        if ((ny>=0) && (ny<yCount) && (nx>=0) && (nx<xCount) && !rows[ny][nx]) {
             rows[cy][cx] = rows[cy][cx] | D[direction];
             rows[ny][nx] = rows[ny][nx] | OPPOSITE[direction];
             carvePassages(nx, ny, rows);
@@ -87,9 +90,9 @@ function drawCell(cell, i, j) {
     push();
         translate(j*cellSize, i*cellSize);
 
-        if ((j == cellCount-1) || !(cell & E))    rightLine();
+        if ((j == xCount-1) || !(cell & E))    rightLine();
         if ((j == 0))                             leftLine();
-        if (((i == cellCount-1) || !(cell & S)))  bottomLine();
+        if (((i == yCount-1) || !(cell & S)))  bottomLine();
         if ((i == 0))                             topLine();
 
         push();
@@ -127,7 +130,7 @@ function drawCompass() {
         textFont("monospace");
         textAlign(CENTER, CENTER);
         translate(canvasSize/2, canvasSize/2);
-        var offset = workingArea/2 + margin/2;
+        var offset = Math.max(xSize/2 + xMargin/2, ySize/2+yMargin/2);
         text("0001", 0, offset);
         text("0010", 0, -offset);
         text("0100", offset, 0);
@@ -138,7 +141,7 @@ function drawCompass() {
 function draw() {
     background(bg);
     push();
-    translate(margin, margin);
+    translate(xMargin, yMargin);
     for (var i=0; i<rows.length; i++) {
         for (var j=0; j<rows[i].length; j++) {
             drawCell(rows[i][j], i, j);
