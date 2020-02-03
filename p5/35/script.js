@@ -9,6 +9,7 @@ var cellSize = 24;
 var lineWeight = 2;
 var workingArea = 600;
 var cellCount = workingArea/cellSize;
+var ts = 12;
 var margin = (canvasSize-workingArea)/2;
 
 var N = 1;
@@ -78,6 +79,7 @@ function setup() {
     stroke(color("indigo"));
     ellipseMode(CORNER);
     makeRows(rows);
+    textSize(ts);
 }
 
 
@@ -95,7 +97,6 @@ function drawCell(cell, i, j) {
             fill(lerpColor(color("indigo"), color("hotpink"), cell/24));
             textFont("monospace");
             textAlign(CENTER, CENTER);
-            textSize(12);
             text(cell, cellSize/2, cellSize/2);
         pop();
 
@@ -119,6 +120,21 @@ function topLine() {
     line(0, 0, cellSize, 0);
 }
 
+function drawCompass() {
+    push();
+        noStroke();
+        fill("indigo")
+        textFont("monospace");
+        textAlign(CENTER, CENTER);
+        translate(canvasSize/2, canvasSize/2);
+        var offset = workingArea/2 + margin/2;
+        text("0001", 0, offset);
+        text("0010", 0, -offset);
+        text("0100", offset, 0);
+        text("1000", -offset, 0);
+    pop();
+}
+
 function draw() {
     background(bg);
     push();
@@ -128,4 +144,6 @@ function draw() {
             drawCell(rows[i][j], i, j);
         }
     }
+    pop();
+    drawCompass();
 }
