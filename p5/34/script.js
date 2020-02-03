@@ -1,10 +1,10 @@
 var canvasSize = 800;
 
 var bg = 220;
-var fg = 100;
+var fg = 50;
 
-var cellSize = 32;
-var lineWeight = 1;
+var cellSize = 16;
+var lineWeight = 3;
 var workingArea = 512;
 var cellCount = workingArea/cellSize;
 var margin = (canvasSize-workingArea)/2;
@@ -137,6 +137,9 @@ function makeRows(rows) {
             }
         }
     }
+
+    rows[0][0].top = false;
+    rows[rows.length-1][rows[0].length-1].bottom = false;
 }
 
 // copy and output
@@ -161,6 +164,7 @@ function drawCell(cell, x, y) {
 function setup() {
     createCanvas(canvasSize, canvasSize);
     noLoop();
+    strokeCap(PROJECT)
     strokeWeight(lineWeight);
     noFill();
     background(bg);
@@ -171,9 +175,9 @@ function setup() {
 }
 
 function draw() {
+    background(bg);
     push();
     translate(margin, margin);
-    console.log(rows.length);
     for (var i=0; i<rows.length; i++) {
         for (var j=0; j<rows[i].length; j++) {
             drawCell(rows[i][j], j, i);
