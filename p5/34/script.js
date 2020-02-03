@@ -5,7 +5,7 @@ var fg = 50;
 
 var cellSize = 6;
 var lineWeight = 3;
-var workingArea = 600;
+var workingArea = 400;
 var cellCount = workingArea/cellSize;
 var margin = (canvasSize-workingArea)/2;
 
