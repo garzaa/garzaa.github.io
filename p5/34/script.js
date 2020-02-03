@@ -1,11 +1,11 @@
 var canvasSize = 800;
 
-var bg = 220;
+var bg = 200;
 var fg = 50;
 
-var cellSize = 16;
+var cellSize = 6;
 var lineWeight = 3;
-var workingArea = 512;
+var workingArea = 600;
 var cellCount = workingArea/cellSize;
 var margin = (canvasSize-workingArea)/2;
 
