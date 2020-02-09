@@ -5,9 +5,12 @@ var fg = 50;
 
 var cellSize = 6;
 var lineWeight = 3;
-var workingArea = 400;
-var cellCount = workingArea/cellSize;
-var margin = (canvasSize-workingArea)/2;
+var xSize = 360;
+var ySize = 360;
+var xCellCount = xSize/cellSize;
+var yCellCount = ySize/cellSize;
+var xMargin = (canvasSize-xSize)/2;
+var yMargin = (canvasSize-ySize)/2;
 
 class Cell {
     constructor(x, y) {
@@ -28,19 +31,17 @@ var rows = []
 
 function makeRows(rows) {
     var currentRow = []
-    for (var q=0; q<cellCount; q++) {
+    for (var q=0; q<yCellCount; q++) {
         var y = rows.length;
         // 1. create the first row, no cells are members of any set
         if (rows.length == 0) {
-            console.log("creating the first row");
-            for (var x=0; x<cellCount; x++) {
+            for (var x=0; x<xCellCount; x++) {
                 var c = new Cell(x, y);
                 currentRow.push(c);
             }
         }
 
         // 2. join any cells not members of a set to their own unique set
-        console.log("making unique sets for lone cells");
         for (var i=0; i<currentRow.length; i++) {
             if (currentRow[i].parentSet == null) {
                 currentRow[i].parentSet = new Set();
@@ -49,7 +50,6 @@ function makeRows(rows) {
         }
 
         // 3. create right walls, moving from left to right
-        console.log("creating right walls")
         for (var i=0; i<currentRow.length-1; i++) {
             // if the current cell and the cell to the right
             // are members of the same set, always create a wall between them
@@ -65,7 +65,6 @@ function makeRows(rows) {
         }
 
         // 4. create bottom walls, moving from left to right
-        console.log("creating bottom rows");
         for (var i=0; i<currentRow.length; i++) {
             // if the cell is the only one in its set, don't make a bottom wall
             // if the cell is the only member of its set without a bottom wall, don't make a bottom wall
@@ -80,10 +79,8 @@ function makeRows(rows) {
         }
 
         //5. if it's the last row
-        if (rows.length == cellCount-1) {
+        if (rows.length == yCellCount-1) {
             // add a bottom wall to every cell
-            print("done, cleaning up");
-
             // if current cell and cell to right are different sets
             for (var i=0; i<currentRow.length-1; i++) {
                 if (currentRow[i].parentSet != currentRow[i+1].parentSet) {
@@ -99,8 +96,6 @@ function makeRows(rows) {
         } else {
             // output the current row
             output(currentRow);
-
-            print("cleaning up current row");
             // remove all right walls
             for (var i=0; i<currentRow.length-1; i++) {
                 currentRow[i].right = false;
@@ -117,11 +112,9 @@ function makeRows(rows) {
                 currentRow[i].bottom = false;
             }
         }
-        console.log(currentRow);
     }
 
     // finally add the walls on the top and sides
-    console.log("done, cleaning up");
     for (var i=0; i<rows.length; i++) {
         for (var j=0; j<rows[i].length; j++) {
             if (i == 0) {
@@ -177,7 +170,7 @@ function setup() {
 function draw() {
     background(bg);
     push();
-    translate(margin, margin);
+    translate(xMargin, yMargin);
     for (var i=0; i<rows.length; i++) {
         for (var j=0; j<rows[i].length; j++) {
             drawCell(rows[i][j], j, i);

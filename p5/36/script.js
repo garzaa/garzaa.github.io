@@ -2,13 +2,13 @@
 
 var canvasSize = 800;
 
-var bg = 200;
+var bg = "#d6c7c7";
 var fg = 50;
 
-var cellSize = 6;
-var lineWeight = 3;
-var xSize = 360;
-var ySize = 360;
+var cellSize = 24;
+var lineWeight = 2;
+var xSize = 480;
+var ySize = 600;
 var xCount = xSize/cellSize;
 var yCount = ySize/cellSize;
 var ts = 12;
@@ -79,7 +79,8 @@ function setup() {
     strokeWeight(lineWeight);
     noFill();
     background(bg);
-    stroke(fg);
+    stroke(color("indigo"));
+    ellipseMode(CORNER);
     makeRows(rows);
     textSize(ts);
 }
@@ -96,9 +97,10 @@ function drawCell(cell, i, j) {
 
         push();
             noStroke();
+            fill(lerpColor(color("indigo"), color("hotpink"), cell/24));
             textFont("monospace");
             textAlign(CENTER, CENTER);
-            //text(cell, cellSize/2, cellSize/2);
+            text(cell, cellSize/2, cellSize/2);
         pop();
 
 
@@ -121,6 +123,21 @@ function topLine() {
     line(0, 0, cellSize, 0);
 }
 
+function drawCompass() {
+    push();
+        noStroke();
+        fill("indigo")
+        textFont("monospace");
+        textAlign(CENTER, CENTER);
+        translate(canvasSize/2, canvasSize/2);
+        var offset = Math.max(xSize/2 + xMargin/2, ySize/2+yMargin/2);
+        text("0001", 0, offset);
+        text("0010", 0, -offset);
+        text("0100", offset, 0);
+        text("1000", -offset, 0);
+    pop();
+}
+
 function draw() {
     background(bg);
     push();
@@ -131,4 +148,5 @@ function draw() {
         }
     }
     pop();
+    drawCompass();
 }
