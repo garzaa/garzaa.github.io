@@ -1,5 +1,5 @@
 var canvasSize = 800;
-var outsideMargin = 250a;
+var outsideMargin = 250;
 var pointGap = 18;
 var fieldSize = canvasSize - (2*outsideMargin);
 
