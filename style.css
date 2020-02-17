@@ -1,32 +1,42 @@
-h1 {
-	font-family: "Roboto Mono", monospace;
-	font-size: 100pt;
-	font-weight: 800;
-	color: #255ed5;
-	max-width: 50%;
-	text-shadow:
-		-1px -1px 0 rgb(240, 240, 255),  
-		1px -1px 0 rgb(240, 240, 255),
-		-1px 1px 0 rgb(240, 240, 255),
-		1px 1px 0 rgb(240, 240, 255);
-
-	-webkit-touch-callout: none; /* iOS Safari */
-		-webkit-user-select: none; /* Safari */
-		-khtml-user-select: none; /* Konqueror HTML */
-			-moz-user-select: none; /* Firefox */
-			-ms-user-select: none; /* Internet Explorer/Edge */
-				user-select: none; /* Non-prefixed version, currently
-									supported by Chrome and Opera */
-}
-
 .splash-container {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #255ed5;
+	background-color: #eee;
 	flex-direction: column;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	border: none;
+	overflow: hidden;
+}
+
+#splash-text {
+	background-color: #eee !important;
+	color: red;
+}
+
+.floating-center {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.floating-card {
+	background-color: #222;
+	opacity: .9;
+	color: #aaa !important;
+	padding: 2rem;
+	z-index: 1;
+	font-family: "Fira Sans", sans-serif;
+	width: 30rem;
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 html, body {
@@ -45,22 +55,17 @@ html, body {
 }
 
 p {
-	color: rgb(240, 240, 255);
 	font-weight: 200;
 }
 
 a {
-	color: inherit;
+	color: #ccc;
 	transition: .2s;
+	text-decoration: none;
 }
 
 a:hover {
 	color: white;
-}
-
-.text-container {
-	background-color: #255ed5;
-	padding: 2rem;
 }
 
 #canvas-container, h1{

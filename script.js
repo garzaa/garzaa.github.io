@@ -1,123 +1,125 @@
-var radius = 400;
-var canvasDiameter = 600;
-
-var offWhite = 'rgba(240, 240, 255, 0.5)'
-
 var w = window.innerWidth;
 var h = window.innerHeight;
 
-var leftParticles = []
-var rightParticles = []
+var bg = 200;
+var fg = 50;
 
-var lastMousePos = null;
+var cellSize = 40;
+var lineWeight = 1;
+var xMargin = 0;
+var yMargin = 0;
+var ts = 12;
+var xSize = w-(xMargin*2);
+var ySize = h-(yMargin*2)+cellSize;
+var xCount = Math.round(xSize/cellSize);
+var yCount = Math.round(ySize/cellSize);
 
-var pixelsPerParticle = 10;
-var maxParticleDistance = 60;
-var minParticleDistance = 10;
-var particleLifetime = 240;
+var N = 1;
+var S = 2;
+var E = 4;
+var W = 8;
 
-var cDistance = 0;
+var D = {
+    N: N,
+    S: S,
+    E: E,
+    W: W
+}
+
+var DX = {
+    E: 1,
+    W: -1,
+    S: 0,
+    N: 0
+}
+
+// p5 js starts at the top left
+// more y = going lower
+var DY = {
+    E: 0,
+    W: 0,
+    N: -1,
+    S: 1
+}
+
+var OPPOSITE = {
+    E: W,
+    W: E,
+    N: S,
+    S: N
+}
 
 function setup() {
-    var cnv = createCanvas(w, h);
-	cnv.parent("canvas-container")
-	lastMousePos = createVector(mouseX, mouseY);
+	var cnv = createCanvas(w, h);
+	cnv.parent("canvas-container");
+    noLoop();
+    strokeCap(PROJECT)
+    strokeWeight(lineWeight);
+    noFill();
+    background(bg);
+    stroke(fg);
+    makeRows(rows);
+    textSize(ts);
+}
+
+var rows = []
+rangeIter(yCount, x=>rows.push(new Array(xCount).fill(0)))
+
+function carvePassages(cx, cy, rows) {
+    var directions = shuffle(["N", "S", "E", "W"]);
+
+    directions.forEach(function(direction) {
+        var nx = cx + DX[direction];
+        var ny = cy + DY[direction];
+
+        if ((ny>=0) && (ny<yCount) && (nx>=0) && (nx<xCount) && !rows[ny][nx]) {
+            rows[cy][cx] = rows[cy][cx] | D[direction];
+            rows[ny][nx] = rows[ny][nx] | OPPOSITE[direction];
+            carvePassages(nx, ny, rows);
+        }
+    });
+}
+
+function makeRows(rows) {
+    carvePassages(0, 0, rows);
+}
+
+function drawCell(cell, i, j) {
+    push();
+        translate(j*cellSize, i*cellSize);
+
+        if ((j == xCount-1) || !(cell & E))       rightLine();
+        if ((j == 0))                             leftLine();
+        if (((i == yCount-1) || !(cell & S)))     bottomLine();
+        if ((i == 0))                             topLine();
+
+    pop();
+}
+
+function leftLine() {
+    line(0, cellSize, 0, 0);
+}
+
+function rightLine() {
+    line(cellSize, 0, cellSize, cellSize);
+}
+
+function bottomLine() {
+    line(cellSize, cellSize, 0, cellSize);
+}
+
+function topLine() {
+    line(0, 0, cellSize, 0);
 }
 
 function draw() {
-    background('#255ed5');
-	stroke(offWhite);
-	strokeWeight(3);
-	noFill();
-
-	var currMousePos = createVector(mouseX, mouseY);
-	var mouseDistance = currMousePos.dist(lastMousePos);
-	if (mouseDistance > pixelsPerParticle || (cDistance > pixelsPerParticle)) {
-		cDistance = 0
-		createParticlePair(currMousePos, p5.Vector.sub(lastMousePos, currMousePos).normalize());
-	} else {
-		cDistance += mouseDistance;
-	}
-
-	lastMousePos = currMousePos;
-
-	runParticles(leftParticles);
-	runParticles(rightParticles);
-}
-
-function createParticlePair(posVec, dirVec) {
-	dirVec.normalize();
-	leftParticles.push(new Particle(posVec, dirVec.rotate(PI), leftParticles));
-	//rightParticles.push(new Particle(posVec, dirVec.rotate(PI), rightParticles));
-}
-
-class Particle {
-	constructor(posVec, dirVec, otherParticles) {
-		this.otherParticles = null;
-		this.lifetime = particleLifetime;
-		this.velocity = dirVec;
-		this.position = posVec;
-		this.otherParticles = otherParticles;
-	}
-
-	update() {
-		this.position.add(this.velocity);
-
-		var closest = [];
-		for (var i = 0; i < this.otherParticles.length; i++) {
-			var currDistance = this.position.dist(this.otherParticles[i].position);
-			if (currDistance < maxParticleDistance && currDistance != 0) {
-				closest.push(this.otherParticles[i])
-			}
-		}
-
-		if (closest.length == 0) {
-			var closestParticle = null;
-			var maxDistance = Infinity;
-			this.otherParticles.forEach(i => {
-				var d = this.position.dist(i.position);
-				if (d < maxDistance && i.closest != this && d > minParticleDistance) {
-					closestParticle = i;
-					maxDistance = d;
-				}
-			})
-			if (closestParticle != null) {
-				closest.push(closestParticle);
-			}
-		}
-
-		strokeWeight(1);
-
-		closest.forEach(i => {
-			line(this.position.x, this.position.y, i.position.x, i.position.y);
-			ellipse(this.position.x, this.position.y, 3, 3);
-		});
-
-		this.lifetime--;
-	}
-
-	display() {
-		fill("white");
-		strokeWeight(0);
-	}
-
-	run() {
-		this.update();
-		this.display();
-	}
-}
-
-function runParticles(particleArray) {
-	var toSplice = []
-	for (var i=0; i<particleArray.length; i++) {
-		particleArray[i].run();
-		if (particleArray[i].lifetime < 0) {
-			// avoid modifying in place
-			toSplice.push(i);
-		}
-	}
-
-	toSplice.forEach(index => {
-		particleArray.splice(index, 1);
-	});
+    background(bg);
+    push();
+    translate(xMargin, yMargin);
+    for (var i=0; i<rows.length; i++) {
+        for (var j=0; j<rows[i].length; j++) {
+            drawCell(rows[i][j], i, j);
+        }
+    }
+    pop();
 }

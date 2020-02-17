@@ -8,6 +8,10 @@
     text-shadow: none !important;
   }
 
+  body {
+    background-color: #fff !important;
+  }
+
   a,
   a:visited {
     text-decoration: underline;
@@ -76,6 +80,7 @@ html {
 
 body {
   line-height: 1.85;
+  background: #f0f0f0;
 }
 
 p,
@@ -154,7 +159,6 @@ html {
 
 body {
   color: #444;
-  font-family: 'Merriweather', Georgia, serif;
   margin: 0;
   max-width: 100%;
 }
@@ -203,7 +207,7 @@ p {
 
 pre,
 code {
-  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-family: Menlo, Monaco, "Consolas", monospace;
 }
 
 pre {
