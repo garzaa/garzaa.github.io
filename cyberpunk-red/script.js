@@ -10,8 +10,17 @@ function multiDice(numDice, sides) {
     return total;
 }
 
-function randomLoot() {
-    return lootTable[Math.floor(Math.random() * lootTable.length)];
+function randomLoot(prevNumbers) {
+    // O(?)
+    var idx = Math.floor(Math.random() * lootTable.length);
+    while (prevNumbers.includes(idx)) {
+        idx = Math.floor(Math.random() * lootTable.length)
+    }
+    prevNumbers.push(idx);
+    return {
+        "lootStr": lootTable[idx],
+        "prevNumbers": prevNumbers
+    }
 }
 
 function parseDice(lootStr) {
@@ -32,9 +41,12 @@ function parseDice(lootStr) {
 }
 
 function loot(amount) {
-    var lootArr = []
+    var lootArr = [];
+    var prevNumbers = [];
     for (var i=0; i<amount; i++) {
-        var lootStr = randomLoot();
+        var result = randomLoot(prevNumbers);
+        prevNumbers = result.prevNumbers;
+        var lootStr = result.lootStr;
         lootStr = parseDice(lootStr);
         lootArr.push(lootStr)
     }

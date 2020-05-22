@@ -3,9 +3,22 @@
     <head>
         <script src="loot.js"></script>
         <script src="script.js"></script>
+        <link rel="stylesheet" href="style.css"/>
+        <meta charset="UTF-8">
     </head>
     <body>
-        <button onclick="lootToList(d(6));">get loot!!</button>
-        <ul id=loot></ul>
+        <div class="container">
+            <button onclick="lootToList(1);">get 1 loot</button>
+            <button onclick="lootToList(2);">get 2 loot</button>
+            <button onclick="lootToList(3);">get 3 loot</button>
+            <button onclick="lootToList(4);">get 4 loot</button>
+            <button onclick="lootToList(5);">get 5 loot</button>
+            <button onclick="lootToList(6);">get 6 loot</button>
+            <button onclick="lootToList(d(6));">get random loot!!</button>
+            <ol id=loot></ol>
+        </div>
     </body>
+    <script>
+        lootToList(6);
+    </script>
 </html>
