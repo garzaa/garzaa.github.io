@@ -121,6 +121,21 @@ function topLine() {
     line(0, 0, cellSize, 0);
 }
 
+function drawCompass() {
+    push();
+        noStroke();
+        fill("indigo")
+        textFont("monospace");
+        textAlign(CENTER, CENTER);
+        translate(canvasSize/2, canvasSize/2);
+        var offset = Math.max(xSize/2 + xMargin/2, ySize/2+yMargin/2);
+        text("0001", 0, -offset);
+        text("0010", 0, offset);
+        text("0100", offset, 0);
+        text("1000", -offset, 0);
+    pop();
+}
+
 function draw() {
     background(bg);
     push();
