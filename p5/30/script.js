@@ -1,57 +1,150 @@
 var canvasDiameter = 800;
 
-var bg = "#8BD7D2";
-var fg = "#FFFBFA";
-var hi = "#D68FD6";
-var fmt = 512;
-var lineLength = 800;
+var bg = "#f6f6f4";
+var fg = "#4169ff";
 
-var waveInterval = 10;
-var amplitude = 20;
-var song, analyzer;
+var rowBuffer = [];
+var mazeWidth = 200;
+var mazeHeight = 400;
+var cellSize = 4;
+var lineWeight = 2;
+var currentRow = [];
 
-function preload() {
-    song = loadSound("song.mp3");
+var rowLength = mazeWidth/cellSize;
+
+class Cell {
+    constructor() {
+        this.right = false;
+        this.bottom = false;
+
+        this.set = null;
+    }
 }
 
-var lines = pointGrid(0, 200, window.innerWidth, window.innerHeight);
-
 function setup() {
-    fillWindowCanvas(WEBGL);
+    createCanvas(canvasDiameter, canvasDiameter);
+    strokeCap(PROJECT);
     noFill();
-    strokeWeight(2);
-    song.loop();
-    fft = new p5.FFT();
+    strokeWeight(lineWeight);
+    rectMode(CENTER);
+    addRow();
+    setInterval(addRow, 100);
+}
+
+function addRow() {
+    if (rowBuffer.length == 0) {
+        // 1. create the first row, no cells are members of any set
+        for (let x=0; x<rowLength; x++) {
+            var c = new Cell();
+            currentRow.push(c);
+        }
+    }
+
+    // 2. join any cells not members of a set to their own unique set
+    for (let i=0; i<currentRow.length; i++) {
+        if (currentRow[i].set == null) {
+            currentRow[i].set = new Set();
+            currentRow[i].set.add(currentRow[i]);
+        }
+    }
+    
+    // 3. create right walls, moving from left to right
+    for (let i=0; i<currentRow.length-1; i++) {
+        // if the current cell and the cell to the right are members 
+        // of the same set, create a wall between them
+        if ((currentRow[i].set === currentRow[i+1].set) || randomBool()) {
+            currentRow[i].right = true;
+        } else {
+        // if no wall, union the sets
+            currentRow[i].set.union(currentRow[i+1].set);
+        }
+    }
+
+    // 4. create bottom walls, moving from left to right
+    for (let i=0; i<currentRow.length; i++) {
+        // if the cell is the only one in its set, don't make a bottom wall
+        // if the cell is the only member of its set without a bottom wall, don't make a bottom wall
+        // if not, randomly add a bottom wall
+        if (
+            currentRow[i].set.size > 0
+            && !(!currentRow[i].bottom && (notBottomCount(currentRow[i].set) == 1))
+            && randomBool()
+            ) {
+                currentRow[i].bottom = true;
+            }
+    }
+
+    outputRow(currentRow);
+
+    // remove all right walls
+    for (let i=0; i<currentRow.length-1; i++) {
+        currentRow[i].right = false;
+    }
+    //remove all cells with a bottom wall from their set
+    for (let i=0; i<currentRow.length; i++) {
+        if (currentRow[i].bottom) {
+            currentRow[i].set.delete(currentRow[i]);
+            currentRow[i].set = null;
+        }
+    }
+    // remove all bottom walls
+    for (let i=0; i<currentRow.length; i++) {
+        currentRow[i].bottom = false;
+    }
+}
+
+function outputRow(row) {
+    // clone the object
+    rowBuffer.push(JSON.parse(JSON.stringify(row)));
+    if (rowBuffer.length > (mazeHeight/cellSize)) {
+        rowBuffer.shift();
+    }
+}
+
+function drawRows() {
+    translate(canvasDiameter/2 - mazeWidth/2, canvasDiameter/2 - mazeHeight/2);
+    for (let i=0; i<rowBuffer.length; i++) {
+        push();
+            translate(0, i*cellSize);
+            let currentRow = rowBuffer[i];
+            for (let j=0; j<currentRow.length; j++) {
+                let currentCell = currentRow[j];
+                push();
+                    translate(j*cellSize, 0);
+                    if (currentCell.bottom) {
+                        line(0, cellSize, cellSize, cellSize);
+                    }
+                    if (currentCell.right) {
+                        line(cellSize, 0, cellSize, cellSize);
+                    }
+                pop();
+            }
+        pop();
+    }
 }
 
 function draw() {
     background(bg);
-    stroke(fg);
+    stroke(fg) 
+    rect(400, 400, mazeWidth, mazeHeight);
 
-    rotateZ(frameCount / fmt);
-    rotateX(frameCount / fmt);
-    rotateY(frameCount / fmt);
-    
-    var waveform = fft.waveform();
-
-    iterateOnPoints(lines, function(v) {
-        beginShape();
-        for (var i=0; i<lineLength; i=Math.min(i+waveInterval, lineLength)) {
-            var j = Math.floor(map(i, 0, lineLength, 0, waveform.length));
-            var a = waveform[j] * amplitude * computeAmplitudeDecay(j, lineLength);
-            vertex(
-                v.x + a - canvasDiameter/2,
-                v.y - canvasDiameter/2,
-                i - lineLength/2
-            )
-        }
-        endShape();
-    });
+    push();
+        drawRows();
+    pop();
 }
 
-// peak in the middle
-function computeAmplitudeDecay(i, max) {
-    var x = i/max;
-    if (x > 1) x = 0;
-    return sin(x * PI);
+// yeah
+function notBottomCount(s) {
+    var c = 0;
+    s.forEach(function(x) {
+        if (!x.bottom) c++;
+    });
+    return c;
+}
+
+Set.prototype.union = function(setB) {
+    for (let elem of setB) {
+        elem.set = this;
+        this.add(elem)
+    }
 }
