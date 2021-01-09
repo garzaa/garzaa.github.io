@@ -1,2 +1,4 @@
 # Jekyll config
 source: ./blog/
+
+theme: jekyll-theme-minimal
