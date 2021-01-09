@@ -1,5 +1,6 @@
 # Jekyll config
 exclude:
-- "*"
+  - "*"
 include: 
-- ./blog/
+  - ./blog/
+theme: jekyll-theme-minimal
