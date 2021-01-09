@@ -1,5 +1,5 @@
 # Jekyll config
-title: Blog
+title: dev blog
 author: Adrian Garza
 source: ./blog/
 remote_theme: aterenin/minima-reboot
