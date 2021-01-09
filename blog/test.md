@@ -1,3 +1,7 @@
-# TESTING
+---
+layout: post
+title:  "E"
+---
 
-ough
+# Welcome
+yeehaw
