@@ -4,9 +4,9 @@ var bg = "#f6f6f4";
 var fg = "#4169ff";
 
 var rowBuffer = [];
-var mazeWidth = 200;
-var mazeHeight = 400;
-var cellSize = 4;
+var mazeWidth = 400;
+var mazeHeight = 100;
+var cellSize = 10;
 var lineWeight = 2;
 var currentRow = [];
 
