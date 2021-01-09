@@ -1,4 +1,3 @@
 # Jekyll config
 source: ./blog/
-remote_theme: 
-
+remote_theme: aterenin/minima-reboot
