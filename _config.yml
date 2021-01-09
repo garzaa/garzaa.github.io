@@ -1,3 +1,4 @@
 # Jekyll config
 source: ./blog/
-remote_theme: RedL0tus/Biu-Jekyll-Theme
+remote_theme: 
+
