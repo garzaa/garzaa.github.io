@@ -1,3 +1,4 @@
 ---
 layout: allposts
+permalink: posts
 ---

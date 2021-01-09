@@ -1,3 +1,9 @@
 # Jekyll config
+title: Blog
+author: Adrian Garza
 source: ./blog/
 remote_theme: aterenin/minima-reboot
+repository: garzaa/garzaa.github.io
+description: ""
+header_pages: 
+- posts.md

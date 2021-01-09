@@ -1,3 +1,7 @@
 *.db
 .DS_Store
 img/Thumbs.db
+
+# Jekyll
+_site/
+blog/.jekyll-cache/
