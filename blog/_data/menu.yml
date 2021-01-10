@@ -1,7 +1,4 @@
 entries:
-  - title: home
-    url: http://garzaa.github.io
-
   - title: all posts ┐
     post_list:
       limit: 5
