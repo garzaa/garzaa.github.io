@@ -5,8 +5,6 @@ source: ./blog/
 remote_theme: riggraz/no-style-please
 repository: garzaa/garzaa.github.io
 description: ""
-header_pages: 
-- posts.md
 BASE_PATH: ./blog/
 theme_config:
   appearance: "auto" # can be "light", "dark" or "auto"
