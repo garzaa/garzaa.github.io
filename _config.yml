@@ -8,7 +8,6 @@ description: ""
 header_pages: 
 - posts.md
 BASE_PATH: ./blog/
-site_url: http://garzaa.github.io/blog/
 theme_config:
   appearance: "auto" # can be "light", "dark" or "auto"
   back_home_text: ".." # customize text for homepage link in post layout
