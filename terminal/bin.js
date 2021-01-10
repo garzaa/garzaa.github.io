@@ -110,7 +110,7 @@ var about = {
 			"Features include file editing, history, tab autocompletion, weather, and improved extensibility.\n"+
 			"For local configuration, save a file called .config with the properties you want to override.\n"+
 			"Run 'terminal' in the dev console to see the possible override properties.\n"+
-			"You can also create a .bookmarks file (linkTitle http://link.com/).\n"+
+			"You can also create a .bookmarks file (linkTitle https://link.com/).\n"+
 			"Put something in a file called .art to add your custom ASCII art to screenfetch.\n"+
 			"Finally, you can put arbitrary startup code to execute in your .startup file. Errors are handled automatically."+
 			"\nTo see the full functionality, type 'ls'."
@@ -217,7 +217,7 @@ var weather = {
 	    //set up the right parameters
     	apiKey=files[".weatherkey"];
 
-		var endpoint = "http://api.openweathermap.org/data/2.5/weather?lat="+terminal.lat+"&lon="+terminal.lon+"&appid="+apiKey;
+		var endpoint = "https://api.openweathermap.org/data/2.5/weather?lat="+terminal.lat+"&lon="+terminal.lon+"&appid="+apiKey;
 
 		//retrieve+format data for storage
 		$.when($.getJSON(endpoint)).done(function(o) {

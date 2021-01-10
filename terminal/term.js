@@ -349,7 +349,7 @@ function searchString(query) {
             return true;
     	case "-m":
     	    window.location =
-    		"http://www.wolframalpha.com/input/?i=" +
+    		"https://www.wolframalpha.com/input/?i=" +
     		query.replace("+", "%2B");
             return true;
         case "-v":

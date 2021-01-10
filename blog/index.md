@@ -1,4 +1,4 @@
 ---
 layout: home
 ---
-[home](http://garzaa.github.io)
+[home](https://garzaa.github.io)
