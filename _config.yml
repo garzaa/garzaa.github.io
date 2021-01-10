@@ -2,8 +2,15 @@
 title: dev blog
 author: Adrian Garza
 source: ./blog/
-remote_theme: aterenin/minima-reboot
+remote_theme: riggraz/no-style-please
 repository: garzaa/garzaa.github.io
 description: ""
 header_pages: 
 - posts.md
+BASE_PATH: ./blog/
+site_url: http://garzaa.github.io/blog/
+theme_config:
+  appearance: "auto" # can be "light", "dark" or "auto"
+  back_home_text: ".." # customize text for homepage link in post layout
+  date_format: "%Y-%m-%d" # customize how date is formatted
+  show_description: false # show blog description in home page

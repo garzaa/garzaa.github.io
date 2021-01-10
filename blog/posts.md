@@ -1,4 +1,0 @@
----
-layout: allposts
-permalink: posts
----
