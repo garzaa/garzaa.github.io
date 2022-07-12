@@ -1,13 +1,14 @@
 # Jekyll config
-title: dev blog
+title: 7crane | blog
 author: Adrian Garza
 source: ./blog/
-remote_theme: riggraz/no-style-please
+remote_theme: jekyll/minima
+show_excerpts: true
+minima:
+  skin: solarized-dark
+  social_links:
+    twitter: sevencrane
+    github:  garzaa
+
 repository: garzaa/garzaa.github.io
 description: ""
-# baseurl: "blog/"
-theme_config:
-  appearance: "auto" # can be "light", "dark" or "auto"
-  back_home_text: ".." # customize text for homepage link in post layout
-  date_format: "%Y-%m-%d" # customize how date is formatted
-  show_description: false # show blog description in home page
