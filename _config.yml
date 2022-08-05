@@ -7,7 +7,7 @@ show_excerpts: true
 
 repository: garzaa/garzaa.github.io
 description: ""
-archive_page: /archive
+archive_page: /blog/archive
 home_page: /index
 
 plugins:
