@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: archive
 ---
 [home](https://garzaa.github.io)
 

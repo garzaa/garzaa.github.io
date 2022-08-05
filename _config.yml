@@ -2,13 +2,13 @@
 title: 7crane | blog
 author: Adrian Garza
 source: ./blog/
-remote_theme: jekyll/minima
+remote_theme: "garzaa/crane-theme"
 show_excerpts: true
-minima:
-  skin: solarized-dark
-  social_links:
-    twitter: sevencrane
-    github:  garzaa
 
 repository: garzaa/garzaa.github.io
 description: ""
+archive_page: /archive
+home_page: /index
+
+plugins:
+  - jekyll-remote-theme

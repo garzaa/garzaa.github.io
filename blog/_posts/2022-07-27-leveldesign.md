@@ -5,13 +5,8 @@ title: Designing Space for Violence
 
 How to make a good Trouble in Terrorist Town level
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Game Patterns](#game-patterns)
-3. [Guide the Player](#guide-the-player)
-4. [Movement](#keep-people-moving)
-5. [Congregation](#avoid-congregation)
-6. [Traitor Mechanics](#traitor-mechanics)
+1. test
+{:toc}
 
 ## Introduction
 
@@ -77,11 +72,13 @@ Rugs angled to highlight the side exit from this space
 ![image](https://user-images.githubusercontent.com/11641991/181401970-af518b7e-b5e6-4abd-b9da-afac4152f7ea.png)
 Crates breaking up sightlines in the underground area, two doorways hidden from each other
 
-### TTT-Specific considerations
+### TTT Specifics
+
+#### Homogenous Map
 
 **There are no lanes.** No opposing spawns where players know the other team will be coming from. Traitors only make up ¼ of the players and are unknown until they act. Therefore, the map needs to allow firefights to break out anywhere.
 
-### Keep People Moving
+#### Keep People Moving
 
 Reinforcement:
 - Treats (health, free shop items)
@@ -95,7 +92,7 @@ Punishment:
 ![image](https://user-images.githubusercontent.com/11641991/181392999-c80bacf4-9a93-4020-9c71-77e8ed94a5aa.png)
 ttt_oldchurch has a traitor tester powered by bananas that appear in different places around the area.
 
-### Avoid Congregation
+#### Avoid Congregation
 
 People love these things:
 1. Light
@@ -149,3 +146,6 @@ Counterplay can take the form of:
 - traps with some audio/visual cue before they activate
 - traps in a high-traffic path that has a longer/inconvenient, yet safe, detour
 - "traps" that spawn something not immediately hostile, like an explosive barrel
+
+#### thanks for reading! 
+{:.no_toc}
