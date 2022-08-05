@@ -21,7 +21,7 @@ gem "github-pages", group: :jekyll_plugins
 # If you have any plugins, put them here!
 group :jekyll_plugins do
   gem "kramdown"
-  gem 'crane-theme', '~> 0.1.1'
+  gem 'crane-theme', '~> 0.1.5'
   gem "jekyll-feed", "~> 0.6"
   gem "jekyll-remote-theme"
 end
