@@ -149,3 +149,10 @@ Counterplay can take the form of:
 
 #### thanks for reading! 
 {:.no_toc}
+maps featured:
+- [ttt_PigIsland](https://steamcommunity.com/sharedfiles/filedetails/?id=2839995999)
+- [ttt_OldChurch](https://steamcommunity.com/sharedfiles/filedetails/?id=2762219146)
+- [ttt_ManHouse](https://steamcommunity.com/sharedfiles/filedetails/?id=2479468104)
+- [ttt_community_bowling](https://steamcommunity.com/sharedfiles/filedetails/?id=131667838)
+- [ttt_riverside](https://steamcommunity.com/sharedfiles/filedetails/?id=312731430)
+- [ttt_NightTrap](https://steamcommunity.com/sharedfiles/filedetails/?id=270698403)
