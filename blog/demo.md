@@ -42,8 +42,6 @@ set `usemathjax: true` in the front matter to see my old ML problem sets
   \text{argmin}_{c \in \mathbb{R}^d} \sum_{i=1}^{n} ||x_i - c||^2
   $$
   
-try pressing `Ctrl``T` to send a brush to a `func_detail` entity.
-
 _aorugh ough_
 
 ### misc markdown
