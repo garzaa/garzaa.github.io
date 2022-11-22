@@ -40,6 +40,4 @@ A sci-fi short story about two people losing touch.
 A post-apocalyptic short story based on a nightmare I had that year.
 
 ## Art
-[<img src="https://user-images.githubusercontent.com/11641991/203392297-b6731275-d4a6-41e2-98a4-79a7484fc75a.png">](https://7cr.co/blog/art/)
-
-## 3D Design
+[<img src="https://user-images.githubusercontent.com/11641991/203404411-f93fe9e3-2313-4119-a8ba-b822ca56833c.png">](https://7cr.co/blog/art/)
