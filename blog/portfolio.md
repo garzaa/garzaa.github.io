@@ -6,6 +6,11 @@ title: portfolio
 1. table of contents son
 {: toc}
 
+## Code
+**You can find my full GitHub profile [here](https://github.com/garzaa).**
+
+It contains personal one-off projects, this website, and my games, all of which are open-source.
+
 ## Games
 
 _These are all browser-playable._
