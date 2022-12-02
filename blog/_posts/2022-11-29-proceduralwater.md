@@ -4,7 +4,7 @@ title: Procedural Water
 usemathjax: true
 ---
 
-How to generate pseudo-3D water with a noise texturea and some color ramps
+How to generate pseudo-3D water with a noise texture and some color ramps
 
 <video src="https://user-images.githubusercontent.com/11641991/204958094-e28d2853-8709-47e0-98c7-6c4d46c69428.webm" autoplay="autoplay" loop="loop" controls style="width: 100%;"></video>
 
