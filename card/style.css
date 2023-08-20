@@ -21,12 +21,12 @@ body {
 	background-color: #fffdfd;
 	width: 32rem;
 	height: 18rem;
-	border: 4px double #CC2936;
+	border: 4px double #363457;
 	font-family: 'Asul', sans-serif;
 }
 
-h2 {
-	color: #08415C;
+h1 {
+	color: #B6244F;
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 800;
 }
