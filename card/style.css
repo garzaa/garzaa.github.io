@@ -14,35 +14,19 @@ body {
 	text-align: center;
 	min-height: 100vh;
 	position: relative;
+	perspective: 1000px;
 }
 
 #card {
-	background-color: white;
+	background-color: #fffdfd;
 	width: 32rem;
 	height: 18rem;
-	animation-name: rotateTest;
-	animation-iteration-count: infinite;
-	animation-duration: 4s;
+	border: 4px double #CC2936;
+	font-family: 'Asul', sans-serif;
 }
 
-@keyframes rotateTest {
-	from {
-		transform: rotate3d(0, 0, 0, 0);
-	}
-	to {
-		transform: rotate3d(1, 1, 0, 45deg);
-	}
-}
-
-#shadow {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-left: -9rem;
-	width: 32rem;
-	height: 18rem;
-	animation-name: rotateTest;
-	animation-iteration-count: infinite;
-	animation-duration: 4s;
-	background-color: black;
+h2 {
+	color: #08415C;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 800;
 }
