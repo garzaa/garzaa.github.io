@@ -57,5 +57,5 @@ $("body").on("mousemove", function(event) {
 	// console.log(distanceRatio);
 
 	// then apply rotation based on that
-	$("#card").css("transform", "rotateY("+distanceRatio.x * 45+"deg) rotateX("+distanceRatio.y * 45+"deg)");
+	$("#card").css("transform", "rotateY("+distanceRatio.x * 22.5/2+"deg) rotateX("+distanceRatio.y * 22.5/2+"deg)");
 });
