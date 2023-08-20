@@ -30,11 +30,7 @@ let cardSize = new vec2($("#card").width(), $("#card").height());
 const two = new vec2(2, 2);
 let c = new vec2(card.position().left, card.position().top).add(cardSize.div(two));
 
-$(window).on("resize", function() {
-	cardSize = new vec2($("#card").width(), $("#card").height());
-	c = new vec2(card.position().left, card.position().top).add(cardSize.div(two));
-	console.log("window resize")
-});
+const baseRotation = 22.5/2;
 
 $.getJSON("https://api.ipify.org?format=json", function(data) {
     console.log("success");
@@ -57,5 +53,8 @@ $("body").on("mousemove", function(event) {
 	// console.log(distanceRatio);
 
 	// then apply rotation based on that
-	$("#card").css("transform", "rotateY("+distanceRatio.x * 22.5/2+"deg) rotateX("+distanceRatio.y * 22.5/2+"deg)");
+	$("#card").css("transform", "rotateY("+distanceRatio.x * baseRotation+"deg) rotateX("+distanceRatio.y * baseRotation+"deg)");
+
+	// fake parallax bg
+	$(".body").css("background-position", "top " +distanceRatio.y/10+"rem right " + distanceRatio.x/10+"rem");
 });
