@@ -1,6 +1,6 @@
 const canvasSize = 900;
-const gridSize = new vec2(2, 4);
-const cellSize = 100;
+const gridSize = new vec2(40, 50);
+const cellSize = 150;
 let hexgrid;
 let sideLength;
 const maxdepth = 5;
@@ -19,7 +19,7 @@ const black = "#000000";
 function setup() {
 	createCanvas(canvasSize, canvasSize);
 	noFill();
-	grid = new HexGrid(new vec2(375, 375), gridSize, cellSize);
+	grid = new HexGrid(new vec2(0, 0), gridSize, cellSize);
 	sideLength = cellSize * 0.5;
 	sideOffset = new vec2(sideLength/2, grid.cellSize.y/2);
 	noLoop();
@@ -27,7 +27,7 @@ function setup() {
 
 function draw() {
 	background(50);
-	grid.iterate(drawBorders);
+	// grid.iterate(drawBorders);
 	grid.iterate(drawCell);
 	strokeWeight(4);
 }
@@ -48,8 +48,11 @@ function drawCell(c) {
 		let v1 = yoink(points);
 		let v2 = yoink(points);
 		// then draw a bezier between the two
+		stroke(0)
+		strokeWeight(20);
+		pointBezier(v1, v2, c.worldCoords);
 		stroke(200);
-		strokeWeight(4);
+		strokeWeight(16);
 		pointBezier(v1, v2, c.worldCoords);
 	}
 }
