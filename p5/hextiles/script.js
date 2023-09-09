@@ -5,6 +5,7 @@ let hexgrid;
 let sideLength;
 const maxdepth = 5;
 const midpointVariance = 1;
+const dotChance = 0.1;
 // const splitChance = 0.5;
 let sideOffset;
 
@@ -26,14 +27,16 @@ function setup() {
 }
 
 function draw() {
-	background(50);
+	background(250);
 	// grid.iterate(drawBorders);
 	grid.iterate(drawCell);
+	grid.iterate(drawDots);
 	strokeWeight(4);
 }
 
 function drawBorders(c) {
 	stroke("#00ffff");
+	strokeWeight(3);
 	polygon(c.worldCoords.x, c.worldCoords.y, cellSize/2, 6);
 }
 
@@ -50,10 +53,25 @@ function drawCell(c) {
 		// then draw a bezier between the two
 		stroke(0)
 		strokeWeight(20);
+		// pointBezier(v1, v2, c.worldCoords);
+		stroke(randomChoice(pinkbluepastels));
+		strokeWeight(20);
 		pointBezier(v1, v2, c.worldCoords);
-		stroke(200);
-		strokeWeight(16);
-		pointBezier(v1, v2, c.worldCoords);
+	}
+}
+
+function drawDots(c) {
+	for (let i=0; i<6; i++) {
+		if (Math.random() < dotChance) {
+			a = i/6 * TWO_PI;
+			let corner = c.worldCoords.add(new vec2(cos(a), sin(a)).scale(cellSize/4 * sqrt(3)));
+			push();
+				noStroke();
+				fill(randomChoice(pinkbluepastels));
+				let r = Math.random() * 15 + 10;
+				ellipse(corner.x, corner.y, r);
+			pop();
+		}
 	}
 }
 
