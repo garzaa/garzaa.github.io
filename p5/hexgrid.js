@@ -4,6 +4,9 @@ class vec2 {
 		this.y = y;
 	}
 
+	static flipX = new vec2(-1, 1);
+	static zero = new vec2(0, 0);
+
 	add(b) {
 		return new vec2(this.x + b.x, this.y + b.y);
 	}

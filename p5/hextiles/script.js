@@ -1,59 +1,82 @@
 const canvasSize = 900;
-const gridSize = new vec2(4,12);
-const cellSize = 400;
+const gridSize = new vec2(2, 4);
+const cellSize = 100;
 let hexgrid;
 let sideLength;
-const maxdepth = 2;
-const midpointVariance = 2;
-const splitChance = 0.9;
+const maxdepth = 5;
+const midpointVariance = 1;
+// const splitChance = 0.5;
+let sideOffset;
 
-const colors = ["0081a7","00afb9","fdfcdc","fed9b7","f07167"]
+let yPos = 0;
+let xPos = 0;
+
+const other = ["f6bd60","f7ede2","f5cac3","84a59d","f28482"];
+const white = "#ffffff";
+const blue = "#0000ff";
+const black = "#000000";
 
 function setup() {
 	createCanvas(canvasSize, canvasSize);
 	noFill();
-	grid = new HexGrid(new vec2(0, 0), gridSize, cellSize);
+	grid = new HexGrid(new vec2(375, 375), gridSize, cellSize);
 	sideLength = cellSize * 0.5;
+	sideOffset = new vec2(sideLength/2, grid.cellSize.y/2);
 	noLoop();
 }
 
 function draw() {
 	background(50);
+	grid.iterate(drawBorders);
 	grid.iterate(drawCell);
-	fill(100);
-	stroke(255);
+	strokeWeight(4);
+}
+
+function drawBorders(c) {
+	stroke("#00ffff");
+	polygon(c.worldCoords.x, c.worldCoords.y, cellSize/2, 6);
 }
 
 function drawCell(c) {
-	push();
-		translate(c.worldCoords.x, c.worldCoords.y);
-		for (let i=0; i<6; i++) {
-			push();
-				rotate(i * TWO_PI/6);
-				subdiv(
-					new vec2(0, 0),
-					new vec2(-sideLength/2, grid.cellSize.y/2),
-					new vec2(sideLength/2, grid.cellSize.y/2),
-					0
-				);
-			pop();
-		}
-	pop();
+	// get all the points on the perimeter (one on each)
+	// draw a bezier line from that point to another random point
+	// remove them from the array
+	// then keep doing that until it's empty
+
+	let points = getPerimeterPoints(c);
+	while (points.length > 0) {
+		let v1 = yoink(points);
+		let v2 = yoink(points);
+		// then draw a bezier between the two
+		stroke(200);
+		strokeWeight(4);
+		pointBezier(v1, v2, c.worldCoords);
+	}
 }
 
-function subdiv(v1, v2, v3, depth) {
-	// if 50/50 and depth < max then subdivide
-	// otherwise fill with a random weighted color
-	if (depth >= maxdepth || (Math.random() > splitChance )) {
-		let color = "#" + randomChoice(colors);
-		fill(color);
-		stroke(color);
-		triangle(v1.x, v1.y, v2.x, v2.y, v3.x, v3.y);
-	} else {
-		// given a triangle with the point up at v1, go clockwise and then do the center
-		subdiv(v1, v1.midpoint(v3, midpointVariance), v1.midpoint(v2, midpointVariance), depth+1);
-		subdiv(v2, v2.midpoint(v1, midpointVariance), v2.midpoint(v3, midpointVariance), depth+1);
-		subdiv(v3, v3.midpoint(v2, midpointVariance), v3.midpoint(v1, midpointVariance), depth+1);
-		subdiv(v1.midpoint(v2, midpointVariance), v2.midpoint(v3, midpointVariance), v3.midpoint(v1, midpointVariance), depth+1);
+function getPerimeterPoints(c) {
+	let x = [];
+	let a = 0;
+	for (let i=0; i<6; i++) {
+		a = i/6 * TWO_PI + PI/6;
+		// distance to a flat edge
+		x.push(
+			c.worldCoords.add(
+				new vec2(cos(a), sin(a))
+				.scale(cellSize/4 * sqrt(3))
+		));
 	}
+	return x;
+}
+
+function yoink(a) {
+	return a.splice(intRange(0, a.length-1), 1)[0];
+}
+
+function pointBezier(p1, p2, center) {
+	// bezier between points with midpoint from point and center as control points
+	let mp1 = p1.midpoint(center);
+	let mp2 = p2.midpoint(center);
+
+	bezier(p1.x, p1.y, mp1.x, mp1.y, mp2.x, mp2.y, p2.x, p2.y);
 }
