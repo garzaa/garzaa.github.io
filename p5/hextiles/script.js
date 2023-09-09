@@ -12,10 +12,13 @@ let sideOffset;
 let yPos = 0;
 let xPos = 0;
 
-const other = ["f6bd60","f7ede2","f5cac3","84a59d","f28482"];
-const white = "#ffffff";
-const blue = "#0000ff";
-const black = "#000000";
+const bg = orangeleaf[1];
+const lace1 = orangeleaf[2];
+const lace2 = orangeleaf[3];
+const laces = [lace1, lace2, orangeleaf[4]];
+
+const agletChance = 0.07;
+let aglets = [];
 
 function setup() {
 	createCanvas(canvasSize, canvasSize);
@@ -27,11 +30,15 @@ function setup() {
 }
 
 function draw() {
-	background(250);
+	background(bg);
 	// grid.iterate(drawBorders);
 	grid.iterate(drawCell);
-	grid.iterate(drawDots);
+	// grid.iterate(drawDots);
 	strokeWeight(4);
+	
+	for (let i=0; i<aglets.length; i++) {
+		aglet(aglets[i][0], aglets[i][1], aglets[i][2])
+	}
 }
 
 function drawBorders(c) {
@@ -47,16 +54,17 @@ function drawCell(c) {
 	// then keep doing that until it's empty
 
 	let points = getPerimeterPoints(c);
+	let a1, a2 = null;
 	while (points.length > 0) {
 		let v1 = yoink(points);
 		let v2 = yoink(points);
 		// then draw a bezier between the two
-		stroke(0)
+		stroke(randomChoice(laces));
 		strokeWeight(20);
-		// pointBezier(v1, v2, c.worldCoords);
-		stroke(randomChoice(pinkbluepastels));
-		strokeWeight(20);
-		pointBezier(v1, v2, c.worldCoords);
+		if (Math.random() > agletChance) pointBezier(v1, v2, c.worldCoords);
+		else {
+			aglets.push([v1, v2, c.worldCoords]);
+		}
 	}
 }
 
@@ -100,4 +108,17 @@ function pointBezier(p1, p2, center) {
 	let mp2 = p2.midpoint(center);
 
 	bezier(p1.x, p1.y, mp1.x, mp1.y, mp2.x, mp2.y, p2.x, p2.y);
+}
+
+function aglet(v1, v2, center) {
+	stroke(255);
+	strokeWeight(16);
+	let m1 = v1.midpoint(center);
+	let m2 = v2.midpoint(center);
+	line(v1.x, v1.y, m1.x, m1.y);
+	line(v2.x, v2.y, m2.x, m2.y);
+
+	strokeWeight(10);
+	line(v1.x, v1.y, m1.x, m1.y);
+	line(v2.x, v2.y, m2.x, m2.y);
 }

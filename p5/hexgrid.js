@@ -6,6 +6,10 @@ class vec2 {
 
 	static flipX = new vec2(-1, 1);
 	static zero = new vec2(0, 0);
+	static up = new vec2(0, -1);
+	static right = new vec2(1, 0);
+	static left = new vec2(-1, 0);
+	static down = new vec2(0, 11);
 
 	add(b) {
 		return new vec2(this.x + b.x, this.y + b.y);
@@ -54,22 +58,25 @@ class HexGrid {
 		for (let x=0; x<gridSize.x; x++) {
 			let row = [];
 			for (let y=0; y<gridSize.y; y++) {
-				let c = new vec2(
-					origin.x + (x*(this.cellSize.x + this.sideLength)),
-					origin.y + (y*(this.cellSize.y * 0.5))
-				);
-
-				if (y % 2 == 0) {
-					// this should be something based on side length maybe
-					c.x += this.sideLength * 0.75;
-				} else {
-					c.x -= this.sideLength * 0.75;
-				}
-
-				row.push(new HexCell(new vec2(x, y), c));
+				let gridPos = new vec2(x, y);
+				row.push(new HexCell(gridPos, this.cellToWorld(gridPos)));
 			}
 			this.rows.push(row);
 		}
+	}
+
+	cellToWorld(cellPos) {
+		let c = new vec2(
+			this.origin.x + (cellPos.x*(this.cellSize.x + this.sideLength)),
+			this.origin.y + (cellPos.y*(this.cellSize.y * 0.5))
+		);
+		if (cellPos.y % 2 == 0) {
+			// this should be something based on side length maybe
+			c.x += this.sideLength * 0.75;
+		} else {
+			c.x -= this.sideLength * 0.75;
+		}
+		return c;
 	}
 
 	iterate(f) {
