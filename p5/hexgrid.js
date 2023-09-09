@@ -11,6 +11,10 @@ class vec2 {
 	scale(s) {
 		return new vec2(this.x * s, this.y * s);
 	}
+
+	mul(v) {
+		return new vec2(this.x * v.x, this.y * v.y);
+	}
 }
 
 class HexCell {
@@ -30,9 +34,7 @@ class HexGrid {
 			let row = [];
 			for (let y=0; y<gridSize.y; y++) {
 				let c = new vec2(
-					// todo: move x sideways by side length
 					origin.x + (x*(this.cellSize.x + this.sideLength)),
-					// and y up by side length? need to move across too
 					origin.y + (y*(this.cellSize.y * 0.5))
 				);
 
