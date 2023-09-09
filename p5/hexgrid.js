@@ -8,12 +8,20 @@ class vec2 {
 		return new vec2(this.x + b.x, this.y + b.y);
 	}
 
+	sub(b) {
+		return new vec2(this.x - b.x, this.y - b.y);
+	}
+
 	scale(s) {
 		return new vec2(this.x * s, this.y * s);
 	}
 
 	mul(v) {
 		return new vec2(this.x * v.x, this.y * v.y);
+	}
+
+	midpoint(v) {
+		return this.add(v.sub(this).scale(0.5));
 	}
 }
 
