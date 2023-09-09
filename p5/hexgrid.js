@@ -20,8 +20,18 @@ class vec2 {
 		return new vec2(this.x * v.x, this.y * v.y);
 	}
 
-	midpoint(v) {
-		return this.add(v.sub(this).scale(0.5));
+	midpoint(v, variance) {
+		if (typeof variance === 'undefined') {
+			return this.add(v.sub(this).scale(0.5));
+		} else {
+			// either get the current midpoint or get another one
+			variance -= 1;
+			if (variance <= 0) {
+				return this.add(v.sub(this).scale(0.5));
+			} else {
+				return this.midpoint(this.midpoint(v), variance);
+			}
+		}
 	}
 }
 
