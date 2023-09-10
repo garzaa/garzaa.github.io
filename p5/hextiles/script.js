@@ -13,11 +13,18 @@ let yPos = 0;
 let xPos = 0;
 
 const bg = orangeleaf[1];
-const lace1 = orangeleaf[2];
-const lace2 = orangeleaf[3];
-const laces = [lace1, lace2, orangeleaf[4]];
+const laces = [
+	"#e3e8e7",
+	"#a5b6b2",
+	"#96a8a4",
+]
+const laces2 = [
+	"#8da39f",
+	"#839691",
+	"#7f928d",
+]
 
-const agletChance = 0.07;
+const agletChance = 0.03;
 let aglets = [];
 
 function setup() {
@@ -27,6 +34,12 @@ function setup() {
 	sideLength = cellSize * 0.5;
 	sideOffset = new vec2(sideLength/2, grid.cellSize.y/2);
 	noLoop();
+	for (let i=0; i<laces.length; i++) {
+		laces[i] = color(laces[i]);
+	}
+	for (let i=0; i<laces2.length; i++) {
+		laces2[i] = color(laces2[i]);
+	}
 }
 
 function draw() {
@@ -48,18 +61,15 @@ function drawBorders(c) {
 }
 
 function drawCell(c) {
-	// get all the points on the perimeter (one on each)
-	// draw a bezier line from that point to another random point
-	// remove them from the array
-	// then keep doing that until it's empty
-
 	let points = getPerimeterPoints(c);
 	let a1, a2 = null;
 	while (points.length > 0) {
 		let v1 = yoink(points);
 		let v2 = yoink(points);
 		// then draw a bezier between the two
-		stroke(randomChoice(laces));
+		// darken it as it gets closer to the bottom
+		let idx = randomInt(laces.length);
+		stroke(lerpColor(laces[idx], laces2[idx], c.worldCoords.y / canvasSize));
 		strokeWeight(12);
 		if (Math.random() > agletChance) pointBezier(v1, v2, c.worldCoords);
 		else {
