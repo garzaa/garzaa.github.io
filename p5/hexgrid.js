@@ -40,6 +40,10 @@ class vec2 {
 			}
 		}
 	}
+
+	distort(scale) {
+		return this.add(new vec2(noise(this.x)*scale, noise(this.y)*scale));
+	}
 }
 
 class HexCell {

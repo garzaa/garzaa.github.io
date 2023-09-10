@@ -1,6 +1,6 @@
 const canvasSize = 900;
 const gridSize = new vec2(40, 50);
-const cellSize = 150;
+const cellSize = 100;
 let hexgrid;
 let sideLength;
 const maxdepth = 5;
@@ -60,7 +60,7 @@ function drawCell(c) {
 		let v2 = yoink(points);
 		// then draw a bezier between the two
 		stroke(randomChoice(laces));
-		strokeWeight(20);
+		strokeWeight(12);
 		if (Math.random() > agletChance) pointBezier(v1, v2, c.worldCoords);
 		else {
 			aglets.push([v1, v2, c.worldCoords]);
@@ -112,7 +112,7 @@ function pointBezier(p1, p2, center) {
 
 function aglet(v1, v2, center) {
 	stroke(255);
-	strokeWeight(16);
+	strokeWeight(5);
 	let m1 = v1.midpoint(center);
 	let m2 = v2.midpoint(center);
 	line(v1.x, v1.y, m1.x, m1.y);
