@@ -1,5 +1,5 @@
 const canvasSize = 900;
-const gridSize = new vec2(40, 50);
+const gridSize = new vec2(3, 8);
 const cellSize = 100;
 let hexgrid;
 let sideLength;
@@ -30,7 +30,7 @@ let aglets = [];
 function setup() {
 	createCanvas(canvasSize, canvasSize);
 	noFill();
-	grid = new HexGrid(new vec2(0, 0), gridSize, cellSize);
+	grid = new HexGrid(new vec2(275, 300), gridSize, cellSize);
 	sideLength = cellSize * 0.5;
 	sideOffset = new vec2(sideLength/2, grid.cellSize.y/2);
 	noLoop();
@@ -55,14 +55,71 @@ function draw() {
 }
 
 function drawBorders(c) {
-	stroke("#00ffff");
+	stroke("#f5b642");
 	strokeWeight(3);
 	polygon(c.worldCoords.x, c.worldCoords.y, cellSize/2, 6);
 }
 
 function drawCell(c) {
-	let points = getPerimeterPoints(c);
-	let a1, a2 = null;
+	let points = getPerimeterPoints(c.worldCoords);
+	let p1, p2 = null;
+	// iT IS doable
+	// start with the top left corner and work clockwise
+	/*
+		4
+	  3   5
+	  2   0
+		1
+	*/
+	// this only works for x-odd y-even grids :')
+	if (c.gridCoords.y == 0) {
+		let c1 = grid.cellToWorld(c.gridCoords.add(new vec2(0, -1)));
+		p1 = points[3];
+		p2 = getPerimeterPoints(grid.cellToWorld(c.gridCoords.add(new vec2(0, 1))))[4];
+		edgeBezier(c, p1, p2, c1, c1);
+
+		c1 = grid.cellToWorld(c.gridCoords.add(new vec2(0, -2)));
+		let c2 = grid.cellToWorld(c.gridCoords.add(new vec2(1, -1)));
+		p1 = points[4];
+		p2 = getPerimeterPoints(grid.cellToWorld(c.gridCoords.add(new vec2(1, -1))))[2];
+		edgeBezier(c, p1, p2, c1, c2, false);
+	} else if (c.gridCoords.y == gridSize.y-1) {
+		// connect 1 to 0
+		let c1 = grid.cellToWorld(c.gridCoords.add(new vec2(0, 2)));
+		p1 = points[1];
+		p2 = points[0];
+		let c2 = grid.cellToWorld(c.gridCoords.add(new vec2(0, 1)));
+		edgeBezier(c, p1, p2, c1, c2, false);
+	}
+
+	if (c.gridCoords.x == 0 && c.gridCoords.y % 2 == 1) {
+		let c1 = grid.cellToWorld(c.gridCoords.add(new vec2(-1, -1)));
+		p1 = points[3];
+		p2 = points[2];
+		let c2 = grid.cellToWorld(c.gridCoords.add(new vec2(-1, 1)));
+		edgeBezier(c, p1, p2, c1, c2, false);
+	} else if (c.gridCoords.x == gridSize.x-1 && c.gridCoords.y > 0 && c.gridCoords.y % 2 == 0) {
+		p1 = points[5];
+		p2 = getPerimeterPoints(grid.cellToWorld(c.gridCoords.add(new vec2(0, -2))))[0];
+		let c1 = grid.cellToWorld(c.gridCoords.add(new vec2(1, -1)));
+		edgeBezier(c, p1, p2, c1, c1, true);
+	}
+
+	if (c.gridCoords.y == gridSize.y-1 && c.gridCoords.x > 0) {
+		p1 = points[2];
+		p2 = getPerimeterPoints(grid.cellToWorld(c.gridCoords.add(new vec2(-1, 1))))[4];
+		let c1 = grid.cellToWorld(c.gridCoords.add(new vec2(-1, 1)));
+		edgeBezier(c, p1, p2, c1, c1, true);
+	}
+
+	if (c.gridCoords.x == gridSize.x-1 && c.gridCoords.y == gridSize.y-2) {
+		p1 = points[0];
+		p2 = points[1];
+		let c1 = grid.cellToWorld(c.gridCoords.add(new vec2(1, 1)));
+		let c2 = grid.cellToWorld(c.gridCoords.add(new vec2(0, 2)));
+		edgeBezier(c, p1, p2, c1, c2, false);
+	}
+
 	while (points.length > 0) {
 		let v1 = yoink(points);
 		let v2 = yoink(points);
@@ -100,7 +157,7 @@ function getPerimeterPoints(c) {
 		a = i/6 * TWO_PI + PI/6;
 		// distance to a flat edge
 		x.push(
-			c.worldCoords.add(
+			c.add(
 				new vec2(cos(a), sin(a))
 				.scale(cellSize/4 * sqrt(3))
 		));
@@ -117,6 +174,15 @@ function pointBezier(p1, p2, center) {
 	let mp1 = p1.midpoint(center);
 	let mp2 = p2.midpoint(center);
 
+	bezier(p1.x, p1.y, mp1.x, mp1.y, mp2.x, mp2.y, p2.x, p2.y);
+}
+
+function edgeBezier(c, p1, p2, c1, c2, useMidpoint=true) {
+	let mp1 = useMidpoint ? p1.midpoint(c1) : c1;
+	let mp2 = useMidpoint ? p2.midpoint(c2) : c2;
+	let idx = randomInt(laces.length);
+	stroke(lerpColor(laces[idx], laces2[idx], c.worldCoords.y / canvasSize));
+	strokeWeight(12);
 	bezier(p1.x, p1.y, mp1.x, mp1.y, mp2.x, mp2.y, p2.x, p2.y);
 }
 

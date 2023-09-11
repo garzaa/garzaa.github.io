@@ -70,6 +70,10 @@ class HexGrid {
 	}
 
 	cellToWorld(cellPos) {
+		if (arguments.length > 1) {
+			cellPos = new vec2(arguments[0], arguments[1]);
+		}
+
 		let c = new vec2(
 			this.origin.x + (cellPos.x*(this.cellSize.x + this.sideLength)),
 			this.origin.y + (cellPos.y*(this.cellSize.y * 0.5))
