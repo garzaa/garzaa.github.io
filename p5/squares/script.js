@@ -3,18 +3,13 @@ const canvasSize = {
 	y: 600
 };
 
-const margin = 75;
-const cellSize = 75;
-const radius = cellSize/2;
+const params = {
+  margin: 75,
+  cellSize: 75,
+  hichance: 0.1,
+}
 
-const bgColor = "#44CF6C";
-const fillColor = "#A9FDAC";
-const hi = "#F1FFE7";
-
-let cellCount = {
-	x: Math.floor((canvasSize.x - (2*margin)) / cellSize),
-	y: Math.floor((canvasSize.y - (2*margin)) / cellSize)
-};
+let cellCount = {};
 
 class Cell {
 	constructor() {
@@ -24,10 +19,45 @@ class Cell {
 }
 
 let grid = [];
+let radius = 0;
+
+const colors = {
+  bgColor: "#44CF6C" ,
+  fillColor: "#F1FFE7",
+  hi: "#F1FFE7"
+};
+
+var gui = new dat.GUI();
+gui.addColor(colors, 'bgColor');
+gui.addColor(colors, 'fillColor');
+gui.addColor(colors, 'hi');
+
+gui.add(params, 'cellSize', 5, 200);
+gui.add(params, 'margin', 5, 200);
+gui.add(params, 'hichance', 0, 1);
+
+var obj = { redraw:function(){ 
+  generate();
+  draw();
+}};
+gui.add(obj, "redraw")
+
+gui.useLocalStorage = true;
+gui.remember(params);
+gui.remember(colors);
 
 function setup() {
 	createCanvas(canvasSize.x, canvasSize.y);
-	fill(fillColor);
+	rectMode(RADIUS);
+  noLoop();
+  noStroke();
+  generate();
+}
+
+function generate() {
+  cellCount.x = Math.floor((canvasSize.x - (2*params.margin)) / params.cellSize);
+  cellCount.y = Math.floor((canvasSize.y - (2*params.margin)) / params.cellSize);
+  grid = [];
 	for (let x=0; x<cellCount.x; x++) {
 		let tempRow = [];
 		for (let y=0; y<cellCount.y; y++) {
@@ -35,14 +65,11 @@ function setup() {
 		}
 		grid.push(tempRow);
 	}
-	rectMode(RADIUS);
-  noLoop();
-  noStroke();
 }
 
 function drawRandomTriangle(x, y) {
   let rotationSteps = Math.floor(Math.random()*4);
-  fill(fillColor);
+  fill(colors.fillColor);
   if (rotationSteps == 0) {
     triangle(-radius, radius, radius, -radius, radius, radius);
     grid[x][y].down = true;
@@ -63,18 +90,21 @@ function drawRandomTriangle(x, y) {
 }
 
 function draw() {
-	background(bgColor);
-	translate(margin + cellSize/2, margin + cellSize/2)
+  push();
+  radius = params.cellSize/2;
+	background(colors.bgColor);
+  fill(colors.fillColor);
+	translate(params.margin + params.cellSize/2, params.margin + params.cellSize/2)
 	for (let x=0; x<cellCount.x; x++) {
 		for (let y=0; y<cellCount.y; y++) {
 			let fillType = Math.ceil(Math.random() * 5);
 			if (fillType <= 2) {
-        rect(x*cellSize, y*cellSize, cellSize/2, cellSize/2);
+        rect(x*params.cellSize, y*params.cellSize, params.cellSize/2, params.cellSize/2);
         grid[x][y].down = true;
         grid[x][y].right = true;
       } else if (fillType <= 4) {
         push();
-        translate(x*cellSize, y*cellSize);
+        translate(x*params.cellSize, y*params.cellSize);
         if (Math.random() < -0.1) {
           drawRandomTriangle(x, y);
         } else {
@@ -83,7 +113,7 @@ function draw() {
             let above = grid[x][y-1]; 
             let left = grid[x-1][y];
             if (above.down && left.right) {
-              if (Math.random() < 0.1) fill(hi);
+              if (Math.random() < params.hichance) fill(colors.hi);
               triangle(-radius, -radius, -radius, radius, radius, radius);
             } else {
               // drawRandomTriangle(x, y);
@@ -115,4 +145,5 @@ function draw() {
       }
 		}	
 	}
+  pop();
 }
