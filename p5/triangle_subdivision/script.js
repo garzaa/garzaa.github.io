@@ -1,9 +1,9 @@
-const canvasSize = 900;
-const gridSize = new vec2(4,10);
-const cellSize = 400;
+const canvasSize = 800;
+const gridSize = new vec2(1,3);
+const cellSize = 300;
 let hexgrid;
 let sideLength;
-const maxdepth = 5;
+const maxdepth = 4;
 const midpointVariance = 1;
 // const splitChance = 0.5;
 let sideOffset;
@@ -14,7 +14,7 @@ let xPos = 0;
 const colors = ["e63946","f1faee","a8dadc","457b9d","1d3557"]
 
 function setup() {
-	createCanvas(canvasSize, canvasSize);
+	createCanvas(canvasSize, canvasSize, SVG);
 	noFill();
 	grid = new HexGrid(new vec2(0, 0), gridSize, cellSize);
 	sideLength = cellSize * 0.5;
@@ -23,10 +23,16 @@ function setup() {
 }
 
 function draw() {
-	background(50);
-	grid.iterate(drawCell);
+	clear();
+	background(255);
+	translate(375, 250);
 	fill(100);
 	stroke(255);
+	noFill();
+	stroke(0);
+	noLoop();
+	grid.iterate(drawCell);
+	save("mySVG.svg");
 }
 
 function drawCell(c) {
@@ -55,8 +61,8 @@ function subdiv(v1, v2, v3, depth) {
 	console.log(splitChance);
 	if (depth >= maxdepth || (Math.random() > splitChance)) {
 		let color = "#" + randomChoice(colors);
-		fill(color);
-		stroke(color);
+		// fill(color);
+		// stroke(color);
 		triangle(v1.x, v1.y, v2.x, v2.y, v3.x, v3.y);
 	} else {
 		// given a triangle with the point up at v1, go clockwise and then do the center
