@@ -4,6 +4,7 @@ const canvasSize = new vec2(8*dpi, 6*dpi);
 let grid = [];
 let allCells = [];
 const gridSize = new vec2(3, 3);
+const exportSVG = true;
 
 const params = {
 	cellSize: 150,
@@ -154,7 +155,7 @@ function setup() {
 	noFill();
 	stroke(0);
 	strokeWeight(1);
-	createCanvas(canvasSize.x, canvasSize.y);
+	createCanvas(canvasSize.x, canvasSize.y, exportSVG ? SVG : undefined);
 	init();
 }
 
@@ -165,6 +166,8 @@ function init() {
 	);
 	generate(grid, gridSize, params.cellSize, 0, new vec2(0, 0));
 	carve(grid);
+	grid[0][0].inDirection(-1, -1).left = true;
+	grid[gridSize.x-1][gridSize.y-1].inDirection(1, 1).right = true;
 }
 
 function generate(currGrid, currGridSize, cellSize, currentDepth, currOrigin) {
@@ -186,14 +189,9 @@ function generate(currGrid, currGridSize, cellSize, currentDepth, currOrigin) {
 
 	// then link the neighbors
 	// when this runs, the lower levels have already populated and linked
-	// ohh shit neighbors are getting linked to the OTHER SIDE
-	// top is getting linked to bottm on a depth traversal
-	// left is getting linked to right on a depth traversal
 	for (let x=0; x<currGridSize.x; x++) {
 		for (let y=0; y<currGridSize.y; y++) {
 			let cell = currGrid[x][y];
-			// link it to its up/down/left/right neighbors
-			// it needs a neighbor/direction thing damn
 			// link up
 			let a, b;
 			if (y > 0) {
@@ -271,7 +269,15 @@ gui.add(params, 'drawConnections');
 gui.add(params, 'drawBorders');
 gui.add(params, 'drawWalls');
 
-var obj = { regen:function(){ 
-	init();
-}};
+var obj = { 
+	regen:function(){ 
+		init();
+	},
+	export: function() {
+		save("output.svg");
+	}
+};
 gui.add(obj, "regen")
+if (exportSVG) {
+	gui.add(obj, 'export');
+}
