@@ -4,7 +4,7 @@ const canvasSize = new vec2(8*dpi, 6*dpi);
 let grid = [];
 let allCells = [];
 const gridSize = new vec2(3, 3);
-const exportSVG = true;
+const exportSVG = false;
 
 const params = {
 	cellSize: 150,
@@ -23,7 +23,7 @@ let margin = new vec2(
 );
 
 class Cell {
-	constructor(size, gridPos, depth, origin) {
+	constructor(size, gridPos, depth, origin, parent=null) {
 		this.connections = [];
 		this.size = size;
 		this.grid = null;
@@ -32,6 +32,7 @@ class Cell {
 		this.center = this.pos.add(new vec2(size/2, size/2));
 		this.depth = depth;
 		this.neighbors = {};
+		this.parent = parent;
 		this.split();
 	}
 
@@ -44,7 +45,7 @@ class Cell {
 			// then create another 3x3 grid
 			// of cells with size/3, etc
 			this.grid = [];
-			generate(this.grid, new vec2(3, 3), this.size/3, this.depth+1, this.pos);
+			generate(this.grid, new vec2(3, 3), this.size/3, this.depth+1, this.pos, this);
 		} else {
 			allCells.push(this);
 		}
@@ -63,6 +64,7 @@ class Cell {
 	}
 
 	drawWalls() {
+		if (this.grid != null) return;
 		// look at connections
 		this.connections.forEach(c => {		
 			// need to get CENTER POSITION
@@ -128,8 +130,9 @@ class Cell {
 }
 
 // we draw from the top left corner, not the center
+// don't duplicate lines
 function drawCell(cell, pos, sideLength) {
-	if (!cell.up) {
+	if (!cell.up && cell.gridPos.y == (0)) {
 		line(pos.x, pos.y, pos.x+sideLength, pos.y);
 	}
 	if (!cell.right) {
@@ -138,7 +141,7 @@ function drawCell(cell, pos, sideLength) {
 	if (!cell.down) {
 		line(pos.x, pos.y+sideLength, pos.x+sideLength, pos.y+sideLength);
 	}
-	if (!cell.left) {
+	if (!cell.left && cell.gridPos.x == (0)) {
 		line(pos.x, pos.y+sideLength, pos.x, pos.y);
 	}
 }
@@ -164,13 +167,13 @@ function init() {
 		(canvasSize.x - params.cellSize*gridSize.x)/2,
 		(canvasSize.y - params.cellSize*gridSize.y)/2
 	);
-	generate(grid, gridSize, params.cellSize, 0, new vec2(0, 0));
+	generate(grid, gridSize, params.cellSize, 0, new vec2(0, 0), null);
 	carve(grid);
 	grid[0][0].inDirection(-1, -1).left = true;
 	grid[gridSize.x-1][gridSize.y-1].inDirection(1, 1).right = true;
 }
 
-function generate(currGrid, currGridSize, cellSize, currentDepth, currOrigin) {
+function generate(currGrid, currGridSize, cellSize, currentDepth, currOrigin, parentCell=null) {
 	// clear it when redrawing
 	allCells.length = 0;
 	currGrid.length = 0;
@@ -182,6 +185,7 @@ function generate(currGrid, currGridSize, cellSize, currentDepth, currOrigin) {
 				new vec2(x, y),
 				currentDepth,
 				currOrigin,
+				parentCell,
 			));
 		}
 		currGrid.push(tempRow);
@@ -204,6 +208,7 @@ function generate(currGrid, currGridSize, cellSize, currentDepth, currOrigin) {
 			// link down
 			if (y < currGrid[x].length-1) {
 				a = cell.inDirection(0, 1);
+
 				b = currGrid[x][y+1].inDirection(0, -1);
 				a.neighbors.down = b;
 				b.neighbors.up = a;
