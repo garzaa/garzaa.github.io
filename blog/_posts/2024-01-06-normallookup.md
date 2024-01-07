@@ -57,7 +57,7 @@ I used two methods to disguise it.
 
 #### Toon Motion
 
-<video src="https://user-images.githubusercontent.com/11641991/294740096-38f6ccc5-f147-4e5a-87bb-af340aef85a1.webm" autoplay="autoplay" loop="loop" controls></video>
+<video src="https://user-images.githubusercontent.com/11641991/294740096-38f6ccc5-f147-4e5a-87bb-af340aef85a1.webm" autoplay="autoplay" loop="loop" controls style="width: 100%;"></video>
 
 I've touched on this method before. I have a [script](https://gist.github.com/garzaa/59596a6836804338258ad53ff09cd0cb) that cuts objects' movement in Unity into 12 or 16 FPS.
 
