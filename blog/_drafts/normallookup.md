@@ -26,20 +26,22 @@ It was inspirational. I wanted something similar but without having to deal with
 
 To get around lights and toon shaders, I just look at the normal direction of the face from the camera and pick the corresponding color from a normal map.
 
+![img](https://garzaa.github.io/blog/assets/3dnormal/lookup.png)
+
 Here's the normal lookup image for the header. Think of it as how I'd shade a sphere in the game's world.
 
-And here's the corresponding part of the fragment shader:
+When applying the shader to the model, I use an optional noise texture to roughen the model surface and artificially add detail. You can see that in action on the sphere, which would otherwise look just like the normal lookup image.
 ```hlsl
 fixed4 frag (v2f i) : SV_Target {
-				half4 color;
-				// now just offset normal.xy by the noise texture's r and b values
-				half2 noiseOffset = (tex2D(_NoiseTex, i.texcoord.xy * _NoiseTex_ST.xy).rb);
-				// convert to -1, 1
-				noiseOffset = noiseOffset * 2 - 1;
-				// scale by noiseStr
-				noiseOffset *= _NoiseStr;
-				color = tex2D(_ColorMap, ((i.normal.xy + 1) / 2) + noiseOffset);
-				color = lerp(color, _FlashColor, _FlashColor.a);
-				return color;
-            }
+	half4 color;
+	// now just offset normal.xy by the noise texture's r and b values
+	half2 noiseOffset = (tex2D(_NoiseTex, i.texcoord.xy * _NoiseTex_ST.xy).rb);
+	// convert to -1, 1
+	noiseOffset = noiseOffset * 2 - 1;
+	// scale by noiseStr
+	noiseOffset *= _NoiseStr;
+	color = tex2D(_ColorMap, ((i.normal.xy + 1) / 2) + noiseOffset);
+	color = lerp(color, _FlashColor, _FlashColor.a);
+	return color;
+}
 ```
