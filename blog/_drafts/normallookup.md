@@ -79,3 +79,8 @@ v2f vert (appdata_base v) {
 	return o;
 }
 ```
+
+## In-Game
+<video src="https://github-production-user-asset-6210df.s3.amazonaws.com/11641991/294740390-8e533c3f-f709-4d1e-849f-1c33248b882a.webm" autoplay="autoplay" loop="loop" controls></video>
+
+Here's a boss arena with gears turning as a backdrop.
