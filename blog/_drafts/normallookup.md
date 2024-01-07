@@ -57,10 +57,25 @@ I used two methods to disguise it.
 
 #### Toon Motion
 
-I've touched on this method before. I have a [script](https://gist.github.com/garzaa/59596a6836804338258ad53ff09cd0cb) that cuts objects' movement in Unity into a predefined FPS. 
+<video src="https://user-images.githubusercontent.com/11641991/294740096-38f6ccc5-f147-4e5a-87bb-af340aef85a1.webm" autoplay="autoplay" loop="loop" controls></video>
+I've touched on this method before. I have a [script](https://gist.github.com/garzaa/59596a6836804338258ad53ff09cd0cb) that cuts objects' movement in Unity into 12 or 16 FPS.
 
 
 #### World Space Vertex Jitter
 
-<video src="https://user-images.githubusercontent.com/11641991/204958094-e28d2853-8709-47e0-98c7-6c4d46c69428.webm" autoplay="autoplay" loop="loop" controls style="width: 100%;"></video>
+![img](https://garzaa.github.io/blog/assets/3dnormal/jitter.gif)
 This one is the most interesting to me. I mess up the models just a _tiny_ bit as they move through space to mimic the inconsistencies of rendering a 3D object as pixel art.
+> The sphere stays unchanged because its vertices aren't moving through space.
+Here's the vertex shader:
+
+```hlsl
+v2f vert (appdata_base v) {
+	v2f o;
+	v.vertex.xyz += noise(mul(unity_ObjectToWorld, v.vertex).xyz) * _VertJitter * 0.001;
+	o.pos = UnityObjectToClipPos(v.vertex);
+	// use worldspace to avoid jitter when the camera moves
+	o.texcoord = v.texcoord;
+	o.normal = UnityObjectToWorldNormal(v.normal);
+	return o;
+}
+```
