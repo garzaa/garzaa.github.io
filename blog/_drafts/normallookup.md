@@ -7,8 +7,8 @@ There are many techniques out there for rendering 3D objects as pixel art. It us
 
 ![img](https://garzaa.github.io/blog/assets/3dnormal/header.gif)
 
-### Why
-Pixels in pixel art art is hand-placed. Therefore, it is:
+## Why
+Pixels in pixel art art are hand-placed. Therefore, it is:
 - Clear
 - Imperfect
 
@@ -24,24 +24,43 @@ It was inspirational. I wanted something similar but without having to deal with
 
 ### Clarity
 
-To get around lights and toon shaders, I just look at the normal direction of the face from the camera and pick the corresponding color from a normal map.
+To get around lights and toon shaders, I drew a normal lookup texture.
 
 ![img](https://garzaa.github.io/blog/assets/3dnormal/lookup.png)
 
-Here's the normal lookup image for the header. Think of it as how I'd shade a sphere in the game's world.
+Think of it as how I'd shade a sphere in the game's world.
 
 When applying the shader to the model, I use an optional noise texture to roughen the model surface and artificially add detail. You can see that in action on the sphere, which would otherwise look just like the normal lookup image.
 ```hlsl
 fixed4 frag (v2f i) : SV_Target {
 	half4 color;
-	// now just offset normal.xy by the noise texture's r and b values
+	// offset normal.xy by the noise texture's r and b values
 	half2 noiseOffset = (tex2D(_NoiseTex, i.texcoord.xy * _NoiseTex_ST.xy).rb);
-	// convert to -1, 1
+	// convert to -1, 1 so it's not just offset positively
 	noiseOffset = noiseOffset * 2 - 1;
-	// scale by noiseStr
+	// apply noise slider
 	noiseOffset *= _NoiseStr;
 	color = tex2D(_ColorMap, ((i.normal.xy + 1) / 2) + noiseOffset);
 	color = lerp(color, _FlashColor, _FlashColor.a);
 	return color;
 }
 ```
+
+![img](https://garzaa.github.io/blog/assets/3dnormal/roughness.gif)
+
+Moving the roughness slider to demonstrate how it works. I use a standard tiled smooth noise texture to modify the vertex normals.
+
+### Imperfection
+
+3D art looks _too_ perfect rendered as pixels. Its smooth movement and consistency stands out too much.
+I used two methods to disguise it.
+
+#### Toon Motion
+
+I've touched on this method before. I have a [script](https://gist.github.com/garzaa/59596a6836804338258ad53ff09cd0cb) that cuts objects' movement in Unity into a predefined FPS. 
+
+
+#### World Space Vertex Jitter
+
+<video src="https://user-images.githubusercontent.com/11641991/204958094-e28d2853-8709-47e0-98c7-6c4d46c69428.webm" autoplay="autoplay" loop="loop" controls style="width: 100%;"></video>
+This one is the most interesting to me. I mess up the models just a _tiny_ bit as they move through space to mimic the inconsistencies of rendering a 3D object as pixel art.
