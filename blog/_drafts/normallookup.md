@@ -5,6 +5,7 @@ title: 3D to Pixel Art
 
 There are many techniques out there for rendering 3D objects as pixel art. It usually looks very bad. I've developed my own method.
 
+![img](https://garzaa.github.io/blog/assets/3dnormal/header.gif)
 
 ### Why
 Pixels in pixel art art is hand-placed. Therefore, it is:
