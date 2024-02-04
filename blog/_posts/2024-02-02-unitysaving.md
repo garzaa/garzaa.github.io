@@ -3,7 +3,7 @@ layout: post
 title: Foolproof Unity Saving
 ---
 
-The title is a bit hyperbolic, because we are all fools. But here is the flexible, ironclad JSON saving method I've been using for Vapor Trails.
+The title is a bit hyperbolic, because we are all fools. But here is the flexible, ironclad JSON saving method I've been using for [Vapor Trails](https://sevencrane.itch.io/vaportrails-physics).
 
 1. tabool of contents
 {:toc}
@@ -20,7 +20,7 @@ I wanted to make it as simple as possible, so here are the assumptions I'm worki
 - each Saved Object will have a `<string, object>` dictionary of properties to save
 - it will expose two methods to inherited classes to load and save from those properties
 
-NOTHING ELSE. Restricting APIs now means less thinking later. Let's start writing classes from the bottom up.
+NOTHING ELSE. Restricting APIs now means less thinking later. Let's start writing classes from the bottom up (for the sake of the tutorial).
 
 ## Code
 
