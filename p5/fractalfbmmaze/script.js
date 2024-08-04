@@ -4,18 +4,20 @@ const canvasSize = new vec2(8*dpi, 6*dpi);
 let grid = [];
 let allCells = [];
 const gridSize = new vec2(3, 3);
-const exportSVG = true;
+const exportSVG = false;
 
 const params = {
 	cellSize: 130,
-	maxDepth: 4,
-	splitChance: 0.9,
-	subSplitModifier: 0.3,
+	maxDepth: 2,
+	splitChance: 1,
+	subSplitModifier: 0,
+	distortStrength: 0.2,
+	distortScale: 0.01,
 	drawNeighbors: false,
 	drawConnections: false,
 	drawBorders: false,
 	drawWalls: true,
-	rotation: 0.75,
+	rotation: 0,
 }
 
 let margin = new vec2(
@@ -135,17 +137,33 @@ class Cell {
 // don't duplicate lines
 function drawCell(cell, pos, sideLength) {
 	if (!cell.up && cell.gridPos.y == (0)) {
-		line(pos.x, pos.y, pos.x+sideLength, pos.y);
+		doLine(pos, sideLength, 0);
+		// line(pos.x, pos.y, pos.x+sideLength, pos.y);
 	}
 	if (!cell.right) {
-		line(pos.x+sideLength, pos.y, pos.x+sideLength, pos.y+sideLength)
+		doLine(pos.add(new vec2(sideLength, 0)), 0, sideLength);
+		// line(pos.x+sideLength, pos.y, pos.x+sideLength, pos.y+sideLength)
 	}
 	if (!cell.down) {
-		line(pos.x, pos.y+sideLength, pos.x+sideLength, pos.y+sideLength);
+		doLine(pos.add(new vec2(0, sideLength)), sideLength, 0);
+		// line(pos.x, pos.y+sideLength, pos.x+sideLength, pos.y+sideLength);
 	}
 	if (!cell.left && cell.gridPos.x == (0)) {
-		line(pos.x, pos.y+sideLength, pos.x, pos.y);
+		doLine(pos.add(new vec2(0, sideLength)), 0, -sideLength);
+		// line(pos.x, pos.y+sideLength, pos.x, pos.y);
 	}
+}
+
+function doLine(startVec, addX, addY) {
+	let a = startVec;//.distort(params.distortStrength, params.distortScale);
+	let b = startVec.add(new vec2(addX, addY));//.distort(params.distortStrength, params.distortScale);
+	beginShape();
+	for (let i=0; i<=10; i++) {
+		let c = a.lerp(b, i/10).fbmDistort(params.distortStrength, params.distortScale, params.cellSize);
+		vertex(c.x, c.y);
+	}
+	endShape(OPEN);
+	// line(a.x, a.y, b.x, b.y);
 }
 
 function drawGrid(currGrid) {
@@ -281,6 +299,8 @@ gui.add(params, 'drawNeighbors');
 gui.add(params, 'drawConnections');
 gui.add(params, 'drawBorders');
 gui.add(params, 'drawWalls');
+gui.add(params, 'distortStrength', 0, 50);
+gui.add(params, 'distortScale', 0.001, 0.01);
 
 var obj = { 
 	regen:function(){ 

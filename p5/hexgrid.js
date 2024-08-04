@@ -41,13 +41,67 @@ class vec2 {
 		}
 	}
 
-	distort(scale) {
-		return this.add(new vec2(noise(this.x)*scale, noise(this.y)*scale));
+	distort(str, scale=1) {
+		// ok don't add...instead, turn it into polar coordinates
+		let a = noise(this.x*scale, this.y*scale) * TWO_PI;
+		let s = noise((this.x+999, this.y+999) * scale) * str;
+		return this.add(new vec2(Math.cos(a)*s, Math.sin(a)*s));
+		// return this.add(new vec2(noise(this.x*scale)*str, noise(this.y*scale)*str));
 	}
 
 	str() {
 		return "("+this.x+", "+this.y+")"
 	}
+
+	lerp(b, t) {
+		return new vec2(lerp(this.x, b.x, t), lerp(this.y, b.y, t));
+	}
+
+	fbmDistort(str, noiseScale, maxDistortion) {
+		let q = new vec2(
+			fbm(this, noiseScale),
+			fbm(this, noiseScale*2)
+		);
+
+		/*
+		float2 r = float2( 
+			fbm( uv + 4.0*q + 5*sin(_Time/2.0)),
+			fbm( uv + 4.0*q)
+		);
+
+		float t = fbm( uv + 4.0*(r-(_Time/2.0)));
+
+		ColorResult result;
+		result.q = q;
+		result.r = r;
+		result.t = t;
+		
+		return result;
+		*/
+		let r = new vec2(
+			fbm(this.add(q.scale(4)), noiseScale),
+			fbm(this.add(q.scale(4)), noiseScale)
+		)
+		
+		let a = r.x * TWO_PI;
+		let s = Math.min(r.y * str, maxDistortion);
+
+		return this.add(new vec2(Math.cos(a)*s, Math.sin(a)*s));
+
+		return this.add(new vec2(q.x, r.y).scale(str));
+	}
+}
+
+function fbm(v, noiseScale, density=4) {
+	let sum = 0;
+	let amp = 1;
+	let x = v.scale(noiseScale);
+	for (let i = 0; i < density; i++){
+        sum += noise(x.x, x.y) * amp;
+        x = x.scale(1.2);
+        amp *= 0.4;
+    }
+	return sum;
 }
 
 class HexCell {
