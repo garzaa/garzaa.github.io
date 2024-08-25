@@ -15,3 +15,12 @@ $("#bonk").click(function() {
 $("#homerun").click(function() {
 	playSound("homerun");
 })
+
+$("#digging").click(function() {
+	playSound("digging");
+})
+
+
+$("#kill").click(function() {
+	playSound("kill");
+})
