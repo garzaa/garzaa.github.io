@@ -4,3 +4,6 @@
 [submodule "cu-lunch"]
 	path = cu-lunch
 	url = https://github.com/adriangarza/cu-lunch.git
+[submodule "boneplain"]
+	path = boneplain
+	url = https://github.com/garzaa/boneplain.git
