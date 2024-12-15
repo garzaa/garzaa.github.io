@@ -76,7 +76,7 @@ var re = {
 
 var log = {
 	main: function(args) {
-		if (args[0] === "-clear") {
+		if (args[0] === "--clear") {
 			lastInputs = [];
 			render("Command logs cleared.");
 		}
@@ -85,19 +85,19 @@ var log = {
 			render(lastInputs[h]);
 		}
 	},
-	helpText: "Shows the command history. Run with -clear to remove history."
+	helpText: "Shows the command history. Run with --clear to remove history."
 }
 
 var purge = {
 	main: function(args) {
-		if (args[0] === "-force") {
+		if (args[0] === "--force") {
 			localStorage.clear();
 			render("Local storage cleared. Reloading...");
 			re.main();
 		} else {
 			render("Are you sure you want to delete local storage?");
 			render("This will delete everything, including your bookmarks! Back that shit up.");
-			render("Rerun with '-force' to confirm.");
+			render("Rerun with '--force' to confirm.");
 		}
 	},
 	helpText: 'Clears all local storage. Requires confirmation.'	
@@ -150,10 +150,10 @@ var screenfetch = {
     	var screenfetchBody =  terminal.userName+'@'+terminal.userMachine+'\n'+
 	        'OS: '+getOS()+'\n'+
 	        'Browser: '+getBrowser()+'\n'+
-	        'Engine: '+navigator.product+'\n'+
+	        'Engine: '+getEngine()+'\n'+
 	        'Resolution: '+window.screen.width+'x'+window.screen.height+'\n'+
 	        'Language: '+navigator.language+'\n'+
-	        'Plugins: '+navigator.plugins.length;
+	        // 'Plugins: '+navigator.plugins.length; - deprecated, shows incorrect / obsilete data
 
 		render(hcat(artBlob, screenfetchBody));
 	},
@@ -168,23 +168,83 @@ var time = {
 }
 
 var reddit = {
-	main: function() {
-		render("Usage: /r/subreddit or /u/user");
+	main: function(arg) {
+		if (arg[0] == undefined || arg[0].toString() == '') {
+			render("Usage: /r/subreddit or /u/user");
+		}
+		if (arg[0].toString().slice(0,3) === "/u/" && arg[0].toString().slice(4) != '') {
+			loadURL("https://www.reddit.com" + arg[0].toString())
+			return;
+		} else if (arg[0].toString().slice(0,3) === "/r/" && arg[0].toString().slice(4) != '') {
+			loadURL("https://www.reddit.com" + arg[0].toString())
+			return;
+		} else {
+			render("Blank subbreddit or user");
+		}
+		
 	},
 	helpText: 'Jumps to a specified subreddit or user.',
 }
 
 var chan = {
 	main: function() {
-		render("Usage: /board or /board/")
+		if (arg[0] == undefined || arg[0].toString() == '') {
+			render("Usage: /board or /board/")
+		} if(str[0] === "/" && (
+    	    str[str.length-1] === "/" || str.length < 5)) {
+    	    //then it's not guaranteed to be a 4chan board, but let's try it anyway
+    	    //everything but the slash at the beginning
+    	    loadURL("https://boards.4chan.org/" + str.substr(1))
+    	    return true
+    	}
 	},
 	helpText: 'Jumps to a specified 4chan board.',
 }
 
 var dice = {
-	main: function() {
-		render("Usage: [count]d[sides][+modifier]")
-		render("Count and modifier are optional.")
+	main: function(args) {
+		if (args[0] == undefined || args[0].toString() == '') {
+			render("Usage: [count]d[sides][+modifier]")
+			render("Count and modifier are optional.")
+		}
+		str = args.toString();
+		//regex for dice matching, either straight or with a modifier (+x)
+		if (/^[0-9]*[d][0-9]+$/.test(str)) {
+
+			var tempArr = str.split('d')
+			var numDice = Number(tempArr[0])
+			if (numDice === 0) numDice = 1
+			var numSides = Number(tempArr[1])
+			var output = ""
+			for (var i=0; i<numDice; i++) {
+				var outcome = randRange(numSides)
+				output += outcome + " "
+			}
+			render(output);
+			return true
+		} else if (/^[0-9]*[d][0-9]+[+][0-9]+$/.test(str)) {
+			var regex = /[+][0-9]+/.exec(str)[0];
+			modifier = Number(regex.slice(1)) //remove the + to get the modifier
+			console.log(modifier)
+	
+			var tempArr = str.split('d')
+			var numDice = Number(tempArr[0])
+			if (numDice === 0) numDice = 1
+			var numSides = Number(tempArr[1].split("+")[0]) //gross, but works
+			var output = ""
+			for (var i=0; i<numDice; i++) {
+				var outcome = randRange(numSides)
+				var temp = outcome + modifier
+				//highlight max rolls
+				if (outcome === numSides) temp = cssColor(temp, "#b0b0b0")
+				output += temp + " "
+			}
+			render(output);
+			return true
+		} else {
+			render("Usage: [count]d[sides][+modifier]")
+			render("Count and modifier are optional.")
+		}
 	},
 	helpText: "Usage: [count]d[sides][+modifier]\nCount and modifier are optional."
 }
