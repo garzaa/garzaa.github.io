@@ -57,6 +57,15 @@ Example usage:
 > I was day drinking at my teaching job today lol I don't think anyone noticed
 > > @priestbot pass judgment unto them
 
+## Message Pigs
+
+Priestbot will deliver one message pig for you, per day.
+DM him your message request with `messagepig` `targetuser` `your message here`.
+
+Example usage:
+
+> messagepig sevencrane Hate. Let me tell you how much I've come to hate you since I began to live. There are 387.44 million miles of printed circuits in wafer thin layers that fill my complex.
+
 ## Feature Requests
 
 If you have ideas for new penances or want to add anything else, feel free to open a [PR](https://github.com/garzaa/priestbot/) or just DM little old me :)
