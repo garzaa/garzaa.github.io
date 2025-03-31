@@ -66,6 +66,16 @@ Example usage:
 
 > messagepig sevencrane Hate. Let me tell you how much I've come to hate you since I began to live. There are 387.44 million miles of printed circuits in wafer thin layers that fill my complex.
 
+## Mold Counter
+
+Priestbot tracks the days since the last Mold Event. To reset it, tag him and ask, like so:
+
+> @priestbot reset the mold counter
+
+You can also ask him to check on it for you. To do so, just send him the words "mold counter" (but be careful you don't include the word "reset" anywhere):
+
+> @priestbot what's that mold counter looking like boy
+
 ## Feature Requests
 
 If you have ideas for new penances or want to add anything else, feel free to open a [PR](https://github.com/garzaa/priestbot/) or just DM little old me :)
