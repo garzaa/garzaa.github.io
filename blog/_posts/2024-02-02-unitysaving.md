@@ -438,6 +438,8 @@ public abstract class SavedObject : MonoBehaviour {
 Ok, that was a lot. You can copy-paste the code into your own game if you want, but it's worth reading comments for any caveats
 in case you want to extend a SavedObject with a special one-off case or something.
 
+The advantage of it being a lot initially is that you don't have to think very hard when extending it. You have a dictionary of strings to arbitrary objects that you can save and load, and that's it!
+
 ## Use-cases
 ### SavedAnimation
 This is a simple case of a SavedObject. It's for something like a door opening.
@@ -463,6 +465,7 @@ public class SavedAnimation : SavedObject {
 	}
 
 	protected override void SaveToProperties(ref Dictionary<string, object> properties) {
+		// this should probably check the animator's state name instead of keeping the run bool but whatever
 		properties["run"] = run;
 	}
 
