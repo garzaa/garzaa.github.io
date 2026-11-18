@@ -8,16 +8,20 @@ An overview of how to create items for NEODRIVE's track editor.
 1. test
 {:toc}
 
-# Overview
+## Overview
 
 Items in NEODRIVE are stored in structures called Item Packs. This is slightly
 more complex, but it makes development of mods easier.
 
-For example, if you have a couple track pieces, or a few different types of rock,
+With this, you can edit a common set of materials for all items in the pack, which
+saves you time, disk space, and IO load time. It's especially useful if you have
+a bunch of similar things like rocks or trees or whatever.
+
+Also, if you have a couple track pieces, or a few different types of rock,
 you can keep them all in one item pack, and quickly switch between them instead of 
 loading a new item every single time.
 
-# You Will Have To Edit A File
+## You Will Have To Edit A File
 
 I know, sorry. You can't do it all in-game. I mean, you'll be looking at the files
 anyway, if you're exporting 3D models into these folders, but still...
@@ -42,9 +46,10 @@ which folders to look in.
 
 Listing folders in a directory and walking through them to find item pack manifests
 is more time-consuming than just loading a text file into memory. I'm making the tradeoff
-of offloading some of the complexity to you, in order to make the game run faster.
+of offloading some of the complexity to you and me, in order to make the game run faster
+for everyone.
 
-# Adding A Model To The Pack
+## Adding A Model To The Pack
 
 Let's say you're making a new track segment in Blender, called MyTrackPiece.
 I assume you know how to use Blender.
