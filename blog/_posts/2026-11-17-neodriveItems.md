@@ -54,15 +54,16 @@ for everyone.
 Let's say you're making a new track segment in Blender, called MyTrackPiece.
 I assume you know how to use Blender.
 
-The Blender file should have at most 3 models in it. These are the LODs.
-Inside the file, you should have three meshes like this:
+The Blender file should have at most 3 visual models in it. These are the LODs.
+Inside the file, you should have the meshes like this:
 
 ```
 .
-└── MyTrackPiece.blend
+└── MyTrackPiece.blend/
     ├── LOD0
     ├── LOD1
-    └── LOD2
+    ├── LOD2
+    └── Collision
 ```
 
 Higher numbers should be less detailed.
@@ -72,11 +73,21 @@ one model inside the file. It still should be named `LOD0`.
 
 ```
 .
-└── MyTrackPiece.blend
-    └── LOD0
+└── MyTrackPiece.blend/
+    ├── LOD0
+    └── Collision
 ```
 
-When you export MyTrackPiece, You should create a new folder for it and
+Collision meshes are optional as well, but are _highly recommended_. A completely bare,
+unoptimized file would just be this:
+
+```
+.
+└── MyTrackPiece.blend/
+    ├── LOD0
+```
+
+When you export MyTrackPiece, you should create a new folder for it and
 export the model as a .glb into it with **the same name as the folder**, like so:
 
 ```
