@@ -102,3 +102,9 @@ export the model as a .glb into it with **the same name as the folder**, like so
         ├── MyTrackPiece.glb
         └── manifest.json
 ```
+
+## FAQ
+
+- manifest stuff
+- editing others'?
+- 
