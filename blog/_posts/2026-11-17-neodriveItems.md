@@ -97,7 +97,7 @@ Inside that folder, continue with the export of `My Track Piece.glb`. Make sure 
 
 #### What & Why:
 - `Active Collections/Nested Collections`: In case you have Clone/Mirror modifier pivots, boolean carve objects, scene lights, or anything else,
-you don't want it to be included, because it'll inflate the file size. Put them in a separate collection and uncheck it.
+you don't want them to be included, because they'll inflate the file size. Put them in a separate collection and uncheck it.
 - `+Y Up`: Blender's "up" direction is Z. In the Unity engine, the "up" direction is Y. You need to bake this conversion
 during the item export stage so NEODRIVE doesn't have issues loading it. As part of this item rotation, the "forward" direction is flipped, which
 is why you needed to make the track segment's forward direction -Y as mentioned above.
@@ -113,7 +113,7 @@ You'll need to update the `manifest.json` file to tell NEODRIVE that there is an
 **This is the `manifest.json` in the Item Pack root directory.**
 
 When you open it, it'll look like this:
-```json
+```js
 {
   "materials": [
     "Material A",
@@ -133,7 +133,7 @@ When you open it, it'll look like this:
 
 You'll need to add your item name to `itemNames`, so it ends up like this:
 
-```json
+```js
 {
   "materials": [
     "Material A",
