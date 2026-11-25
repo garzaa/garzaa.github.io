@@ -159,7 +159,45 @@ is more time-consuming than just loading a text file into memory. I'm making the
 of offloading some of the complexity to you and me, in order to make the game run faster
 for everyone.
 
-Back in NEODRIVE, click "Save & Rescan Pack" to pick up your new item.
+Back in NEODRIVE, click "Save & Rescan Pack" to pick up your new item. You'll see a message about
+manifest regeneration.
+
+<img src="https://garzaa.github.io/blog/assets/neodrive_items/manifest generation.png">
+
+You'll need to open that file and edit it a bit, because if you try to load your item now, it'll log an error about material IDs.
+It should look like this:
+
+```js
+{
+  "materialIDs": null,
+  "itemType": 0,
+  "lodObjectSize": 0.0,
+  "lodTransitions": null,
+  "convexHull": false
+}
+```
+
+Since I had two material slots for the mesh in the first image, I'll add two material IDs, to make the file look like this:
+```js
+{
+  "materialIDs": [
+  	"Material A",
+   	"Material B"
+  ],
+  "itemType": 0,
+  "lodObjectSize": 0.0,
+  "lodTransitions": null,
+  "convexHull": false
+}
+```
+
+Back in Neodrive, click on the name for My Track Piece, et voila! Your custom track piece is imported. 
+
+<img src="https://garzaa.github.io/blog/assets/neodrive_items/item import complete.png">
+
+It is also completely white. Do not despair, that is just because the materials were created with their base
+values, which show up bright white in an open scene. It's time to play with the material parameters until you're satisfied.
+
 
 ## FAQ
 
