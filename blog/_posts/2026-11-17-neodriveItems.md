@@ -52,6 +52,7 @@ a collision mesh. **They must be named LOD1/2/3 and Collision.**
 
 #### Item File Structure
 - Collision meshes are optional, but recommended.
+- The order of the meshes doesn't matter.
 - You can have up to three LODs, or just one if you have a simple mesh.
 - LOD0 should be the most detailed, and LOD2 should be the least detailed.
 - LOD transition distances are determined automatically based on the item's bounding box size, which is also 
@@ -82,8 +83,8 @@ To find the folder to export into, click the folder view icon. It'll open your O
 
 <img src="https://garzaa.github.io/blog/assets/neodrive_items/item pack folder view.png">
 
-> Your folder path will be different. The one shown here is for the game running inside Unity so item packs can be packaged
-with the game.
+> Your folder path will be different. The one shown here is for the game running inside Unity so Item Packs I create here
+can be packaged with the game.
 
 Back in Blender, navigate to that folder, and create a **new** folder for what you want your item to be named. 
 Assuming you're making an item called My Track Piece, it'd look like this:
@@ -92,7 +93,7 @@ Assuming you're making an item called My Track Piece, it'd look like this:
 
 Inside that folder, continue with the export of `My Track Piece.glb`. Make sure your export parameters look like these.
 
-<img src="https://garzaa.github.io/blog/assets/neodrive_items/blender export parameters.png">
+<img src="https://garzaa.github.io/blog/assets/neodrive_items/blender export params.png">
 
 #### What & Why:
 - `Active Collections/Nested Collections`: In case you have Clone/Mirror modifier pivots, boolean carve objects, scene lights, or anything else,
