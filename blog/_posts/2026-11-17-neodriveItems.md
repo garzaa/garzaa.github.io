@@ -103,9 +103,54 @@ is why you needed to make the track segment's forward direction -Y as mentioned 
 - `Apply Modifiers`: If you have Clone or Mirror modifiers to create the final segment, like I do, you'll need to also bake them into the exported object.
 - `UVs/Normals`: These are required for accurate lighting calculations on the object surface.
 
+### Updating The Manifest
 
+You'll need to update the `manifest.json` file to tell NEODRIVE that there is an item in the pack named My Track Piece.
 
-### You Will Have To Edit A File
+<img src="https://garzaa.github.io/blog/assets/neodrive_items/pack manifest source.png">
+
+**This is the `manifest.json` in the Item Pack root directory.**
+
+When you open it, it'll look like this:
+```json
+{
+  "materials": [
+    "Material A",
+    "Material B",
+    "Material C",
+    "Material D"
+  ],
+  "itemNames": [],
+  "version": 1,
+  "name": "My Item Pack",
+  "authorSteamID": "",
+  "addonType": "itemPack",
+  "description": null,
+  "publishedFileID": null
+}
+```
+
+You'll need to add your item name to `itemNames`, so it ends up like this:
+
+```json
+{
+  "materials": [
+    "Material A",
+    "Material B",
+    "Material C",
+    "Material D"
+  ],
+  "itemNames": [
+  	"My Track Piece"
+  ],
+  "version": 1,
+  "name": "My Item Pack",
+  "authorSteamID": "",
+  "addonType": "itemPack",
+  "description": null,
+  "publishedFileID": null
+}
+```
 
 I know, sorry. You can't do it all in-game. I mean, you'll be looking at the files
 anyway, if you're exporting 3D models into these folders, but still...
